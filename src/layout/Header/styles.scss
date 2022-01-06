@@ -1,8 +1,8 @@
 #categorias {
-    display: block;
     margin-top: -10px;
     position: relative;
     padding-bottom: 20px;
+    transition: opacity 0.5s linear;
 }
 
 #categorias h4 {
@@ -12,6 +12,34 @@
 
 #categorias hr {
     border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes FadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.hideCategories {
+    display: none;
+    opacity: 0;
+    animation: FadeOut 0.2s ease-in-out;
+}
+.showCategories {
+    display: block;
+    opacity: 1;
+    animation: FadeIn 0.2s ease-in-out;
 }
 
 /*=============================================

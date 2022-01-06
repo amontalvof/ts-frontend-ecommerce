@@ -1,13 +1,23 @@
+import { Dispatch, SetStateAction } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
 import './styles.scss';
 
-const Search = () => {
+interface ISearchProps {
+    handleHideCategories: Dispatch<SetStateAction<boolean>>;
+}
+
+const Search = ({ handleHideCategories }: ISearchProps) => {
+    const handleBtnCategoriesClick = () => {
+        handleHideCategories((c) => !c);
+    };
+
     return (
         <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12">
             {/* CATEGORIES BUTTON */}
             <div
                 className="col-lg-4 col-md-4 col-sm-4 col-xs-12 backColor"
                 id="btnCategorias"
+                onClick={handleBtnCategoriesClick}
             >
                 <p>
                     CATEGORIES
