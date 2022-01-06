@@ -1,4 +1,5 @@
-import { FaFacebookSquare, FaInstagramSquare } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import './styles.scss';
 
 const Top = () => {
     return (
@@ -6,7 +7,7 @@ const Top = () => {
             <div className="container">
                 <div className="row">
                     {/* SOCIAL */}
-                    <div className="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
+                    <div className="col-lg-9 col-md-9 col-sm-8 col-xs-12">
                         <ul>
                             <li>
                                 <a
@@ -14,7 +15,7 @@ const Top = () => {
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    <FaFacebookSquare />
+                                    <FaFacebookF className="redSocial facebookBlanco" />
                                 </a>
                             </li>
                             <li>
@@ -23,7 +24,7 @@ const Top = () => {
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    <FaInstagramSquare />
+                                    <FaInstagram className="redSocial instagramBlanco" />
                                 </a>
                             </li>
                         </ul>

@@ -1,4 +1,5 @@
 import { FaShoppingCart } from 'react-icons/fa';
+import './styles.scss';
 
 const ShoppingCart = () => {
     return (

@@ -1,0 +1,27 @@
+// GLOBAL
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+ul,
+ol {
+    padding: 0px;
+}
+
+a:visited,
+a:link,
+a:focus,
+a:hover,
+a:active {
+    list-style: none;
+    text-decoration: none;
+}
+
+.backColor {
+    background: #47bac1;
+    color: white;
+}

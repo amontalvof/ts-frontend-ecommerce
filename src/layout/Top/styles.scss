@@ -1,0 +1,68 @@
+.barraSuperior {
+    background: black;
+    a {
+        color: white;
+    }
+}
+
+.barraSuperiorLink {
+    color: white;
+}
+
+.redSocial {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 1px;
+}
+
+/*FACEBOOK*/
+
+.facebookBlanco {
+    color: white;
+}
+
+.facebookNegro {
+    color: black;
+}
+
+.facebookColor {
+    color: white;
+    background: #46639f;
+}
+
+/*INSTAGRAM*/
+
+.instagramColor {
+    color: white;
+    background: linear-gradient(45deg, #fca925, #ee1d5f, #6350a2);
+}
+
+.instagramBlanco {
+    color: white;
+}
+
+.instagramNegro {
+    color: black;
+}
+
+/*=============================================
+TOP
+=============================================*/
+
+#top ul {
+    padding-top: 8px;
+}
+
+#top ul li {
+    display: inline;
+    line-height: 30px;
+    margin: 0px 5px;
+    color: white;
+}
+
+.registro ul {
+    text-align: right;
+    font-size: 12px;
+}

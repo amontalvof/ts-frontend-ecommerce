@@ -2,6 +2,7 @@ import Categories from '../../components/Categories';
 import Logo from '../../components/Logo';
 import Search from '../../components/Search';
 import ShoppingCart from '../../components/ShoppingCart';
+import './styles.scss';
 
 const Header = () => {
     return (

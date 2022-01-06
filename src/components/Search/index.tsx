@@ -1,4 +1,5 @@
 import { FaSearch, FaBars } from 'react-icons/fa';
+import './styles.scss';
 
 const Search = () => {
     return (
@@ -22,9 +23,9 @@ const Search = () => {
             >
                 <input
                     type="search"
-                    name="buscar"
+                    name="search"
                     className="form-control"
-                    placeholder="Buscar..."
+                    placeholder="Search..."
                 />
                 <span className="input-group-btn">
                     <a href="#">
