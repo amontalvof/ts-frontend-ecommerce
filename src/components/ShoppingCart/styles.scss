@@ -14,3 +14,47 @@
     border: 1px solid #aaa;
     font-size: 12px;
 }
+
+/*=============================================
+ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
+=============================================*/
+
+@media (min-width: 1200px) {
+    #carrito {
+        padding-left: 100px;
+    }
+}
+
+/*=============================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================*/
+
+@media (max-width: 1199px) and (min-width: 992px) {
+    #carrito {
+        padding-left: 70px;
+    }
+}
+
+/*=============================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+=============================================*/
+
+@media (max-width: 991px) and (min-width: 768px) {
+    #carrito {
+        padding-left: 55px;
+    }
+
+    #carrito p {
+        display: none;
+    }
+}
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width: 767px) {
+    #carrito {
+        margin: 0px;
+    }
+}

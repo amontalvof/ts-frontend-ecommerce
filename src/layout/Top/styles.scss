@@ -66,3 +66,17 @@ TOP
     text-align: right;
     font-size: 12px;
 }
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width: 767px) {
+    #top ul {
+        text-align: center;
+    }
+
+    #top #registro {
+        border-top: 1px solid #222;
+    }
+}

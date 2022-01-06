@@ -1,4 +1,4 @@
-# React TypeScript Pro
+# TypeScript Frontend E-Commerce
 
 ## Technologies
 

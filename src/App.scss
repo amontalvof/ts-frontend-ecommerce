@@ -25,3 +25,43 @@ a:active {
     background: #47bac1;
     color: white;
 }
+
+/*=============================================
+LARGE DESK (LG reviewed in 1366px onwards)
+=============================================*/
+
+@media (min-width: 1200px) {
+    .col-lg-0 {
+        display: none;
+    }
+}
+
+/*=============================================
+MEDIUM DESKTOP OR HORIZONTAL TABLET (MD we review at 1024px)
+=============================================*/
+
+@media (max-width: 1199px) and (min-width: 992px) {
+    .col-md-0 {
+        display: none;
+    }
+}
+
+/*=============================================
+SMALL DESKTOP OR VERTICAL TABLET (SM we review at 768px)
+=============================================*/
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .col-sm-0 {
+        display: none;
+    }
+}
+
+/*=============================================
+MOBILE (XS we review in 320px)
+=============================================*/
+
+@media (max-width: 767px) {
+    .col-xs-0 {
+        display: none;
+    }
+}
