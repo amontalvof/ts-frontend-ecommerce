@@ -2,7 +2,9 @@
 
 ## Technologies
 
--   React
 -   TypeScript
+-   React
+-   Redux
+-   JWT
 -   React Router Dom v6
 -   Sass

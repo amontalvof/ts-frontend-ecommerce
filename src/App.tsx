@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import './App.scss';
-import Main from './pages/Main';
+import store from './redux/store';
+import AppRouter from './router/AppRouter';
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Main />} />
-            </Routes>
-        </BrowserRouter>
+        <Provider store={store}>
+            <AppRouter />
+        </Provider>
     );
 }
 
