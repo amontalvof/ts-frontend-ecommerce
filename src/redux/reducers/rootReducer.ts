@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
+import { plantillaReducer } from './plantillaReducer';
 
-const rootReducer = combineReducers({  });
+const rootReducer = combineReducers({ plantillaReducer });
 
 export default rootReducer;

@@ -2,7 +2,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 export const fetchWithoutToken = <T>(
     endpoint: string,
-    data: T,
+    data?: T,
     method = 'GET'
 ): Promise<Response> => {
     const url = `${baseUrl}/${endpoint}`;
@@ -20,7 +20,7 @@ export const fetchWithoutToken = <T>(
 
 export const fetchWithToken = <T>(
     endpoint: string,
-    data: T,
+    data?: T,
     method = 'GET'
 ): Promise<Response> => {
     const url = `${baseUrl}/${endpoint}`;
