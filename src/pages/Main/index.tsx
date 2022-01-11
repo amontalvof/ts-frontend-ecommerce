@@ -12,7 +12,8 @@ const Main = () => {
     const { loading, styles } = useSelector(
         (state: RootStore) => state.plantillaReducer
     );
-    console.log(styles);
+    const plantillaStyles = styles && styles[0];
+
     useEffect(() => {
         dispatch(getStyles());
     }, [dispatch]);
@@ -20,14 +21,14 @@ const Main = () => {
     if (loading) {
         return (
             <div id="spinnerContainer">
-                <Spinner />
+                <Spinner plantillaStyles={plantillaStyles} />
             </div>
         );
     }
 
     return (
         <div>
-            <Top />
+            <Top plantillaStyles={plantillaStyles} />
             <Header />
         </div>
     );

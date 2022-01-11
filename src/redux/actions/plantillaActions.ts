@@ -3,7 +3,7 @@ import {
     STYLES_FAIL,
     STYLES_LOADING,
     STYLES_SUCCESS,
-} from '../interfaces/plantilla';
+} from '../../interfaces/plantilla';
 
 export const getStyles = () => {
     return async (dispatch: Function) => {

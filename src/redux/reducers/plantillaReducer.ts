@@ -1,10 +1,10 @@
-import { STYLES_SUCCESS } from '../interfaces/plantilla';
+import { STYLES_SUCCESS } from '../../interfaces/plantilla';
 import {
     StylesDispatchTypes,
     STYLES_LOADING,
     TStyles,
     STYLES_FAIL,
-} from '../interfaces/plantilla';
+} from '../../interfaces/plantilla';
 
 interface IInitialState {
     loading: boolean;
