@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../redux/store';
 import './styles.scss';
 
 interface ISearchProps {
@@ -7,6 +9,17 @@ interface ISearchProps {
 }
 
 const Search = ({ handleHideCategories }: ISearchProps) => {
+    const { styles } = useSelector(
+        (state: RootStore) => state.plantillaReducer
+    );
+    const plantillaStyles = styles && styles[0];
+
+    const searchStyles = {
+        backgroundColor: plantillaStyles?.colorFondo,
+        color: plantillaStyles?.colorTexto,
+    };
+
+    console.log(plantillaStyles);
     const handleBtnCategoriesClick = () => {
         handleHideCategories((c) => !c);
     };
@@ -18,6 +31,7 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                 className="col-lg-4 col-md-4 col-sm-4 col-xs-12 backColor"
                 id="btnCategorias"
                 onClick={handleBtnCategoriesClick}
+                style={searchStyles}
             >
                 <p>
                     CATEGORIES
@@ -42,6 +56,7 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                         <button
                             className="btn btn-default backColor"
                             type="submit"
+                            style={searchStyles}
                         >
                             <FaSearch />
                         </button>

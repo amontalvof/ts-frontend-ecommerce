@@ -1,15 +1,25 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Categories from '../../components/Categories';
 import Logo from '../../components/Logo';
 import Search from '../../components/Search';
 import ShoppingCart from '../../components/ShoppingCart';
+import { RootStore } from '../../redux/store';
 import './styles.scss';
 
 const Header = () => {
+    const { styles } = useSelector(
+        (state: RootStore) => state.plantillaReducer
+    );
     const [hideCategories, setHideCategories] = useState(true);
     const classHideCategories = hideCategories
         ? 'hideCategories'
         : 'showCategories';
+
+    const plantillaStyles = styles && styles[0];
+    const categoriesStyles = {
+        backgroundColor: plantillaStyles?.colorFondo,
+    };
 
     return (
         <div>
@@ -23,11 +33,12 @@ const Header = () => {
                     <div
                         className={`col-xs-12 backColor ${classHideCategories}`}
                         id="categorias"
+                        style={categoriesStyles}
                     >
-                        <Categories />
-                        <Categories />
-                        <Categories />
-                        <Categories />
+                        <Categories plantillaStyles={plantillaStyles} />
+                        <Categories plantillaStyles={plantillaStyles} />
+                        <Categories plantillaStyles={plantillaStyles} />
+                        <Categories plantillaStyles={plantillaStyles} />
                     </div>
                 </div>
             </header>

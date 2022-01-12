@@ -1,25 +1,51 @@
-import React from 'react';
+import { TStyle } from '../../interfaces/plantilla';
 
-const SubCategories = () => {
+interface ISubCategoriesProps {
+    plantillaStyles?: TStyle;
+}
+const SubCategories = ({ plantillaStyles }: ISubCategoriesProps) => {
+    const { colorFondo, colorTexto } = plantillaStyles as TStyle;
+
+    const linkStyles = {
+        backgroundColor: colorFondo,
+        color: colorTexto,
+    };
+
     return (
         <>
             <li>
-                <a href="#" className="pixelSubCategorias backColor">
+                <a
+                    href="#"
+                    className="pixelSubCategorias backColor"
+                    style={linkStyles}
+                >
                     Lorem Ipsum
                 </a>
             </li>
             <li>
-                <a href="#" className="pixelSubCategorias backColor">
+                <a
+                    href="#"
+                    className="pixelSubCategorias backColor"
+                    style={linkStyles}
+                >
                     Lorem Ipsum
                 </a>
             </li>
             <li>
-                <a href="#" className="pixelSubCategorias backColor">
+                <a
+                    href="#"
+                    className="pixelSubCategorias backColor"
+                    style={linkStyles}
+                >
                     Lorem Ipsum
                 </a>
             </li>
             <li>
-                <a href="#" className="pixelSubCategorias backColor">
+                <a
+                    href="#"
+                    className="pixelSubCategorias backColor"
+                    style={linkStyles}
+                >
                     Lorem Ipsum
                 </a>
             </li>
