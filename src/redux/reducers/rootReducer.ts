@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { plantillaReducer } from './plantillaReducer';
+import { categoriesReducer } from './categoriesReducer';
 
-const rootReducer = combineReducers({ plantillaReducer });
-
-export default rootReducer;
+export const rootReducer = combineReducers({
+    plantillaReducer,
+    categoriesReducer,
+});

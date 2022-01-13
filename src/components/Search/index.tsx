@@ -19,7 +19,6 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
         color: plantillaStyles?.colorTexto,
     };
 
-    console.log(plantillaStyles);
     const handleBtnCategoriesClick = () => {
         handleHideCategories((c) => !c);
     };

@@ -2,10 +2,13 @@ import { TStyle } from '../../interfaces/plantilla';
 import SubCategories from '../SubCategories';
 
 interface ICategoriesProps {
-    plantillaStyles?: TStyle;
+    plantillaStyles: TStyle;
+    category: string;
+    to: string;
+    id: number;
 }
 
-const Categories = ({ plantillaStyles }: ICategoriesProps) => {
+const Categories = ({ plantillaStyles, category }: ICategoriesProps) => {
     const { colorFondo, colorTexto } = plantillaStyles as TStyle;
 
     const linkStyles = {
@@ -21,7 +24,7 @@ const Categories = ({ plantillaStyles }: ICategoriesProps) => {
                     className="pixelCategorias backColor"
                     style={linkStyles}
                 >
-                    Lorem Ipsum
+                    {category}
                 </a>
             </h4>
             <hr />

@@ -8,18 +8,22 @@ import { RootStore } from '../../redux/store';
 import './styles.scss';
 
 const Header = () => {
-    const { styles } = useSelector(
-        (state: RootStore) => state.plantillaReducer
-    );
     const [hideCategories, setHideCategories] = useState(true);
+    const { plantillaReducer, categoriesReducer } = useSelector(
+        (state: RootStore) => state
+    );
+
     const classHideCategories = hideCategories
         ? 'hideCategories'
         : 'showCategories';
 
-    const plantillaStyles = styles && styles[0];
+    const { styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
     const categoriesStyles = {
         backgroundColor: plantillaStyles?.colorFondo,
     };
+
+    const { categories = [] } = categoriesReducer;
 
     return (
         <div>
@@ -35,10 +39,15 @@ const Header = () => {
                         id="categorias"
                         style={categoriesStyles}
                     >
-                        <Categories plantillaStyles={plantillaStyles} />
-                        <Categories plantillaStyles={plantillaStyles} />
-                        <Categories plantillaStyles={plantillaStyles} />
-                        <Categories plantillaStyles={plantillaStyles} />
+                        {categories.map((item) => (
+                            <Categories
+                                key={item.id}
+                                id={item.id}
+                                category={item.categoria}
+                                to={item.ruta}
+                                plantillaStyles={plantillaStyles}
+                            />
+                        ))}
                     </div>
                 </div>
             </header>

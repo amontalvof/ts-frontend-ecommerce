@@ -3,22 +3,29 @@ import Top from '../../layout/Top';
 import Header from '../../layout/Header';
 import { RootStore } from '../../redux/store';
 import { useEffect } from 'react';
-import { getStyles } from '../../redux/actions/plantillaActions';
+import { getStyles, getCategories } from '../../redux/actions';
 import Spinner from '../../components/Spinner';
 import './styles.scss';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const { loading, styles } = useSelector(
-        (state: RootStore) => state.plantillaReducer
+    const { plantillaReducer, categoriesReducer } = useSelector(
+        (state: RootStore) => state
     );
-    const plantillaStyles = styles && styles[0];
+    const { loading: loadingStyles, styles = [] } = plantillaReducer;
+    const { loading: loadingCategories } = categoriesReducer;
+
+    const plantillaStyles = styles[0];
+
+    const favicon = document.getElementById('favicon') as HTMLAnchorElement;
+    favicon.href = plantillaStyles?.icono || './favicon.ico';
 
     useEffect(() => {
         dispatch(getStyles());
+        dispatch(getCategories());
     }, [dispatch]);
 
-    if (loading) {
+    if (loadingStyles && loadingCategories) {
         return (
             <div id="spinnerContainer">
                 <Spinner plantillaStyles={plantillaStyles} />
