@@ -1,15 +1,27 @@
+import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategoriesByCategoryId';
 import { TStyle } from '../../interfaces/plantilla';
-import SubCategories from '../SubCategories';
+import { TSubCategories } from '../../interfaces/subCategories';
 
 interface ICategoriesProps {
     plantillaStyles: TStyle;
     category: string;
     to: string;
     id: number;
+    subCategories?: TSubCategories;
 }
 
-const Categories = ({ plantillaStyles, category }: ICategoriesProps) => {
+const Categories = ({
+    plantillaStyles,
+    category,
+    id,
+    subCategories,
+}: ICategoriesProps) => {
     const { colorFondo, colorTexto } = plantillaStyles as TStyle;
+
+    const filteredSubCategories = filterSubCategoriesByCategoryId(
+        subCategories,
+        id
+    );
 
     const linkStyles = {
         backgroundColor: colorFondo,
@@ -29,7 +41,17 @@ const Categories = ({ plantillaStyles, category }: ICategoriesProps) => {
             </h4>
             <hr />
             <ul>
-                <SubCategories plantillaStyles={plantillaStyles} />
+                {filteredSubCategories.map((item) => (
+                    <li key={item.id}>
+                        <a
+                            href="#"
+                            className="pixelSubCategorias backColor"
+                            style={linkStyles}
+                        >
+                            {item.subcategoria}
+                        </a>
+                    </li>
+                ))}
             </ul>
         </div>
     );

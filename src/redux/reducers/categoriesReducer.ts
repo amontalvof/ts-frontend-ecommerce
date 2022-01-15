@@ -22,14 +22,17 @@ export const categoriesReducer = (
     switch (action.type) {
         case CATEGORIES_FAIL:
             return {
+                ...state,
                 loading: false,
             };
         case CATEGORIES_LOADING:
             return {
+                ...state,
                 loading: true,
             };
         case CATEGORIES_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 categories: action.payload,
             };

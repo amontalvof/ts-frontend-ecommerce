@@ -1,40 +1,40 @@
 import {
-    StylesDispatchTypes,
-    TStyles,
-    STYLES_LOADING,
-    STYLES_SUCCESS,
-    STYLES_FAIL,
-} from '../../interfaces/plantilla';
+    SubCategoriesDispatchTypes,
+    TSubCategories,
+    SUB_CATEGORIES_LOADING,
+    SUB_CATEGORIES_SUCCESS,
+    SUB_CATEGORIES_FAIL,
+} from '../../interfaces/subCategories';
 
 interface IInitialState {
     loading: boolean;
-    styles?: TStyles;
+    subCategories?: TSubCategories;
 }
 
 const initialState: IInitialState = {
     loading: true,
 };
 
-export const plantillaReducer = (
+export const subCategoriesReducer = (
     state: IInitialState = initialState,
-    action: StylesDispatchTypes
+    action: SubCategoriesDispatchTypes
 ) => {
     switch (action.type) {
-        case STYLES_FAIL:
+        case SUB_CATEGORIES_FAIL:
             return {
                 ...state,
                 loading: false,
             };
-        case STYLES_LOADING:
+        case SUB_CATEGORIES_LOADING:
             return {
                 ...state,
                 loading: true,
             };
-        case STYLES_SUCCESS:
+        case SUB_CATEGORIES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                styles: action.payload,
+                subCategories: action.payload,
             };
         default:
             return state;

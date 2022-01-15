@@ -9,9 +9,8 @@ import './styles.scss';
 
 const Header = () => {
     const [hideCategories, setHideCategories] = useState(true);
-    const { plantillaReducer, categoriesReducer } = useSelector(
-        (state: RootStore) => state
-    );
+    const { plantillaReducer, categoriesReducer, subCategoriesReducer } =
+        useSelector((state: RootStore) => state);
 
     const classHideCategories = hideCategories
         ? 'hideCategories'
@@ -46,6 +45,9 @@ const Header = () => {
                                 category={item.categoria}
                                 to={item.ruta}
                                 plantillaStyles={plantillaStyles}
+                                subCategories={
+                                    subCategoriesReducer.subCategories
+                                }
                             />
                         ))}
                     </div>

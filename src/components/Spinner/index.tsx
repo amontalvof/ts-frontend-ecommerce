@@ -1,16 +1,27 @@
+import { ReactElement } from 'react';
 import { GridLoader } from 'react-spinners';
 import { TStyle } from '../../interfaces/plantilla';
 
 interface ISpinnerProps {
     plantillaStyles?: TStyle;
+    size: number;
+    margin: number;
+    defaultColor: string;
+    text?: ReactElement;
 }
 
-const Spinner = ({ plantillaStyles }: ISpinnerProps) => {
-    const colorFondo = plantillaStyles?.colorFondo || '#47bac1';
+const Spinner = ({
+    plantillaStyles,
+    size,
+    margin,
+    defaultColor,
+    text,
+}: ISpinnerProps) => {
+    const colorFondo = plantillaStyles?.colorFondo || defaultColor;
     return (
         <>
-            <GridLoader size={15} margin={2} color={colorFondo} />
-            <h1>Loading...</h1>
+            <GridLoader size={size} margin={margin} color={colorFondo} />
+            {text}
         </>
     );
 };

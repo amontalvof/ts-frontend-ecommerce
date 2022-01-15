@@ -3,17 +3,22 @@ import Top from '../../layout/Top';
 import Header from '../../layout/Header';
 import { RootStore } from '../../redux/store';
 import { useEffect } from 'react';
-import { getStyles, getCategories } from '../../redux/actions';
+import {
+    getStyles,
+    getCategories,
+    getSubCategories,
+} from '../../redux/actions';
 import Spinner from '../../components/Spinner';
 import './styles.scss';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const { plantillaReducer, categoriesReducer } = useSelector(
-        (state: RootStore) => state
-    );
+    const state = useSelector((state: RootStore) => state);
+
+    const { plantillaReducer, categoriesReducer, subCategoriesReducer } = state;
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
     const { loading: loadingCategories } = categoriesReducer;
+    const { loading: loadingSubCategories } = subCategoriesReducer;
 
     const plantillaStyles = styles[0];
 
@@ -23,12 +28,20 @@ const Main = () => {
     useEffect(() => {
         dispatch(getStyles());
         dispatch(getCategories());
-    }, [dispatch]);
+        dispatch(getSubCategories());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    if (loadingStyles && loadingCategories) {
+    if (loadingStyles || loadingCategories || loadingSubCategories) {
         return (
             <div id="spinnerContainer">
-                <Spinner plantillaStyles={plantillaStyles} />
+                <Spinner
+                    plantillaStyles={plantillaStyles}
+                    size={15}
+                    margin={2}
+                    defaultColor="#47bac1"
+                    text={<h1>Loading...</h1>}
+                />
             </div>
         );
     }
