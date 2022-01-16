@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategoriesByCategoryId';
 import { TStyle } from '../../interfaces/plantilla';
 import { TSubCategories } from '../../interfaces/subCategories';
@@ -15,6 +16,7 @@ const Categories = ({
     category,
     id,
     subCategories,
+    to,
 }: ICategoriesProps) => {
     const { colorFondo, colorTexto } = plantillaStyles as TStyle;
 
@@ -31,25 +33,25 @@ const Categories = ({
     return (
         <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <h4>
-                <a
-                    href="#"
+                <Link
+                    to={`/${to}`}
                     className="pixelCategorias backColor"
                     style={linkStyles}
                 >
                     {category}
-                </a>
+                </Link>
             </h4>
             <hr />
             <ul>
                 {filteredSubCategories.map((item) => (
                     <li key={item.id}>
-                        <a
-                            href="#"
+                        <Link
+                            to={`/${to}/${item.ruta}`}
                             className="pixelSubCategorias backColor"
                             style={linkStyles}
                         >
                             {item.subcategoria}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

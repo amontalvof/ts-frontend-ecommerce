@@ -26,6 +26,16 @@ a:active {
     color: white;
 }
 
+#spinnerContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    color: #47bac1;
+}
+
 /*=============================================
 LARGE DESK (LG reviewed in 1366px onwards)
 =============================================*/
