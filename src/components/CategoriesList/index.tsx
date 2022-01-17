@@ -3,7 +3,7 @@ import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategori
 import { TStyle } from '../../interfaces/plantilla';
 import { TSubCategories } from '../../interfaces/subCategories';
 
-interface ICategoriesProps {
+interface ICategoriesListProps {
     plantillaStyles: TStyle;
     category: string;
     to: string;
@@ -11,13 +11,13 @@ interface ICategoriesProps {
     subCategories?: TSubCategories;
 }
 
-const Categories = ({
+const CategoriesList = ({
     plantillaStyles,
     category,
     id,
     subCategories,
     to,
-}: ICategoriesProps) => {
+}: ICategoriesListProps) => {
     const { colorFondo, colorTexto } = plantillaStyles as TStyle;
 
     const filteredSubCategories = filterSubCategoriesByCategoryId(
@@ -59,4 +59,4 @@ const Categories = ({
     );
 };
 
-export default Categories;
+export default CategoriesList;

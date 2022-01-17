@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Categories from '../../components/Categories';
+import CategoriesList from '../../components/CategoriesList';
 import Logo from '../../components/Logo';
 import Search from '../../components/Search';
 import ShoppingCart from '../../components/ShoppingCart';
@@ -39,7 +39,7 @@ const Header = () => {
                         style={categoriesStyles}
                     >
                         {categories.map((item) => (
-                            <Categories
+                            <CategoriesList
                                 key={item.id}
                                 id={item.id}
                                 category={item.categoria}
