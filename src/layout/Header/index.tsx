@@ -25,35 +25,31 @@ const Header = () => {
     const { categories = [] } = categoriesReducer;
 
     return (
-        <div>
-            <header className="container-fluid">
-                <div className="container">
-                    <div className="row" id="cabezote">
-                        <Logo />
-                        <Search handleHideCategories={setHideCategories} />
-                        <ShoppingCart />
-                    </div>
-                    <div
-                        className={`col-xs-12 backColor ${classHideCategories}`}
-                        id="categorias"
-                        style={categoriesStyles}
-                    >
-                        {categories.map((item) => (
-                            <CategoriesList
-                                key={item.id}
-                                id={item.id}
-                                category={item.categoria}
-                                to={item.ruta}
-                                plantillaStyles={plantillaStyles}
-                                subCategories={
-                                    subCategoriesReducer.subCategories
-                                }
-                            />
-                        ))}
-                    </div>
+        <header className="container-fluid">
+            <div className="container">
+                <div className="row" id="cabezote">
+                    <Logo />
+                    <Search handleHideCategories={setHideCategories} />
+                    <ShoppingCart />
                 </div>
-            </header>
-        </div>
+                <div
+                    className={`col-xs-12 backColor ${classHideCategories}`}
+                    id="categorias"
+                    style={categoriesStyles}
+                >
+                    {categories.map((item) => (
+                        <CategoriesList
+                            key={item.id}
+                            id={item.id}
+                            category={item.categoria}
+                            to={item.ruta}
+                            plantillaStyles={plantillaStyles}
+                            subCategories={subCategoriesReducer.subCategories}
+                        />
+                    ))}
+                </div>
+            </div>
+        </header>
     );
 };
 

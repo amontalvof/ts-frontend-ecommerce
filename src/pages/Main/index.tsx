@@ -1,52 +1,47 @@
-import Slider from '../../components/Slide';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Slider from '../../components/Slider';
+import Spinner from '../../components/Spinner';
+import { getSlider } from '../../redux/actions/sliderActions';
+import { RootStore } from '../../redux/store';
 import './styles.scss';
 
-const elements = [
-    {
-        id: 1,
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1642398328/ecommerce/slide/1_ngf8q9.jpg',
-        text: 'Deals & Promotions on watches',
-        textStyle: { backgroundColor: 'rgba(0,0,0,.5)', color: '#fff' },
-        to: '/accessories/watches',
-    },
-    {
-        id: 2,
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1642398328/ecommerce/slide/2_ofmisq.jpg',
-        text: 'Deals & Promotions on watches',
-        textStyle: { backgroundColor: 'rgba(0,0,0,.5)', color: '#fff' },
-        to: '/accessories/watches',
-    },
-    {
-        id: 3,
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1642398328/ecommerce/slide/3_rhutml.jpg',
-        text: 'Deals & Promotions on watches',
-        textStyle: { backgroundColor: 'rgba(0,0,0,.5)', color: '#fff' },
-        to: '/accessories/watches',
-    },
-    {
-        id: 4,
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1642398328/ecommerce/slide/4_ddx9zd.jpg',
-        text: 'Deals & Promotions on watches',
-        textStyle: { backgroundColor: 'rgba(0,0,0,.5)', color: '#fff' },
-        to: '/accessories/watches',
-    },
-];
-
-const arrowStyles = {
-    width: '25px',
-    height: '25px',
-    color: '#fff',
-};
-
 const Main = () => {
+    const dispatch = useDispatch();
+    const state = useSelector((state: RootStore) => state);
+    const { sliderReducer, plantillaReducer } = state;
+    const { loading: loadingStyles, styles = [] } = plantillaReducer;
+    const { loading: loadingSlider, slider = [] } = sliderReducer;
+    const plantillaStyles = styles[0];
+
+    useEffect(() => {
+        if (!sliderReducer.slider) {
+            dispatch(getSlider());
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    if (loadingStyles || loadingSlider) {
+        return (
+            <div id="mainSpinnerContainer">
+                <Spinner
+                    plantillaStyles={plantillaStyles}
+                    size={15}
+                    margin={2}
+                    defaultColor="#47bac1"
+                    text={<h1>Loading...</h1>}
+                />
+            </div>
+        );
+    }
+
     return (
         <div>
             <div id="SliderContainer">
                 <Slider
-                    elements={elements}
+                    elements={slider}
                     controles
                     // autoplay
-                    arrowStyles={arrowStyles}
                     velocidad="800"
                 />
             </div>

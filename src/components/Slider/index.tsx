@@ -1,13 +1,13 @@
 import { useRef, useEffect, useCallback, MutableRefObject } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import './styles.scss';
 
 interface IElement {
-    to?: string;
+    route: string;
     src: string;
-    text?: string;
-    textStyle?: React.CSSProperties;
+    text: string;
     id: number;
 }
 
@@ -17,8 +17,15 @@ interface ISlide {
     autoplay?: boolean;
     velocidad?: string;
     intervalo?: number;
-    arrowStyles?: React.CSSProperties;
 }
+
+const arrowStyles = {
+    width: '25px',
+    height: '25px',
+    color: '#fff',
+    backgroundColor: 'rgba(0,0,0,.5)',
+    borderRadius: '5px',
+};
 
 const Slide = ({
     elements,
@@ -26,15 +33,19 @@ const Slide = ({
     autoplay = false,
     velocidad = '500',
     intervalo = 5000,
-    arrowStyles,
 }: ISlide) => {
+    const isLarge = useMediaQuery('(min-width: 700px)');
+    const textBackground = isLarge ? 'rgba(0, 0, 0,.5)' : 'rgb(0, 0, 0)';
+    const textPosition = isLarge ? undefined : 'relative';
+    const textFontSize = isLarge ? '25px' : '16px';
+
     const slideshow = useRef(null) as MutableRefObject<any>;
     const intervaloSlideshow = useRef(null) as MutableRefObject<any>;
 
     const siguiente = useCallback(() => {
         // Comprobamos que el slideshow tenga elementos
         if (slideshow.current.children.length > 0) {
-            console.log('Siguiente');
+            // console.log('Siguiente');
 
             // Obtenemos el primer elemento del slideshow.
             const primerElemento = slideshow.current.children[0];
@@ -67,7 +78,7 @@ const Slide = ({
     }, [velocidad]);
 
     const anterior = () => {
-        console.log('Anterior');
+        // console.log('Anterior');
         if (slideshow.current.children.length > 0) {
             // Obtenemos el ultimo elemento del slideshow.
             const index = slideshow.current.children.length - 1;
@@ -114,10 +125,18 @@ const Slide = ({
                 {elements.map((item) => {
                     return (
                         <div className="Slide" key={item.id}>
-                            <Link to={item?.to || ''}>
+                            <Link to={item?.route || ''}>
                                 <img src={item.src} alt={`item-${item.id}`} />
                             </Link>
-                            <div className="TextoSlide" style={item?.textStyle}>
+                            <div
+                                className="TextoSlide"
+                                style={{
+                                    backgroundColor: `${textBackground}`,
+                                    color: '#fff',
+                                    position: textPosition,
+                                    fontSize: textFontSize,
+                                }}
+                            >
                                 <p>{item?.text}</p>
                             </div>
                         </div>

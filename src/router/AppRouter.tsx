@@ -31,9 +31,15 @@ const AppRouter = () => {
     favicon.href = plantillaStyles?.icono || './favicon.ico';
 
     useEffect(() => {
-        dispatch(getStyles());
-        dispatch(getCategories());
-        dispatch(getSubCategories());
+        if (!plantillaReducer.styles) {
+            dispatch(getStyles());
+        }
+        if (!categoriesReducer.categories) {
+            dispatch(getCategories());
+        }
+        if (!subCategoriesReducer.subCategories) {
+            dispatch(getSubCategories());
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -52,7 +58,7 @@ const AppRouter = () => {
     }
     return (
         <Router>
-            <div>
+            <div id="routerContainer">
                 <Top plantillaStyles={plantillaStyles} />
                 <Header />
                 <Switch>

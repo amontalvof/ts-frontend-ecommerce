@@ -36,11 +36,7 @@ const Top = ({ plantillaStyles }: ITopProps) => {
     // const redesSocialesParsed = JSON.parse(redesSociales);
 
     return (
-        <div
-            className="container-fluid barraSuperior"
-            id="top"
-            style={barraSuperiorStyles}
-        >
+        <div className="barraSuperior" id="top" style={barraSuperiorStyles}>
             <div className="container">
                 <div className="row">
                     {/* SOCIAL */}
