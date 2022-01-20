@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DisplayGridListBar from '../../components/DisplayGridListBar';
 import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 import { getSlider } from '../../redux/actions/sliderActions';
@@ -44,6 +45,7 @@ const Main = () => {
                     // autoplay
                     velocidad="800"
                 />
+                <DisplayGridListBar />
             </div>
         </div>
     );

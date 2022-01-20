@@ -3,20 +3,30 @@ import { Redirect, useParams } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
+import { TCategory } from '../../interfaces/categories';
 
 const SubCategory = () => {
-    const { subCategoryId = '' } = useParams<{ subCategoryId?: string }>();
-    const { subCategories = [] } = useSelector(
-        (state: RootStore) => state.subCategoriesReducer
+    const { categoryId = '', subCategoryId = '' } =
+        useParams<{ categoryId?: string; subCategoryId?: string }>();
+    const { subCategoriesReducer, categoriesReducer } = useSelector(
+        (state: RootStore) => state
     );
-    const isAnAllowedRoute = checkIsAllowedRoute<TSubCategory>(
+    const { subCategories = [] } = subCategoriesReducer;
+    const { categories = [] } = categoriesReducer;
+
+    const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         subCategories,
         subCategoryId
     );
+    const isACategoryAllowedRoute = checkIsAllowedRoute<TCategory>(
+        categories,
+        categoryId
+    );
 
-    if (!isAnAllowedRoute) {
+    if (!isASubCategoryAllowedRoute || !isACategoryAllowedRoute) {
         return <Redirect to="/error" />;
     }
+
     return (
         <div>
             <h1>SubCategory</h1>
