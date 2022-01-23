@@ -42,7 +42,7 @@ const CategoriesList = ({
                 </Link>
             </h4>
             <hr />
-            <ul>
+            <ul style={{ listStyleType: 'none' }}>
                 {filteredSubCategories.map((item) => (
                     <li key={item.id}>
                         <Link
