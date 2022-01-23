@@ -15,6 +15,7 @@ import SubCategory from '../pages/SubCategory';
 import { getCategories, getStyles, getSubCategories } from '../redux/actions';
 import { RootStore } from '../redux/store';
 import Error404 from '../pages/Error404';
+import { SpinnerContainer, RouterContainer } from './styles';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const AppRouter = () => {
 
     if (loadingStyles || loadingCategories || loadingSubCategories) {
         return (
-            <div id="spinnerContainer">
+            <SpinnerContainer>
                 <Spinner
                     plantillaStyles={plantillaStyles}
                     size={15}
@@ -53,12 +54,12 @@ const AppRouter = () => {
                     defaultColor="#47bac1"
                     text={<h1>Loading...</h1>}
                 />
-            </div>
+            </SpinnerContainer>
         );
     }
     return (
         <Router>
-            <div id="routerContainer">
+            <RouterContainer>
                 <Top plantillaStyles={plantillaStyles} />
                 <Header />
                 <Switch>
@@ -72,7 +73,7 @@ const AppRouter = () => {
                     <Route exact path="/" component={Main} />
                     <Redirect to="/error" />
                 </Switch>
-            </div>
+            </RouterContainer>
         </Router>
     );
 };

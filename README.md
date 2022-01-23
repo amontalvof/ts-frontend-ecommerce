@@ -6,5 +6,5 @@
 -   React
 -   Redux
 -   JWT
--   React Router Dom v6
--   Sass
+-   React Router Dom v5
+-   Styled Components
