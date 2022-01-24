@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
-import './styles.scss';
+import { LogoContainer } from './styles';
 
 const Logo = () => {
     const { styles } = useSelector(
@@ -10,7 +10,7 @@ const Logo = () => {
     const plantillaStyles = styles && styles[0];
 
     return (
-        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
+        <LogoContainer className="col-lg-3 col-md-3 col-sm-2 col-xs-12">
             <Link to="/">
                 <img
                     src={plantillaStyles?.logo}
@@ -18,7 +18,7 @@ const Logo = () => {
                     alt="logo"
                 />
             </Link>
-        </div>
+        </LogoContainer>
     );
 };
 

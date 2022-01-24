@@ -5,16 +5,12 @@ import Logo from '../../components/Logo';
 import Search from '../../components/Search';
 import ShoppingCart from '../../components/ShoppingCart';
 import { RootStore } from '../../redux/store';
-import './styles.scss';
+import { CategoriasContainer } from './styles';
 
 const Header = () => {
     const [hideCategories, setHideCategories] = useState(true);
     const { plantillaReducer, categoriesReducer, subCategoriesReducer } =
         useSelector((state: RootStore) => state);
-
-    const classHideCategories = hideCategories
-        ? 'hideCategories'
-        : 'showCategories';
 
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
@@ -27,14 +23,14 @@ const Header = () => {
     return (
         <header className="container-fluid">
             <div className="container">
-                <div className="row" id="cabezote">
+                <div className="row">
                     <Logo />
                     <Search handleHideCategories={setHideCategories} />
                     <ShoppingCart />
                 </div>
-                <div
-                    className={`col-xs-12 backColor ${classHideCategories}`}
-                    id="categorias"
+                <CategoriasContainer
+                    className="col-xs-12 backColor"
+                    hideCategories={hideCategories}
                     style={categoriesStyles}
                 >
                     {categories.map((item) => (
@@ -47,7 +43,7 @@ const Header = () => {
                             subCategories={subCategoriesReducer.subCategories}
                         />
                     ))}
-                </div>
+                </CategoriasContainer>
             </div>
         </header>
     );

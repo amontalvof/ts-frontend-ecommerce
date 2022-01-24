@@ -1,6 +1,13 @@
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { TStyle } from '../../interfaces/plantilla';
-import './styles.scss';
+import {
+    BarraSuperior,
+    // StyledIconsUl,
+    // StyledIconsLi,
+    StyledLinkUl,
+    StyledLinkLi,
+} from './styles';
 
 interface ITopProps {
     plantillaStyles?: TStyle;
@@ -36,16 +43,16 @@ const Top = ({ plantillaStyles }: ITopProps) => {
     // const redesSocialesParsed = JSON.parse(redesSociales);
 
     return (
-        <div className="barraSuperior" id="top" style={barraSuperiorStyles}>
+        <BarraSuperior id="top" style={barraSuperiorStyles}>
             <div className="container">
                 <div className="row">
                     {/* SOCIAL */}
                     <div className="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                        {/* <ul>
+                        {/* <StyledIconsUl>
                             {redesSocialesParsed.map((item: ISocialNetwork) => {
                                 const Icon = iconsMap[item.red];
                                 return (
-                                    <li key={item.red}>
+                                    <StyledIconsLi key={item.red}>
                                         <a
                                             href={item.url}
                                             target="_blank"
@@ -55,38 +62,41 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                                                 className={`redSocial ${item.estilo}`}
                                             />
                                         </a>
-                                    </li>
+                                    </StyledIconsLi>
                                 );
                             })}
-                        </ul> */}
+                        </StyledIconsUl> */}
                     </div>
                     {/* SIGN IN */}
-                    <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
-                        <ul>
-                            <li>
-                                <a
-                                    href="#modalIngreso"
+                    <div
+                        className="col-lg-3 col-md-3 col-sm-4 col-xs-12"
+                        id="registro"
+                    >
+                        <StyledLinkUl>
+                            <StyledLinkLi>
+                                <Link
+                                    to="modalIngreso"
                                     data-toggle="modal"
                                     style={linkStyles}
                                 >
                                     Sign in
-                                </a>
-                            </li>
-                            <li>|</li>
-                            <li>
-                                <a
-                                    href="#modalRegistro"
+                                </Link>
+                            </StyledLinkLi>
+                            <StyledLinkLi>|</StyledLinkLi>
+                            <StyledLinkLi>
+                                <Link
+                                    to="modalRegistro"
                                     data-toggle="modal"
                                     style={linkStyles}
                                 >
                                     Create an account
-                                </a>
-                            </li>
-                        </ul>
+                                </Link>
+                            </StyledLinkLi>
+                        </StyledLinkUl>
                     </div>
                 </div>
             </div>
-        </div>
+        </BarraSuperior>
     );
 };
 
