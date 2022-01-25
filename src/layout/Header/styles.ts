@@ -36,10 +36,6 @@ export const CategoriasContainer = styled.div<ICategoriasContainerProps>`
         margin-bottom: -10px;
     }
 
-    hr {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
     /*=============================================
     MOVIL (XS revisamos en 320px)
     =============================================*/

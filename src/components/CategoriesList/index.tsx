@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategoriesByCategoryId';
+import hexToRGB from '../../helpers/hexToRGB';
 import { TStyle } from '../../interfaces/plantilla';
 import { TSubCategories } from '../../interfaces/subCategories';
+import { StyledCategoriesListUl, StyledDivider } from './styles';
 
 interface ICategoriesListProps {
     plantillaStyles: TStyle;
@@ -30,6 +32,10 @@ const CategoriesList = ({
         color: colorTexto,
     };
 
+    const dividerStyles = {
+        border: `1px solid ${hexToRGB(colorTexto, '0.3')}`,
+    };
+
     return (
         <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <h4>
@@ -41,8 +47,8 @@ const CategoriesList = ({
                     {category}
                 </Link>
             </h4>
-            <hr />
-            <ul style={{ listStyleType: 'none' }}>
+            <StyledDivider style={dividerStyles} />
+            <StyledCategoriesListUl>
                 {filteredSubCategories.map((item) => (
                     <li key={item.id}>
                         <Link
@@ -54,7 +60,7 @@ const CategoriesList = ({
                         </Link>
                     </li>
                 ))}
-            </ul>
+            </StyledCategoriesListUl>
         </div>
     );
 };

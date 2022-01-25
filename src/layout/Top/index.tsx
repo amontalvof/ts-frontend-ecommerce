@@ -40,6 +40,10 @@ const Top = ({ plantillaStyles }: ITopProps) => {
         color: textoSuperior,
     };
 
+    const dividerStyles = {
+        color: textoSuperior,
+    };
+
     // const redesSocialesParsed = JSON.parse(redesSociales);
 
     return (
@@ -82,7 +86,7 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                                     Sign in
                                 </Link>
                             </StyledLinkLi>
-                            <StyledLinkLi>|</StyledLinkLi>
+                            <StyledLinkLi style={dividerStyles}>|</StyledLinkLi>
                             <StyledLinkLi>
                                 <Link
                                     to="modalRegistro"

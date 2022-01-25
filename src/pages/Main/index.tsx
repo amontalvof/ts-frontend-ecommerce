@@ -5,7 +5,7 @@ import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 import { getSlider } from '../../redux/actions/sliderActions';
 import { RootStore } from '../../redux/store';
-import './styles.scss';
+import { SpinnerContainer, SliderContainer } from './styles';
 
 const Main = () => {
     const dispatch = useDispatch();
@@ -24,28 +24,28 @@ const Main = () => {
 
     if (loadingStyles || loadingSlider) {
         return (
-            <div id="mainSpinnerContainer">
+            <SpinnerContainer>
                 <Spinner
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
                     defaultColor="#47bac1"
-                    text={<h1>Loading...</h1>}
+                    text={<h1 style={{ color: '#47bac1' }}>Loading...</h1>}
                 />
-            </div>
+            </SpinnerContainer>
         );
     }
 
     return (
         <div>
-            <div id="SliderContainer">
+            <SliderContainer>
                 <Slider
                     elements={slider}
                     controles
                     // autoplay
                     velocidad="800"
                 />
-            </div>
+            </SliderContainer>
             <Products title="FREE PRODUCTS" />
         </div>
     );

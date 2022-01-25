@@ -6,11 +6,10 @@ export const SpinnerContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    flex-grow: 1;
 `;
 
-export const RouterContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+export const SliderContainer = styled.div`
+    margin: 20px auto;
+    overflow: hidden;
 `;
