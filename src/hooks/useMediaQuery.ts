@@ -1,3 +1,4 @@
+// TODO: Remove hook if not used
 import { useState, useEffect } from 'react';
 import useEventListener from './useEventListener';
 

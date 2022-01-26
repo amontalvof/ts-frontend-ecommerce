@@ -1,8 +1,14 @@
 import { useRef, useEffect, useCallback, MutableRefObject } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import './styles.scss';
+import {
+    Boton,
+    ContenedorPrincipal,
+    ContenedorSlideshow,
+    Controles,
+    Slide,
+    TextoSlide,
+} from './styles';
 
 interface IElement {
     route: string;
@@ -27,18 +33,13 @@ const arrowStyles = {
     borderRadius: '5px',
 };
 
-const Slide = ({
+const Slider = ({
     elements,
     controles = false,
     autoplay = false,
     velocidad = '500',
     intervalo = 5000,
 }: ISlide) => {
-    const isLarge = useMediaQuery('(min-width: 700px)');
-    const textBackground = isLarge ? 'rgba(0, 0, 0,.5)' : 'rgb(0, 0, 0)';
-    const textPosition = isLarge ? undefined : 'relative';
-    const textFontSize = isLarge ? '25px' : '16px';
-
     const slideshow = useRef(null) as MutableRefObject<any>;
     const intervaloSlideshow = useRef(null) as MutableRefObject<any>;
 
@@ -120,41 +121,33 @@ const Slide = ({
     }, [autoplay, intervalo, siguiente]);
 
     return (
-        <div id="ContenedorPrincipal">
-            <div id="ContenedorSlideshow" ref={slideshow}>
+        <ContenedorPrincipal>
+            <ContenedorSlideshow ref={slideshow}>
                 {elements.map((item) => {
                     return (
-                        <div className="Slide" key={item.id}>
+                        <Slide key={item.id}>
                             <Link to={item?.route || ''}>
                                 <img src={item.src} alt={`item-${item.id}`} />
                             </Link>
-                            <div
-                                className="TextoSlide"
-                                style={{
-                                    backgroundColor: `${textBackground}`,
-                                    color: '#fff',
-                                    position: textPosition,
-                                    fontSize: textFontSize,
-                                }}
-                            >
+                            <TextoSlide>
                                 <p>{item?.text}</p>
-                            </div>
-                        </div>
+                            </TextoSlide>
+                        </Slide>
                     );
                 })}
-            </div>
+            </ContenedorSlideshow>
             {controles && (
-                <div id="Controles">
-                    <button className="Boton ArrowLeft" onClick={anterior}>
+                <Controles>
+                    <Boton direction="left" onClick={anterior}>
                         <FaChevronLeft style={arrowStyles} />
-                    </button>
-                    <button className="Boton ArrowRight" onClick={siguiente}>
+                    </Boton>
+                    <Boton direction="right" onClick={siguiente}>
                         <FaChevronRight style={arrowStyles} />
-                    </button>
-                </div>
+                    </Boton>
+                </Controles>
             )}
-        </div>
+        </ContenedorPrincipal>
     );
 };
 
-export default Slide;
+export default Slider;
