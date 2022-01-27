@@ -1,38 +1,34 @@
 import { FaTh, FaList } from 'react-icons/fa';
-import './styles.scss';
+import { IconTextContainer, StyledButtonText } from './styles';
 
 const DisplayGridListBar = () => {
     return (
-        <div className="container-fluid well well-sm barraProductos">
+        <div className="container-fluid well well-sm">
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-12 organizarProductos">
+                    <div className="col-xs-12">
                         <div className="btn-group pull-right">
                             <button
                                 type="button"
                                 className="btn btn-default btnGrid"
-                                id="btnGrid0"
                             >
-                                <div className="IconTextContainer">
+                                <IconTextContainer>
                                     <FaTh />
-                                    <span className="col-xs-0 pull-right">
-                                        {' '}
+                                    <StyledButtonText className="col-xs-0 pull-right">
                                         GRID
-                                    </span>
-                                </div>
+                                    </StyledButtonText>
+                                </IconTextContainer>
                             </button>
                             <button
                                 type="button"
                                 className="btn btn-default btnList"
-                                id="btnList0"
                             >
-                                <div className="IconTextContainer">
+                                <IconTextContainer>
                                     <FaList />
-                                    <span className="col-xs-0 pull-right">
-                                        {' '}
+                                    <StyledButtonText className="col-xs-0 pull-right">
                                         LIST
-                                    </span>
-                                </div>
+                                    </StyledButtonText>
+                                </IconTextContainer>
                             </button>
                         </div>
                     </div>

@@ -47,7 +47,7 @@ const Top = ({ plantillaStyles }: ITopProps) => {
     // const redesSocialesParsed = JSON.parse(redesSociales);
 
     return (
-        <BarraSuperior id="top" style={barraSuperiorStyles}>
+        <BarraSuperior style={barraSuperiorStyles}>
             <div className="container">
                 <div className="row">
                     {/* SOCIAL */}
@@ -72,10 +72,7 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                         </StyledIconsUl> */}
                     </div>
                     {/* SIGN IN */}
-                    <div
-                        className="col-lg-3 col-md-3 col-sm-4 col-xs-12"
-                        id="registro"
-                    >
+                    <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                         <StyledLinkUl>
                             <StyledLinkLi>
                                 <Link

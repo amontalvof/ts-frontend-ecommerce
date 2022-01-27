@@ -51,9 +51,7 @@ export const BarraSuperior = styled.div`
     }
 
     @media (max-width: 767px) {
-        #top #registro {
-            border-top: 1px solid #222;
-        }
+        border-top: 1px solid #222;
     }
 `;
 
