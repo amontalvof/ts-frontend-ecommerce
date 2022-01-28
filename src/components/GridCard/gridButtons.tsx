@@ -1,5 +1,11 @@
 import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
+import {
+    EnlacesContainer,
+    StyledButton,
+    IconContainer,
+    ButtonsContainer,
+} from './styles';
 interface IGridButtonsProps {
     tipo: string;
 }
@@ -7,62 +13,44 @@ interface IGridButtonsProps {
 const GridButtons = ({ tipo }: IGridButtonsProps) => {
     const isVirtual = tipo === 'virtual';
     return (
-        <div className="col-xs-6 enlaces">
-            <div className="btn-group pull-right">
-                <button
+        <EnlacesContainer className="col-xs-5">
+            <ButtonsContainer>
+                <StyledButton
                     type="button"
-                    className="btn btn-default btn-xs deseos"
+                    className="btn btn-default btn-xs"
                     data-toggle="tooltip"
                     title="Add to my wish list"
                 >
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            margin: '3px 0',
-                        }}
-                    >
+                    <IconContainer>
                         <FaHeart />
-                    </div>
-                </button>
+                    </IconContainer>
+                </StyledButton>
                 {isVirtual && (
-                    <button
+                    <StyledButton
                         type="button"
-                        className="btn btn-default btn-xs agregarCarrito"
+                        className="btn btn-default btn-xs"
                         data-toggle="tooltip"
                         title="Add to shopping cart"
                     >
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                margin: '3px 0',
-                            }}
-                        >
+                        <IconContainer>
                             <FaShoppingCart />
-                        </div>
-                    </button>
+                        </IconContainer>
+                    </StyledButton>
                 )}
-                <a href="#" className="pixelProducto">
-                    <button
+                <Link to="">
+                    <StyledButton
                         type="button"
                         className="btn btn-default btn-xs"
                         data-toggle="tooltip"
                         title="See product"
                     >
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                margin: '3px 0',
-                            }}
-                        >
+                        <IconContainer>
                             <FaEye />
-                        </div>
-                    </button>
-                </a>
-            </div>
-        </div>
+                        </IconContainer>
+                    </StyledButton>
+                </Link>
+            </ButtonsContainer>
+        </EnlacesContainer>
     );
 };
 

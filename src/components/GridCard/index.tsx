@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import GridButtons from './gridButtons';
 import GridPrice from './gridPrice';
 import GridTitle from './gridTitle';
+import { StyledFigure, StyledImg, StyledCard } from './styles';
 
 interface IGridCardProps {
     ruta: string;
@@ -25,16 +26,16 @@ const GridCard = ({
     tipo,
 }: IGridCardProps) => {
     return (
-        <>
-            <figure>
+        <StyledCard>
+            <StyledFigure>
                 <Link to={ruta} className="pixelProducto">
-                    <img
+                    <StyledImg
                         src={imgOferta}
                         className="img-responsive"
                         alt="grid-product"
                     />
                 </Link>
-            </figure>
+            </StyledFigure>
             <GridTitle
                 ruta={ruta}
                 titulo={titulo}
@@ -43,7 +44,7 @@ const GridCard = ({
             />
             <GridPrice precio={precio} oferta={oferta} />
             <GridButtons tipo={tipo} />
-        </>
+        </StyledCard>
     );
 };
 

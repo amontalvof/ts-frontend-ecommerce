@@ -1,3 +1,6 @@
+import formatPrice from '../../helpers/formatPrice';
+import { PrecioContainer, StyledOferta } from './styles';
+
 interface IGridPriceProps {
     precio?: number;
     oferta?: number;
@@ -7,32 +10,23 @@ const GridPrice = ({ precio = 0, oferta = 0 }: IGridPriceProps) => {
     const isNotFree = precio !== 0;
     const hasOffer = oferta !== 0;
 
-    const newPrice = isNotFree
-        ? new Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: 'USD',
-          }).format(precio)
-        : 'FREE';
+    const newPrice = isNotFree ? formatPrice(precio) : 'FREE';
 
-    const newOffer =
-        hasOffer &&
-        new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            currencyDisplay: 'code',
-        }).format(oferta);
+    const newOffer = hasOffer && formatPrice(oferta);
 
     return (
-        <div className="col-xs-6 precio">
+        <PrecioContainer className="col-xs-7">
             <h2>
                 {hasOffer && (
                     <small>
-                        <strong className="oferta">{newOffer}</strong>
+                        <StyledOferta className="oferta">
+                            {newOffer}
+                        </StyledOferta>
                     </small>
                 )}{' '}
                 <small>{newPrice}</small>
             </h2>
-        </div>
+        </PrecioContainer>
     );
 };
 

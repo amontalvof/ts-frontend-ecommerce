@@ -1,5 +1,5 @@
 import GridCard from '../GridCard';
-import './styles.scss';
+import { StyledUl } from './styles';
 
 const products = [
     {
@@ -48,13 +48,13 @@ const products = [
 
 const GridProducts = () => {
     return (
-        <ul className="grid0" style={{ listStyleType: 'none' }}>
+        <StyledUl>
             {products.map((product) => (
                 <li key={product.id} className="col-md-3 col-sm-6 col-xs-12">
                     <GridCard {...product} />
                 </li>
             ))}
-        </ul>
+        </StyledUl>
     );
 };
 

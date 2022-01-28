@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-
+import { StyledSmall, StyledLink, StyledBadge, StyledTitle } from './styles';
 interface IGridTitleProps {
     ruta: string;
     titulo: string;
@@ -17,28 +16,28 @@ const GridTitle = ({
     const newText = nuevo && 'New';
     const discountText = descuentoOferta && `${descuentoOferta}% off`;
     return (
-        <h4>
-            <small>
-                <Link to={ruta} className="pixelProducto">
+        <StyledTitle>
+            <StyledSmall>
+                <StyledLink to={ruta} className="pixelProducto">
                     {titulo}
                     <br />
                     {showBadge ? (
                         <>
-                            <span className="label label-warning fontSize">
+                            <StyledBadge className="label label-warning fontSize">
                                 {newText}
-                            </span>{' '}
-                            <span className="label label-warning fontSize">
+                            </StyledBadge>{' '}
+                            <StyledBadge className="label label-warning fontSize">
                                 {discountText}
-                            </span>
+                            </StyledBadge>
                         </>
                     ) : (
                         <>
                             <br />
                         </>
                     )}
-                </Link>
-            </small>
-        </h4>
+                </StyledLink>
+            </StyledSmall>
+        </StyledTitle>
     );
 };
 
