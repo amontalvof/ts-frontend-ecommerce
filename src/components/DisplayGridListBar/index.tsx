@@ -10,7 +10,8 @@ const DisplayGridListBar = () => {
                         <div className="btn-group pull-right">
                             <button
                                 type="button"
-                                className="btn btn-default btnGrid"
+                                className="btn btn-default"
+                                style={{ outline: 'none' }}
                             >
                                 <IconTextContainer>
                                     <FaTh />
@@ -21,7 +22,8 @@ const DisplayGridListBar = () => {
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-default btnList"
+                                className="btn btn-default"
+                                style={{ outline: 'none' }}
                             >
                                 <IconTextContainer>
                                     <FaList />

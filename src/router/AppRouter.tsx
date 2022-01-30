@@ -52,7 +52,15 @@ const AppRouter = () => {
                     size={15}
                     margin={2}
                     defaultColor="#47bac1"
-                    text={<h1 style={{ color: '#47bac1' }}>Loading...</h1>}
+                    text={
+                        <h1
+                            style={{
+                                color: plantillaStyles?.colorFondo || '#47bac1',
+                            }}
+                        >
+                            Loading...
+                        </h1>
+                    }
                 />
             </SpinnerContainer>
         );

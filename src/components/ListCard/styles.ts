@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+interface IStyledBadgeProps {
+    colorTexto?: string;
+    colorFondo?: string;
+}
+interface IStyledButtonProps extends IStyledBadgeProps {}
+
 export const StyledFigure = styled.figure`
     overflow: hidden;
 `;
@@ -32,9 +38,10 @@ export const StyledLink = styled(Link)`
     color: #777;
 `;
 
-export const StyledBadge = styled.span`
+export const StyledBadge = styled.span<IStyledBadgeProps>`
     font-size: 12px;
-    background-color: #47bac1;
+    background-color: ${(props) => props.colorFondo};
+    color: ${(props) => props.colorTexto};
     margin-left: 5px;
 `;
 
@@ -44,10 +51,16 @@ export const StyledOferta = styled.strong`
     font-size: 12px;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<IStyledButtonProps>`
     margin: 2px;
     svg {
         color: #999;
+    }
+    :hover {
+        background-color: ${(props) => props.colorFondo};
+        svg {
+            color: ${(props) => props.colorTexto};
+        }
     }
 `;
 

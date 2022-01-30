@@ -1,4 +1,6 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootStore } from '../../redux/store';
 import GridButtons from './gridButtons';
 import GridPrice from './gridPrice';
 import GridTitle from './gridTitle';
@@ -25,6 +27,10 @@ const GridCard = ({
     oferta,
     tipo,
 }: IGridCardProps) => {
+    const state = useSelector((state: RootStore) => state);
+    const { plantillaReducer } = state;
+    const { styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
     return (
         <>
             <StyledFigure>
@@ -41,9 +47,10 @@ const GridCard = ({
                 titulo={titulo}
                 descuentoOferta={descuentoOferta}
                 nuevo={nuevo}
+                plantillaStyles={plantillaStyles}
             />
             <GridPrice precio={precio} oferta={oferta} />
-            <GridButtons tipo={tipo} />
+            <GridButtons tipo={tipo} plantillaStyles={plantillaStyles} />
         </>
     );
 };

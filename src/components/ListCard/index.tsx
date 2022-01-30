@@ -1,4 +1,6 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootStore } from '../../redux/store';
 import ListButtons from './listButtons';
 import ListPrice from './listPrice';
 import ListTitle from './listTitle';
@@ -27,6 +29,10 @@ const ListCard = ({
     tipo,
     descripcion,
 }: IListCardProps) => {
+    const state = useSelector((state: RootStore) => state);
+    const { plantillaReducer } = state;
+    const { styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
     return (
         <>
             <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -47,9 +53,10 @@ const ListCard = ({
                     descuentoOferta={descuentoOferta}
                     nuevo={nuevo}
                     descripcion={descripcion}
+                    plantillaStyles={plantillaStyles}
                 />
                 <ListPrice precio={precio} oferta={oferta} />
-                <ListButtons tipo={tipo} />
+                <ListButtons tipo={tipo} plantillaStyles={plantillaStyles} />
             </div>
             <div className="col-xs-12">
                 <hr />

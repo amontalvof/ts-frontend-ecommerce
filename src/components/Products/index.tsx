@@ -1,4 +1,7 @@
 import { FaChevronRight } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { RootStore } from '../../redux/store';
 import DisplayGridListBar from '../DisplayGridListBar';
 import GridProducts from '../GridProducts';
 import ListProducts from '../ListProducts';
@@ -62,6 +65,10 @@ interface IProductsProps {
 }
 
 const Products = ({ title }: IProductsProps) => {
+    const state = useSelector((state: RootStore) => state);
+    const { plantillaReducer } = state;
+    const { styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
     return (
         <>
             <DisplayGridListBar />
@@ -75,16 +82,27 @@ const Products = ({ title }: IProductsProps) => {
                                 </h1>
                             </div>
                             <div className="col-sm-6 col-xs-12">
-                                <a href="see-more">
-                                    <button className="btn btn-default backColor pull-right">
+                                <Link to="">
+                                    <button
+                                        className="btn btn-default pull-right"
+                                        style={{
+                                            outline: 'none',
+                                            backgroundColor:
+                                                plantillaStyles.colorFondo,
+                                            color: plantillaStyles.colorTexto,
+                                        }}
+                                    >
                                         <ShowMoreButtonContainer>
                                             SEE MORE{' '}
                                             <FaChevronRight
-                                                style={{ marginLeft: '5px' }}
+                                                style={{
+                                                    marginLeft: '5px',
+                                                    color: plantillaStyles.colorTexto,
+                                                }}
                                             />
                                         </ShowMoreButtonContainer>
                                     </button>
-                                </a>
+                                </Link>
                             </div>
                         </TituloDestacadoContainer>
                         <div className="clearfix" />

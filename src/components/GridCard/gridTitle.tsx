@@ -1,9 +1,11 @@
+import { TStyle } from '../../interfaces/plantilla';
 import { StyledSmall, StyledLink, StyledBadge, StyledTitle } from './styles';
 interface IGridTitleProps {
     ruta: string;
     titulo: string;
     descuentoOferta?: number;
     nuevo?: boolean;
+    plantillaStyles?: TStyle;
 }
 
 const GridTitle = ({
@@ -11,10 +13,12 @@ const GridTitle = ({
     titulo,
     descuentoOferta,
     nuevo,
+    plantillaStyles,
 }: IGridTitleProps) => {
     const showBadge = descuentoOferta || nuevo;
     const newText = nuevo && 'New';
     const discountText = descuentoOferta && `${descuentoOferta}% off`;
+
     return (
         <StyledTitle>
             <StyledSmall>
@@ -23,10 +27,18 @@ const GridTitle = ({
                     <br />
                     {showBadge ? (
                         <>
-                            <StyledBadge className="label">
+                            <StyledBadge
+                                className="label"
+                                colorTexto={plantillaStyles?.colorTexto}
+                                colorFondo={plantillaStyles?.colorFondo}
+                            >
                                 {newText}
                             </StyledBadge>{' '}
-                            <StyledBadge className="label">
+                            <StyledBadge
+                                className="label"
+                                colorTexto={plantillaStyles?.colorTexto}
+                                colorFondo={plantillaStyles?.colorFondo}
+                            >
                                 {discountText}
                             </StyledBadge>
                         </>

@@ -25,7 +25,6 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
 
     return (
         <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-            {/* CATEGORIES BUTTON */}
             <BtnCategorias
                 className="col-lg-4 col-md-4 col-sm-4 col-xs-12 backColor"
                 onClick={handleBtnCategoriesClick}
@@ -38,7 +37,6 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                     </span>
                 </p>
             </BtnCategorias>
-            {/* SEARCH */}
             <Buscador className="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <input
                     type="search"

@@ -1,3 +1,4 @@
+import { TStyle } from '../../interfaces/plantilla';
 import {
     StyledTitle,
     StyledLink,
@@ -11,6 +12,7 @@ interface IListTitleProps {
     descuentoOferta?: number;
     nuevo?: boolean;
     descripcion: string;
+    plantillaStyles?: TStyle;
 }
 const ListTitle = ({
     ruta,
@@ -18,6 +20,7 @@ const ListTitle = ({
     descuentoOferta,
     nuevo,
     descripcion,
+    plantillaStyles,
 }: IListTitleProps) => {
     const showBadge = descuentoOferta || nuevo;
     const newText = nuevo && 'New';
@@ -31,10 +34,18 @@ const ListTitle = ({
                             {titulo}
                             {showBadge && (
                                 <>
-                                    <StyledBadge className="label">
+                                    <StyledBadge
+                                        className="label"
+                                        colorTexto={plantillaStyles?.colorTexto}
+                                        colorFondo={plantillaStyles?.colorFondo}
+                                    >
                                         {newText}
                                     </StyledBadge>{' '}
-                                    <StyledBadge className="label">
+                                    <StyledBadge
+                                        className="label"
+                                        colorTexto={plantillaStyles?.colorTexto}
+                                        colorFondo={plantillaStyles?.colorFondo}
+                                    >
                                         {discountText}
                                     </StyledBadge>
                                 </>

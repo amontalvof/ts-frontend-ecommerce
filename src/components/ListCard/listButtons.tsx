@@ -1,11 +1,14 @@
 import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { TStyle } from '../../interfaces/plantilla';
 import { StyledButton, IconContainer, ButtonsContainer } from './styles';
 
 interface IListButtonsProps {
     tipo: string;
+    plantillaStyles?: TStyle;
 }
-const ListButtons = ({ tipo }: IListButtonsProps) => {
+
+const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
     const isVirtual = tipo === 'virtual';
 
     return (
@@ -15,6 +18,9 @@ const ListButtons = ({ tipo }: IListButtonsProps) => {
                 className="btn btn-default btn-xs"
                 data-toggle="tooltip"
                 title="Add to my wish list"
+                style={{ outline: 'none' }}
+                colorTexto={plantillaStyles?.colorTexto}
+                colorFondo={plantillaStyles?.colorFondo}
             >
                 <IconContainer>
                     <FaHeart />
@@ -26,6 +32,9 @@ const ListButtons = ({ tipo }: IListButtonsProps) => {
                     className="btn btn-default btn-xs"
                     data-toggle="tooltip"
                     title="Add to shopping cart"
+                    style={{ outline: 'none' }}
+                    colorTexto={plantillaStyles?.colorTexto}
+                    colorFondo={plantillaStyles?.colorFondo}
                 >
                     <IconContainer>
                         <FaShoppingCart />
@@ -38,6 +47,9 @@ const ListButtons = ({ tipo }: IListButtonsProps) => {
                     className="btn btn-default btn-xs"
                     data-toggle="tooltip"
                     title="See product"
+                    style={{ outline: 'none' }}
+                    colorTexto={plantillaStyles?.colorTexto}
+                    colorFondo={plantillaStyles?.colorFondo}
                 >
                     <IconContainer>
                         <FaEye />
