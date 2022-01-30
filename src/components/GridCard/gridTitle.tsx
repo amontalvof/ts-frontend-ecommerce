@@ -23,10 +23,10 @@ const GridTitle = ({
                     <br />
                     {showBadge ? (
                         <>
-                            <StyledBadge className="label label-warning fontSize">
+                            <StyledBadge className="label">
                                 {newText}
                             </StyledBadge>{' '}
-                            <StyledBadge className="label label-warning fontSize">
+                            <StyledBadge className="label">
                                 {discountText}
                             </StyledBadge>
                         </>

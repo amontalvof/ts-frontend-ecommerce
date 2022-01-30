@@ -19,9 +19,7 @@ const GridPrice = ({ precio = 0, oferta = 0 }: IGridPriceProps) => {
             <h2>
                 {hasOffer && (
                     <small>
-                        <StyledOferta className="oferta">
-                            {newOffer}
-                        </StyledOferta>
+                        <StyledOferta>{newOffer}</StyledOferta>
                     </small>
                 )}{' '}
                 <small>{newPrice}</small>
