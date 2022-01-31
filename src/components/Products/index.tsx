@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import DisplayGridListBar from '../DisplayGridListBar';
 import GridProducts from '../GridProducts';
 import ListProducts from '../ListProducts';
 import { ShowMoreButtonContainer, TituloDestacadoContainer } from './styles';
+import RenderIf from '../RenderIf/index';
 
 const products = [
     {
@@ -65,13 +67,18 @@ interface IProductsProps {
 }
 
 const Products = ({ title }: IProductsProps) => {
+    const [display, setDisplay] = useState<string>('grid');
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
     return (
         <>
-            <DisplayGridListBar />
+            <DisplayGridListBar
+                display={display}
+                changeDisplay={setDisplay}
+                plantillaStyles={plantillaStyles}
+            />
             <div className="container-fluid">
                 <div className="container">
                     <div className="row">
@@ -108,8 +115,12 @@ const Products = ({ title }: IProductsProps) => {
                         <div className="clearfix" />
                         <hr />
                     </div>
-                    <GridProducts products={products} />
-                    <ListProducts products={products} />
+                    <RenderIf isTrue={display === 'grid'}>
+                        <GridProducts products={products} />
+                    </RenderIf>
+                    <RenderIf isTrue={display === 'list'}>
+                        <ListProducts products={products} />
+                    </RenderIf>
                 </div>
             </div>
         </>

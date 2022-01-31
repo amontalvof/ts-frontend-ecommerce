@@ -1,17 +1,33 @@
+import { Dispatch, SetStateAction } from 'react';
 import { FaTh, FaList } from 'react-icons/fa';
-import { IconTextContainer, StyledButtonText } from './styles';
+import { TStyle } from '../../interfaces/plantilla';
+import { IconTextContainer, StyledButtonText, StyledButton } from './styles';
 
-const DisplayGridListBar = () => {
+interface IDisplayGridListBarProps {
+    changeDisplay: Dispatch<SetStateAction<string>>;
+    display: string;
+    plantillaStyles: TStyle;
+}
+
+const DisplayGridListBar = ({
+    display,
+    changeDisplay,
+    plantillaStyles,
+}: IDisplayGridListBarProps) => {
     return (
         <div className="container-fluid well well-sm">
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12">
                         <div className="btn-group pull-right">
-                            <button
+                            <StyledButton
                                 type="button"
                                 className="btn btn-default"
                                 style={{ outline: 'none' }}
+                                onClick={() => changeDisplay('grid')}
+                                isSelected={display === 'grid'}
+                                colorFondo={plantillaStyles.colorFondo}
+                                colorTexto={plantillaStyles.colorTexto}
                             >
                                 <IconTextContainer>
                                     <FaTh />
@@ -19,11 +35,15 @@ const DisplayGridListBar = () => {
                                         GRID
                                     </StyledButtonText>
                                 </IconTextContainer>
-                            </button>
-                            <button
+                            </StyledButton>
+                            <StyledButton
                                 type="button"
                                 className="btn btn-default"
                                 style={{ outline: 'none' }}
+                                onClick={() => changeDisplay('list')}
+                                isSelected={display === 'list'}
+                                colorFondo={plantillaStyles.colorFondo}
+                                colorTexto={plantillaStyles.colorTexto}
                             >
                                 <IconTextContainer>
                                     <FaList />
@@ -31,7 +51,7 @@ const DisplayGridListBar = () => {
                                         LIST
                                     </StyledButtonText>
                                 </IconTextContainer>
-                            </button>
+                            </StyledButton>
                         </div>
                     </div>
                 </div>

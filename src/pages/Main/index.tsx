@@ -55,6 +55,8 @@ const Main = () => {
                 />
             </SliderContainer>
             <Products title="FREE PRODUCTS" />
+            <Products title="MOST SELLED PRODUCTS" />
+            <Products title="MOST VIEWED PRODUCTS" />
         </div>
     );
 };
