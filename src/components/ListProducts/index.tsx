@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import ListCard from '../ListCard';
 import { StyledUl } from './styles';
 
@@ -22,7 +23,7 @@ const ListProducts = ({ products = [] }: IListProducts) => {
     return (
         <StyledUl>
             {products.map((product) => (
-                <li key={product.id} className="col-xs-12">
+                <li key={nanoid(10)} className="col-xs-12">
                     <ListCard {...product} />
                 </li>
             ))}

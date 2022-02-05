@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, MutableRefObject } from 'react';
+import { nanoid } from 'nanoid';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {
@@ -125,7 +126,7 @@ const Slider = ({
             <ContenedorSlideshow ref={slideshow}>
                 {elements.map((item) => {
                     return (
-                        <Slide key={item.id}>
+                        <Slide key={nanoid(10)}>
                             <Link to={item?.route || ''}>
                                 <img src={item.src} alt={`item-${item.id}`} />
                             </Link>

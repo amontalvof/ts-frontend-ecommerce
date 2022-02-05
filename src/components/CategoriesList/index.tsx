@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategoriesByCategoryId';
 import hexToRGB from '../../helpers/hexToRGB';
 import { TStyle } from '../../interfaces/plantilla';
@@ -11,6 +12,7 @@ interface ICategoriesListProps {
     to: string;
     id: number;
     subCategories?: TSubCategories;
+    onRequestClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CategoriesList = ({
@@ -19,6 +21,7 @@ const CategoriesList = ({
     id,
     subCategories,
     to,
+    onRequestClose,
 }: ICategoriesListProps) => {
     const { colorFondo, colorTexto } = plantillaStyles as TStyle;
 
@@ -38,7 +41,7 @@ const CategoriesList = ({
 
     return (
         <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-            <h4>
+            <h4 onClick={() => onRequestClose(true)}>
                 <Link
                     to={`/${to}`}
                     className="pixelCategorias backColor"
@@ -50,7 +53,7 @@ const CategoriesList = ({
             <StyledDivider style={dividerStyles} />
             <StyledCategoriesListUl>
                 {filteredSubCategories.map((item) => (
-                    <li key={item.id}>
+                    <li key={nanoid(10)} onClick={() => onRequestClose(true)}>
                         <Link
                             to={`/${to}/${item.ruta}`}
                             className="pixelSubCategorias backColor"

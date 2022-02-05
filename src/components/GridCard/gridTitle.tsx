@@ -22,7 +22,7 @@ const GridTitle = ({
     return (
         <StyledTitle>
             <StyledSmall>
-                <StyledLink to={ruta} className="pixelProducto">
+                <StyledLink to={ruta} colorFondo={plantillaStyles?.colorFondo}>
                     {titulo}
                     <br />
                     {showBadge ? (

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { TStyle } from '../../interfaces/plantilla';
@@ -56,7 +57,7 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                             {redesSocialesParsed.map((item: ISocialNetwork) => {
                                 const Icon = iconsMap[item.red];
                                 return (
-                                    <StyledIconsLi key={item.red}>
+                                    <StyledIconsLi key={nanoid(10)}>
                                         <a
                                             href={item.url}
                                             target="_blank"

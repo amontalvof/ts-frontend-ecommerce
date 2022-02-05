@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import GridCard from '../GridCard';
 import RenderIf from '../RenderIf';
@@ -24,19 +25,14 @@ const GridProducts = ({ products = [] }: IGridProducts) => {
     return (
         <StyledUl>
             {products.map((product) => (
-                <>
-                    <li
-                        key={product.id}
-                        className="col-md-3 col-sm-6 col-xs-12"
-                    >
-                        <GridCard {...product} />
-                    </li>
+                <li className="col-md-3 col-sm-6 col-xs-12" key={nanoid(10)}>
+                    <GridCard {...product} />
                     <RenderIf isTrue={!isLarge}>
                         <div className="col-xs-12">
                             <hr />
                         </div>
                     </RenderIf>
-                </>
+                </li>
             ))}
         </StyledUl>
     );

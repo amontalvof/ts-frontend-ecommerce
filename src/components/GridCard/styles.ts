@@ -5,10 +5,9 @@ interface IStyledBadgeProps {
     colorTexto?: string;
     colorFondo?: string;
 }
-interface IStyledButtonProps {
-    colorTexto?: string;
-    colorFondo?: string;
-}
+interface IStyledButtonProps extends IStyledBadgeProps {}
+
+interface IStyledLinkProps extends IStyledBadgeProps {}
 
 export const StyledFigure = styled.figure`
     overflow: hidden;
@@ -29,8 +28,11 @@ export const StyledSmall = styled.small`
     font-weight: 700;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<IStyledLinkProps>`
     color: #777;
+    :hover {
+        color: ${(props) => props.colorFondo};
+    }
 `;
 
 export const StyledBadge = styled.span<IStyledBadgeProps>`
