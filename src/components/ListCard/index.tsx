@@ -1,26 +1,15 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IProduct } from '../../interfaces/product';
 import { RootStore } from '../../redux/store';
 import ListButtons from './listButtons';
 import ListPrice from './listPrice';
 import ListTitle from './listTitle';
 import { StyledFigure, StyledImg } from './styles';
 
-interface IListCardProps {
-    descripcion: string;
-    ruta: string;
-    imgOferta: string;
-    titulo: string;
-    descuentoOferta?: number;
-    nuevo?: boolean;
-    precio?: number;
-    oferta?: number;
-    tipo: string;
-}
-
 const ListCard = ({
     ruta,
-    imgOferta,
+    portada,
     titulo,
     descuentoOferta,
     nuevo,
@@ -28,7 +17,9 @@ const ListCard = ({
     oferta,
     tipo,
     descripcion,
-}: IListCardProps) => {
+    categoriaRuta,
+    subcategoriaRuta,
+}: IProduct) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
@@ -37,9 +28,9 @@ const ListCard = ({
         <>
             <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                 <StyledFigure>
-                    <Link to="">
+                    <Link to={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
                         <StyledImg
-                            src={imgOferta}
+                            src={portada}
                             className="img-responsive"
                             alt="list-product"
                         />
@@ -48,7 +39,7 @@ const ListCard = ({
             </div>
             <div className="col-lg-10 col-md-7 col-sm-8 col-xs-12">
                 <ListTitle
-                    ruta={ruta}
+                    ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
                     titulo={titulo}
                     descuentoOferta={descuentoOferta}
                     nuevo={nuevo}

@@ -1,0 +1,32 @@
+export interface IProduct {
+    id: number;
+    id_categoria: number;
+    id_subcategoria: number;
+    tipo: string;
+    ruta: string;
+    titulo: string;
+    titular: string;
+    descripcion: string;
+    detalles: string;
+    precio: number;
+    portada: string;
+    vistas: number;
+    ventas: number;
+    vistasGratis: number;
+    ventasGratis: number;
+    ofertadoPorCategoria: number;
+    ofertadoPorSubCategoria: number;
+    oferta: number;
+    precioOferta: number;
+    descuentoOferta: number;
+    imgOferta: string;
+    finOferta: string | null;
+    nuevo: number;
+    peso: number;
+    entrega: number;
+    fecha: string;
+    categoria: string;
+    categoriaRuta: string;
+    subcategoria: string;
+    subcategoriaRuta: string;
+}

@@ -16,6 +16,7 @@ import { getCategories, getStyles, getSubCategories } from '../redux/actions';
 import { RootStore } from '../redux/store';
 import Error404 from '../pages/Error404';
 import { SpinnerContainer, RouterContainer } from './styles';
+import ProductInfo from '../pages/ProductInfo';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -73,6 +74,11 @@ const AppRouter = () => {
                 <Header />
                 <Switch>
                     <Route exact path="/error" component={Error404} />
+                    <Route
+                        exact
+                        path="/:categoryId/:subCategoryId/:productId"
+                        component={ProductInfo}
+                    />
                     <Route
                         exact
                         path="/:categoryId/:subCategoryId"

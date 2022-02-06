@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Products from '../../components/Products';
 import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
+import useFetch from '../../hooks/useFetch';
 import { getSlider } from '../../redux/actions/sliderActions';
 import { RootStore } from '../../redux/store';
 import { SpinnerContainer, SliderContainer } from './styles';
+
+const baseUrl = process.env.REACT_APP_API_URL;
 
 const Main = () => {
     const dispatch = useDispatch();
@@ -15,6 +18,10 @@ const Main = () => {
     const { loading: loadingSlider, slider = [] } = sliderReducer;
     const plantillaStyles = styles[0];
 
+    const { loading: loadingProducts, value } = useFetch(
+        `${baseUrl}/products/relevant`
+    );
+
     useEffect(() => {
         if (!sliderReducer.slider) {
             dispatch(getSlider());
@@ -22,7 +29,7 @@ const Main = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (loadingStyles || loadingSlider) {
+    if (loadingStyles || loadingSlider || loadingProducts) {
         return (
             <SpinnerContainer>
                 <Spinner
@@ -54,9 +61,21 @@ const Main = () => {
                     velocidad="800"
                 />
             </SliderContainer>
-            <Products title="FREE PRODUCTS" />
-            <Products title="MOST SELLED PRODUCTS" />
-            <Products title="MOST VIEWED PRODUCTS" />
+            <Products
+                title="FREE PRODUCTS"
+                products={value?.free}
+                seeMoreRoute="products/free"
+            />
+            <Products
+                title="MOST SELLED PRODUCTS"
+                products={value?.ventas}
+                seeMoreRoute="products/sales"
+            />
+            <Products
+                title="MOST VIEWED PRODUCTS"
+                products={value?.vistas}
+                seeMoreRoute="products/views"
+            />
         </div>
     );
 };

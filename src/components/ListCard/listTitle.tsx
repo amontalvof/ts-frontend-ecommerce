@@ -10,7 +10,7 @@ interface IListTitleProps {
     ruta: string;
     titulo: string;
     descuentoOferta?: number;
-    nuevo?: boolean;
+    nuevo?: number;
     descripcion: string;
     plantillaStyles?: TStyle;
 }
@@ -22,9 +22,9 @@ const ListTitle = ({
     descripcion,
     plantillaStyles,
 }: IListTitleProps) => {
-    const showBadge = descuentoOferta || nuevo;
-    const newText = nuevo && 'New';
-    const discountText = descuentoOferta && `${descuentoOferta}% off`;
+    const showBadge = !!descuentoOferta || !!nuevo;
+    const newText = !!nuevo && 'New';
+    const discountText = !!descuentoOferta && `${descuentoOferta}% off`;
     return (
         <>
             <StyledTitle>

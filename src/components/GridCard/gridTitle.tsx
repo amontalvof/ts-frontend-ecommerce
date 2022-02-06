@@ -4,7 +4,7 @@ interface IGridTitleProps {
     ruta: string;
     titulo: string;
     descuentoOferta?: number;
-    nuevo?: boolean;
+    nuevo?: number;
     plantillaStyles?: TStyle;
 }
 
@@ -15,9 +15,9 @@ const GridTitle = ({
     nuevo,
     plantillaStyles,
 }: IGridTitleProps) => {
-    const showBadge = descuentoOferta || nuevo;
-    const newText = nuevo && 'New';
-    const discountText = descuentoOferta && `${descuentoOferta}% off`;
+    const showBadge = !!descuentoOferta || !!nuevo;
+    const newText = !!nuevo && 'New';
+    const discountText = !!descuentoOferta && `${descuentoOferta}% off`;
 
     return (
         <StyledTitle>

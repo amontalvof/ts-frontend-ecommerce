@@ -1,20 +1,9 @@
 import { nanoid } from 'nanoid';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { IProduct } from '../../interfaces/product';
 import GridCard from '../GridCard';
 import RenderIf from '../RenderIf';
 import { StyledUl } from './styles';
-
-interface IProduct {
-    id: number;
-    ruta: string;
-    imgOferta: string;
-    titulo: string;
-    precio: number;
-    oferta?: number;
-    descuentoOferta?: number;
-    tipo: string;
-    nuevo?: boolean;
-}
 
 interface IGridProducts {
     products?: IProduct[];

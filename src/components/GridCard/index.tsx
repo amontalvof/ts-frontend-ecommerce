@@ -1,32 +1,24 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IProduct } from '../../interfaces/product';
 import { RootStore } from '../../redux/store';
 import GridButtons from './gridButtons';
 import GridPrice from './gridPrice';
 import GridTitle from './gridTitle';
 import { StyledFigure, StyledImg } from './styles';
 
-interface IGridCardProps {
-    ruta: string;
-    imgOferta: string;
-    titulo: string;
-    descuentoOferta?: number;
-    nuevo?: boolean;
-    precio?: number;
-    oferta?: number;
-    tipo: string;
-}
-
 const GridCard = ({
     ruta,
-    imgOferta,
+    portada,
     titulo,
     descuentoOferta,
     nuevo,
     precio,
     oferta,
     tipo,
-}: IGridCardProps) => {
+    categoriaRuta,
+    subcategoriaRuta,
+}: IProduct) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
@@ -34,16 +26,16 @@ const GridCard = ({
     return (
         <>
             <StyledFigure>
-                <Link to={ruta}>
+                <Link to={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
                     <StyledImg
-                        src={imgOferta}
+                        src={portada}
                         className="img-responsive"
                         alt="grid-product"
                     />
                 </Link>
             </StyledFigure>
             <GridTitle
-                ruta={ruta}
+                ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
                 titulo={titulo}
                 descuentoOferta={descuentoOferta}
                 nuevo={nuevo}

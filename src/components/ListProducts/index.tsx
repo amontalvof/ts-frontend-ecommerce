@@ -1,19 +1,7 @@
 import { nanoid } from 'nanoid';
+import { IProduct } from '../../interfaces/product';
 import ListCard from '../ListCard';
 import { StyledUl } from './styles';
-
-interface IProduct {
-    id: number;
-    ruta: string;
-    imgOferta: string;
-    titulo: string;
-    precio: number;
-    oferta?: number;
-    descuentoOferta?: number;
-    tipo: string;
-    nuevo?: boolean;
-    descripcion: string;
-}
 
 interface IListProducts {
     products?: IProduct[];
