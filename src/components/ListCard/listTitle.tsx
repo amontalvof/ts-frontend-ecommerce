@@ -36,15 +36,15 @@ const ListTitle = ({
                                 <>
                                     <StyledBadge
                                         className="label"
-                                        colorTexto={plantillaStyles?.colorTexto}
-                                        colorFondo={plantillaStyles?.colorFondo}
+                                        colortexto={plantillaStyles?.colorTexto}
+                                        colorfondo={plantillaStyles?.colorFondo}
                                     >
                                         {newText}
                                     </StyledBadge>{' '}
                                     <StyledBadge
                                         className="label"
-                                        colorTexto={plantillaStyles?.colorTexto}
-                                        colorFondo={plantillaStyles?.colorFondo}
+                                        colortexto={plantillaStyles?.colorTexto}
+                                        colorfondo={plantillaStyles?.colorFondo}
                                     >
                                         {discountText}
                                     </StyledBadge>

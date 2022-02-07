@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { plantillaReducer } from './plantillaReducer';
 import { categoriesReducer } from './categoriesReducer';
 import { subCategoriesReducer } from './subCategoriesReducer';
-import { sliderReducer } from './sliderReducer';
+import { productsRoutesReducer } from './productsRoutesReducer';
 
 export const rootReducer = combineReducers({
     plantillaReducer,
     categoriesReducer,
     subCategoriesReducer,
-    sliderReducer,
+    productsRoutesReducer,
 });

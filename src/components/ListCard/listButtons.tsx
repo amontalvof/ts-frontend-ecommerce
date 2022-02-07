@@ -21,8 +21,8 @@ const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
                     data-tip
                     data-for="tooltipHeart"
                     style={{ outline: 'none' }}
-                    colorTexto={plantillaStyles?.colorTexto}
-                    colorFondo={plantillaStyles?.colorFondo}
+                    colortexto={plantillaStyles?.colorTexto}
+                    colorfondo={plantillaStyles?.colorFondo}
                 >
                     <IconContainer>
                         <FaHeart />
@@ -35,8 +35,8 @@ const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
                         data-tip
                         data-for="tooltipCart"
                         style={{ outline: 'none' }}
-                        colorTexto={plantillaStyles?.colorTexto}
-                        colorFondo={plantillaStyles?.colorFondo}
+                        colortexto={plantillaStyles?.colorTexto}
+                        colorfondo={plantillaStyles?.colorFondo}
                     >
                         <IconContainer>
                             <FaShoppingCart />
@@ -50,8 +50,8 @@ const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
                         data-tip
                         data-for="tooltipEye"
                         style={{ outline: 'none' }}
-                        colorTexto={plantillaStyles?.colorTexto}
-                        colorFondo={plantillaStyles?.colorFondo}
+                        colortexto={plantillaStyles?.colorTexto}
+                        colorfondo={plantillaStyles?.colorFondo}
                     >
                         <IconContainer>
                             <FaEye />

@@ -22,22 +22,22 @@ const GridTitle = ({
     return (
         <StyledTitle>
             <StyledSmall>
-                <StyledLink to={ruta} colorFondo={plantillaStyles?.colorFondo}>
+                <StyledLink to={ruta} colorfondo={plantillaStyles?.colorFondo}>
                     {titulo}
                     <br />
                     {showBadge ? (
                         <>
                             <StyledBadge
                                 className="label"
-                                colorTexto={plantillaStyles?.colorTexto}
-                                colorFondo={plantillaStyles?.colorFondo}
+                                colortexto={plantillaStyles?.colorTexto}
+                                colorfondo={plantillaStyles?.colorFondo}
                             >
                                 {newText}
                             </StyledBadge>{' '}
                             <StyledBadge
                                 className="label"
-                                colorTexto={plantillaStyles?.colorTexto}
-                                colorFondo={plantillaStyles?.colorFondo}
+                                colortexto={plantillaStyles?.colorTexto}
+                                colorfondo={plantillaStyles?.colorFondo}
                             >
                                 {discountText}
                             </StyledBadge>

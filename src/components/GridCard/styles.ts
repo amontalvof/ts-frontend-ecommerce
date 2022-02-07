@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 interface IStyledBadgeProps {
-    colorTexto?: string;
-    colorFondo?: string;
+    colortexto?: string;
+    colorfondo?: string;
 }
 interface IStyledButtonProps extends IStyledBadgeProps {}
 
@@ -31,14 +31,14 @@ export const StyledSmall = styled.small`
 export const StyledLink = styled(Link)<IStyledLinkProps>`
     color: #777;
     :hover {
-        color: ${(props) => props.colorFondo};
+        color: ${(props) => props.colorfondo};
     }
 `;
 
 export const StyledBadge = styled.span<IStyledBadgeProps>`
     font-size: 11px;
-    background-color: ${(props) => props.colorFondo};
-    color: ${(props) => props.colorTexto};
+    background-color: ${(props) => props.colorfondo};
+    color: ${(props) => props.colortexto};
 `;
 
 export const PrecioContainer = styled.div`
@@ -64,9 +64,9 @@ export const StyledButton = styled.button<IStyledButtonProps>`
         color: #999;
     }
     :hover {
-        background-color: ${(props) => props.colorFondo};
+        background-color: ${(props) => props.colorfondo};
         svg {
-            color: ${(props) => props.colorTexto};
+            color: ${(props) => props.colortexto};
         }
     }
 `;

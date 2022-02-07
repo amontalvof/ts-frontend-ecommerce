@@ -26,8 +26,8 @@ const DisplayGridListBar = ({
                                 style={{ outline: 'none' }}
                                 onClick={() => changeDisplay('grid')}
                                 isSelected={display === 'grid'}
-                                colorFondo={plantillaStyles.colorFondo}
-                                colorTexto={plantillaStyles.colorTexto}
+                                colorfondo={plantillaStyles.colorFondo}
+                                colortexto={plantillaStyles.colorTexto}
                             >
                                 <IconTextContainer>
                                     <FaTh />
@@ -42,8 +42,8 @@ const DisplayGridListBar = ({
                                 style={{ outline: 'none' }}
                                 onClick={() => changeDisplay('list')}
                                 isSelected={display === 'list'}
-                                colorFondo={plantillaStyles.colorFondo}
-                                colorTexto={plantillaStyles.colorTexto}
+                                colorfondo={plantillaStyles.colorFondo}
+                                colortexto={plantillaStyles.colorTexto}
                             >
                                 <IconTextContainer>
                                     <FaList />

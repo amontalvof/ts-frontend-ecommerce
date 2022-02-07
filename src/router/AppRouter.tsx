@@ -12,7 +12,12 @@ import Top from '../layout/Top';
 import Main from '../pages/Main';
 import Category from '../pages/Category';
 import SubCategory from '../pages/SubCategory';
-import { getCategories, getStyles, getSubCategories } from '../redux/actions';
+import {
+    getCategories,
+    getStyles,
+    getSubCategories,
+    getProductRoutes,
+} from '../redux/actions';
 import { RootStore } from '../redux/store';
 import Error404 from '../pages/Error404';
 import { SpinnerContainer, RouterContainer } from './styles';
@@ -22,10 +27,16 @@ const AppRouter = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
 
-    const { plantillaReducer, categoriesReducer, subCategoriesReducer } = state;
+    const {
+        plantillaReducer,
+        categoriesReducer,
+        subCategoriesReducer,
+        productsRoutesReducer,
+    } = state;
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
     const { loading: loadingCategories } = categoriesReducer;
     const { loading: loadingSubCategories } = subCategoriesReducer;
+    const { loading: loadingProductsRoutes } = productsRoutesReducer;
 
     const plantillaStyles = styles[0];
 
@@ -42,10 +53,21 @@ const AppRouter = () => {
         if (!subCategoriesReducer.subCategories) {
             dispatch(getSubCategories());
         }
+        if (!subCategoriesReducer.subCategories) {
+            dispatch(getSubCategories());
+        }
+        if (!productsRoutesReducer.routes) {
+            dispatch(getProductRoutes());
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (loadingStyles || loadingCategories || loadingSubCategories) {
+    if (
+        loadingStyles ||
+        loadingCategories ||
+        loadingSubCategories ||
+        loadingProductsRoutes
+    ) {
         return (
             <SpinnerContainer>
                 <Spinner

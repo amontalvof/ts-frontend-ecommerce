@@ -2,23 +2,23 @@ import styled from 'styled-components';
 
 interface IStyledButtonProps {
     isSelected: boolean;
-    colorFondo?: string;
-    colorTexto?: string;
+    colorfondo?: string;
+    colortexto?: string;
 }
 
 export const StyledButton = styled.button<IStyledButtonProps>`
     ${(props) =>
         props.isSelected &&
         `
-            background-color: ${props.colorFondo};
-            color: ${props.colorTexto};
+            background-color: ${props.colorfondo};
+            color: ${props.colortexto};
     `}
     :focus {
         ${(props) =>
             props.isSelected &&
             `
-            background-color: ${props.colorFondo};
-            color: ${props.colorTexto};
+            background-color: ${props.colorfondo};
+            color: ${props.colortexto};
         `}
     }
 `;

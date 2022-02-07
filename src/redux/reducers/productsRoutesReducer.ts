@@ -1,40 +1,40 @@
 import {
-    SliderDispatchTypes,
-    TSlider,
-    SLIDER_LOADING,
-    SLIDER_FAIL,
-    SLIDER_SUCCESS,
-} from '../../interfaces/slider';
+    RoutesDispatchTypes,
+    TRoutes,
+    ROUTES_LOADING,
+    ROUTES_SUCCESS,
+    ROUTES_FAIL,
+} from '../../interfaces/productRoutes';
 
 interface IInitialState {
     loading: boolean;
-    slider?: TSlider;
+    routes?: TRoutes;
 }
 
 const initialState: IInitialState = {
     loading: true,
 };
 
-export const sliderReducer = (
+export const productsRoutesReducer = (
     state: IInitialState = initialState,
-    action: SliderDispatchTypes
+    action: RoutesDispatchTypes
 ) => {
     switch (action.type) {
-        case SLIDER_FAIL:
+        case ROUTES_FAIL:
             return {
                 ...state,
                 loading: false,
             };
-        case SLIDER_LOADING:
+        case ROUTES_LOADING:
             return {
                 ...state,
                 loading: true,
             };
-        case SLIDER_SUCCESS:
+        case ROUTES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                slider: action.payload,
+                routes: action.payload,
             };
         default:
             return state;
