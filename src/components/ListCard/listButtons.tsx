@@ -2,16 +2,24 @@ import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 import { TStyle } from '../../interfaces/plantilla';
+import RenderIf from '../RenderIf';
 import { StyledButton, IconContainer, ButtonsContainer } from './styles';
 
 interface IListButtonsProps {
+    ruta: string;
     tipo: string;
+    precio?: number;
     plantillaStyles?: TStyle;
 }
 
-const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
+const ListButtons = ({
+    tipo,
+    plantillaStyles,
+    ruta,
+    precio,
+}: IListButtonsProps) => {
     const isVirtual = tipo === 'virtual';
-
+    const isFree = !precio;
     return (
         <>
             <ButtonsContainer>
@@ -28,7 +36,7 @@ const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
                         <FaHeart />
                     </IconContainer>
                 </StyledButton>
-                {isVirtual && (
+                <RenderIf isTrue={isVirtual && !isFree}>
                     <StyledButton
                         type="button"
                         className="btn btn-default btn-xs"
@@ -42,8 +50,8 @@ const ListButtons = ({ tipo, plantillaStyles }: IListButtonsProps) => {
                             <FaShoppingCart />
                         </IconContainer>
                     </StyledButton>
-                )}
-                <Link to="">
+                </RenderIf>
+                <Link to={ruta}>
                     <StyledButton
                         type="button"
                         className="btn btn-default btn-xs"

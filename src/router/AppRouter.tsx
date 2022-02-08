@@ -10,18 +10,17 @@ import Spinner from '../components/Spinner';
 import Header from '../layout/Header';
 import Top from '../layout/Top';
 import Main from '../pages/Main';
-import Category from '../pages/Category';
-import SubCategory from '../pages/SubCategory';
+import ProductInfo from '../pages/ProductInfo';
+import Products from '../pages/Products';
+import Error404 from '../pages/Error404';
+import { SpinnerContainer, RouterContainer } from './styles';
+import { RootStore } from '../redux/store';
 import {
     getCategories,
     getStyles,
     getSubCategories,
     getProductRoutes,
 } from '../redux/actions';
-import { RootStore } from '../redux/store';
-import Error404 from '../pages/Error404';
-import { SpinnerContainer, RouterContainer } from './styles';
-import ProductInfo from '../pages/ProductInfo';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -103,10 +102,15 @@ const AppRouter = () => {
                     />
                     <Route
                         exact
-                        path="/:categoryId/:subCategoryId"
-                        component={SubCategory}
+                        path={[
+                            '/:categoryId/:subCategoryId',
+                            '/products/free',
+                            '/products/sales',
+                            '/products/views',
+                            '/:categoryId',
+                        ]}
+                        component={Products}
                     />
-                    <Route exact path="/:categoryId" component={Category} />
                     <Route exact path="/" component={Main} />
                     <Redirect to="/error" />
                 </Switch>

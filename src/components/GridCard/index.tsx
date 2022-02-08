@@ -42,7 +42,12 @@ const GridCard = ({
                 plantillaStyles={plantillaStyles}
             />
             <GridPrice precio={precio} oferta={oferta} />
-            <GridButtons tipo={tipo} plantillaStyles={plantillaStyles} />
+            <GridButtons
+                tipo={tipo}
+                precio={precio}
+                plantillaStyles={plantillaStyles}
+                ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+            />
         </>
     );
 };

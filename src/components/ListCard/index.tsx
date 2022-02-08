@@ -47,7 +47,12 @@ const ListCard = ({
                     plantillaStyles={plantillaStyles}
                 />
                 <ListPrice precio={precio} oferta={oferta} />
-                <ListButtons tipo={tipo} plantillaStyles={plantillaStyles} />
+                <ListButtons
+                    tipo={tipo}
+                    precio={precio}
+                    plantillaStyles={plantillaStyles}
+                    ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                />
             </div>
             <div className="col-xs-12">
                 <hr />

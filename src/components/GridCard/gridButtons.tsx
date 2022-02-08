@@ -2,6 +2,7 @@ import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 import { TStyle } from '../../interfaces/plantilla';
+import RenderIf from '../RenderIf';
 import {
     EnlacesContainer,
     StyledButton,
@@ -9,12 +10,21 @@ import {
     ButtonsContainer,
 } from './styles';
 interface IGridButtonsProps {
+    ruta: string;
     tipo: string;
     plantillaStyles?: TStyle;
+    precio?: number;
 }
 
-const GridButtons = ({ tipo, plantillaStyles }: IGridButtonsProps) => {
+const GridButtons = ({
+    tipo,
+    plantillaStyles,
+    ruta,
+    precio,
+}: IGridButtonsProps) => {
     const isVirtual = tipo === 'virtual';
+    const isFree = !precio;
+
     return (
         <>
             <EnlacesContainer className="col-xs-5">
@@ -32,7 +42,7 @@ const GridButtons = ({ tipo, plantillaStyles }: IGridButtonsProps) => {
                             <FaHeart />
                         </IconContainer>
                     </StyledButton>
-                    {isVirtual && (
+                    <RenderIf isTrue={isVirtual && !isFree}>
                         <StyledButton
                             type="button"
                             className="btn btn-default btn-xs"
@@ -46,8 +56,8 @@ const GridButtons = ({ tipo, plantillaStyles }: IGridButtonsProps) => {
                                 <FaShoppingCart />
                             </IconContainer>
                         </StyledButton>
-                    )}
-                    <Link to="">
+                    </RenderIf>
+                    <Link to={ruta}>
                         <StyledButton
                             type="button"
                             className="btn btn-default btn-xs"
