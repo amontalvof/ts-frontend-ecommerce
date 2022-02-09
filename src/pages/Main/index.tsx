@@ -18,11 +18,11 @@ const Main = () => {
         `${baseUrl}/slider`
     );
 
-    const { loading: loadingProducts, value: valueRelevant } = useFetch(
+    const { loading: loadingRelevantProducts, value: valueRelevant } = useFetch(
         `${baseUrl}/products/relevant`
     );
 
-    if (loadingStyles || loadingSlider || loadingProducts) {
+    if (loadingStyles || loadingSlider || loadingRelevantProducts) {
         return (
             <SpinnerContainer>
                 <Spinner

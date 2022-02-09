@@ -6,6 +6,8 @@ interface IUseFetchReturn {
     value?: any;
 }
 
+type TDependencies = any[];
+
 const DEFAULT_OPTIONS = {
     headers: { 'Content-Type': 'application/json' },
 };
@@ -13,7 +15,7 @@ const DEFAULT_OPTIONS = {
 const useFetch = (
     url: string,
     options = {},
-    dependencies = []
+    dependencies: TDependencies = []
 ): IUseFetchReturn => {
     return useAsync(() => {
         return fetch(url, { ...DEFAULT_OPTIONS, ...options }).then((res) => {

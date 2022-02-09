@@ -5,10 +5,10 @@ interface IUseAsyncReturn {
     error?: any;
     value?: any;
 }
-
+type TDependencies = any[];
 const useAsync = (
     callback: () => Promise<any>,
-    dependencies = []
+    dependencies: TDependencies = []
 ): IUseAsyncReturn => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();

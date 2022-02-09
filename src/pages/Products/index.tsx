@@ -5,20 +5,45 @@ import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import checkProductsRoute from '../../helpers/checkProductsRoute';
+import getProductsRequestBody from '../../helpers/getProductsRequestBody';
+import useFetch from '../../hooks/useFetch';
+import Spinner from '../../components/Spinner';
+
+import { SpinnerContainer } from './styles';
 
 interface IUseParams {
     categoryId?: string;
     subCategoryId?: string;
 }
 
+const baseUrl = process.env.REACT_APP_API_URL;
+
 const Products = () => {
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
     const { pathname } = useLocation();
-    const { subCategoriesReducer, categoriesReducer } = useSelector(
-        (state: RootStore) => state
-    );
+    const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
+        useSelector((state: RootStore) => state);
+    const { loading: loadingStyles, styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
     const { subCategories = [] } = subCategoriesReducer;
     const { categories = [] } = categoriesReducer;
+
+    const requestBody = getProductsRequestBody({
+        categories,
+        subCategories,
+        categoryId,
+        subCategoryId,
+    });
+
+    const { loading: loadingProducts, value: valueProducts } = useFetch(
+        `${baseUrl}/products`,
+        {
+            body: JSON.stringify(requestBody),
+            method: 'POST',
+        },
+        [categoryId, subCategoryId]
+    );
+    console.log(valueProducts);
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
@@ -44,6 +69,28 @@ const Products = () => {
         })
     ) {
         return <Redirect to="/error" />;
+    }
+
+    if (loadingStyles || loadingProducts) {
+        return (
+            <SpinnerContainer>
+                <Spinner
+                    plantillaStyles={plantillaStyles}
+                    size={15}
+                    margin={2}
+                    defaultColor="#47bac1"
+                    text={
+                        <h1
+                            style={{
+                                color: plantillaStyles?.colorFondo || '#47bac1',
+                            }}
+                        >
+                            Loading...
+                        </h1>
+                    }
+                />
+            </SpinnerContainer>
+        );
     }
 
     return (

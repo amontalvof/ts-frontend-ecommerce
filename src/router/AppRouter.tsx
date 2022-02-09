@@ -52,9 +52,6 @@ const AppRouter = () => {
         if (!subCategoriesReducer.subCategories) {
             dispatch(getSubCategories());
         }
-        if (!subCategoriesReducer.subCategories) {
-            dispatch(getSubCategories());
-        }
         if (!productsRoutesReducer.routes) {
             dispatch(getProductRoutes());
         }
