@@ -28,7 +28,7 @@ const Header = () => {
     const { categories = [] } = categoriesReducer;
 
     return (
-        <header className="container-fluid">
+        <header>
             <div className="container">
                 <div className="row">
                     <Logo />

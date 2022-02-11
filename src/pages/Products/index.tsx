@@ -10,6 +10,7 @@ import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/Spinner';
 
 import { SpinnerContainer } from './styles';
+import Banner from '../../components/Banner';
 
 interface IUseParams {
     categoryId?: string;
@@ -95,6 +96,7 @@ const Products = () => {
 
     return (
         <div>
+            <Banner />
             <h1>Products {pathNameLastPosition}</h1>
         </div>
     );
