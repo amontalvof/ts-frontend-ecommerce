@@ -26,7 +26,7 @@ const GridCard = ({
     return (
         <>
             <StyledFigure>
-                <Link to={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
+                <Link to={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
                     <StyledImg
                         src={portada}
                         className="img-responsive"
@@ -35,7 +35,7 @@ const GridCard = ({
                 </Link>
             </StyledFigure>
             <GridTitle
-                ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
                 titulo={titulo}
                 descuentoOferta={descuentoOferta}
                 nuevo={nuevo}
@@ -46,7 +46,7 @@ const GridCard = ({
                 tipo={tipo}
                 precio={precio}
                 plantillaStyles={plantillaStyles}
-                ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
             />
         </>
     );

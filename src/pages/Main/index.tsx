@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Products from '../../components/Products';
+import ProductsPanel from '../../components/ProductsPanel';
 import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';
@@ -54,17 +54,17 @@ const Main = () => {
                     velocidad="800"
                 />
             </SliderContainer>
-            <Products
+            <ProductsPanel
                 title="FREE PRODUCTS"
                 products={valueRelevant?.free}
                 seeMoreRoute="products/free"
             />
-            <Products
+            <ProductsPanel
                 title="BEST SELLER"
                 products={valueRelevant?.ventas}
                 seeMoreRoute="products/sales"
             />
-            <Products
+            <ProductsPanel
                 title="MOST VIEWED"
                 products={valueRelevant?.vistas}
                 seeMoreRoute="products/views"

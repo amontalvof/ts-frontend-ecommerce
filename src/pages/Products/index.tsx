@@ -11,6 +11,7 @@ import Spinner from '../../components/Spinner';
 
 import { SpinnerContainer } from './styles';
 import Banner from '../../components/Banner';
+import ProductsPanel from '../../components/ProductsPanel';
 
 interface IUseParams {
     categoryId?: string;
@@ -36,7 +37,7 @@ const Products = () => {
         subCategoryId,
     });
 
-    const { loading: loadingProducts, value: valueProducts } = useFetch(
+    const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
         `${baseUrl}/products`,
         {
             body: JSON.stringify(requestBody),
@@ -44,7 +45,7 @@ const Products = () => {
         },
         [categoryId, subCategoryId]
     );
-    console.log(valueProducts);
+    const { products } = valueProducts;
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
@@ -97,7 +98,7 @@ const Products = () => {
     return (
         <div>
             <Banner />
-            <h1>Products {pathNameLastPosition}</h1>
+            <ProductsPanel products={products} displayOrderDropdown />
         </div>
     );
 };

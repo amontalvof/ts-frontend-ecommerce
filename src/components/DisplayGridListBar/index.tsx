@@ -1,16 +1,19 @@
 import { Dispatch, SetStateAction } from 'react';
 import { FaTh, FaList } from 'react-icons/fa';
 import { TStyle } from '../../interfaces/plantilla';
+import RenderIf from '../RenderIf';
 import { IconTextContainer, StyledButtonText, StyledButton } from './styles';
 
 interface IDisplayGridListBarProps {
     changeDisplay: Dispatch<SetStateAction<string>>;
     display: string;
     plantillaStyles: TStyle;
+    displayOrderDropdown?: boolean;
 }
 
 const DisplayGridListBar = ({
     display,
+    displayOrderDropdown = false,
     changeDisplay,
     plantillaStyles,
 }: IDisplayGridListBarProps) => {
@@ -18,7 +21,31 @@ const DisplayGridListBar = ({
         <div className="container-fluid well well-sm">
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-12">
+                    <div className="col-sm-6 col-xs-12">
+                        <RenderIf isTrue={displayOrderDropdown}>
+                            <div className="btn-group">
+                                <>
+                                    <button
+                                        type="button"
+                                        className="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown"
+                                    >
+                                        Order Products{' '}
+                                        <span className="caret" />
+                                    </button>
+                                    <ul className="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">More recent</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Oldest</a>
+                                        </li>
+                                    </ul>
+                                </>
+                            </div>
+                        </RenderIf>
+                    </div>
+                    <div className="col-sm-6 col-xs-12">
                         <div className="btn-group pull-right">
                             <StyledButton
                                 type="button"

@@ -28,7 +28,7 @@ const ListCard = ({
         <>
             <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                 <StyledFigure>
-                    <Link to={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
+                    <Link to={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}>
                         <StyledImg
                             src={portada}
                             className="img-responsive"
@@ -39,7 +39,7 @@ const ListCard = ({
             </div>
             <div className="col-lg-10 col-md-7 col-sm-8 col-xs-12">
                 <ListTitle
-                    ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                    ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
                     titulo={titulo}
                     descuentoOferta={descuentoOferta}
                     nuevo={nuevo}
@@ -51,7 +51,7 @@ const ListCard = ({
                     tipo={tipo}
                     precio={precio}
                     plantillaStyles={plantillaStyles}
-                    ruta={`${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                    ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
                 />
             </div>
             <div className="col-xs-12">
