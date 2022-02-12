@@ -1,6 +1,7 @@
 import { TCategories } from '../interfaces/categories';
 import { TSubCategories } from '../interfaces/subCategories';
 import { relevantRoutes } from '../constants';
+import filterCategoriesByRoute from './filterCategoriesByRoute';
 
 interface IGetProductsRequestBodyParams {
     categories: TCategories;
@@ -58,8 +59,9 @@ const getProductsRequestBody = ({
         }
     }
     if (subCategoryId !== '') {
-        const subCategory = subCategories.find(
-            (item) => item.ruta === subCategoryId
+        const subCategory = filterCategoriesByRoute(
+            subCategories,
+            subCategoryId
         );
         return {
             ordenar: 'id',
@@ -70,7 +72,7 @@ const getProductsRequestBody = ({
             tope: 12,
         };
     }
-    const category = categories.find((item) => item.ruta === categoryId);
+    const category = filterCategoriesByRoute(categories, categoryId);
     return {
         ordenar: 'id',
         modo: 'ASC',

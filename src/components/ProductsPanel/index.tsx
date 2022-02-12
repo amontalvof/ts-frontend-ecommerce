@@ -7,12 +7,16 @@ import ListProducts from '../ListProducts';
 import RenderIf from '../RenderIf';
 import { IProduct } from '../../interfaces/product';
 import RelevantTitle from '../RelevantTitle';
+import Breadcrumb from '../Breadcrumb';
 
 interface IProductsPanelProps {
     title?: string;
     products?: IProduct[];
     seeMoreRoute?: string;
     displayOrderDropdown?: boolean;
+    displayBreadcrumb?: boolean;
+    categoria?: string;
+    subcategoria?: string;
 }
 
 const ProductsPanel = ({
@@ -20,6 +24,9 @@ const ProductsPanel = ({
     products,
     seeMoreRoute,
     displayOrderDropdown,
+    displayBreadcrumb = false,
+    categoria = '',
+    subcategoria = '',
 }: IProductsPanelProps) => {
     const [display, setDisplay] = useState<string>('grid');
     const state = useSelector((state: RootStore) => state);
@@ -43,6 +50,12 @@ const ProductsPanel = ({
                                 title={title}
                                 seeMoreRoute={seeMoreRoute}
                                 plantillaStyles={plantillaStyles}
+                            />
+                        </RenderIf>
+                        <RenderIf isTrue={displayBreadcrumb}>
+                            <Breadcrumb
+                                categoria={categoria}
+                                subcategoria={subcategoria}
                             />
                         </RenderIf>
                     </div>

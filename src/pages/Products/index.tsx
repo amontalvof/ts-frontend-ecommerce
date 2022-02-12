@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useLocation, useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
@@ -12,6 +12,7 @@ import Spinner from '../../components/Spinner';
 import { SpinnerContainer } from './styles';
 import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
+import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 
 interface IUseParams {
     categoryId?: string;
@@ -22,7 +23,6 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const Products = () => {
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
-    const { pathname } = useLocation();
     const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
         useSelector((state: RootStore) => state);
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
@@ -36,7 +36,24 @@ const Products = () => {
         categoryId,
         subCategoryId,
     });
-
+    const { categoria } =
+        filterCategoriesByRoute<TCategory>(
+            [
+                { ruta: 'products', categoria: 'products' } as TCategory,
+                ...categories,
+            ],
+            categoryId
+        ) || {};
+    const { subcategoria } =
+        filterCategoriesByRoute<TSubCategory>(
+            [
+                { ruta: 'free', subcategoria: 'free' } as TSubCategory,
+                { ruta: 'views', subcategoria: 'views' } as TSubCategory,
+                { ruta: 'sales', subcategoria: 'sales' } as TSubCategory,
+                ...subCategories,
+            ],
+            subCategoryId
+        ) || {};
     const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
         `${baseUrl}/products`,
         {
@@ -46,7 +63,6 @@ const Products = () => {
         [categoryId, subCategoryId]
     );
     const { products } = valueProducts;
-
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
             { ruta: 'free' } as TSubCategory,
@@ -60,8 +76,6 @@ const Products = () => {
         [{ ruta: 'products' } as TCategory, ...categories],
         categoryId
     );
-
-    const pathNameLastPosition = pathname.split('/').at(-1);
 
     if (
         checkProductsRoute({
@@ -98,7 +112,13 @@ const Products = () => {
     return (
         <div>
             <Banner />
-            <ProductsPanel products={products} displayOrderDropdown />
+            <ProductsPanel
+                products={products}
+                displayOrderDropdown
+                displayBreadcrumb
+                categoria={categoria}
+                subcategoria={subcategoria}
+            />
         </div>
     );
 };
