@@ -12,7 +12,6 @@ import Spinner from '../../components/Spinner';
 import { SpinnerContainer } from './styles';
 import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
-import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 
 interface IUseParams {
     categoryId?: string;
@@ -36,24 +35,7 @@ const Products = () => {
         categoryId,
         subCategoryId,
     });
-    const { categoria } =
-        filterCategoriesByRoute<TCategory>(
-            [
-                { ruta: 'products', categoria: 'products' } as TCategory,
-                ...categories,
-            ],
-            categoryId
-        ) || {};
-    const { subcategoria } =
-        filterCategoriesByRoute<TSubCategory>(
-            [
-                { ruta: 'free', subcategoria: 'free' } as TSubCategory,
-                { ruta: 'views', subcategoria: 'views' } as TSubCategory,
-                { ruta: 'sales', subcategoria: 'sales' } as TSubCategory,
-                ...subCategories,
-            ],
-            subCategoryId
-        ) || {};
+
     const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
         `${baseUrl}/products`,
         {
@@ -62,7 +44,9 @@ const Products = () => {
         },
         [categoryId, subCategoryId]
     );
+
     const { products } = valueProducts;
+
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
             { ruta: 'free' } as TSubCategory,
@@ -77,12 +61,16 @@ const Products = () => {
         categoryId
     );
 
+    const isOnlyProductsRoute =
+        `/${categoryId}/${subCategoryId}` === '/products/';
+
     if (
         checkProductsRoute({
             subCategoryId,
             isASubCategoryAllowedRoute,
             isACategoryAllowedRoute,
-        })
+        }) ||
+        isOnlyProductsRoute
     ) {
         return <Redirect to="/error" />;
     }
@@ -116,8 +104,6 @@ const Products = () => {
                 products={products}
                 displayOrderDropdown
                 displayBreadcrumb
-                categoria={categoria}
-                subcategoria={subcategoria}
             />
         </div>
     );

@@ -1,5 +1,5 @@
 import { BannerContainer, TextoBanner } from './styles';
-
+// TODO: Add parallax effect
 const Banner = () => {
     return (
         <BannerContainer>

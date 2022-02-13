@@ -8,6 +8,7 @@ import RenderIf from '../RenderIf';
 import { IProduct } from '../../interfaces/product';
 import RelevantTitle from '../RelevantTitle';
 import Breadcrumb from '../Breadcrumb';
+import ThereAreNoProducts from '../ThereAreNoProducts';
 
 interface IProductsPanelProps {
     title?: string;
@@ -15,8 +16,6 @@ interface IProductsPanelProps {
     seeMoreRoute?: string;
     displayOrderDropdown?: boolean;
     displayBreadcrumb?: boolean;
-    categoria?: string;
-    subcategoria?: string;
 }
 
 const ProductsPanel = ({
@@ -25,14 +24,13 @@ const ProductsPanel = ({
     seeMoreRoute,
     displayOrderDropdown,
     displayBreadcrumb = false,
-    categoria = '',
-    subcategoria = '',
 }: IProductsPanelProps) => {
     const [display, setDisplay] = useState<string>('grid');
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
+    const existsProducts = products?.length !== 0;
 
     return (
         <>
@@ -53,16 +51,16 @@ const ProductsPanel = ({
                             />
                         </RenderIf>
                         <RenderIf isTrue={displayBreadcrumb}>
-                            <Breadcrumb
-                                categoria={categoria}
-                                subcategoria={subcategoria}
-                            />
+                            <Breadcrumb />
                         </RenderIf>
                     </div>
-                    <RenderIf isTrue={display === 'grid'}>
+                    <RenderIf isTrue={!existsProducts}>
+                        <ThereAreNoProducts />
+                    </RenderIf>
+                    <RenderIf isTrue={existsProducts && display === 'grid'}>
                         <GridProducts products={products} />
                     </RenderIf>
-                    <RenderIf isTrue={display === 'list'}>
+                    <RenderIf isTrue={existsProducts && display === 'list'}>
                         <ListProducts products={products} />
                     </RenderIf>
                 </div>
