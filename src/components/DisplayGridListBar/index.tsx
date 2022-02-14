@@ -34,12 +34,12 @@ const DisplayGridListBar = ({
                                         <span className="caret" />
                                     </button>
                                     <ul className="dropdown-menu" role="menu">
-                                        <li>
+                                        {/* <li>
                                             <a href="#">More recent</a>
                                         </li>
                                         <li>
                                             <a href="#">Oldest</a>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </>
                             </div>

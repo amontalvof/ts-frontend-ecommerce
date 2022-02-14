@@ -21,6 +21,7 @@ import {
     getSubCategories,
     getProductRoutes,
 } from '../redux/actions';
+import ScrollButton from '../components/ScrollButton';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -111,6 +112,7 @@ const AppRouter = () => {
                     <Route exact path="/" component={Main} />
                     <Redirect to="/error" />
                 </Switch>
+                <ScrollButton />
             </RouterContainer>
         </Router>
     );

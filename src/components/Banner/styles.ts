@@ -3,6 +3,19 @@ import styled from 'styled-components';
 interface ITextoBannerProps {
     position: string;
 }
+interface IStyledImageProps {
+    scrollYCss: number;
+}
+
+export const StyledImage = styled.img<IStyledImageProps>`
+    margin-top: ${(props) => `${-props.scrollYCss / 3}px`};
+    /*=============================================
+    MOVIL (XS revisamos en 320px)
+    =============================================*/
+    @media (max-width: 767px) {
+        margin-top: 0px;
+    }
+`;
 
 export const BannerContainer = styled.figure`
     position: relative;
