@@ -8,7 +8,7 @@ interface IStyledImageProps {
 }
 
 export const StyledImage = styled.img<IStyledImageProps>`
-    margin-top: ${(props) => `${-props.scrollYCss / 3}px`};
+    margin-top: ${(props) => `${-props.scrollYCss / 2}px`};
     /*=============================================
     MOVIL (XS revisamos en 320px)
     =============================================*/

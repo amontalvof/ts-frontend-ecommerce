@@ -21,7 +21,7 @@ const RelevantTitle = ({
                     </h1>
                 </div>
                 <div className="col-sm-6 col-xs-12">
-                    <Link to={seeMoreRoute}>
+                    <Link to={`${seeMoreRoute}?page=1`}>
                         <button
                             className="btn btn-default pull-right"
                             style={{

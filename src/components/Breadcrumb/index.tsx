@@ -25,7 +25,7 @@ const CategoryLink = ({
 }: ICategoryLinkProps) => {
     if (categoryId !== 'products') {
         return (
-            <StyledLink to={`/${categoryId}`} colorfondo={colorfondo}>
+            <StyledLink to={`/${categoryId}?page=1`} colorfondo={colorfondo}>
                 {categoria}
             </StyledLink>
         );
@@ -72,7 +72,7 @@ const Breadcrumb = () => {
             <RenderIf isTrue={!!subcategoria}>
                 <li className="active pagActiva">
                     <StyledLink
-                        to={`/${categoryId}/${subCategoryId}`}
+                        to={`/${categoryId}/${subCategoryId}?page=1`}
                         colorfondo={plantillaStyles?.colorFondo}
                     >
                         {subcategoria}

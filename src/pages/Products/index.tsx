@@ -12,6 +12,7 @@ import Spinner from '../../components/Spinner';
 import { SpinnerContainer } from './styles';
 import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
+import Pagination from '../../components/Pagination';
 
 interface IUseParams {
     categoryId?: string;
@@ -45,7 +46,7 @@ const Products = () => {
         [categoryId, subCategoryId]
     );
 
-    const { products } = valueProducts;
+    const { products, total } = valueProducts;
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
@@ -104,6 +105,10 @@ const Products = () => {
                 products={products}
                 displayOrderDropdown
                 displayBreadcrumb
+            />
+            <Pagination
+                colorfondo={plantillaStyles?.colorFondo}
+                total={total}
             />
         </div>
     );

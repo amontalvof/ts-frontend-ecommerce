@@ -31,3 +31,7 @@ export const IconTextContainer = styled.div`
 export const StyledButtonText = styled.span`
     margin-left: 5px;
 `;
+
+export const StyledLi = styled.li`
+    cursor: pointer;
+`;

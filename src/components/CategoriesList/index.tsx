@@ -43,7 +43,7 @@ const CategoriesList = ({
         <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <h4 onClick={() => onRequestClose(true)}>
                 <Link
-                    to={`/${to}`}
+                    to={`/${to}?page=1`}
                     className="pixelCategorias backColor"
                     style={linkStyles}
                 >
@@ -55,7 +55,7 @@ const CategoriesList = ({
                 {filteredSubCategories.map((item) => (
                     <li key={nanoid(10)} onClick={() => onRequestClose(true)}>
                         <Link
-                            to={`/${to}/${item.ruta}`}
+                            to={`/${to}/${item.ruta}?page=1`}
                             className="pixelSubCategorias backColor"
                             style={linkStyles}
                         >

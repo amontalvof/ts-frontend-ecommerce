@@ -1,8 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Dispatch, SetStateAction } from 'react';
 import { FaTh, FaList } from 'react-icons/fa';
 import { TStyle } from '../../interfaces/plantilla';
 import RenderIf from '../RenderIf';
-import { IconTextContainer, StyledButtonText, StyledButton } from './styles';
+import {
+    IconTextContainer,
+    StyledButtonText,
+    StyledButton,
+    StyledLi,
+} from './styles';
 
 interface IDisplayGridListBarProps {
     changeDisplay: Dispatch<SetStateAction<string>>;
@@ -34,12 +40,12 @@ const DisplayGridListBar = ({
                                         <span className="caret" />
                                     </button>
                                     <ul className="dropdown-menu" role="menu">
-                                        {/* <li>
-                                            <a href="#">More recent</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Oldest</a>
-                                        </li> */}
+                                        <StyledLi>
+                                            <a>More recent</a>
+                                        </StyledLi>
+                                        <StyledLi>
+                                            <a>Oldest</a>
+                                        </StyledLi>
                                     </ul>
                                 </>
                             </div>
