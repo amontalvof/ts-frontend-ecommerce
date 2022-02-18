@@ -8,6 +8,7 @@ interface IGetProductsRequestBodyParams {
     subCategories: TSubCategories;
     categoryId: string;
     subCategoryId: string;
+    actualPage: number;
 }
 
 interface IGetProductsRequestBodyReturn {
@@ -24,7 +25,10 @@ const getProductsRequestBody = ({
     subCategories,
     categoryId,
     subCategoryId,
+    actualPage,
 }: IGetProductsRequestBodyParams): IGetProductsRequestBodyReturn => {
+    const page = actualPage || 1;
+    const base = (page - 1) * 12;
     if (categoryId === 'products' && relevantRoutes.includes(subCategoryId)) {
         switch (subCategoryId) {
             case 'free':
@@ -33,7 +37,7 @@ const getProductsRequestBody = ({
                     modo: 'ASC',
                     item: 'precio',
                     valor: 0,
-                    base: 0,
+                    base,
                     tope: 12,
                 };
             case 'sales':
@@ -42,7 +46,7 @@ const getProductsRequestBody = ({
                     modo: 'DESC',
                     item: null,
                     valor: null,
-                    base: 0,
+                    base,
                     tope: 12,
                 };
             case 'views':
@@ -51,7 +55,7 @@ const getProductsRequestBody = ({
                     modo: 'DESC',
                     item: null,
                     valor: null,
-                    base: 0,
+                    base,
                     tope: 12,
                 };
             default:
@@ -68,7 +72,7 @@ const getProductsRequestBody = ({
             modo: 'ASC',
             item: 'id_subcategoria',
             valor: subCategory?.id,
-            base: 0,
+            base,
             tope: 12,
         };
     }
@@ -78,7 +82,7 @@ const getProductsRequestBody = ({
         modo: 'ASC',
         item: 'id_categoria',
         valor: category?.id,
-        base: 0,
+        base,
         tope: 12,
     };
 };

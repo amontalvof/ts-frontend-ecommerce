@@ -8,11 +8,11 @@ import checkProductsRoute from '../../helpers/checkProductsRoute';
 import getProductsRequestBody from '../../helpers/getProductsRequestBody';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/Spinner';
-
 import { SpinnerContainer } from './styles';
 import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
 import Pagination from '../../components/Pagination';
+import useQueryParams from '../../hooks/useQueryParams';
 
 interface IUseParams {
     categoryId?: string;
@@ -23,6 +23,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const Products = () => {
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
+    const query = useQueryParams();
     const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
         useSelector((state: RootStore) => state);
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
@@ -30,11 +31,14 @@ const Products = () => {
     const { subCategories = [] } = subCategoriesReducer;
     const { categories = [] } = categoriesReducer;
 
+    const actualPage = query.get('page');
+
     const requestBody = getProductsRequestBody({
         categories,
         subCategories,
         categoryId,
         subCategoryId,
+        actualPage: Number(actualPage),
     });
 
     const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
@@ -43,7 +47,7 @@ const Products = () => {
             body: JSON.stringify(requestBody),
             method: 'POST',
         },
-        [categoryId, subCategoryId]
+        [categoryId, subCategoryId, actualPage]
     );
 
     const { products, total } = valueProducts;
@@ -108,6 +112,7 @@ const Products = () => {
             />
             <Pagination
                 colorfondo={plantillaStyles?.colorFondo}
+                colortexto={plantillaStyles?.colorTexto}
                 total={total}
             />
         </div>
