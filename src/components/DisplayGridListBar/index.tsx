@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { FaTh, FaList } from 'react-icons/fa';
 import { TStyle } from '../../interfaces/plantilla';
 import RenderIf from '../RenderIf';
@@ -11,24 +11,55 @@ import {
 } from './styles';
 
 interface IDisplayGridListBarProps {
-    changeDisplay: Dispatch<SetStateAction<string>>;
-    display: string;
+    viewType: string;
     plantillaStyles: TStyle;
-    displayOrderDropdown?: boolean;
+    displaySortDropdown?: boolean;
+    sortDirection?: string;
+    onSort?: React.Dispatch<React.SetStateAction<string>>;
+    onChangeViewType: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DisplayGridListBar = ({
-    display,
-    displayOrderDropdown = false,
-    changeDisplay,
     plantillaStyles,
+    displaySortDropdown = false,
+    sortDirection,
+    onSort,
+    viewType,
+    onChangeViewType,
 }: IDisplayGridListBarProps) => {
+    const [hoveredRecent, setHoveredRecent] = useState<boolean>(false);
+    const [hoveredOld, setHoveredOld] = useState<boolean>(false);
+    const handleSort = (value: string) => {
+        if (onSort) {
+            onSort(value);
+        }
+    };
+    const isSortDesc = sortDirection === 'DESC';
+    const isSortAsc = sortDirection === 'ASC';
+    const selectListStyles = {
+        backgroundColor: plantillaStyles?.colorFondo,
+    };
+
+    const recentAnchorStyles = {
+        color: hoveredRecent ? '#333333' : plantillaStyles?.colorTexto,
+    };
+    const oldAnchorStyles = {
+        color: hoveredOld ? '#333333' : plantillaStyles?.colorTexto,
+    };
+
+    const toggleHoverRecent = () => {
+        setHoveredRecent(!hoveredRecent);
+    };
+    const toggleHoverOld = () => {
+        setHoveredOld(!hoveredOld);
+    };
+
     return (
         <div className="container-fluid well well-sm">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-6 col-xs-12">
-                        <RenderIf isTrue={displayOrderDropdown}>
+                        <RenderIf isTrue={displaySortDropdown}>
                             <div className="btn-group">
                                 <>
                                     <button
@@ -36,15 +67,48 @@ const DisplayGridListBar = ({
                                         className="btn btn-default dropdown-toggle"
                                         data-toggle="dropdown"
                                     >
-                                        Order Products{' '}
-                                        <span className="caret" />
+                                        Sort Products <span className="caret" />
                                     </button>
                                     <ul className="dropdown-menu" role="menu">
-                                        <StyledLi>
-                                            <a>More recent</a>
+                                        <StyledLi
+                                            onMouseEnter={toggleHoverRecent}
+                                            onMouseLeave={toggleHoverRecent}
+                                            onClick={() => handleSort('DESC')}
+                                            style={
+                                                isSortDesc
+                                                    ? selectListStyles
+                                                    : {}
+                                            }
+                                        >
+                                            <a
+                                                style={
+                                                    isSortDesc
+                                                        ? recentAnchorStyles
+                                                        : {}
+                                                }
+                                            >
+                                                More recent
+                                            </a>
                                         </StyledLi>
-                                        <StyledLi>
-                                            <a>Oldest</a>
+                                        <StyledLi
+                                            onMouseEnter={toggleHoverOld}
+                                            onMouseLeave={toggleHoverOld}
+                                            onClick={() => handleSort('ASC')}
+                                            style={
+                                                isSortAsc
+                                                    ? selectListStyles
+                                                    : {}
+                                            }
+                                        >
+                                            <a
+                                                style={
+                                                    isSortAsc
+                                                        ? oldAnchorStyles
+                                                        : {}
+                                                }
+                                            >
+                                                More old
+                                            </a>
                                         </StyledLi>
                                     </ul>
                                 </>
@@ -57,8 +121,8 @@ const DisplayGridListBar = ({
                                 type="button"
                                 className="btn btn-default"
                                 style={{ outline: 'none' }}
-                                onClick={() => changeDisplay('grid')}
-                                isSelected={display === 'grid'}
+                                onClick={() => onChangeViewType('grid')}
+                                isSelected={viewType === 'grid'}
                                 colorfondo={plantillaStyles.colorFondo}
                                 colortexto={plantillaStyles.colorTexto}
                             >
@@ -73,8 +137,8 @@ const DisplayGridListBar = ({
                                 type="button"
                                 className="btn btn-default"
                                 style={{ outline: 'none' }}
-                                onClick={() => changeDisplay('list')}
-                                isSelected={display === 'list'}
+                                onClick={() => onChangeViewType('list')}
+                                isSelected={viewType === 'list'}
                                 colorfondo={plantillaStyles.colorFondo}
                                 colortexto={plantillaStyles.colorTexto}
                             >

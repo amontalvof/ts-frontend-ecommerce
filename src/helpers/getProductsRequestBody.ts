@@ -8,6 +8,7 @@ interface IGetProductsRequestBodyParams {
     subCategories: TSubCategories;
     categoryId: string;
     subCategoryId: string;
+    sortDirection: string;
     actualPage: number;
 }
 
@@ -26,6 +27,7 @@ const getProductsRequestBody = ({
     categoryId,
     subCategoryId,
     actualPage,
+    sortDirection,
 }: IGetProductsRequestBodyParams): IGetProductsRequestBodyReturn => {
     const page = actualPage || 1;
     const base = (page - 1) * 12;
@@ -34,7 +36,7 @@ const getProductsRequestBody = ({
             case 'free':
                 return {
                     ordenar: 'id',
-                    modo: 'ASC',
+                    modo: sortDirection,
                     item: 'precio',
                     valor: 0,
                     base,
@@ -43,7 +45,7 @@ const getProductsRequestBody = ({
             case 'sales':
                 return {
                     ordenar: 'ventas',
-                    modo: 'DESC',
+                    modo: sortDirection,
                     item: null,
                     valor: null,
                     base,
@@ -52,7 +54,7 @@ const getProductsRequestBody = ({
             case 'views':
                 return {
                     ordenar: 'vistas',
-                    modo: 'DESC',
+                    modo: sortDirection,
                     item: null,
                     valor: null,
                     base,
@@ -69,7 +71,7 @@ const getProductsRequestBody = ({
         );
         return {
             ordenar: 'id',
-            modo: 'ASC',
+            modo: sortDirection,
             item: 'id_subcategoria',
             valor: subCategory?.id,
             base,
@@ -79,7 +81,7 @@ const getProductsRequestBody = ({
     const category = filterCategoriesByRoute(categories, categoryId);
     return {
         ordenar: 'id',
-        modo: 'ASC',
+        modo: sortDirection,
         item: 'id_categoria',
         valor: category?.id,
         base,

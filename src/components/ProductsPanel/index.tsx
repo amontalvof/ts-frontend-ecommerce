@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../redux/store';
 import DisplayGridListBar from '../DisplayGridListBar';
@@ -14,7 +13,11 @@ interface IProductsPanelProps {
     title?: string;
     products?: IProduct[];
     seeMoreRoute?: string;
-    displayOrderDropdown?: boolean;
+    sortDirection?: string;
+    onSort?: React.Dispatch<React.SetStateAction<string>>;
+    viewType: string;
+    onChangeViewType: React.Dispatch<React.SetStateAction<string>>;
+    displaySortDropdown?: boolean;
     displayBreadcrumb?: boolean;
 }
 
@@ -22,10 +25,13 @@ const ProductsPanel = ({
     title,
     products,
     seeMoreRoute,
-    displayOrderDropdown,
+    displaySortDropdown,
+    sortDirection,
+    onSort,
+    viewType,
+    onChangeViewType,
     displayBreadcrumb = false,
 }: IProductsPanelProps) => {
-    const [display, setDisplay] = useState<string>('grid');
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
@@ -35,10 +41,12 @@ const ProductsPanel = ({
     return (
         <>
             <DisplayGridListBar
-                display={display}
-                changeDisplay={setDisplay}
+                viewType={viewType}
+                onChangeViewType={onChangeViewType}
                 plantillaStyles={plantillaStyles}
-                displayOrderDropdown={displayOrderDropdown}
+                displaySortDropdown={displaySortDropdown}
+                sortDirection={sortDirection}
+                onSort={onSort}
             />
             <div className="container-fluid">
                 <div className="container">
@@ -57,10 +65,10 @@ const ProductsPanel = ({
                     <RenderIf isTrue={!existsProducts}>
                         <ThereAreNoProducts />
                     </RenderIf>
-                    <RenderIf isTrue={existsProducts && display === 'grid'}>
+                    <RenderIf isTrue={existsProducts && viewType === 'grid'}>
                         <GridProducts products={products} />
                     </RenderIf>
-                    <RenderIf isTrue={existsProducts && display === 'list'}>
+                    <RenderIf isTrue={existsProducts && viewType === 'list'}>
                         <ListProducts products={products} />
                     </RenderIf>
                 </div>

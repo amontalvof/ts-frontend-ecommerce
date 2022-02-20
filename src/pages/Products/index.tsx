@@ -13,6 +13,7 @@ import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
 import Pagination from '../../components/Pagination';
 import useQueryParams from '../../hooks/useQueryParams';
+import { useState } from 'react';
 
 interface IUseParams {
     categoryId?: string;
@@ -22,6 +23,8 @@ interface IUseParams {
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const Products = () => {
+    const [viewType, setViewType] = useState<string>('grid');
+    const [sortDirection, setSortDirection] = useState<string>('DESC');
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
     const query = useQueryParams();
     const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
@@ -39,6 +42,7 @@ const Products = () => {
         categoryId,
         subCategoryId,
         actualPage: Number(actualPage),
+        sortDirection,
     });
 
     const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
@@ -47,7 +51,7 @@ const Products = () => {
             body: JSON.stringify(requestBody),
             method: 'POST',
         },
-        [categoryId, subCategoryId, actualPage]
+        [categoryId, subCategoryId, actualPage, sortDirection]
     );
 
     const { products, total } = valueProducts;
@@ -107,7 +111,11 @@ const Products = () => {
             <Banner />
             <ProductsPanel
                 products={products}
-                displayOrderDropdown
+                viewType={viewType}
+                onChangeViewType={setViewType}
+                displaySortDropdown
+                sortDirection={sortDirection}
+                onSort={setSortDirection}
                 displayBreadcrumb
             />
             <Pagination

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProductsPanel from '../../components/ProductsPanel';
 import Slider from '../../components/Slider';
@@ -9,6 +10,9 @@ import { SpinnerContainer, SliderContainer } from './styles';
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const Main = () => {
+    const [viewTypeFree, setViewTypeFree] = useState<string>('grid');
+    const [viewTypeViews, setViewTypeViews] = useState<string>('grid');
+    const [viewTypeSales, setViewTypeSales] = useState<string>('grid');
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
@@ -58,16 +62,22 @@ const Main = () => {
                 title="FREE PRODUCTS"
                 products={valueRelevant?.free}
                 seeMoreRoute="products/free"
+                viewType={viewTypeFree}
+                onChangeViewType={setViewTypeFree}
             />
             <ProductsPanel
                 title="BEST SELLER"
                 products={valueRelevant?.ventas}
                 seeMoreRoute="products/sales"
+                viewType={viewTypeSales}
+                onChangeViewType={setViewTypeSales}
             />
             <ProductsPanel
                 title="MOST VIEWED"
                 products={valueRelevant?.vistas}
                 seeMoreRoute="products/views"
+                viewType={viewTypeViews}
+                onChangeViewType={setViewTypeViews}
             />
         </div>
     );
