@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, Redirect } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
@@ -13,7 +14,7 @@ import Banner from '../../components/Banner';
 import ProductsPanel from '../../components/ProductsPanel';
 import Pagination from '../../components/Pagination';
 import useQueryParams from '../../hooks/useQueryParams';
-import { useState } from 'react';
+import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
 
 interface IUseParams {
     categoryId?: string;
@@ -54,6 +55,10 @@ const Products = () => {
         [categoryId, subCategoryId, actualPage, sortDirection]
     );
 
+    const { loading: loadingBanner, value: valueBanner = {} } = useFetch(
+        `${baseUrl}/banner`
+    );
+    const { banners = [] } = valueBanner;
     const { products, total } = valueProducts;
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
@@ -73,6 +78,9 @@ const Products = () => {
     const isOnlyProductsRoute =
         `/${categoryId}/${subCategoryId}` === '/products/';
 
+    const bannerIndex = useMemo(() => resolveRandomBanner(1, 4), []);
+    const newBanner = banners.find((item: any) => item.id === bannerIndex);
+
     if (
         checkProductsRoute({
             subCategoryId,
@@ -84,7 +92,7 @@ const Products = () => {
         return <Redirect to="/error" />;
     }
 
-    if (loadingStyles || loadingProducts) {
+    if (loadingStyles || loadingProducts || loadingBanner) {
         return (
             <SpinnerContainer>
                 <Spinner
@@ -108,7 +116,7 @@ const Products = () => {
 
     return (
         <div>
-            <Banner />
+            <Banner banner={newBanner} />
             <ProductsPanel
                 products={products}
                 viewType={viewType}
