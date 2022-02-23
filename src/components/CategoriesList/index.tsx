@@ -15,7 +15,7 @@ interface ICategoriesListProps {
     onRequestClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CategoriesList = ({
+export const CategoriesList = ({
     plantillaStyles,
     category,
     id,
@@ -67,5 +67,3 @@ const CategoriesList = ({
         </div>
     );
 };
-
-export default CategoriesList;

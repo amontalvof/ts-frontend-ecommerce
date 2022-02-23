@@ -33,7 +33,7 @@ const CategoryLink = ({
     return <span>{categoria}</span>;
 };
 
-const Breadcrumb = () => {
+export const Breadcrumb = () => {
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
     const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
         useSelector((state: RootStore) => state);
@@ -82,5 +82,3 @@ const Breadcrumb = () => {
         </ul>
     );
 };
-
-export default Breadcrumb;

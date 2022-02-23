@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { IProduct } from '../../interfaces/product';
-import GridCard from '../GridCard';
+import { GridCard } from '../GridCard';
 import RenderIf from '../RenderIf';
 import { StyledUl } from './styles';
 
@@ -9,7 +9,7 @@ interface IGridProducts {
     products?: IProduct[];
 }
 
-const GridProducts = ({ products = [] }: IGridProducts) => {
+export const GridProducts = ({ products = [] }: IGridProducts) => {
     const isLarge = useMediaQuery('(min-width: 767px)');
     return (
         <StyledUl>
@@ -26,5 +26,3 @@ const GridProducts = ({ products = [] }: IGridProducts) => {
         </StyledUl>
     );
 };
-
-export default GridProducts;

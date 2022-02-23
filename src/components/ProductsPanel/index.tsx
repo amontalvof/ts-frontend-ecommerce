@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../redux/store';
-import DisplayGridListBar from '../DisplayGridListBar';
-import GridProducts from '../GridProducts';
-import ListProducts from '../ListProducts';
+import { DisplayGridListBar } from '../DisplayGridListBar';
+import { GridProducts } from '../GridProducts';
+import { ListProducts } from '../ListProducts';
 import RenderIf from '../RenderIf';
 import { IProduct } from '../../interfaces/product';
 import RelevantTitle from '../RelevantTitle';
-import Breadcrumb from '../Breadcrumb';
+import { Breadcrumb } from '../Breadcrumb';
 import ThereAreNoProducts from '../ThereAreNoProducts';
 
 interface IProductsPanelProps {
@@ -21,7 +21,7 @@ interface IProductsPanelProps {
     displayBreadcrumb?: boolean;
 }
 
-const ProductsPanel = ({
+export const ProductsPanel = ({
     title,
     products,
     seeMoreRoute,
@@ -76,5 +76,3 @@ const ProductsPanel = ({
         </>
     );
 };
-
-export default ProductsPanel;

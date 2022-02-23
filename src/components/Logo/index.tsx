@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { LogoContainer } from './styles';
 
-const Logo = () => {
+export const Logo = () => {
     const { styles } = useSelector(
         (state: RootStore) => state.plantillaReducer
     );
@@ -21,5 +21,3 @@ const Logo = () => {
         </LogoContainer>
     );
 };
-
-export default Logo;

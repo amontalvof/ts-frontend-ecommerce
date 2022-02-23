@@ -1,8 +1,7 @@
 import { useRef, useState, MutableRefObject } from 'react';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
-import CategoriesList from '../../components/CategoriesList';
-import Logo from '../../components/Logo';
+import { CategoriesList, Logo } from '../../components';
 import Search from '../../components/Search';
 import ShoppingCart from '../../components/ShoppingCart';
 import useClickOutside from '../../hooks/useClickOutside';

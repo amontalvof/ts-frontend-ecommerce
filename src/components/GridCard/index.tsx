@@ -7,7 +7,7 @@ import GridPrice from './gridPrice';
 import GridTitle from './gridTitle';
 import { StyledFigure, StyledImg } from './styles';
 
-const GridCard = ({
+export const GridCard = ({
     ruta,
     portada,
     titulo,
@@ -51,5 +51,3 @@ const GridCard = ({
         </>
     );
 };
-
-export default GridCard;

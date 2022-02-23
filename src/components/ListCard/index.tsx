@@ -7,7 +7,7 @@ import ListPrice from './listPrice';
 import ListTitle from './listTitle';
 import { StyledFigure, StyledImg } from './styles';
 
-const ListCard = ({
+export const ListCard = ({
     ruta,
     portada,
     titulo,
@@ -60,5 +60,3 @@ const ListCard = ({
         </>
     );
 };
-
-export default ListCard;

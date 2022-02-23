@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import ProductsPanel from '../../components/ProductsPanel';
+import { ProductsPanel } from '../../components';
 import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';

@@ -16,7 +16,7 @@ interface IBannerProps {
 
 const defaultTitulo = '{"texto":"","color":""}';
 
-const Banner = ({ banner }: IBannerProps) => {
+export const Banner = ({ banner }: IBannerProps) => {
     const { img = '', titulo1, titulo2, titulo3, estilo = '' } = banner || {};
     const [scrollY, setScrollY] = useState<number>(0);
     const [scrollYCss, setScrollYCss] = useState<number>(0);
@@ -73,5 +73,3 @@ const Banner = ({ banner }: IBannerProps) => {
         </RenderIf>
     );
 };
-
-export default Banner;

@@ -17,7 +17,7 @@ interface IUseParams {
     subCategoryId?: string;
 }
 
-const Pagination = ({
+export const Pagination = ({
     colorfondo,
     colortexto,
     total = 0,
@@ -53,5 +53,3 @@ const Pagination = ({
         </RenderIf>
     );
 };
-
-export default Pagination;

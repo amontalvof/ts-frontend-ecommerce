@@ -10,9 +10,7 @@ import getProductsRequestBody from '../../helpers/getProductsRequestBody';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/Spinner';
 import { SpinnerContainer } from './styles';
-import Banner from '../../components/Banner';
-import ProductsPanel from '../../components/ProductsPanel';
-import Pagination from '../../components/Pagination';
+import { Banner, ProductsPanel, Pagination } from '../../components';
 import useQueryParams from '../../hooks/useQueryParams';
 import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
 

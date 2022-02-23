@@ -19,7 +19,7 @@ interface IDisplayGridListBarProps {
     onChangeViewType: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const DisplayGridListBar = ({
+export const DisplayGridListBar = ({
     plantillaStyles,
     displaySortDropdown = false,
     sortDirection,
@@ -156,5 +156,3 @@ const DisplayGridListBar = ({
         </div>
     );
 };
-
-export default DisplayGridListBar;
