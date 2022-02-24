@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import useRenderCount from '../../hooks/useRenderCount';
 import { RootStore } from '../../redux/store';
 import { BtnCategorias, Buscador } from './styles';
 
@@ -9,11 +10,14 @@ interface ISearchProps {
 }
 
 const Search = ({ handleHideCategories }: ISearchProps) => {
-    const { styles } = useSelector(
-        (state: RootStore) => state.plantillaReducer
-    );
-    const plantillaStyles = styles && styles[0];
-
+    const renderCount = useRenderCount();
+    const [internalSearchValue, setInternalSearchValue] = useState('');
+    const dispatch = useDispatch();
+    const state = useSelector((state: RootStore) => state);
+    const { plantillaReducer, searchReducer } = state;
+    const { styles = [] } = plantillaReducer;
+    const plantillaStyles = styles[0];
+    const { searchValue } = searchReducer;
     const searchStyles = {
         backgroundColor: plantillaStyles?.colorFondo,
         color: plantillaStyles?.colorTexto,
@@ -22,6 +26,16 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
     const handleBtnCategoriesClick = () => {
         handleHideCategories((c) => !c);
     };
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInternalSearchValue(event.target.value);
+        // dispatch({
+        //     type: 'TRIGGER_SEARCH',
+        //     payload: event.target.value,
+        // });
+    };
+
+    console.log(renderCount);
 
     return (
         <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12">
@@ -43,6 +57,9 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                     name="search"
                     className="form-control"
                     placeholder="Search..."
+                    // value={searchValue}
+                    value={internalSearchValue}
+                    onChange={handleSearch}
                 />
                 <span className="input-group-btn">
                     <button
