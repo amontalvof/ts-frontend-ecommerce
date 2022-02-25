@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
-import { range } from 'lodash';
+import range from 'lodash.range';
 import useQueryParams from '../../hooks/useQueryParams';
 
 interface IListProps {
