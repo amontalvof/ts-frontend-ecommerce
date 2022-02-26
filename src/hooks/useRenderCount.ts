@@ -1,3 +1,4 @@
+// TODO: Remove hook when the project is finished
 import { useEffect, useRef } from 'react';
 
 const useRenderCount = () => {

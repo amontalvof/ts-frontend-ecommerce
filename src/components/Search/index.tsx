@@ -1,17 +1,19 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import useRenderCount from '../../hooks/useRenderCount';
+import { Link, useHistory } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { BtnCategorias, Buscador } from './styles';
 
 interface ISearchProps {
     handleHideCategories: Dispatch<SetStateAction<boolean>>;
 }
+const regex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚ ]*$/;
 
 const Search = ({ handleHideCategories }: ISearchProps) => {
-    const renderCount = useRenderCount();
+    const history = useHistory();
     const [internalSearchValue, setInternalSearchValue] = useState('');
+    const [routeSearch, setRouteSearch] = useState('');
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer, searchReducer } = state;
@@ -28,14 +30,27 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
     };
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInternalSearchValue(event.target.value);
+        const inputSearchValue = event.target.value;
+        if (!regex.test(inputSearchValue)) {
+            setInternalSearchValue('');
+        } else {
+            setInternalSearchValue(inputSearchValue);
+            const evaluateSearch = inputSearchValue
+                .replace(/[áéíóúÁÉÍÓÚ ]/g, '-')
+                .toLowerCase();
+            setRouteSearch(evaluateSearch);
+        }
         // dispatch({
         //     type: 'TRIGGER_SEARCH',
         //     payload: event.target.value,
         // });
     };
 
-    console.log(renderCount);
+    const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+            history.push(`/search/${routeSearch}?page=1`);
+        }
+    };
 
     return (
         <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12">
@@ -60,14 +75,17 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                     // value={searchValue}
                     value={internalSearchValue}
                     onChange={handleSearch}
+                    onKeyDown={handleEnter}
                 />
                 <span className="input-group-btn">
-                    <button
-                        className="btn btn-default backColor"
-                        style={{ ...searchStyles, outline: 'none' }}
-                    >
-                        <FaSearch />
-                    </button>
+                    <Link to={`/search/${routeSearch}?page=1`}>
+                        <button
+                            className="btn btn-default backColor"
+                            style={{ ...searchStyles, outline: 'none' }}
+                        >
+                            <FaSearch />
+                        </button>
+                    </Link>
                 </span>
             </Buscador>
         </div>
