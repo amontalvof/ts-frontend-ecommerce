@@ -15,6 +15,7 @@ interface IGetProductsRequestBodyParams {
 interface IGetProductsRequestBodyReturn {
     ordenar?: string;
     modo?: string;
+    busqueda?: string;
     item?: string | null;
     valor?: number | null;
     base?: number;
@@ -31,6 +32,16 @@ const getProductsRequestBody = ({
 }: IGetProductsRequestBodyParams): IGetProductsRequestBodyReturn => {
     const page = actualPage || 1;
     const base = (page - 1) * 12;
+    if (categoryId === 'search') {
+        return {
+            ordenar: 'id',
+            modo: sortDirection,
+            item: 'precio',
+            busqueda: subCategoryId,
+            base,
+            tope: 12,
+        };
+    }
     if (categoryId === 'products' && relevantRoutes.includes(subCategoryId)) {
         switch (subCategoryId) {
             case 'free':

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { otherCategoriesRoutes, relevantRoutes } from '../../constants';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import { TCategory } from '../../interfaces/categories';
 import { TSubCategory } from '../../interfaces/subCategories';
@@ -23,7 +24,7 @@ const CategoryLink = ({
     colorfondo,
     categoria,
 }: ICategoryLinkProps) => {
-    if (categoryId !== 'products') {
+    if (!otherCategoriesRoutes.includes(categoryId)) {
         return (
             <StyledLink to={`/${categoryId}?page=1`} colorfondo={colorfondo}>
                 {categoria}
@@ -35,30 +36,41 @@ const CategoryLink = ({
 
 export const Breadcrumb = () => {
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
-    const { subCategoriesReducer, categoriesReducer, plantillaReducer } =
-        useSelector((state: RootStore) => state);
+    const {
+        subCategoriesReducer,
+        categoriesReducer,
+        plantillaReducer,
+        searchReducer,
+    } = useSelector((state: RootStore) => state);
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
     const { subCategories = [] } = subCategoriesReducer;
     const { categories = [] } = categoriesReducer;
+
     const { categoria } =
         filterCategoriesByRoute<TCategory>(
             [
-                { ruta: 'products', categoria: 'products' } as TCategory,
+                ...otherCategoriesRoutes.map(
+                    (item) => ({ ruta: item, categoria: item } as TCategory)
+                ),
                 ...categories,
             ],
             categoryId
         ) || {};
+
     const { subcategoria } =
         filterCategoriesByRoute<TSubCategory>(
             [
-                { ruta: 'free', subcategoria: 'free' } as TSubCategory,
-                { ruta: 'views', subcategoria: 'views' } as TSubCategory,
-                { ruta: 'sales', subcategoria: 'sales' } as TSubCategory,
+                ...relevantRoutes.map(
+                    (item) =>
+                        ({ ruta: item, subcategoria: item } as TSubCategory)
+                ),
                 ...subCategories,
             ],
             subCategoryId
         ) || {};
+
+    const { searchValue } = searchReducer;
 
     return (
         <ul className="breadcrumb fondoBreadcrumb text-uppercase">
@@ -69,13 +81,15 @@ export const Breadcrumb = () => {
                     categoria={categoria}
                 />
             </li>
-            <RenderIf isTrue={!!subcategoria}>
+            <RenderIf isTrue={!!subcategoria || !!searchValue}>
                 <li className="active pagActiva">
                     <StyledLink
-                        to={`/${categoryId}/${subCategoryId}?page=1`}
+                        to={`/${categoryId}/${
+                            subCategoryId || searchValue
+                        }?page=1`}
                         colorfondo={plantillaStyles?.colorFondo}
                     >
-                        {subcategoria}
+                        {subcategoria || searchValue}
                     </StyledLink>
                 </li>
             </RenderIf>

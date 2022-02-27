@@ -22,7 +22,7 @@ const Arrows = ({
     const nextPage = actualPage + 1;
     const previousPage = actualPage - 1;
     const showLeftArrow = actualPage !== 1 && pagesAmount > 4;
-    const showRigthArrow = actualPage < pagesAmount - 3 && pagesAmount > 4;
+    const showRigthArrow = actualPage < pagesAmount && pagesAmount > 4;
     return (
         <>
             <RenderIf isTrue={showLeftArrow}>

@@ -100,13 +100,7 @@ const AppRouter = () => {
                     />
                     <Route
                         exact
-                        path={[
-                            '/:categoryId/:subCategoryId',
-                            '/products/free',
-                            '/products/sales',
-                            '/products/views',
-                            '/:categoryId',
-                        ]}
+                        path={['/:categoryId/:subCategoryId', '/:categoryId']}
                         component={Products}
                     />
                     <Route exact path="/" component={Main} />

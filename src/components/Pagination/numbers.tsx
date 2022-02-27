@@ -37,9 +37,11 @@ const Numbers = ({
                                 end={5}
                                 route={route}
                             />
-                            <li className="disabled">
-                                <a style={{ color: colorfondo }}>...</a>
-                            </li>
+                            <RenderIf isTrue={pagesAmount !== 5}>
+                                <li className="disabled">
+                                    <a style={{ color: colorfondo }}>...</a>
+                                </li>
+                            </RenderIf>
                             <li>
                                 <Link
                                     to={`${route}?page=${pagesAmount}`}
@@ -59,9 +61,11 @@ const Numbers = ({
                                 end={actualPage + 4}
                                 route={route}
                             />
-                            <li className="disabled">
-                                <a style={{ color: colorfondo }}>...</a>
-                            </li>
+                            <RenderIf isTrue={pagesAmount !== 5}>
+                                <li className="disabled">
+                                    <a style={{ color: colorfondo }}>...</a>
+                                </li>
+                            </RenderIf>
                             <li>
                                 <Link
                                     to={`${route}?page=${pagesAmount}`}
@@ -82,9 +86,11 @@ const Numbers = ({
                                     1
                                 </Link>
                             </li>
-                            <li className="disabled">
-                                <a style={{ color: colorfondo }}>...</a>
-                            </li>
+                            <RenderIf isTrue={pagesAmount !== 5}>
+                                <li className="disabled">
+                                    <a style={{ color: colorfondo }}>...</a>
+                                </li>
+                            </RenderIf>
                             <List
                                 colorfondo={colorfondo}
                                 colortexto={colortexto}
@@ -104,9 +110,11 @@ const Numbers = ({
                                     1
                                 </Link>
                             </li>
-                            <li className="disabled">
-                                <a style={{ color: colorfondo }}>...</a>
-                            </li>
+                            <RenderIf isTrue={pagesAmount !== 5}>
+                                <li className="disabled">
+                                    <a style={{ color: colorfondo }}>...</a>
+                                </li>
+                            </RenderIf>
                             <List
                                 colorfondo={colorfondo}
                                 colortexto={colortexto}

@@ -1,33 +1,39 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import { FaSearch, FaBars } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
+import SearchButton from './searchButton';
 import { BtnCategorias, Buscador } from './styles';
 
 interface ISearchProps {
     handleHideCategories: Dispatch<SetStateAction<boolean>>;
 }
-const regex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚ ]*$/;
+const regex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_ ]*$/;
 
 const Search = ({ handleHideCategories }: ISearchProps) => {
     const history = useHistory();
     const [internalSearchValue, setInternalSearchValue] = useState('');
-    const [routeSearch, setRouteSearch] = useState('');
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
-    const { plantillaReducer, searchReducer } = state;
+    const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
-    const { searchValue } = searchReducer;
+
     const searchStyles = {
         backgroundColor: plantillaStyles?.colorFondo,
         color: plantillaStyles?.colorTexto,
     };
 
+    const isInputSearchValueNotEmpty = internalSearchValue !== '';
+
     const handleBtnCategoriesClick = () => {
         handleHideCategories((c) => !c);
     };
+
+    const routeSearch = internalSearchValue
+        .replace(/[áéíóúÁÉÍÓÚ ]/g, '_')
+        .toLowerCase();
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputSearchValue = event.target.value;
@@ -35,20 +41,30 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
             setInternalSearchValue('');
         } else {
             setInternalSearchValue(inputSearchValue);
-            const evaluateSearch = inputSearchValue
-                .replace(/[áéíóúÁÉÍÓÚ ]/g, '-')
-                .toLowerCase();
-            setRouteSearch(evaluateSearch);
         }
-        // dispatch({
-        //     type: 'TRIGGER_SEARCH',
-        //     payload: event.target.value,
-        // });
     };
 
     const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        if (
+            (event.code === 'Enter' || event.code === 'NumpadEnter') &&
+            isInputSearchValueNotEmpty
+        ) {
+            dispatch({
+                type: 'TRIGGER_SEARCH',
+                payload: internalSearchValue,
+            });
             history.push(`/search/${routeSearch}?page=1`);
+            setInternalSearchValue('');
+        }
+    };
+
+    const handleClick = () => {
+        if (isInputSearchValueNotEmpty) {
+            dispatch({
+                type: 'TRIGGER_SEARCH',
+                payload: internalSearchValue,
+            });
+            setInternalSearchValue('');
         }
     };
 
@@ -72,20 +88,17 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                     name="search"
                     className="form-control"
                     placeholder="Search..."
-                    // value={searchValue}
                     value={internalSearchValue}
                     onChange={handleSearch}
                     onKeyDown={handleEnter}
                 />
                 <span className="input-group-btn">
-                    <Link to={`/search/${routeSearch}?page=1`}>
-                        <button
-                            className="btn btn-default backColor"
-                            style={{ ...searchStyles, outline: 'none' }}
-                        >
-                            <FaSearch />
-                        </button>
-                    </Link>
+                    <SearchButton
+                        isInputSearchValueNotEmpty={isInputSearchValueNotEmpty}
+                        routeSearch={routeSearch}
+                        searchStyles={searchStyles}
+                        onClick={handleClick}
+                    />
                 </span>
             </Buscador>
         </div>

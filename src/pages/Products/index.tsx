@@ -13,6 +13,7 @@ import { SpinnerContainer } from './styles';
 import { Banner, ProductsPanel, Pagination } from '../../components';
 import useQueryParams from '../../hooks/useQueryParams';
 import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
+import { otherCategoriesRoutes, relevantRoutes } from '../../constants';
 
 interface IUseParams {
     categoryId?: string;
@@ -61,33 +62,41 @@ const Products = () => {
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         [
-            { ruta: 'free' } as TSubCategory,
-            { ruta: 'views' } as TSubCategory,
-            { ruta: 'sales' } as TSubCategory,
+            ...relevantRoutes.map((item) => ({ ruta: item } as TSubCategory)),
             ...subCategories,
         ],
         subCategoryId
     );
     const isACategoryAllowedRoute = checkIsAllowedRoute<TCategory>(
-        [{ ruta: 'products' } as TCategory, ...categories],
+        [
+            ...otherCategoriesRoutes.map(
+                (item) => ({ ruta: item } as TCategory)
+            ),
+            ...categories,
+        ],
         categoryId
     );
 
-    const isOnlyProductsRoute =
-        `/${categoryId}/${subCategoryId}` === '/products/';
+    const isOnlyProductsOrSearchRoute = otherCategoriesRoutes
+        .map((item) => `/${item}/`)
+        .includes(`/${categoryId}/${subCategoryId}`);
+
+    const isSearchRoute = categoryId === 'search' && !!subCategoryId;
 
     const bannerIndex = useMemo(() => resolveRandomBanner(1, 4), []);
     const newBanner = banners.find((item: any) => item.id === bannerIndex);
 
-    if (
-        checkProductsRoute({
-            subCategoryId,
-            isASubCategoryAllowedRoute,
-            isACategoryAllowedRoute,
-        }) ||
-        isOnlyProductsRoute
-    ) {
-        return <Redirect to="/error" />;
+    if (!isSearchRoute) {
+        if (
+            checkProductsRoute({
+                subCategoryId,
+                isASubCategoryAllowedRoute,
+                isACategoryAllowedRoute,
+            }) ||
+            isOnlyProductsOrSearchRoute
+        ) {
+            return <Redirect to="/error" />;
+        }
     }
 
     if (loadingStyles || loadingProducts || loadingBanner) {
