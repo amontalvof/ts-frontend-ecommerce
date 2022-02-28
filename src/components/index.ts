@@ -4,6 +4,7 @@ export { CategoriesList } from './CategoriesList';
 export { DisplayGridListBar } from './DisplayGridListBar';
 export { GridCard } from './GridCard';
 export { GridProducts } from './GridProducts';
+export { ImagesViewer } from './ImagesViewer';
 export { ListCard } from './ListCard';
 export { ListProducts } from './ListProducts';
 export { Logo } from './Logo';

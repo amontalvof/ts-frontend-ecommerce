@@ -5,6 +5,7 @@ import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import { TRoute } from '../../interfaces/productRoutes';
+import { ImagesViewer } from '../../components';
 
 interface IUseParams {
     categoryId?: string;
@@ -49,7 +50,9 @@ const ProductInfo = () => {
         <div className="container-fluid infoproducto">
             <div className="container">
                 <div className="row">
-                    <h1>ProductInfo</h1>
+                    <div className="col-md-5 col-sm-6 col-xs-12">
+                        <ImagesViewer />
+                    </div>
                 </div>
             </div>
         </div>
