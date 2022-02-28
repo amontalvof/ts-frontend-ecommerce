@@ -75,12 +75,8 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
                 onClick={handleBtnCategoriesClick}
                 style={searchStyles}
             >
-                <p>
-                    CATEGORIES
-                    <span className="pull-right">
-                        <FaBars />
-                    </span>
-                </p>
+                <span>CATEGORIES</span>
+                <FaBars />
             </BtnCategorias>
             <Buscador className="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <input

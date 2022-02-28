@@ -46,8 +46,12 @@ const ProductInfo = () => {
     }
 
     return (
-        <div>
-            <h1>ProductInfo</h1>
+        <div className="container-fluid infoproducto">
+            <div className="container">
+                <div className="row">
+                    <h1>ProductInfo</h1>
+                </div>
+            </div>
         </div>
     );
 };

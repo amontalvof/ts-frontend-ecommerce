@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const BtnCategorias = styled.div`
     margin: 20px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    p {
+    span {
         line-height: 40px;
         margin-bottom: 0px;
-    }
-
-    p span {
-        cursor: pointer;
     }
 `;
 
