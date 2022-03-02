@@ -8,7 +8,11 @@ import {
     LeftArrow,
     RightArrow,
     ImagesViewerContainer,
+    ImageContainer,
+    Lens,
 } from './styles';
+import getCursor from '../../helpers/ getCursor';
+import moveLens from '../../helpers/moveLens';
 
 const images = [
     {
@@ -25,9 +29,13 @@ const images = [
     },
 ];
 
+type TImageZoomEvent = React.MouseEvent<HTMLImageElement, MouseEvent>;
+
 export const ImagesViewer = () => {
     const [activeImage, setActiveImage] = useState(images[0]);
-    const slideshowRef = useRef(null) as React.MutableRefObject<any>;
+    const sliderRef = useRef(null) as React.MutableRefObject<any>;
+    const imageRef = useRef(null) as React.MutableRefObject<any>;
+    const lensRef = useRef(null) as React.MutableRefObject<any>;
 
     const handleHover = (image: { src: string }) => {
         setActiveImage(image);
@@ -35,18 +43,45 @@ export const ImagesViewer = () => {
 
     const handleClick = (direction: string) => {
         if (direction === 'left') {
-            slideshowRef.current.scrollLeft -= 180;
+            sliderRef.current.scrollLeft -= 180;
         } else {
-            slideshowRef.current.scrollLeft += 180;
+            sliderRef.current.scrollLeft += 180;
         }
+    };
+
+    const imageZoom = (event: TImageZoomEvent) => {
+        const img = imageRef.current;
+        const lens = lensRef.current;
+        lens.style.backgroundImage = `url(${img.src})`;
+        const ratio = 3;
+        lens.style.backgroundSize =
+            img.width * ratio + 'px ' + img.height * ratio + 'px';
+
+        const pos = getCursor({ event, img });
+        const { positionLeft, positionTop } = moveLens({ pos, lens, img });
+
+        lens.style.left = positionLeft + 'px';
+        lens.style.top = positionTop + 'px';
+
+        lens.style.backgroundPosition =
+            '-' + pos.x * ratio + 'px -' + pos.y * ratio + 'px';
     };
 
     return (
         <ImagesViewerContainer>
-            <FeaturedImage src={activeImage.src} alt="product" />
+            <ImageContainer>
+                <Lens ref={lensRef} onMouseMove={imageZoom} />
+                <FeaturedImage
+                    ref={imageRef}
+                    src={activeImage.src}
+                    alt="product"
+                    className="img-thumbnail"
+                    onMouseMove={imageZoom}
+                />
+            </ImageContainer>
             <SlideWrapper>
                 <LeftArrow onClick={() => handleClick('left')} />
-                <Slider ref={slideshowRef}>
+                <Slider ref={sliderRef}>
                     {images.map((image) => {
                         const active = image.src === activeImage.src;
                         return (
@@ -56,6 +91,7 @@ export const ImagesViewer = () => {
                                 alt="product"
                                 active={active}
                                 onMouseEnter={() => handleHover(image)}
+                                className="img-thumbnail"
                             />
                         );
                     })}

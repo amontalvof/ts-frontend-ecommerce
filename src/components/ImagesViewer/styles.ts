@@ -8,6 +8,30 @@ export const ImagesViewerContainer = styled.div`
     margin: 20px auto;
 `;
 
+export const ImageContainer = styled.div`
+    z-index: 1;
+    position: relative;
+`;
+
+export const Lens = styled.div`
+    z-index: 2;
+    position: absolute;
+    height: 125px;
+    width: 125px;
+    /* border: 1px solid black; */
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    cursor: none;
+
+    /*=============================================
+    MOVIL (XS revisamos en 320px)
+    =============================================*/
+
+    @media (max-width: 767px) {
+        display: none;
+    }
+`;
+
 export const SlideWrapper = styled.div`
     max-width: 100%;
     display: flex;
@@ -34,7 +58,6 @@ export const FeaturedImage = styled.img`
     max-height: 600px;
     object-fit: cover;
     cursor: pointer;
-    border: 2px solid black;
 `;
 
 export const ThumbnailImage = styled.img<IThumbnailImageProps>`
@@ -44,7 +67,6 @@ export const ThumbnailImage = styled.img<IThumbnailImageProps>`
     cursor: pointer;
     opacity: 0.5;
     margin: 5px;
-    border: 1px solid black;
 
     ${(props) => props.active && 'opacity: 1;'}
 
