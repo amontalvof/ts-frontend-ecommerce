@@ -8,6 +8,7 @@ import {
     StyledButtonText,
     StyledButton,
     StyledLi,
+    Container,
 } from './styles';
 
 interface IDisplayGridListBarProps {
@@ -57,7 +58,7 @@ export const DisplayGridListBar = ({
     return (
         <div className="container-fluid well well-sm">
             <div className="container">
-                <div className="row">
+                <Container className="row">
                     <div className="col-sm-6 col-xs-12">
                         <RenderIf isTrue={displaySortDropdown}>
                             <div className="btn-group">
@@ -151,7 +152,7 @@ export const DisplayGridListBar = ({
                             </StyledButton>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
         </div>
     );

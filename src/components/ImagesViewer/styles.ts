@@ -21,7 +21,7 @@ export const Lens = styled.div`
     /* border: 1px solid black; */
     border-radius: 50%;
     background-repeat: no-repeat;
-    cursor: none;
+    cursor: crosshair;
 
     /*=============================================
     MOVIL (XS revisamos en 320px)

@@ -35,3 +35,8 @@ export const StyledButtonText = styled.span`
 export const StyledLi = styled.li`
     cursor: pointer;
 `;
+
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+`;
