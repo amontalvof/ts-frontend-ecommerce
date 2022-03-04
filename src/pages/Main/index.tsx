@@ -5,9 +5,8 @@ import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';
 import { RootStore } from '../../redux/store';
+import { baseUrl } from '../../constants';
 import { SpinnerContainer, SliderContainer } from './styles';
-
-const baseUrl = process.env.REACT_APP_API_URL;
 
 const Main = () => {
     const [viewTypeFree, setViewTypeFree] = useState<string>('grid');

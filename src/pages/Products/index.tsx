@@ -14,13 +14,12 @@ import { Banner, ProductsPanel, Pagination } from '../../components';
 import useQueryParams from '../../hooks/useQueryParams';
 import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
 import { otherCategoriesRoutes, relevantRoutes } from '../../constants';
+import { baseUrl } from '../../constants';
 
 interface IUseParams {
     categoryId?: string;
     subCategoryId?: string;
 }
-
-const baseUrl = process.env.REACT_APP_API_URL;
 
 const Products = () => {
     const [viewType, setViewType] = useState<string>('grid');

@@ -8,6 +8,9 @@ import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import { TRoute } from '../../interfaces/productRoutes';
 import { ImagesViewer } from '../../components';
+import Spinner from '../../components/Spinner';
+import useFetch from '../../hooks/useFetch';
+import { baseUrl } from '../../constants';
 import {
     InfoContainer,
     IconContainer,
@@ -17,7 +20,8 @@ import {
     StyledWhatsappIcon,
     SpinnerContainer,
 } from './styles';
-import Spinner from '../../components/Spinner';
+import RenderIf from '../../components/RenderIf';
+import VideoViewer from '../../components/VideoViewer';
 
 interface IUseParams {
     categoryId?: string;
@@ -39,6 +43,15 @@ const ProductInfo = () => {
         productsRoutesReducer,
         plantillaReducer,
     } = useSelector((state: RootStore) => state);
+
+    const { loading: loadingProduct, value: valueProduct = {} } = useFetch(
+        `${baseUrl}/product/${productId}`
+    );
+    const { product = [] } = valueProduct;
+    const isFisico = product[0]?.tipo === 'fisico';
+    const infoContainerClass = isFisico
+        ? 'col-md-7 col-sm-6 col-xs-12'
+        : 'col-sm-6 col-xs-12';
 
     const { loading: loadingSubCategories, subCategories = [] } =
         subCategoriesReducer;
@@ -74,7 +87,8 @@ const ProductInfo = () => {
         loadingStyles ||
         loadingCategories ||
         loadingSubCategories ||
-        loadingProductsRoutes
+        loadingProductsRoutes ||
+        loadingProduct
     ) {
         return (
             <SpinnerContainer>
@@ -98,68 +112,73 @@ const ProductInfo = () => {
     }
 
     return (
-        <div className="container-fluid infoproducto">
-            <div className="container">
-                <div className="row">
+        <div className="container">
+            <div className="row">
+                <RenderIf isTrue={isFisico}>
                     <div className="col-md-5 col-sm-6 col-xs-12">
                         <ImagesViewer />
                     </div>
-                    <InfoContainer className="col-md-7 col-sm-6 col-xs-12">
+                </RenderIf>
+                <RenderIf isTrue={!isFisico}>
+                    <div className="col-sm-6 col-xs-12">
+                        <VideoViewer infoProduct={product[0]} />
+                    </div>
+                </RenderIf>
+                <InfoContainer className={infoContainerClass}>
+                    <div className="col-xs-6">
+                        <h6>
+                            <StyledAnchor
+                                className="text-muted"
+                                onClick={() => history.goBack()}
+                                plantillaStyles={plantillaStyles}
+                            >
+                                <IconContainer>
+                                    <FaReply />
+                                    <StyledSpan>Continue Buying</StyledSpan>
+                                </IconContainer>
+                            </StyledAnchor>
+                        </h6>
+                    </div>
+                    <div>
                         <div className="col-xs-6">
                             <h6>
                                 <StyledAnchor
-                                    className="text-muted"
-                                    onClick={() => history.goBack()}
+                                    className="dropdown-toggle pull-right text-muted"
+                                    data-toggle="dropdown"
                                     plantillaStyles={plantillaStyles}
                                 >
                                     <IconContainer>
-                                        <FaReply />
-                                        <StyledSpan>Continue Buying</StyledSpan>
+                                        <FaPlus />
+                                        <StyledSpan>Share</StyledSpan>
                                     </IconContainer>
                                 </StyledAnchor>
+                                <ul className="dropdown-menu pull-right compartirRedes">
+                                    <li>
+                                        <StyledAnchor>
+                                            <IconContainer>
+                                                <StyledFacebookIcon />
+                                                <StyledSpan>
+                                                    Facebook
+                                                </StyledSpan>
+                                            </IconContainer>
+                                        </StyledAnchor>
+                                    </li>
+                                    <li>
+                                        <StyledAnchor>
+                                            <IconContainer>
+                                                <StyledWhatsappIcon />
+                                                <StyledSpan>
+                                                    Whatsapp
+                                                </StyledSpan>
+                                            </IconContainer>
+                                        </StyledAnchor>
+                                    </li>
+                                </ul>
                             </h6>
                         </div>
-                        <div>
-                            <div className="col-xs-6">
-                                <h6>
-                                    <StyledAnchor
-                                        className="dropdown-toggle pull-right text-muted"
-                                        data-toggle="dropdown"
-                                        plantillaStyles={plantillaStyles}
-                                    >
-                                        <IconContainer>
-                                            <FaPlus />
-                                            <StyledSpan>Share</StyledSpan>
-                                        </IconContainer>
-                                    </StyledAnchor>
-                                    <ul className="dropdown-menu pull-right compartirRedes">
-                                        <li>
-                                            <StyledAnchor>
-                                                <IconContainer>
-                                                    <StyledFacebookIcon />
-                                                    <StyledSpan>
-                                                        Facebook
-                                                    </StyledSpan>
-                                                </IconContainer>
-                                            </StyledAnchor>
-                                        </li>
-                                        <li>
-                                            <StyledAnchor>
-                                                <IconContainer>
-                                                    <StyledWhatsappIcon />
-                                                    <StyledSpan>
-                                                        Whatsapp
-                                                    </StyledSpan>
-                                                </IconContainer>
-                                            </StyledAnchor>
-                                        </li>
-                                    </ul>
-                                </h6>
-                            </div>
-                            <div className="clearfix" />
-                        </div>
-                    </InfoContainer>
-                </div>
+                        <div className="clearfix" />
+                    </div>
+                </InfoContainer>
             </div>
         </div>
     );

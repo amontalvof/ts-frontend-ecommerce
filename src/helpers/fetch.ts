@@ -1,4 +1,4 @@
-const baseUrl = process.env.REACT_APP_API_URL;
+import { baseUrl } from '../constants';
 
 export const fetchWithoutToken = <T>(
     endpoint: string,
