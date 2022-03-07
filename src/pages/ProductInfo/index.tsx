@@ -2,12 +2,12 @@
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
-import { FaReply, FaPlus } from 'react-icons/fa';
+import { FaReply /*, FaPlus*/ } from 'react-icons/fa';
 import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import { TRoute } from '../../interfaces/productRoutes';
-import { ImagesViewer } from '../../components';
+import { ImagesViewer, ProductFeatures } from '../../components';
 import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';
 import { baseUrl } from '../../constants';
@@ -16,8 +16,8 @@ import {
     IconContainer,
     StyledSpan,
     StyledAnchor,
-    StyledFacebookIcon,
-    StyledWhatsappIcon,
+    // StyledFacebookIcon,
+    // StyledWhatsappIcon,
     SpinnerContainer,
 } from './styles';
 import RenderIf from '../../components/RenderIf';
@@ -139,9 +139,8 @@ const ProductInfo = () => {
                             </StyledAnchor>
                         </h6>
                     </div>
-                    <div>
-                        <div className="col-xs-6">
-                            <h6>
+                    <div className="col-xs-6">
+                        {/* <h6>
                                 <StyledAnchor
                                     className="dropdown-toggle pull-right text-muted"
                                     data-toggle="dropdown"
@@ -174,10 +173,13 @@ const ProductInfo = () => {
                                         </StyledAnchor>
                                     </li>
                                 </ul>
-                            </h6>
-                        </div>
-                        <div className="clearfix" />
+                            </h6> */}
                     </div>
+                    <div className="clearfix" />
+                    <ProductFeatures
+                        infoProduct={product[0]}
+                        plantillaStyles={plantillaStyles}
+                    />
                 </InfoContainer>
             </div>
         </div>

@@ -9,4 +9,5 @@ export { ListCard } from './ListCard';
 export { ListProducts } from './ListProducts';
 export { Logo } from './Logo';
 export { Pagination } from './Pagination';
+export { ProductFeatures } from './ProductFeatures';
 export { ProductsPanel } from './ProductsPanel';

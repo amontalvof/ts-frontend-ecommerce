@@ -14,6 +14,7 @@ export const GridCard = ({
     descuentoOferta,
     nuevo,
     precio,
+    precioOferta,
     oferta,
     tipo,
     categoriaRuta,
@@ -41,7 +42,11 @@ export const GridCard = ({
                 nuevo={nuevo}
                 plantillaStyles={plantillaStyles}
             />
-            <GridPrice precio={precio} oferta={oferta} />
+            <GridPrice
+                precio={precio}
+                oferta={oferta}
+                precioOferta={precioOferta}
+            />
             <GridButtons
                 tipo={tipo}
                 precio={precio}

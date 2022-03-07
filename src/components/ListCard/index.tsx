@@ -13,6 +13,7 @@ export const ListCard = ({
     titulo,
     descuentoOferta,
     nuevo,
+    precioOferta,
     precio,
     oferta,
     tipo,
@@ -46,7 +47,11 @@ export const ListCard = ({
                     descripcion={descripcion}
                     plantillaStyles={plantillaStyles}
                 />
-                <ListPrice precio={precio} oferta={oferta} />
+                <ListPrice
+                    precio={precio}
+                    oferta={oferta}
+                    precioOferta={precioOferta}
+                />
                 <ListButtons
                     tipo={tipo}
                     precio={precio}
