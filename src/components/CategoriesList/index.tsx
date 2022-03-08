@@ -42,11 +42,7 @@ export const CategoriesList = ({
     return (
         <div className="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <h4 onClick={() => onRequestClose(true)}>
-                <Link
-                    to={`/${to}?page=1`}
-                    className="pixelCategorias backColor"
-                    style={linkStyles}
-                >
+                <Link to={`/${to}?page=1`} style={linkStyles}>
                     {category}
                 </Link>
             </h4>
@@ -56,7 +52,6 @@ export const CategoriesList = ({
                     <li key={nanoid(10)} onClick={() => onRequestClose(true)}>
                         <Link
                             to={`/${to}/${item.ruta}?page=1`}
-                            className="pixelSubCategorias backColor"
                             style={linkStyles}
                         >
                             {item.subcategoria}

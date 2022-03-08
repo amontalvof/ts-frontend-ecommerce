@@ -4,6 +4,9 @@ interface IStyledBadgeProps {
     colortexto?: string;
     colorfondo?: string;
 }
+interface IStyledSelectProps {
+    colorfondo?: string;
+}
 
 export const StyledBadge = styled.span<IStyledBadgeProps>`
     background-color: ${(props) => props.colorfondo};
@@ -28,4 +31,23 @@ export const IconContainer = styled.div`
 export const StyledLabel = styled.div`
     display: inline-flex;
     align-items: center;
+`;
+
+export const StyledSelect = styled.select<IStyledSelectProps>`
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 0;
+    outline: 1px solid #777777;
+    border-right: 10px solid transparent;
+
+    :focus {
+        outline: 1px solid ${(props) => props.colorfondo};
+        box-shadow: 0px 0px 2px 2px ${(props) => props.colorfondo};
+    }
+`;
+
+export const NoVirtualContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
 `;

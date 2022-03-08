@@ -20,7 +20,7 @@ const SearchButton = ({
                 <Link to={`/search/${routeSearch}?page=1`}>
                     <button
                         onClick={onClick}
-                        className="btn btn-default backColor"
+                        className="btn btn-default"
                         style={{ ...searchStyles, outline: 'none' }}
                     >
                         <FaSearch />
@@ -30,7 +30,7 @@ const SearchButton = ({
             <RenderIf isTrue={!isInputSearchValueNotEmpty}>
                 <button
                     onClick={onClick}
-                    className="btn btn-default backColor"
+                    className="btn btn-default"
                     style={{ ...searchStyles, outline: 'none' }}
                 >
                     <FaSearch />

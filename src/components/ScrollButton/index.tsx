@@ -29,7 +29,6 @@ const ScrollButton = () => {
 
     return (
         <StyledButton
-            className=" backColor"
             onClick={scrollBackToTop}
             isPageScrollBiggerThan200={isPageScrollBiggerThan200}
             colortexto={plantillaStyles?.colorTexto}

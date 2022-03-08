@@ -35,7 +35,7 @@ const Header = () => {
                     <ShoppingCart />
                 </div>
                 <CategoriasContainer
-                    className="col-xs-12 backColor"
+                    className="col-xs-12"
                     hideCategories={hideCategories}
                     style={categoriesStyles}
                     ref={categoriesRef}

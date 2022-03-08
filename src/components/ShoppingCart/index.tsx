@@ -15,7 +15,7 @@ const ShoppingCart = () => {
     return (
         <Carrito className="col-lg-3 col-md-3 col-sm-2 col-xs-12">
             <button
-                className="btn btn-default pull-left backColor"
+                className="btn btn-default pull-left"
                 style={{ ...cartStyles, outline: 'none' }}
             >
                 <FaShoppingCart />

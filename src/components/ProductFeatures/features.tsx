@@ -9,14 +9,20 @@ import {
 } from 'react-icons/fa';
 import capitalizeFirstLetter from '../../helpers/capitalizeFirstLetter';
 import RenderIf from '../RenderIf';
-import { IconContainer, StyledUl } from './styles';
+import {
+    IconContainer,
+    NoVirtualContainer,
+    StyledSelect,
+    StyledUl,
+} from './styles';
 
 interface IFeaturesProps {
     tipo: string;
     detalles: string;
+    colorfondo: string;
 }
 
-const Features = ({ tipo, detalles }: IFeaturesProps) => {
+const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
     const hasDetails = detalles !== null;
     const isNotVirtual = tipo === 'fisico';
     const details = hasDetails && JSON.parse(detalles);
@@ -25,56 +31,41 @@ const Features = ({ tipo, detalles }: IFeaturesProps) => {
             <>
                 <hr />
                 <RenderIf isTrue={isNotVirtual}>
-                    <>
+                    <NoVirtualContainer>
                         <RenderIf isTrue={!!details.Size}>
-                            <div className="col-md-3 col-xs-12">
-                                <select className="form-control seleccionarDetalle">
-                                    <option value="">Size</option>
-                                    {!!details.Size &&
-                                        details.Size.map((size: number) => (
-                                            <option
-                                                key={nanoid(10)}
-                                                value={size}
-                                            >
-                                                {size}
-                                            </option>
-                                        ))}
-                                </select>
-                            </div>
+                            <StyledSelect colorfondo={colorfondo}>
+                                <option value="">Size</option>
+                                {!!details.Size &&
+                                    details.Size.map((size: number) => (
+                                        <option key={nanoid(10)} value={size}>
+                                            {size}
+                                        </option>
+                                    ))}
+                            </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Color}>
-                            <div className="col-md-3 col-xs-12">
-                                <select className="form-control seleccionarDetalle">
-                                    <option value="">Color</option>
-                                    {!!details.Color &&
-                                        details.Color.map((color: string) => (
-                                            <option
-                                                key={nanoid(10)}
-                                                value={color}
-                                            >
-                                                {capitalizeFirstLetter(color)}
-                                            </option>
-                                        ))}
-                                </select>
-                            </div>
+                            <StyledSelect colorfondo={colorfondo}>
+                                <option value="">Color</option>
+                                {!!details.Color &&
+                                    details.Color.map((color: string) => (
+                                        <option key={nanoid(10)} value={color}>
+                                            {capitalizeFirstLetter(color)}
+                                        </option>
+                                    ))}
+                            </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Brand}>
-                            <div className="col-md-3 col-xs-12">
-                                <select className="form-control seleccionarDetalle">
-                                    <option value="">Brand</option>
-                                    {!!details.Brand &&
-                                        details.Brand.map((brand: string) => (
-                                            <option
-                                                key={nanoid(10)}
-                                                value={brand}
-                                            >
-                                                {capitalizeFirstLetter(brand)}
-                                            </option>
-                                        ))}
-                                </select>
-                            </div>
+                            <StyledSelect colorfondo={colorfondo}>
+                                <option value="">Brand</option>
+                                {!!details.Brand &&
+                                    details.Brand.map((brand: string) => (
+                                        <option key={nanoid(10)} value={brand}>
+                                            {capitalizeFirstLetter(brand)}
+                                        </option>
+                                    ))}
+                            </StyledSelect>
                         </RenderIf>
-                    </>
+                    </NoVirtualContainer>
                 </RenderIf>
                 <RenderIf isTrue={!isNotVirtual}>
                     <div className="col-xs-12">
