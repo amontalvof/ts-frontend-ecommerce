@@ -1,4 +1,5 @@
 import formatPrice from '../../helpers/formatPrice';
+import RenderIf from '../RenderIf';
 import { PrecioContainer, StyledOferta } from './styles';
 
 interface IGridPriceProps {
@@ -15,19 +16,26 @@ const GridPrice = ({
     const isNotFree = precio !== 0;
     const hasOffer = oferta !== 0;
 
-    const newPrice = isNotFree ? formatPrice(precio) : 'FREE';
+    const newPrice = formatPrice(precio);
 
     const newOffer = hasOffer && formatPrice(precioOferta);
 
     return (
         <PrecioContainer className="col-xs-7">
             <h2>
-                {hasOffer && (
-                    <small>
-                        <StyledOferta>{newPrice}</StyledOferta>
-                    </small>
-                )}{' '}
-                <small>{newOffer || newPrice}</small>
+                <RenderIf isTrue={!isNotFree}>
+                    <small>FREE</small>
+                </RenderIf>
+                <RenderIf isTrue={isNotFree}>
+                    <>
+                        {hasOffer && (
+                            <small>
+                                <StyledOferta>{newPrice}</StyledOferta>
+                            </small>
+                        )}{' '}
+                        <small>{newOffer || newPrice}</small>
+                    </>
+                </RenderIf>
             </h2>
         </PrecioContainer>
     );

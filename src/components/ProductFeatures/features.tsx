@@ -9,12 +9,8 @@ import {
 } from 'react-icons/fa';
 import capitalizeFirstLetter from '../../helpers/capitalizeFirstLetter';
 import RenderIf from '../RenderIf';
-import {
-    IconContainer,
-    NoVirtualContainer,
-    StyledSelect,
-    StyledUl,
-} from './styles';
+import { StyledVirtualFeaturesContainer } from './styles';
+import { IconContainer, NoVirtualContainer, StyledSelect } from './styles';
 
 interface IFeaturesProps {
     tipo: string;
@@ -68,48 +64,32 @@ const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
                     </NoVirtualContainer>
                 </RenderIf>
                 <RenderIf isTrue={!isNotVirtual}>
-                    <div className="col-xs-12">
-                        <StyledUl>
-                            <li>
-                                <IconContainer>
-                                    <FaPlayCircle style={{ marginRight: 10 }} />{' '}
-                                    {details.Classes}
-                                </IconContainer>
-                            </li>
-                            <li>
-                                <IconContainer>
-                                    <FaClock style={{ marginRight: 10 }} />{' '}
-                                    {details.Time}
-                                </IconContainer>
-                            </li>
-                            <li>
-                                <IconContainer>
-                                    <FaRegCheckCircle
-                                        style={{ marginRight: 10 }}
-                                    />{' '}
-                                    {details.Level}
-                                </IconContainer>
-                            </li>
-                            <li>
-                                <IconContainer>
-                                    <FaInfoCircle style={{ marginRight: 10 }} />{' '}
-                                    {details.Access}
-                                </IconContainer>
-                            </li>
-                            <li>
-                                <IconContainer>
-                                    <FaDesktop style={{ marginRight: 10 }} />{' '}
-                                    {details.Device}
-                                </IconContainer>
-                            </li>
-                            <li>
-                                <IconContainer>
-                                    <FaTrophy style={{ marginRight: 10 }} />{' '}
-                                    {details.Certificate}
-                                </IconContainer>
-                            </li>
-                        </StyledUl>
-                    </div>
+                    <StyledVirtualFeaturesContainer className="col-xs-12">
+                        <IconContainer>
+                            <FaPlayCircle style={{ marginRight: 5 }} />{' '}
+                            {details.Classes}
+                        </IconContainer>
+                        <IconContainer>
+                            <FaClock style={{ marginRight: 5 }} />{' '}
+                            {details.Time}
+                        </IconContainer>
+                        <IconContainer>
+                            <FaRegCheckCircle style={{ marginRight: 5 }} />{' '}
+                            {details.Level}
+                        </IconContainer>
+                        <IconContainer>
+                            <FaInfoCircle style={{ marginRight: 5 }} />{' '}
+                            {details.Access}
+                        </IconContainer>
+                        <IconContainer>
+                            <FaDesktop style={{ marginRight: 5 }} />{' '}
+                            {details.Device}
+                        </IconContainer>
+                        <IconContainer>
+                            <FaTrophy style={{ marginRight: 5 }} />{' '}
+                            {details.Certificate}
+                        </IconContainer>
+                    </StyledVirtualFeaturesContainer>
                 </RenderIf>
             </>
         </RenderIf>

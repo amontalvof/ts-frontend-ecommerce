@@ -1,5 +1,5 @@
 import { FaShoppingCart, FaRegClock, FaRegEye } from 'react-icons/fa';
-import { IconContainer, StyledLabel } from './styles';
+import { IconContainer, StyledDeliveryText, StyledLabel } from './styles';
 
 interface IDeliveryProps {
     entrega: number;
@@ -37,16 +37,24 @@ const DeliveryInfo = ({ deliveryText, ventas, vistas }: IDeliveryInfoProps) => {
             <h4 className="col-lg-0 col-md-0 col-xs-12">
                 <small style={{ fontWeight: 100 }}>
                     <IconContainer style={{ margin: '5px 0' }}>
-                        <FaRegClock style={{ marginRight: 12 }} />
-                        <span>{deliveryText}</span> <br />
+                        <FaRegClock style={{ marginRight: 7 }} />
+                        <StyledDeliveryText>
+                            {deliveryText}
+                        </StyledDeliveryText>{' '}
+                        <br />
                     </IconContainer>
                     <IconContainer style={{ margin: '5px 0' }}>
-                        <FaShoppingCart style={{ marginRight: 12 }} />
-                        <span>{ventas} registered</span> <br />
+                        <FaShoppingCart style={{ marginRight: 7 }} />
+                        <StyledDeliveryText>
+                            {ventas} registered
+                        </StyledDeliveryText>{' '}
+                        <br />
                     </IconContainer>
                     <IconContainer style={{ margin: '5px 0' }}>
-                        <FaRegEye style={{ marginRight: 12 }} />
-                        <span>Seen by {vistas} people</span>{' '}
+                        <FaRegEye style={{ marginRight: 7 }} />
+                        <StyledDeliveryText>
+                            Seen by {vistas} people
+                        </StyledDeliveryText>{' '}
                     </IconContainer>
                 </small>
             </h4>

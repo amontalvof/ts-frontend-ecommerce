@@ -1,5 +1,6 @@
 import { TStyle } from '../../interfaces/plantilla';
 import { IProduct } from '../../interfaces/product';
+import BuyButtons from './buyButtons';
 import Delivery from './delivery';
 import Description from './description';
 import Features from './features';
@@ -47,7 +48,7 @@ export const ProductFeatures = ({
                 oferta={oferta}
             />
             <Description descripcion={descripcion} />
-            <Features detalles={detalles} tipo={tipo} />
+            <Features detalles={detalles} tipo={tipo} colorfondo={colorFondo} />
             <Delivery
                 entrega={entrega}
                 precio={precio}
@@ -55,6 +56,12 @@ export const ProductFeatures = ({
                 vistasGratis={vistasGratis}
                 vistas={vistas}
                 ventas={ventas}
+            />
+            <BuyButtons
+                precio={precio}
+                tipo={tipo}
+                colorfondo={colorFondo}
+                colortexto={colorTexto}
             />
         </>
     );

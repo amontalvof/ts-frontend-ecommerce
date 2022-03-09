@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { FaShoppingCart } from 'react-icons/fa';
 
 interface IStyledBadgeProps {
     colortexto?: string;
     colorfondo?: string;
 }
+
 interface IStyledSelectProps {
     colorfondo?: string;
 }
@@ -19,13 +21,16 @@ export const StyledOferta = styled.strong`
     font-size: 16px;
 `;
 
-export const StyledUl = styled.ul`
-    list-style-type: none;
-`;
-
 export const IconContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-right: 25px;
+`;
+
+export const AddToCartIconContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const StyledLabel = styled.div`
@@ -40,7 +45,8 @@ export const StyledSelect = styled.select<IStyledSelectProps>`
     border: 0;
     outline: 1px solid #777777;
     border-right: 10px solid transparent;
-
+    background-color: transparent;
+    cursor: pointer;
     :focus {
         outline: 1px solid ${(props) => props.colorfondo};
         box-shadow: 0px 0px 2px 2px ${(props) => props.colorfondo};
@@ -50,4 +56,27 @@ export const StyledSelect = styled.select<IStyledSelectProps>`
 export const NoVirtualContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+`;
+
+export const StyledFaShoppingCart = styled(FaShoppingCart)`
+    margin: 5px;
+    /*=============================================
+    MOVIL (XS revisamos en 320px)
+    =============================================*/
+    @media (max-width: 767px) {
+        display: none;
+    }
+`;
+
+export const StyledBuyButton = styled.button`
+    margin-top: 10px;
+`;
+
+export const StyledVirtualFeaturesContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+export const StyledDeliveryText = styled.span`
+    font-size: 14px;
 `;
