@@ -7,6 +7,7 @@ export interface IProduct {
     titulo: string;
     titular: string;
     descripcion: string;
+    multimedia: string;
     detalles: string;
     precio: number;
     portada: string;

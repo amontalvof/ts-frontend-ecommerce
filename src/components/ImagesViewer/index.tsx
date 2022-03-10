@@ -13,31 +13,22 @@ import {
 } from './styles';
 import getCursor from '../../helpers/ getCursor';
 import moveLens from '../../helpers/moveLens';
-
-const images = [
-    {
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1646011746/ecommerce/multimedia/img-01_wowa7q.jpg',
-    },
-    {
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1646011746/ecommerce/multimedia/img-02_jmq4kf.jpg',
-    },
-    {
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1646011746/ecommerce/multimedia/img-03_nzudlh.jpg',
-    },
-    {
-        src: 'https://res.cloudinary.com/a03m02f92/image/upload/v1646011746/ecommerce/multimedia/img-04_wgyyyf.jpg',
-    },
-];
+import { IProduct } from '../../interfaces/product';
+interface IVideoViewerProps {
+    infoProduct: IProduct;
+}
 
 type TImageZoomEvent = React.MouseEvent<HTMLImageElement, MouseEvent>;
 
-export const ImagesViewer = () => {
+export const ImagesViewer = ({ infoProduct }: IVideoViewerProps) => {
+    const { multimedia } = infoProduct;
+    const images = multimedia ? JSON.parse(multimedia) : [];
     const [activeImage, setActiveImage] = useState(images[0]);
     const sliderRef = useRef(null) as React.MutableRefObject<any>;
     const imageRef = useRef(null) as React.MutableRefObject<any>;
     const lensRef = useRef(null) as React.MutableRefObject<any>;
 
-    const handleHover = (image: { src: string }) => {
+    const handleHover = (image: { foto: string }) => {
         setActiveImage(image);
     };
 
@@ -73,7 +64,7 @@ export const ImagesViewer = () => {
                 <Lens ref={lensRef} onMouseMove={imageZoom} />
                 <FeaturedImage
                     ref={imageRef}
-                    src={activeImage.src}
+                    src={activeImage.foto}
                     alt="product"
                     className="img-thumbnail"
                     onMouseMove={imageZoom}
@@ -82,12 +73,12 @@ export const ImagesViewer = () => {
             <SlideWrapper>
                 <LeftArrow onClick={() => handleClick('left')} />
                 <Slider ref={sliderRef}>
-                    {images.map((image) => {
-                        const active = image.src === activeImage.src;
+                    {images.map((image: { foto: string }) => {
+                        const active = image.foto === activeImage.foto;
                         return (
                             <ThumbnailImage
                                 key={nanoid(10)}
-                                src={image.src}
+                                src={image.foto}
                                 alt="product"
                                 active={active}
                                 onMouseEnter={() => handleHover(image)}

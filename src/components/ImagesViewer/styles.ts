@@ -37,6 +37,7 @@ export const SlideWrapper = styled.div`
     display: flex;
     min-height: 100px;
     align-items: center;
+    justify-content: center;
 `;
 
 export const Slider = styled.div`
@@ -48,7 +49,7 @@ export const Slider = styled.div`
     MOVIL (XS revisamos en 320px)
     =============================================*/
 
-    @media (max-width: 767px) {
+    @media (max-width: 500px) {
         width: 220px;
     }
 `;

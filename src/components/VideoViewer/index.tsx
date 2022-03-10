@@ -5,7 +5,8 @@ interface IVideoViewerProps {
     infoProduct: IProduct;
 }
 const VideoViewer = ({ infoProduct }: IVideoViewerProps) => {
-    const src = `https://www.youtube.com/embed/bG7tIR4QS10?rel=0&autoplay=0`;
+    const { multimedia: videoId } = infoProduct;
+    const src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=0`;
     return (
         <VideoViewerContainer>
             <StyledIframe
