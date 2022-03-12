@@ -22,6 +22,8 @@ import {
 } from './styles';
 import RenderIf from '../../components/RenderIf';
 import VideoViewer from '../../components/VideoViewer';
+import TabSet from '../../components/TabSet';
+import Comments from '../../components/Comments';
 
 interface IUseParams {
     categoryId?: string;
@@ -183,6 +185,8 @@ const ProductInfo = () => {
                     />
                 </InfoContainer>
             </div>
+            <TabSet color={plantillaStyles?.colorFondo} />
+            <Comments color={plantillaStyles?.colorFondo} />
         </div>
     );
 };
