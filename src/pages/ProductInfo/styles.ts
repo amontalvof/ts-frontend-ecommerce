@@ -43,3 +43,7 @@ export const SpinnerContainer = styled.div`
     width: 100vw;
     flex-grow: 1;
 `;
+
+export const StyledErrorContainer = styled.div`
+    margin-bottom: 100px;
+`;

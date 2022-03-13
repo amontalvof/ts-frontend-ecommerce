@@ -63,7 +63,7 @@ export const ProductsPanel = ({
                         </RenderIf>
                     </div>
                     <RenderIf isTrue={!existsProducts}>
-                        <ThereAreNoProducts />
+                        <ThereAreNoProducts message="There are no products in this section yet." />
                     </RenderIf>
                     <RenderIf isTrue={existsProducts && viewType === 'grid'}>
                         <GridProducts products={products} />
