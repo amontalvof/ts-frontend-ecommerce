@@ -16,6 +16,7 @@ export const ProductFeatures = ({
     plantillaStyles,
 }: IProductFeaturesProps) => {
     const {
+        ruta,
         titulo,
         nuevo,
         oferta,
@@ -50,6 +51,7 @@ export const ProductFeatures = ({
             <Description descripcion={descripcion} />
             <Features detalles={detalles} tipo={tipo} colorfondo={colorFondo} />
             <Delivery
+                ruta={ruta}
                 entrega={entrega}
                 precio={precio}
                 ventasGratis={ventasGratis}
