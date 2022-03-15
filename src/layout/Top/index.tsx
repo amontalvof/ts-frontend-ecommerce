@@ -1,7 +1,9 @@
 // import { nanoid } from 'nanoid';
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import AuthModal from '../../components/AuthModal';
 import { TStyle } from '../../interfaces/plantilla';
+import { openAuthModal } from '../../redux/actions';
 import {
     BarraSuperior,
     // StyledIconsUl,
@@ -30,6 +32,7 @@ interface ITopProps {
 // };
 
 const Top = ({ plantillaStyles }: ITopProps) => {
+    const dispatch = useDispatch();
     const { barraSuperior, /*redesSociales,*/ textoSuperior } =
         plantillaStyles as TStyle;
 
@@ -37,12 +40,18 @@ const Top = ({ plantillaStyles }: ITopProps) => {
         backgroundColor: barraSuperior,
     };
 
-    const linkStyles = {
+    const buttonStyles = {
         color: textoSuperior,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
     };
 
     const dividerStyles = {
         color: textoSuperior,
+    };
+
+    const handleButtonClick = (value: string) => {
+        dispatch(openAuthModal(value));
     };
 
     // const redesSocialesParsed = JSON.parse(redesSociales);
@@ -76,28 +85,24 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                     <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                         <StyledLinkUl>
                             <StyledLinkLi>
-                                <Link
-                                    to="modalIngreso"
-                                    data-toggle="modal"
-                                    style={linkStyles}
+                                <button
+                                    style={buttonStyles}
+                                    onClick={() => handleButtonClick('login')}
                                 >
-                                    Sign in
-                                </Link>
+                                    Login
+                                </button>
                             </StyledLinkLi>
                             <StyledLinkLi style={dividerStyles}>|</StyledLinkLi>
-                            <StyledLinkLi>
-                                <Link
-                                    to="modalRegistro"
-                                    data-toggle="modal"
-                                    style={linkStyles}
-                                >
-                                    Create an account
-                                </Link>
+                            <StyledLinkLi
+                                onClick={() => handleButtonClick('register')}
+                            >
+                                <button style={buttonStyles}>Register</button>
                             </StyledLinkLi>
                         </StyledLinkUl>
                     </div>
                 </div>
             </div>
+            <AuthModal />
         </BarraSuperior>
     );
 };
