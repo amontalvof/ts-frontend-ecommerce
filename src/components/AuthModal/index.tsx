@@ -6,6 +6,8 @@ import {
     customStyles,
     ModalContent,
     ModalTitulo,
+    StyledAnchor,
+    SubmitButton,
     Title,
     XCloseButton,
 } from './styles';
@@ -39,7 +41,7 @@ const AuthModal = () => {
             // ariaHideApp={!process.env.NODE_ENV === 'test'}
         >
             <ModalContent>
-                <form>
+                <form noValidate>
                     <ModalTitulo className="modal-body">
                         <Title
                             colorfondo={plantillaStyles.colorFondo}
@@ -102,34 +104,52 @@ const AuthModal = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="checkBox">
+                            <div>
                                 <label>
-                                    <input id="regPoliticas" type="checkbox" />
-                                    <small>
-                                        Al registrarse, usted acepta nuestras
-                                        condiciones de uso y políticas de
-                                        privacidad
-                                        <br />
-                                        <a
+                                    <input
+                                        type="checkbox"
+                                        style={{
+                                            verticalAlign: 'middle',
+                                            position: 'relative',
+                                            bottom: '3px',
+                                        }}
+                                    />
+                                    <small style={{ marginLeft: '5px' }}>
+                                        By registering, you agree to our terms
+                                        of use and privacy policies.{' '}
+                                        {/* TODO: change the link of terms of use
+                                            and privacy policies*/}
+                                        <StyledAnchor
                                             href="//www.iubenda.com/privacy-policy/8146355"
-                                            className="iubenda-white iubenda-embed"
-                                            title="condiciones de uso y políticas de privacidad"
+                                            title="Terms of use and privacy policies"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            color={plantillaStyles.colorFondo}
                                         >
-                                            Leer más
-                                        </a>
+                                            Read more
+                                        </StyledAnchor>
                                     </small>
                                 </label>
                             </div>
                         </div>
-                    </ModalTitulo>
-                    <div className="modal-footer">
-                        <input
+                        <SubmitButton
+                            colorfondo={plantillaStyles.colorFondo}
+                            colortexto={plantillaStyles.colorTexto}
                             type="submit"
-                            className="btn btn-default backColor btn-block"
-                            value="ENVIAR"
+                            className="btn btn-block"
+                            value="SUBMIT"
+                            style={{ outline: 'none' }}
                         />
-                    </div>
+                    </ModalTitulo>
                 </form>
+                <div className="modal-footer">
+                    Do you already have a registered account? |{' '}
+                    <strong>
+                        <StyledAnchor color={plantillaStyles.colorFondo}>
+                            Ingresar
+                        </StyledAnchor>
+                    </strong>
+                </div>
             </ModalContent>
         </Modal>
     );

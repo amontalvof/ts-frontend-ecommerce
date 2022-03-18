@@ -4,8 +4,17 @@ interface IStyledTitleProps {
     colorfondo?: string;
     colortexto?: string;
 }
+interface ISubmitButtonProps {
+    colorfondo?: string;
+    colortexto?: string;
+}
 interface IXCloseButtonProps {
     colortexto?: string;
+}
+
+interface IStyledAnchor {
+    color?: string;
+    darkencolor?: string;
 }
 
 export const customStyles = {
@@ -53,5 +62,26 @@ export const XCloseButton = styled.button<IXCloseButtonProps>`
     font-size: 16px;
     :hover {
         opacity: 1;
+    }
+`;
+
+export const StyledAnchor = styled.a<IStyledAnchor>`
+    cursor: pointer;
+    color: ${(props) => props.color};
+    :hover {
+        text-decoration: underline;
+        color: ${(props) => props.color};
+    }
+    :visited {
+        color: ${(props) => props.color};
+    }
+`;
+
+export const SubmitButton = styled.input<ISubmitButtonProps>`
+    margin: 10px 0;
+    background-color: ${(props) => props.colorfondo};
+    color: ${(props) => props.colortexto};
+    :hover {
+        color: ${(props) => props.colortexto};
     }
 `;
