@@ -4,6 +4,9 @@ interface IStyledTitleProps {
     colorfondo?: string;
     colortexto?: string;
 }
+interface ICheckboxProps {
+    colorfondo?: string;
+}
 interface ISubmitButtonProps {
     colorfondo?: string;
     colortexto?: string;
@@ -29,11 +32,13 @@ export const customStyles = {
 };
 
 export const ModalContent = styled.div`
+    padding: 10px 10px 0;
     /*=============================================
     MOVIL (XS revisamos en 320px)
     =============================================*/
     @media (max-width: 500px) {
         max-width: 300px;
+        padding: 0px;
     }
 `;
 
@@ -84,4 +89,19 @@ export const SubmitButton = styled.input<ISubmitButtonProps>`
     :hover {
         color: ${(props) => props.colortexto};
     }
+    :focus {
+        color: ${(props) => props.colortexto};
+    }
+`;
+
+export const StyledCheckbox = styled.input<ICheckboxProps>`
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    bottom: 3px;
+    accent-color: ${(props) => props.colorfondo};
+`;
+
+export const ErrorText = styled.p`
+    color: #cc0000;
 `;
