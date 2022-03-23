@@ -1,4 +1,5 @@
 import { fetchWithoutToken } from '../../helpers/fetch';
+import { AppDispatch } from '../store';
 import {
     SUB_CATEGORIES_FAIL,
     SUB_CATEGORIES_LOADING,
@@ -6,7 +7,7 @@ import {
 } from '../../interfaces/subCategories';
 
 export const getSubCategories = () => {
-    return async (dispatch: Function) => {
+    return async (dispatch: AppDispatch) => {
         dispatch({
             type: SUB_CATEGORIES_LOADING,
         });

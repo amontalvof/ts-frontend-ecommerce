@@ -22,7 +22,7 @@ export const registerValidationSchema = Yup.object({
         ),
     regPassword2: Yup.string()
         .required('A confirmation password is required.')
-        .oneOf([Yup.ref('password1')], 'The passwords are not equal.'),
+        .oneOf([Yup.ref('regPassword1')], "The passwords don't match"),
     regTerms: Yup.boolean().oneOf(
         [true],
         'You must accept the terms of use and privacy policies.'

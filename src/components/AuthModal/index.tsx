@@ -11,8 +11,8 @@ Modal.setAppElement('#root');
 const AuthModal = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
-    const { authModalReducer, plantillaReducer } = state;
-    useDisableBodyScroll(authModalReducer.modalOpen);
+    const { uiAuthModalReducer, plantillaReducer } = state;
+    useDisableBodyScroll(uiAuthModalReducer.modalOpen);
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
 
@@ -22,7 +22,7 @@ const AuthModal = () => {
 
     return (
         <Modal
-            isOpen={authModalReducer.modalOpen}
+            isOpen={uiAuthModalReducer.modalOpen}
             // onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}

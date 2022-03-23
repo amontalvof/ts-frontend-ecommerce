@@ -1,4 +1,5 @@
 import { fetchWithoutToken } from '../../helpers/fetch';
+import { AppDispatch } from '../store';
 import {
     ROUTES_FAIL,
     ROUTES_LOADING,
@@ -6,7 +7,7 @@ import {
 } from '../../interfaces/productRoutes';
 
 export const getProductRoutes = () => {
-    return async (dispatch: Function) => {
+    return async (dispatch: AppDispatch) => {
         dispatch({
             type: ROUTES_LOADING,
         });

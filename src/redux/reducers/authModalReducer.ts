@@ -1,12 +1,12 @@
-import { AuthModalDispatchTypes } from '../../interfaces/authModal';
+import { UiAuthModalDispatchTypes } from '../../interfaces/authModal';
 
 const initialState = {
     modalOpen: false,
 };
 
-export const authModalReducer = (
+export const uiAuthModalReducer = (
     state = initialState,
-    action: AuthModalDispatchTypes
+    action: UiAuthModalDispatchTypes
 ) => {
     switch (action.type) {
         case 'OPEN_AUTH_MODAL':

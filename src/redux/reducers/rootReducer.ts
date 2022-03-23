@@ -4,7 +4,7 @@ import { categoriesReducer } from './categoriesReducer';
 import { subCategoriesReducer } from './subCategoriesReducer';
 import { productsRoutesReducer } from './productsRoutesReducer';
 import { searchReducer } from './searchReducer';
-import { authModalReducer } from './authModalReducer';
+import { uiAuthModalReducer } from './authModalReducer';
 
 export const rootReducer = combineReducers({
     plantillaReducer,
@@ -12,5 +12,5 @@ export const rootReducer = combineReducers({
     subCategoriesReducer,
     productsRoutesReducer,
     searchReducer,
-    authModalReducer,
+    uiAuthModalReducer,
 });

@@ -1,4 +1,5 @@
 import { fetchWithoutToken } from '../../helpers/fetch';
+import { AppDispatch } from '../store';
 import {
     STYLES_FAIL,
     STYLES_LOADING,
@@ -6,7 +7,7 @@ import {
 } from '../../interfaces/plantilla';
 
 export const getStyles = () => {
-    return async (dispatch: Function) => {
+    return async (dispatch: AppDispatch) => {
         dispatch({
             type: STYLES_LOADING,
         });
