@@ -15,6 +15,7 @@ export const closeAuthModal = () => ({
 
 export const startRegister = (params: IRegisterActionParams) => {
     return async (dispatch: AppDispatch, getState: () => RootStore) => {
+        const { plantillaReducer } = getState();
         const resp = await fetchWithoutToken('auth/new', { ...params }, 'POST');
         const body = await resp.json();
         if (body.ok) {
@@ -23,9 +24,10 @@ export const startRegister = (params: IRegisterActionParams) => {
                 'token-init-time',
                 new Date().getTime().toString()
             );
-            const plantillaReducerState = getState().plantillaReducer;
+            const plantillaReducerState = plantillaReducer;
             const { styles = [] } = plantillaReducerState;
             const plantillaStyles = styles[0];
+            dispatch(closeAuthModal());
             Swal.fire({
                 title: 'Successfully registered!',
                 text: `Please check your email inbox or SPAM folder in "${params.regEmail}" to verify the account!`,
@@ -33,6 +35,7 @@ export const startRegister = (params: IRegisterActionParams) => {
                 confirmButtonColor: plantillaStyles.colorFondo,
             });
         } else {
+            dispatch(closeAuthModal());
             toast.error(body.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });

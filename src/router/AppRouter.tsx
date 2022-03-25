@@ -22,6 +22,7 @@ import {
     getProductRoutes,
 } from '../redux/actions';
 import ScrollButton from '../components/ScrollButton';
+import Verify from '../pages/Verify';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -93,6 +94,7 @@ const AppRouter = () => {
                 <Header />
                 <Switch>
                     <Route exact path="/error" component={Error404} />
+                    <Route exact path="/verify/:hash" component={Verify} />
                     <Route
                         exact
                         path="/:categoryId/:subCategoryId/:productId"

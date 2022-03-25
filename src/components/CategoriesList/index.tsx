@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import { filterSubCategoriesByCategoryId } from '../../helpers/filterSubCategoriesByCategoryId';
 import hexToRGB from '../../helpers/hexToRGB';
 import { TStyle } from '../../interfaces/plantilla';
@@ -48,16 +47,21 @@ export const CategoriesList = ({
             </h4>
             <StyledDivider style={dividerStyles} />
             <StyledCategoriesListUl>
-                {filteredSubCategories.map((item) => (
-                    <li key={nanoid(10)} onClick={() => onRequestClose(true)}>
-                        <Link
-                            to={`/${to}/${item.ruta}?page=1`}
-                            style={linkStyles}
+                {filteredSubCategories.map((item) => {
+                    return (
+                        <li
+                            key={`subcategory-list-${item.id}`}
+                            onClick={() => onRequestClose(true)}
                         >
-                            {item.subcategoria}
-                        </Link>
-                    </li>
-                ))}
+                            <Link
+                                to={`/${to}/${item.ruta}?page=1`}
+                                style={linkStyles}
+                            >
+                                {item.subcategoria}
+                            </Link>
+                        </li>
+                    );
+                })}
             </StyledCategoriesListUl>
         </div>
     );

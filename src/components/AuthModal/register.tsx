@@ -24,7 +24,6 @@ const Register = ({ plantillaStyles, closeModal }: IRegisterProps) => {
 
     const handleRegister = (values: IRegisterActionParams) => {
         dispatch(startRegister({ ...values }));
-        closeModal();
     };
 
     return (
@@ -32,9 +31,9 @@ const Register = ({ plantillaStyles, closeModal }: IRegisterProps) => {
         <Formik
             initialValues={{
                 regName: 'Andy',
-                regEmail: 'andy@mail.com',
-                regPassword1: 'Aa@123456',
-                regPassword2: 'Aa@123456',
+                regEmail: 'amontalvof92@gmail.com', // andy@mail.com
+                regPassword1: 'P@ssw0rd', // Aa@123456
+                regPassword2: 'P@ssw0rd',
                 regTerms: true,
             }}
             onSubmit={handleRegister}
