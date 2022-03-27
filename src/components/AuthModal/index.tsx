@@ -3,8 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
 import { closeAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
+import RenderIf from '../RenderIf';
+import Footer from './footer';
+import Login from './login';
 import Register from './register';
-import { customStyles, ModalContent, StyledAnchor } from './styles';
+import { customStyles, ModalContent } from './styles';
 
 Modal.setAppElement('#root');
 
@@ -20,31 +23,32 @@ const AuthModal = () => {
         dispatch(closeAuthModal());
     };
 
+    const type = uiAuthModalReducer?.payload;
+
     return (
         <Modal
             isOpen={uiAuthModalReducer.modalOpen}
-            // onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Example modal"
             closeTimeoutMS={200}
             className="modal"
             overlayClassName="modal-fondo"
-            // ariaHideApp={!process.env.NODE_ENV === 'test'}
         >
             <ModalContent>
-                <Register
-                    plantillaStyles={plantillaStyles}
-                    closeModal={closeModal}
-                />
-                <div className="modal-footer">
-                    Do you already have a registered account? |{' '}
-                    <strong>
-                        <StyledAnchor color={plantillaStyles.colorFondo}>
-                            Ingresar
-                        </StyledAnchor>
-                    </strong>
-                </div>
+                <RenderIf isTrue={type === 'register'}>
+                    <Register
+                        plantillaStyles={plantillaStyles}
+                        closeModal={closeModal}
+                    />
+                </RenderIf>
+                <RenderIf isTrue={type === 'login'}>
+                    <Login
+                        plantillaStyles={plantillaStyles}
+                        closeModal={closeModal}
+                    />
+                </RenderIf>
+                <Footer colorFondo={plantillaStyles.colorFondo} type={type} />
             </ModalContent>
         </Modal>
     );

@@ -1,8 +1,13 @@
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import { fetchWithoutToken } from '../../helpers/fetch';
-import { IRegisterActionParams } from '../../interfaces/authModal';
+import { fetchWithoutToken, fetchWithToken } from '../../helpers/fetch';
+import {
+    IRegisterActionParams,
+    ILoginActionParams,
+} from '../../interfaces/authModal';
 import { AppDispatch, RootStore } from '../store';
+
+// ! Open and Close Auth Modal
 
 export const openAuthModal = (authType: string) => ({
     type: 'OPEN_AUTH_MODAL',
@@ -12,6 +17,8 @@ export const openAuthModal = (authType: string) => ({
 export const closeAuthModal = () => ({
     type: 'CLOSE_AUTH_MODAL',
 });
+
+// ! Auth Register
 
 export const startRegister = (params: IRegisterActionParams) => {
     return async (dispatch: AppDispatch, getState: () => RootStore) => {
@@ -42,3 +49,83 @@ export const startRegister = (params: IRegisterActionParams) => {
         }
     };
 };
+
+// ! Auth Login
+
+export const startLogin = (params: ILoginActionParams) => {
+    return async (dispatch: AppDispatch) => {
+        const resp = await fetchWithoutToken('auth', { ...params }, 'POST');
+        const body = await resp.json();
+        if (body.ok) {
+            localStorage.setItem('token', body.token);
+            localStorage.setItem(
+                'token-init-time',
+                new Date().getTime().toString()
+            );
+            const user = {
+                uid: body.id,
+                name: body.nombre,
+                foto: body.foto,
+                email: body.email,
+            };
+            dispatch(closeAuthModal());
+            dispatch(login(user));
+        } else {
+            dispatch(closeAuthModal());
+            toast.error(body.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+    };
+};
+
+const login = (user: {
+    uid: number;
+    name: string;
+    foto: string;
+    email: string;
+}) => {
+    return { type: 'AUTH_LOGIN', payload: user };
+};
+
+// ! Refresh token
+
+export const startChecking = () => {
+    return async (dispatch: AppDispatch) => {
+        const resp = await fetchWithToken('auth/renew');
+        const body = await resp.json();
+        if (body.ok) {
+            localStorage.setItem('token', body.token);
+            localStorage.setItem(
+                'token-init-time',
+                new Date().getTime().toString()
+            );
+            const user = {
+                uid: body.id,
+                name: body.nombre,
+                foto: body.foto,
+                email: body.email,
+            };
+            dispatch(login(user));
+        } else {
+            dispatch(checkingFinish());
+        }
+    };
+};
+
+const checkingFinish = () => ({
+    type: 'AUTH_CHECKING_FINISH',
+});
+
+// ! Auth Logout
+
+export const startLogout = () => {
+    return (dispatch: AppDispatch) => {
+        localStorage.clear();
+        dispatch(logout());
+    };
+};
+
+const logout = () => ({
+    type: 'AUTH_LOGOUT',
+});

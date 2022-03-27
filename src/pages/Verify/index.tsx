@@ -26,7 +26,7 @@ const Verify = () => {
     const { hash } = useParams<IUseParams>();
 
     const { loading: loadingRedUser, value: valueRedUser = {} } = useFetch(
-        `${baseUrl}/auth`,
+        `${baseUrl}/user`,
         {
             body: JSON.stringify({
                 valor: hash,
@@ -42,7 +42,7 @@ const Verify = () => {
                 try {
                     setLoadingUpdateUser(true);
                     const response = await fetchWithoutToken(
-                        `auth/${valueRedUser?.user?.id}`,
+                        `user/${valueRedUser?.user?.id}`,
                         { verificacion: 0 },
                         'PUT'
                     );

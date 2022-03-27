@@ -23,26 +23,34 @@ import {
 } from '../redux/actions';
 import ScrollButton from '../components/ScrollButton';
 import Verify from '../pages/Verify';
+import { startChecking } from '../redux/actions/authModalActions';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
+    console.log(state.authReducer);
 
     const {
         plantillaReducer,
         categoriesReducer,
         subCategoriesReducer,
         productsRoutesReducer,
+        authReducer,
     } = state;
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
     const { loading: loadingCategories } = categoriesReducer;
     const { loading: loadingSubCategories } = subCategoriesReducer;
     const { loading: loadingProductsRoutes } = productsRoutesReducer;
+    const { checking, uid } = authReducer;
 
     const plantillaStyles = styles[0];
 
     const favicon = document.getElementById('favicon') as HTMLAnchorElement;
     favicon.href = plantillaStyles?.icono || './favicon.ico';
+
+    useEffect(() => {
+        dispatch(startChecking());
+    }, [dispatch]);
 
     useEffect(() => {
         if (!plantillaReducer.styles) {
@@ -64,7 +72,8 @@ const AppRouter = () => {
         loadingStyles ||
         loadingCategories ||
         loadingSubCategories ||
-        loadingProductsRoutes
+        loadingProductsRoutes ||
+        checking
     ) {
         return (
             <SpinnerContainer>

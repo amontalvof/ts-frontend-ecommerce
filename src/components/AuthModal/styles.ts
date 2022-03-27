@@ -19,6 +19,10 @@ interface IStyledAnchor {
     color?: string;
     darkencolor?: string;
 }
+interface IStyledButton {
+    color?: string;
+    darkencolor?: string;
+}
 
 export const customStyles = {
     content: {
@@ -79,6 +83,15 @@ export const StyledAnchor = styled.a<IStyledAnchor>`
     }
     :visited {
         color: ${(props) => props.color};
+    }
+`;
+
+export const StyledButton = styled.button<IStyledButton>`
+    color: ${(props) => props.color};
+    border: none;
+    background-color: transparent;
+    :hover {
+        text-decoration: underline;
     }
 `;
 

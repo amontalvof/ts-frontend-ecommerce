@@ -2,6 +2,7 @@ import { UiAuthModalDispatchTypes } from '../../interfaces/authModal';
 
 const initialState = {
     modalOpen: false,
+    payload: '',
 };
 
 export const uiAuthModalReducer = (
@@ -19,6 +20,7 @@ export const uiAuthModalReducer = (
             return {
                 ...state,
                 modalOpen: false,
+                payload: '',
             };
         default:
             return state;

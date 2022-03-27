@@ -48,7 +48,6 @@ const Register = ({ plantillaStyles, closeModal }: IRegisterProps) => {
                         >
                             Register
                         </Title>
-
                         <XCloseButton
                             onClick={closeModal}
                             type="button"

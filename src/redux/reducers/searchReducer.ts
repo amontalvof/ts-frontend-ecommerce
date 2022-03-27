@@ -2,12 +2,15 @@ const initialState = {
     searchValue: '',
 };
 
-interface ISearchAction {
+type SearchDispatchTypes = {
     type: string;
-    payload?: string;
-}
+    payload?: any;
+};
 
-export const searchReducer = (state = initialState, action: ISearchAction) => {
+export const searchReducer = (
+    state = initialState,
+    action: SearchDispatchTypes
+) => {
     switch (action.type) {
         case 'TRIGGER_SEARCH':
             return { ...state, searchValue: action.payload };
