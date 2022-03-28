@@ -1,3 +1,5 @@
+import { IUserInfo } from './user';
+
 export const OPEN_AUTH_MODAL = 'OPEN_AUTH_MODAL';
 export const CLOSE_AUTH_MODAL = 'CLOSE_AUTH_MODAL';
 
@@ -30,10 +32,7 @@ export interface ILoginActionParams {
 
 export interface AuthLogin {
     type: typeof AUTH_LOGIN;
-    payload: {
-        uid: number;
-        name: string;
-    };
+    payload: IUserInfo;
 }
 
 export interface AuthCheckingFinish {

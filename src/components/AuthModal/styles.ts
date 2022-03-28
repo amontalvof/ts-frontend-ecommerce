@@ -118,3 +118,8 @@ export const StyledCheckbox = styled.input<ICheckboxProps>`
 export const ErrorText = styled.p`
     color: #cc0000;
 `;
+
+export const ReCaptchaContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;

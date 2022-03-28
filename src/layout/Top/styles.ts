@@ -88,3 +88,9 @@ export const StyledLinkLi = styled.li`
     margin: 0px 5px;
     color: white;
 `;
+
+export const AvatarContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;

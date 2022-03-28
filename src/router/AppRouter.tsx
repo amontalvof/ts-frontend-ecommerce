@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { omit } from 'lodash';
 import {
     BrowserRouter as Router,
     Route,
@@ -24,11 +25,12 @@ import {
 import ScrollButton from '../components/ScrollButton';
 import Verify from '../pages/Verify';
 import { startChecking } from '../redux/actions/authModalActions';
+import { IUserInfo } from '../interfaces/user';
 
 const AppRouter = () => {
+    // TODO: implement private and public routes
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
-    console.log(state.authReducer);
 
     const {
         plantillaReducer,
@@ -41,8 +43,8 @@ const AppRouter = () => {
     const { loading: loadingCategories } = categoriesReducer;
     const { loading: loadingSubCategories } = subCategoriesReducer;
     const { loading: loadingProductsRoutes } = productsRoutesReducer;
-    const { checking, uid } = authReducer;
-
+    const { checking } = authReducer;
+    const userInfo = omit<IUserInfo>(authReducer, 'checking');
     const plantillaStyles = styles[0];
 
     const favicon = document.getElementById('favicon') as HTMLAnchorElement;
@@ -99,7 +101,7 @@ const AppRouter = () => {
     return (
         <Router>
             <RouterContainer>
-                <Top plantillaStyles={plantillaStyles} />
+                <Top plantillaStyles={plantillaStyles} userInfo={userInfo} />
                 <Header />
                 <Switch>
                     <Route exact path="/error" component={Error404} />

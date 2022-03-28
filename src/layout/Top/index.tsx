@@ -1,19 +1,25 @@
 // import { nanoid } from 'nanoid';
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import MaleUserAvatar from '../../assets/maleUserAvatar';
 import AuthModal from '../../components/AuthModal';
+import RenderIf from '../../components/RenderIf';
 import { TStyle } from '../../interfaces/plantilla';
+import { IUserInfo } from '../../interfaces/user';
 import { openAuthModal } from '../../redux/actions';
+import { startLogout } from '../../redux/actions/authModalActions';
 import {
     BarraSuperior,
     // StyledIconsUl,
     // StyledIconsLi,
     StyledLinkUl,
     StyledLinkLi,
+    AvatarContainer,
 } from './styles';
 
 interface ITopProps {
     plantillaStyles?: TStyle;
+    userInfo?: IUserInfo;
 }
 
 // interface ISocialNetwork {
@@ -31,9 +37,9 @@ interface ITopProps {
 //     FaInstagram: FaInstagram,
 // };
 
-const Top = ({ plantillaStyles }: ITopProps) => {
+const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
     const dispatch = useDispatch();
-    const { barraSuperior, /*redesSociales,*/ textoSuperior } =
+    const { barraSuperior, /*redesSociales,*/ textoSuperior, colorFondo } =
         plantillaStyles as TStyle;
 
     const barraSuperiorStyles = {
@@ -54,7 +60,13 @@ const Top = ({ plantillaStyles }: ITopProps) => {
         dispatch(openAuthModal(value));
     };
 
+    const handleLogout = () => {
+        dispatch(startLogout());
+    };
+
     // const redesSocialesParsed = JSON.parse(redesSociales);
+    const { uid, foto } = userInfo;
+    console.log(userInfo);
 
     return (
         <BarraSuperior style={barraSuperiorStyles}>
@@ -84,20 +96,71 @@ const Top = ({ plantillaStyles }: ITopProps) => {
                     {/* SIGN IN */}
                     <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                         <StyledLinkUl>
-                            <StyledLinkLi>
-                                <button
-                                    style={buttonStyles}
-                                    onClick={() => handleButtonClick('login')}
-                                >
-                                    Login
-                                </button>
-                            </StyledLinkLi>
-                            <StyledLinkLi style={dividerStyles}>|</StyledLinkLi>
-                            <StyledLinkLi
-                                onClick={() => handleButtonClick('register')}
-                            >
-                                <button style={buttonStyles}>Register</button>
-                            </StyledLinkLi>
+                            <RenderIf isTrue={!!uid}>
+                                <>
+                                    <StyledLinkLi>
+                                        <RenderIf isTrue={!!foto}>
+                                            <img
+                                                className="img-circle"
+                                                src={foto}
+                                                width="25"
+                                                alt="user"
+                                            />
+                                        </RenderIf>
+                                        <RenderIf isTrue={!foto}>
+                                            <AvatarContainer>
+                                                <MaleUserAvatar
+                                                    color={colorFondo}
+                                                    width="25"
+                                                    height="25"
+                                                />
+                                            </AvatarContainer>
+                                        </RenderIf>
+                                    </StyledLinkLi>
+                                    <StyledLinkLi style={dividerStyles}>
+                                        |
+                                    </StyledLinkLi>
+                                    <StyledLinkLi>
+                                        <button style={buttonStyles}>
+                                            Profile
+                                        </button>
+                                    </StyledLinkLi>
+                                    <StyledLinkLi style={dividerStyles}>
+                                        |
+                                    </StyledLinkLi>
+                                    <StyledLinkLi onClick={handleLogout}>
+                                        <button style={buttonStyles}>
+                                            Logout
+                                        </button>
+                                    </StyledLinkLi>
+                                </>
+                            </RenderIf>
+                            <RenderIf isTrue={!userInfo?.uid}>
+                                <>
+                                    <StyledLinkLi>
+                                        <button
+                                            style={buttonStyles}
+                                            onClick={() =>
+                                                handleButtonClick('login')
+                                            }
+                                        >
+                                            Login
+                                        </button>
+                                    </StyledLinkLi>
+                                    <StyledLinkLi style={dividerStyles}>
+                                        |
+                                    </StyledLinkLi>
+                                    <StyledLinkLi
+                                        onClick={() =>
+                                            handleButtonClick('register')
+                                        }
+                                    >
+                                        <button style={buttonStyles}>
+                                            Register
+                                        </button>
+                                    </StyledLinkLi>
+                                </>
+                            </RenderIf>
                         </StyledLinkUl>
                     </div>
                 </div>

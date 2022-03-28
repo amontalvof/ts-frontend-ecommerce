@@ -1,5 +1,8 @@
+import { CSSProperties } from 'react';
+
 interface IUserAvatarProps {
     color?: string;
+    style?: CSSProperties;
     width: string;
     height: string;
 }
@@ -8,9 +11,11 @@ const MaleUserAvatar = ({
     color = '#ffffff',
     width,
     height,
+    style,
 }: IUserAvatarProps) => {
     return (
         <svg
+            style={style}
             xmlns="http://www.w3.org/2000/svg"
             data-name="Layer 1"
             width={width}
