@@ -1,6 +1,7 @@
 // import { nanoid } from 'nanoid';
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
 import AuthModal from '../../components/AuthModal';
 import RenderIf from '../../components/RenderIf';
@@ -38,6 +39,8 @@ interface ITopProps {
 // };
 
 const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
+    const { uid, foto } = userInfo;
+    const history = useHistory();
     const dispatch = useDispatch();
     const { barraSuperior, /*redesSociales,*/ textoSuperior, colorFondo } =
         plantillaStyles as TStyle;
@@ -64,9 +67,11 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
         dispatch(startLogout());
     };
 
+    const handleProfileClick = () => {
+        history.push(`/user/${uid}`);
+    };
+
     // const redesSocialesParsed = JSON.parse(redesSociales);
-    const { uid, foto } = userInfo;
-    console.log(userInfo);
 
     return (
         <BarraSuperior style={barraSuperiorStyles}>
@@ -121,7 +126,10 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
                                         |
                                     </StyledLinkLi>
                                     <StyledLinkLi>
-                                        <button style={buttonStyles}>
+                                        <button
+                                            style={buttonStyles}
+                                            onClick={handleProfileClick}
+                                        >
                                             Profile
                                         </button>
                                     </StyledLinkLi>

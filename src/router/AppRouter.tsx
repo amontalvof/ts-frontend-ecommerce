@@ -26,6 +26,8 @@ import ScrollButton from '../components/ScrollButton';
 import Verify from '../pages/Verify';
 import { startChecking } from '../redux/actions/authModalActions';
 import { IUserInfo } from '../interfaces/user';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 const AppRouter = () => {
     // TODO: implement private and public routes
@@ -43,7 +45,7 @@ const AppRouter = () => {
     const { loading: loadingCategories } = categoriesReducer;
     const { loading: loadingSubCategories } = subCategoriesReducer;
     const { loading: loadingProductsRoutes } = productsRoutesReducer;
-    const { checking } = authReducer;
+    const { checking, uid } = authReducer;
     const userInfo = omit<IUserInfo>(authReducer, 'checking');
     const plantillaStyles = styles[0];
 
@@ -104,20 +106,8 @@ const AppRouter = () => {
                 <Top plantillaStyles={plantillaStyles} userInfo={userInfo} />
                 <Header />
                 <Switch>
-                    <Route exact path="/error" component={Error404} />
-                    <Route exact path="/verify/:hash" component={Verify} />
-                    <Route
-                        exact
-                        path="/:categoryId/:subCategoryId/:productId"
-                        component={ProductInfo}
-                    />
-                    <Route
-                        exact
-                        path={['/:categoryId/:subCategoryId', '/:categoryId']}
-                        component={Products}
-                    />
-                    <Route exact path="/" component={Main} />
-                    <Redirect to="/error" />
+                    <PrivateRoute path="/user" isAuthenticated={!!uid} />
+                    <PublicRoute path="/" isAuthenticated={!!uid} />
                 </Switch>
                 <ScrollButton />
             </RouterContainer>

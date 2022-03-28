@@ -1,12 +1,12 @@
-// import { MutableRefObject, useRef, useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-// import ReCAPTCHA from 'react-google-recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { ILoginActionParams } from '../../interfaces/authModal';
 import { TStyle } from '../../interfaces/plantilla';
 import { startLogin } from '../../redux/actions/authModalActions';
 import TextInput from './fields/textInput';
-// import { reCaptchaKey } from '../../constants';
+import { reCaptchaKey } from '../../constants';
 import {
     ModalTitulo,
     ReCaptchaContainer,
@@ -22,22 +22,21 @@ interface ILoginProps {
 }
 
 const Login = ({ plantillaStyles, closeModal }: ILoginProps) => {
-    // const captcha = useRef(null) as MutableRefObject<any>;
-    // const [isReCaptchaChecked, setReCaptchaChecked] = useState(false);
+    const captcha = useRef(null) as MutableRefObject<any>;
+    const [isReCaptchaChecked, setReCaptchaChecked] = useState(false);
     const dispatch = useDispatch();
 
     const handleLogin = (values: ILoginActionParams) => {
-        // isReCaptchaChecked && dispatch(startLogin({ ...values }));
-        dispatch(startLogin({ ...values }));
+        isReCaptchaChecked && dispatch(startLogin({ ...values }));
+        // dispatch(startLogin({ ...values }));
     };
 
-    // const handleCaptchaChange = () => {
-    //     if (captcha.current.getValue()) {
-    //         setReCaptchaChecked(true);
-    //     }
-    // };
+    const handleCaptchaChange = () => {
+        if (captcha.current.getValue()) {
+            setReCaptchaChecked(true);
+        }
+    };
 
-    // TODO: activate reCaptcha
     // TODO: remove initialValues
     return (
         <Formik
@@ -82,11 +81,11 @@ const Login = ({ plantillaStyles, closeModal }: ILoginProps) => {
                             />
                         </div>
                         <ReCaptchaContainer>
-                            {/* <ReCAPTCHA
+                            <ReCAPTCHA
                                 ref={captcha}
                                 sitekey={reCaptchaKey || ''}
                                 onChange={handleCaptchaChange}
-                            /> */}
+                            />
                         </ReCaptchaContainer>
                         <SubmitButton
                             colorfondo={plantillaStyles.colorFondo}
