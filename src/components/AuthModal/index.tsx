@@ -5,6 +5,7 @@ import { closeAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
 import RenderIf from '../RenderIf';
 import Footer from './footer';
+import ForgotPassword from './forgotPassword';
 import Login from './login';
 import Register from './register';
 import { customStyles, ModalContent } from './styles';
@@ -44,6 +45,12 @@ const AuthModal = () => {
                 </RenderIf>
                 <RenderIf isTrue={type === 'login'}>
                     <Login
+                        plantillaStyles={plantillaStyles}
+                        closeModal={closeModal}
+                    />
+                </RenderIf>
+                <RenderIf isTrue={type === 'forgotPassword'}>
+                    <ForgotPassword
                         plantillaStyles={plantillaStyles}
                         closeModal={closeModal}
                     />

@@ -3,38 +3,41 @@ import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ILoginActionParams } from '../../interfaces/authModal';
-import { TStyle } from '../../interfaces/plantilla';
-import { startLogin } from '../../redux/actions/authModalActions';
+import {
+    startLogin,
+    openAuthModal,
+} from '../../redux/actions/authModalActions';
 import TextInput from './fields/textInput';
 import { reCaptchaKey } from '../../constants';
 import {
+    ForgotPasswordContainer,
     ModalTitulo,
     ReCaptchaContainer,
+    StyledButton,
     SubmitButton,
     Title,
     XCloseButton,
 } from './styles';
 import { loginValidationSchema } from './validation/loginValidation';
+import { IAuthProps } from './interface';
 
-interface ILoginProps {
-    plantillaStyles: TStyle;
-    closeModal: () => void;
-}
-
-const Login = ({ plantillaStyles, closeModal }: ILoginProps) => {
+const Login = ({ plantillaStyles, closeModal }: IAuthProps) => {
     const captcha = useRef(null) as MutableRefObject<any>;
     const [isReCaptchaChecked, setReCaptchaChecked] = useState(false);
     const dispatch = useDispatch();
 
     const handleLogin = (values: ILoginActionParams) => {
         isReCaptchaChecked && dispatch(startLogin({ ...values }));
-        // dispatch(startLogin({ ...values }));
     };
 
     const handleCaptchaChange = () => {
         if (captcha.current.getValue()) {
             setReCaptchaChecked(true);
         }
+    };
+
+    const handleButtonClick = (value: string) => {
+        dispatch(openAuthModal(value));
     };
 
     // TODO: remove initialValues
@@ -95,6 +98,16 @@ const Login = ({ plantillaStyles, closeModal }: ILoginProps) => {
                             value="SUBMIT"
                             style={{ outline: 'none' }}
                         />
+                        <ForgotPasswordContainer>
+                            <StyledButton
+                                color={plantillaStyles.colorFondo}
+                                onClick={() =>
+                                    handleButtonClick('forgotPassword')
+                                }
+                            >
+                                Forgot Password
+                            </StyledButton>
+                        </ForgotPasswordContainer>
                     </ModalTitulo>
                 </Form>
             )}

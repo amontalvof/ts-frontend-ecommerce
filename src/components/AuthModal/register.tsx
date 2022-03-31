@@ -1,10 +1,10 @@
 import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { IRegisterActionParams } from '../../interfaces/authModal';
-import { TStyle } from '../../interfaces/plantilla';
 import { startRegister } from '../../redux/actions';
 import Checkbox from './fields/checkbox';
 import TextInput from './fields/textInput';
+import { IAuthProps } from './interface';
 import {
     ModalTitulo,
     StyledAnchor,
@@ -14,12 +14,7 @@ import {
 } from './styles';
 import { registerValidationSchema } from './validation/registerValidation';
 
-interface IRegisterProps {
-    plantillaStyles: TStyle;
-    closeModal: () => void;
-}
-
-const Register = ({ plantillaStyles, closeModal }: IRegisterProps) => {
+const Register = ({ plantillaStyles, closeModal }: IAuthProps) => {
     const dispatch = useDispatch();
 
     const handleRegister = (values: IRegisterActionParams) => {
