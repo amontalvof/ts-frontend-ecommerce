@@ -6,11 +6,19 @@ import { RootStore } from '../../redux/store';
 import RenderIf from '../RenderIf';
 import Footer from './footer';
 import ForgotPassword from './forgotPassword';
+import GoogleSignInButton from './googleSignInButton';
+import Header from './header';
 import Login from './login';
 import Register from './register';
-import { customStyles, ModalContent } from './styles';
+import { customStyles, ModalContent, ModalTitulo } from './styles';
 
 Modal.setAppElement('#root');
+
+const headerTextMap: { [key: string]: string } = {
+    register: 'Register',
+    login: 'Login',
+    forgotPassword: 'Forgot Password',
+};
 
 const AuthModal = () => {
     const dispatch = useDispatch();
@@ -25,6 +33,7 @@ const AuthModal = () => {
     };
 
     const type = uiAuthModalReducer?.payload;
+    const headerText = headerTextMap[type];
 
     return (
         <Modal
@@ -37,24 +46,25 @@ const AuthModal = () => {
             overlayClassName="modal-fondo"
         >
             <ModalContent>
-                <RenderIf isTrue={type === 'register'}>
-                    <Register
+                <ModalTitulo className="modal-body">
+                    <Header
+                        text={headerText}
                         plantillaStyles={plantillaStyles}
                         closeModal={closeModal}
                     />
-                </RenderIf>
-                <RenderIf isTrue={type === 'login'}>
-                    <Login
-                        plantillaStyles={plantillaStyles}
-                        closeModal={closeModal}
-                    />
-                </RenderIf>
-                <RenderIf isTrue={type === 'forgotPassword'}>
-                    <ForgotPassword
-                        plantillaStyles={plantillaStyles}
-                        closeModal={closeModal}
-                    />
-                </RenderIf>
+                    <RenderIf isTrue={type !== 'forgotPassword'}>
+                        <GoogleSignInButton text={headerText} />
+                    </RenderIf>
+                    <RenderIf isTrue={type === 'register'}>
+                        <Register plantillaStyles={plantillaStyles} />
+                    </RenderIf>
+                    <RenderIf isTrue={type === 'login'}>
+                        <Login plantillaStyles={plantillaStyles} />
+                    </RenderIf>
+                    <RenderIf isTrue={type === 'forgotPassword'}>
+                        <ForgotPassword plantillaStyles={plantillaStyles} />
+                    </RenderIf>
+                </ModalTitulo>
                 <Footer colorFondo={plantillaStyles.colorFondo} type={type} />
             </ModalContent>
         </Modal>

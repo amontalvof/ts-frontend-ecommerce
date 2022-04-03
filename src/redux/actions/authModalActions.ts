@@ -4,6 +4,7 @@ import { fetchWithoutToken, fetchWithToken } from '../../helpers/fetch';
 import {
     IRegisterActionParams,
     ILoginActionParams,
+    IGoogleSignInParams,
 } from '../../interfaces/authModal';
 import { AppDispatch, RootStore } from '../store';
 
@@ -23,7 +24,11 @@ export const closeAuthModal = () => ({
 export const startRegister = (params: IRegisterActionParams) => {
     return async (dispatch: AppDispatch, getState: () => RootStore) => {
         const { plantillaReducer } = getState();
-        const resp = await fetchWithoutToken('auth/new', { ...params }, 'POST');
+        const resp = await fetchWithoutToken(
+            'auth/register',
+            { ...params },
+            'POST'
+        );
         const body = await resp.json();
         if (body.ok) {
             const plantillaReducerState = plantillaReducer;
@@ -80,7 +85,11 @@ export const startForgotPassword = (params: { fgpEmail: string }) => {
 
 export const startLogin = (params: ILoginActionParams) => {
     return async (dispatch: AppDispatch) => {
-        const resp = await fetchWithoutToken('auth', { ...params }, 'POST');
+        const resp = await fetchWithoutToken(
+            'auth/login',
+            { ...params },
+            'POST'
+        );
         const body = await resp.json();
         if (body.ok) {
             localStorage.setItem('token', body.token);
@@ -155,3 +164,35 @@ export const startLogout = () => {
 const logout = () => ({
     type: 'AUTH_LOGOUT',
 });
+
+// ! Auth Google Sign In
+export const startGoogleSignIn = (params: IGoogleSignInParams) => {
+    return async (dispatch: AppDispatch) => {
+        const resp = await fetchWithoutToken(
+            'auth/google',
+            { ...params },
+            'POST'
+        );
+        const body = await resp.json();
+        if (body.ok) {
+            localStorage.setItem('token', body.token);
+            localStorage.setItem(
+                'token-init-time',
+                new Date().getTime().toString()
+            );
+            const user = {
+                uid: body.id,
+                name: body.nombre,
+                foto: body.foto,
+                email: body.email,
+            };
+            dispatch(closeAuthModal());
+            dispatch(login(user));
+        } else {
+            dispatch(closeAuthModal());
+            toast.error(body.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+    };
+};

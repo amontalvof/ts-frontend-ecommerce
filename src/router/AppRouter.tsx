@@ -1,19 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { omit } from 'lodash';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import Header from '../layout/Header';
 import Top from '../layout/Top';
-import Main from '../pages/Main';
-import ProductInfo from '../pages/ProductInfo';
-import Products from '../pages/Products';
-import Error404 from '../pages/Error404';
 import { SpinnerContainer, RouterContainer } from './styles';
 import { RootStore } from '../redux/store';
 import {
@@ -23,14 +14,12 @@ import {
     getProductRoutes,
 } from '../redux/actions';
 import ScrollButton from '../components/ScrollButton';
-import Verify from '../pages/Verify';
 import { startChecking } from '../redux/actions/authModalActions';
 import { IUserInfo } from '../interfaces/user';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 
 const AppRouter = () => {
-    // TODO: implement private and public routes
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
 

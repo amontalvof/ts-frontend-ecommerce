@@ -11,17 +11,14 @@ import TextInput from './fields/textInput';
 import { reCaptchaKey } from '../../constants';
 import {
     ForgotPasswordContainer,
-    ModalTitulo,
     ReCaptchaContainer,
     StyledButton,
     SubmitButton,
-    Title,
-    XCloseButton,
 } from './styles';
 import { loginValidationSchema } from './validation/loginValidation';
-import { IAuthProps } from './interface';
+import { TStyle } from '../../interfaces/plantilla';
 
-const Login = ({ plantillaStyles, closeModal }: IAuthProps) => {
+const Login = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     const captcha = useRef(null) as MutableRefObject<any>;
     const [isReCaptchaChecked, setReCaptchaChecked] = useState(false);
     const dispatch = useDispatch();
@@ -52,63 +49,46 @@ const Login = ({ plantillaStyles, closeModal }: IAuthProps) => {
         >
             {() => (
                 <Form noValidate>
-                    <ModalTitulo className="modal-body">
-                        <Title
-                            colorfondo={plantillaStyles.colorFondo}
-                            colortexto={plantillaStyles.colorTexto}
-                        >
-                            Login
-                        </Title>
-                        <XCloseButton
-                            onClick={closeModal}
-                            type="button"
-                            colortexto={plantillaStyles.colorTexto}
-                        >
-                            X
-                        </XCloseButton>
-                        <div>
-                            <hr />
-                            <TextInput
-                                type="email"
-                                className="form-control"
-                                name="logEmail"
-                                placeholder="EMAIL"
-                                required
-                            />
-                            <TextInput
-                                type="password"
-                                className="form-control text-uppercase"
-                                name="logPassword"
-                                placeholder="Password"
-                                required
-                            />
-                        </div>
-                        <ReCaptchaContainer>
-                            <ReCAPTCHA
-                                ref={captcha}
-                                sitekey={reCaptchaKey || ''}
-                                onChange={handleCaptchaChange}
-                            />
-                        </ReCaptchaContainer>
-                        <SubmitButton
-                            colorfondo={plantillaStyles.colorFondo}
-                            colortexto={plantillaStyles.colorTexto}
-                            type="submit"
-                            className="btn btn-block"
-                            value="SUBMIT"
-                            style={{ outline: 'none' }}
+                    <div>
+                        <hr />
+                        <TextInput
+                            type="email"
+                            className="form-control"
+                            name="logEmail"
+                            placeholder="EMAIL"
+                            required
                         />
-                        <ForgotPasswordContainer>
-                            <StyledButton
-                                color={plantillaStyles.colorFondo}
-                                onClick={() =>
-                                    handleButtonClick('forgotPassword')
-                                }
-                            >
-                                Forgot Password
-                            </StyledButton>
-                        </ForgotPasswordContainer>
-                    </ModalTitulo>
+                        <TextInput
+                            type="password"
+                            className="form-control text-uppercase"
+                            name="logPassword"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+                    <ReCaptchaContainer>
+                        <ReCAPTCHA
+                            ref={captcha}
+                            sitekey={reCaptchaKey || ''}
+                            onChange={handleCaptchaChange}
+                        />
+                    </ReCaptchaContainer>
+                    <SubmitButton
+                        colorfondo={plantillaStyles.colorFondo}
+                        colortexto={plantillaStyles.colorTexto}
+                        type="submit"
+                        className="btn btn-block"
+                        value="SUBMIT"
+                        style={{ outline: 'none' }}
+                    />
+                    <ForgotPasswordContainer>
+                        <StyledButton
+                            color={plantillaStyles.colorFondo}
+                            onClick={() => handleButtonClick('forgotPassword')}
+                        >
+                            Forgot Password
+                        </StyledButton>
+                    </ForgotPasswordContainer>
                 </Form>
             )}
         </Formik>

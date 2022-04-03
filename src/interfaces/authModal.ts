@@ -25,6 +25,10 @@ export interface IRegisterActionParams {
     regPassword2: string;
     regTerms: boolean;
 }
+export interface IGoogleSignInParams {
+    tokenId: string;
+    type: string;
+}
 export interface ILoginActionParams {
     logEmail: string;
     logPassword: string;

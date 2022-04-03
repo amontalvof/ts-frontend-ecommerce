@@ -1,12 +1,12 @@
 import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
+import { TStyle } from '../../interfaces/plantilla';
 import { startForgotPassword } from '../../redux/actions/authModalActions';
 import TextInput from './fields/textInput';
-import { IAuthProps } from './interface';
-import { ModalTitulo, SubmitButton, Title, XCloseButton } from './styles';
+import { SubmitButton } from './styles';
 import { forgotPasswordValidationSchema } from './validation/forgotPasswordValidation';
 
-const ForgotPassword = ({ plantillaStyles, closeModal }: IAuthProps) => {
+const ForgotPassword = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     const dispatch = useDispatch();
 
     const handleForgotPasswordSubmit = (values: { fgpEmail: string }) => {
@@ -23,43 +23,28 @@ const ForgotPassword = ({ plantillaStyles, closeModal }: IAuthProps) => {
         >
             {() => (
                 <Form noValidate>
-                    <ModalTitulo className="modal-body">
-                        <Title
-                            colorfondo={plantillaStyles.colorFondo}
-                            colortexto={plantillaStyles.colorTexto}
-                        >
-                            Forgot Password
-                        </Title>
-                        <XCloseButton
-                            onClick={closeModal}
-                            type="button"
-                            colortexto={plantillaStyles.colorTexto}
-                        >
-                            X
-                        </XCloseButton>
-                        <div>
-                            <hr />
-                            <label className="text-muted">
-                                Write the email with which you are registered,
-                                and we will send you a new password:
-                            </label>
-                            <TextInput
-                                type="email"
-                                className="form-control"
-                                name="fgpEmail"
-                                placeholder="Email"
-                                required
-                            />
-                        </div>
-                        <SubmitButton
-                            colorfondo={plantillaStyles.colorFondo}
-                            colortexto={plantillaStyles.colorTexto}
-                            type="submit"
-                            className="btn btn-block"
-                            value="SUBMIT"
-                            style={{ outline: 'none' }}
+                    <div>
+                        <hr />
+                        <label className="text-muted">
+                            Write the email with which you are registered, and
+                            we will send you a new password:
+                        </label>
+                        <TextInput
+                            type="email"
+                            className="form-control"
+                            name="fgpEmail"
+                            placeholder="Email"
+                            required
                         />
-                    </ModalTitulo>
+                    </div>
+                    <SubmitButton
+                        colorfondo={plantillaStyles.colorFondo}
+                        colortexto={plantillaStyles.colorTexto}
+                        type="submit"
+                        className="btn btn-block"
+                        value="SUBMIT"
+                        style={{ outline: 'none' }}
+                    />
                 </Form>
             )}
         </Formik>

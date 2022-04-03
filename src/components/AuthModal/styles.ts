@@ -130,3 +130,10 @@ export const ForgotPasswordContainer = styled.div`
     align-items: center;
     margin: 15px 0 10px;
 `;
+
+export const GoogleLoginContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0 10px;
+`;

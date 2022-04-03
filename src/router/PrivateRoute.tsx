@@ -1,4 +1,3 @@
-import { ElementType } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserProfile from '../pages/UserProfile';
 
