@@ -10,6 +10,7 @@ import {
     TabTitleContainer,
     StyledTabLink,
 } from './styles';
+import EditProfile from './editProfile';
 
 const tabTitles = [
     <TabTitleContainer>
@@ -31,22 +32,25 @@ const tabTitles = [
         </StyledTabLink>
     </TabTitleContainer>,
 ];
-const tabPanels = [
-    <h2>Any content 1</h2>,
-    <h2>Any content 2</h2>,
-    <h2>Any content 3</h2>,
-    <h2>Any content 4</h2>,
-];
 
 const UserProfile = () => {
     const [tabIndex, setTabIndex] = useState(0);
-    const { plantillaReducer } = useSelector((state: RootStore) => state);
+    const { plantillaReducer, authReducer } = useSelector(
+        (state: RootStore) => state
+    );
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
 
     const handleTabSelect = (index: number) => {
         setTabIndex(index);
     };
+
+    const tabPanels = [
+        <h2>Any content 1</h2>,
+        <h2>Any content 2</h2>,
+        <EditProfile {...authReducer} color={plantillaStyles?.colorFondo} />,
+        <h2>Any content 4</h2>,
+    ];
 
     return (
         <Container>

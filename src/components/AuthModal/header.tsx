@@ -1,4 +1,3 @@
-import React from 'react';
 import { TStyle } from '../../interfaces/plantilla';
 import { Title, XCloseButton } from './styles';
 
