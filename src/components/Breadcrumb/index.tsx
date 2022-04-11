@@ -1,16 +1,21 @@
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { otherCategoriesRoutes, relevantRoutes } from '../../constants';
+import { useParams, useLocation } from 'react-router-dom';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import { TCategory } from '../../interfaces/categories';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { RootStore } from '../../redux/store';
 import RenderIf from '../RenderIf';
 import { StyledLink } from './styles';
+import {
+    otherCategoriesRoutes,
+    relevantRoutes,
+    privateRoutes,
+} from '../../constants';
 
 interface IUseParams {
     categoryId?: string;
     subCategoryId?: string;
+    uid?: string;
 }
 
 interface ICategoryLinkProps {
@@ -35,6 +40,7 @@ const CategoryLink = ({
 };
 
 export const Breadcrumb = () => {
+    const location = useLocation();
     const { categoryId = '', subCategoryId = '' } = useParams<IUseParams>();
     const {
         subCategoriesReducer,
@@ -46,7 +52,8 @@ export const Breadcrumb = () => {
     const plantillaStyles = styles[0];
     const { subCategories = [] } = subCategoriesReducer;
     const { categories = [] } = categoriesReducer;
-
+    const privateRoute = location.pathname.split('/')[1];
+    const isPrivate = privateRoutes.includes(privateRoute);
     const { categoria } =
         filterCategoriesByRoute<TCategory>(
             [
@@ -74,13 +81,20 @@ export const Breadcrumb = () => {
 
     return (
         <ul className="breadcrumb fondoBreadcrumb text-uppercase">
-            <li>
-                <CategoryLink
-                    categoryId={categoryId}
-                    colorfondo={plantillaStyles?.colorFondo}
-                    categoria={categoria}
-                />
-            </li>
+            <RenderIf isTrue={isPrivate}>
+                <li>
+                    <span>{privateRoute}</span>
+                </li>
+            </RenderIf>
+            <RenderIf isTrue={!isPrivate}>
+                <li>
+                    <CategoryLink
+                        categoryId={categoryId}
+                        colorfondo={plantillaStyles?.colorFondo}
+                        categoria={categoria}
+                    />
+                </li>
+            </RenderIf>
             <RenderIf isTrue={!!subcategoria || !!searchValue}>
                 <li className="active pagActiva">
                     <StyledLink

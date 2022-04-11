@@ -15,7 +15,8 @@ export const PrivateRoute = ({
         <Route {...rest}>
             {isAuthenticated ? (
                 <Switch>
-                    <Route path="/:uid" component={UserProfile} />
+                    <Route path="/profile/:uid" component={UserProfile} />
+                    <Redirect to="/" />
                 </Switch>
             ) : (
                 <Redirect to="/" />

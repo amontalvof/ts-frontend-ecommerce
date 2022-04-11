@@ -68,7 +68,7 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
     };
 
     const handleProfileClick = () => {
-        history.push(`/user/${uid}`);
+        history.push(`/profile/${uid}`);
     };
 
     // const redesSocialesParsed = JSON.parse(redesSociales);

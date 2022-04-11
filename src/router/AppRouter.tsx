@@ -95,7 +95,7 @@ const AppRouter = () => {
                 <Top plantillaStyles={plantillaStyles} userInfo={userInfo} />
                 <Header />
                 <Switch>
-                    <PrivateRoute path="/user" isAuthenticated={!!uid} />
+                    <PrivateRoute path="/profile" isAuthenticated={!!uid} />
                     <PublicRoute path="/" isAuthenticated={!!uid} />
                 </Switch>
                 <ScrollButton />

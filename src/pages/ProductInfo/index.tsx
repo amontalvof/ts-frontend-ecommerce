@@ -18,6 +18,7 @@ import TabSet from '../../components/TabSet';
 import Comments from '../../components/Comments';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import ThereAreNoProducts from '../../components/ThereAreNoProducts';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import {
     InfoContainer,
     IconContainer,
@@ -25,6 +26,11 @@ import {
     StyledAnchor,
     // StyledFacebookIcon,
     // StyledWhatsappIcon,
+    Divider,
+    StarIconsContainer,
+    StyledFaStar,
+    StyledFaStarHalfAlt,
+    StyledFaRegStar,
     SpinnerContainer,
     StyledErrorContainer,
 } from './styles';
@@ -35,9 +41,14 @@ interface IUseParams {
     productId?: string;
 }
 
+const tabTitles = ['Comments', 'See More'];
+const tabPanels = [<h2>Any content 1</h2>, <h2>Any content 2</h2>];
+
 const ProductInfo = () => {
+    const isLarge = useMediaQuery('(min-width: 767px)');
     const [viewRelatedProducts, setViewRelatedProducts] =
         useState<string>('grid');
+    const [tabIndex, setTabIndex] = useState(0);
     const history = useHistory();
     const {
         categoryId = '',
@@ -103,6 +114,10 @@ const ProductInfo = () => {
         routes,
         productId
     );
+
+    const handleTabSelect = (index: number) => {
+        setTabIndex(index);
+    };
 
     if (
         !isASubCategoryAllowedRoute ||
@@ -213,7 +228,26 @@ const ProductInfo = () => {
                         />
                     </InfoContainer>
                 </div>
-                <TabSet color={plantillaStyles?.colorFondo} />
+                <TabSet
+                    titles={tabTitles}
+                    panels={tabPanels}
+                    tabIndex={tabIndex}
+                    onSelect={handleTabSelect}
+                    color={plantillaStyles?.colorFondo}
+                    action={
+                        isLarge ? (
+                            <StarIconsContainer>
+                                <span>AVERAGE RATING: 3.5</span>
+                                <Divider>|</Divider>
+                                <StyledFaStar />
+                                <StyledFaStar />
+                                <StyledFaStar />
+                                <StyledFaStarHalfAlt />
+                                <StyledFaRegStar />
+                            </StarIconsContainer>
+                        ) : undefined
+                    }
+                />
                 <Comments color={plantillaStyles?.colorFondo} />
             </div>
             <RenderIf isTrue={products}>

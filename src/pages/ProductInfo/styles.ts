@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { FaFacebookSquare, FaWhatsappSquare } from 'react-icons/fa';
+import {
+    FaFacebookSquare,
+    FaWhatsappSquare,
+    FaStar,
+    FaStarHalfAlt,
+    FaRegStar,
+} from 'react-icons/fa';
 import { TStyle } from '../../interfaces/plantilla';
 
 interface IStyledAnchorProps {
@@ -46,4 +52,23 @@ export const SpinnerContainer = styled.div`
 
 export const StyledErrorContainer = styled.div`
     margin-bottom: 100px;
+`;
+
+export const StyledFaStar = styled(FaStar)`
+    color: #fdcc0d;
+`;
+export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
+    color: #fdcc0d;
+`;
+export const StyledFaRegStar = styled(FaRegStar)`
+    color: #fdcc0d;
+`;
+
+export const StarIconsContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const Divider = styled.span`
+    margin: 0 5px;
 `;
