@@ -3,8 +3,9 @@ import { CSSProperties } from 'react';
 interface IUserAvatarProps {
     color?: string;
     style?: CSSProperties;
-    width: string;
-    height: string;
+    className?: string;
+    width?: string;
+    height?: string;
 }
 
 const MaleUserAvatar = ({
@@ -12,6 +13,7 @@ const MaleUserAvatar = ({
     width,
     height,
     style,
+    className,
 }: IUserAvatarProps) => {
     return (
         <svg
@@ -22,6 +24,7 @@ const MaleUserAvatar = ({
             height={height}
             viewBox="0 0 698 698"
             style={style}
+            className={className}
         >
             <defs>
                 <linearGradient

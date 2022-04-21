@@ -3,5 +3,6 @@ export interface IUserInfo {
     uid?: number;
     name?: string;
     foto?: string;
+    modo?: string;
     email?: string;
 }

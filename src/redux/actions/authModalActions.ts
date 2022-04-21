@@ -101,6 +101,7 @@ export const startLogin = (params: ILoginActionParams) => {
                 uid: body.id,
                 name: body.nombre,
                 foto: body.foto,
+                modo: body.modo,
                 email: body.email,
             };
             dispatch(closeAuthModal());
@@ -118,6 +119,7 @@ const login = (user: {
     uid: number;
     name: string;
     foto: string;
+    modo: string;
     email: string;
 }) => {
     return { type: 'AUTH_LOGIN', payload: user };
@@ -139,6 +141,7 @@ export const startChecking = () => {
                 uid: body.id,
                 name: body.nombre,
                 foto: body.foto,
+                modo: body.modo,
                 email: body.email,
             };
             dispatch(login(user));
@@ -184,6 +187,7 @@ export const startGoogleSignIn = (params: IGoogleSignInParams) => {
                 uid: body.id,
                 name: body.nombre,
                 foto: body.foto,
+                modo: body.modo,
                 email: body.email,
             };
             dispatch(closeAuthModal());

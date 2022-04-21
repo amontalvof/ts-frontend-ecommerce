@@ -34,7 +34,7 @@ const tabTitles = [
 ];
 
 const UserProfile = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+    const [tabIndex, setTabIndex] = useState(2);
     const { plantillaReducer, authReducer } = useSelector(
         (state: RootStore) => state
     );
@@ -48,7 +48,11 @@ const UserProfile = () => {
     const tabPanels = [
         <h2>Any content 1</h2>,
         <h2>Any content 2</h2>,
-        <EditProfile {...authReducer} color={plantillaStyles?.colorFondo} />,
+        <EditProfile
+            {...authReducer}
+            colorfondo={plantillaStyles?.colorFondo}
+            colortexto={plantillaStyles?.colorTexto}
+        />,
         <h2>Any content 4</h2>,
     ];
 
