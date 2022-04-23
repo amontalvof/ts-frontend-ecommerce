@@ -24,7 +24,9 @@ const Login = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     const dispatch = useDispatch();
 
     const handleLogin = (values: ILoginActionParams) => {
-        isReCaptchaChecked && dispatch(startLogin({ ...values }));
+        // TODO: Activate recaptcha
+        // isReCaptchaChecked && dispatch(startLogin({ ...values }));
+        dispatch(startLogin({ ...values }));
     };
 
     const handleCaptchaChange = () => {
@@ -41,8 +43,8 @@ const Login = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     return (
         <Formik
             initialValues={{
-                logEmail: 'amontalvof92@gmail.com', // andy@mail.com
-                logPassword: 'P@ssw0rd', // Aa@123456
+                logEmail: 'amontalvof92@gmail.com', //test1@mail.com andy@mail.com
+                logPassword: 'P@ssw0rd', //           P@ssw0rd2      Aa@123456
             }}
             onSubmit={handleLogin}
             validationSchema={loginValidationSchema}
