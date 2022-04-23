@@ -7,7 +7,7 @@ import {
     startLogin,
     openAuthModal,
 } from '../../redux/actions/authModalActions';
-import TextInput from './fields/textInput';
+import TextInput from '../FormFields/textInput';
 import { reCaptchaKey } from '../../constants';
 import {
     ForgotPasswordContainer,

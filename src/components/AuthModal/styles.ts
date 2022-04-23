@@ -4,9 +4,6 @@ interface IStyledTitleProps {
     colorfondo?: string;
     colortexto?: string;
 }
-interface ICheckboxProps {
-    colorfondo?: string;
-}
 interface ISubmitButtonProps {
     colorfondo?: string;
     colortexto?: string;
@@ -105,18 +102,6 @@ export const SubmitButton = styled.input<ISubmitButtonProps>`
     :focus {
         color: ${(props) => props.colortexto};
     }
-`;
-
-export const StyledCheckbox = styled.input<ICheckboxProps>`
-    cursor: pointer;
-    vertical-align: middle;
-    position: relative;
-    bottom: 3px;
-    accent-color: ${(props) => props.colorfondo};
-`;
-
-export const ErrorText = styled.p`
-    color: #cc0000;
 `;
 
 export const ReCaptchaContainer = styled.div`

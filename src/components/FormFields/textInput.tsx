@@ -1,5 +1,5 @@
 import { ErrorMessage, useField } from 'formik';
-import { ErrorText } from '../styles';
+import { ErrorText } from './styles';
 
 interface IMyTextInputProps {
     name: string;

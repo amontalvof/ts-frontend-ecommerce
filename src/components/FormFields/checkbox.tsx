@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { ErrorMessage, useField } from 'formik';
-import { ErrorText, StyledCheckbox } from '../styles';
+import { ErrorText, StyledCheckbox } from './styles';
 
 interface ICheckboxProps {
     label?: ReactElement;

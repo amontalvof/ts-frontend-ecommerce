@@ -29,6 +29,7 @@ const EditProfile = ({
                             <StyledUserImg
                                 className="img-thumbnail"
                                 src={foto}
+                                referrerPolicy="no-referrer"
                                 alt="user"
                             />
                         </RenderIf>
