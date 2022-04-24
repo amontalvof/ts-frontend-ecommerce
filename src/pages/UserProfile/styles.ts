@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    margin-top: 20px;
+    margin: 20px 0 0;
+    padding: 0 0 40px;
 `;
 
 export const TabTitleContainer = styled.div`

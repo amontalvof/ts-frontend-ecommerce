@@ -19,6 +19,12 @@ export const authReducer = (
                 ...action.payload,
                 checking: false,
             };
+        case 'UPLOAD_IMAGE':
+            return {
+                ...state,
+                ...action.payload,
+                checking: false,
+            };
         case 'AUTH_CHECKING_FINISH':
             return {
                 ...state,

@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export const updatePasswordValidationSchema = Yup.object({
     updPassword1: Yup.string()
-        .required('A password is required.')
+        .required('A new password is required.')
         .min(8, 'The password must be 8 characters or more')
         .max(20, 'The password must be 20 characters or less.')
         .matches(

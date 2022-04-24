@@ -18,7 +18,12 @@ const EditProfile = ({
 }: IEditProfileProps) => {
     return (
         <div className="row">
-            <UploadUserImg colorfondo={colorfondo} foto={foto} modo={modo} />
+            <UploadUserImg
+                colorfondo={colorfondo}
+                foto={foto}
+                modo={modo}
+                uid={uid}
+            />
             <UpdatePassword
                 uid={uid}
                 modo={modo}

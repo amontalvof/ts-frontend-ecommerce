@@ -42,7 +42,7 @@ const Verify = () => {
                 try {
                     setLoadingUpdateUser(true);
                     const response = await fetchWithoutToken(
-                        `user/${valueRedUser?.user?.id}`,
+                        `user/verify/${valueRedUser?.user?.id}`,
                         { verificacion: 0 },
                         'PUT'
                     );

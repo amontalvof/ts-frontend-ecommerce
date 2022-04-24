@@ -4,6 +4,7 @@ export const OPEN_AUTH_MODAL = 'OPEN_AUTH_MODAL';
 export const CLOSE_AUTH_MODAL = 'CLOSE_AUTH_MODAL';
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const AUTH_CHECKING_FINISH = 'AUTH_CHECKING_FINISH';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
@@ -39,6 +40,11 @@ export interface AuthLogin {
     payload: IUserInfo;
 }
 
+export interface UploadImage {
+    type: typeof UPLOAD_IMAGE;
+    payload: IUserInfo;
+}
+
 export interface AuthCheckingFinish {
     type: typeof AUTH_CHECKING_FINISH;
 }
@@ -49,5 +55,6 @@ export interface AuthLogout {
 
 export type AuthLoginDispatchTypes =
     | AuthLogin
+    | UploadImage
     | AuthCheckingFinish
     | AuthLogout;
