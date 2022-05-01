@@ -9,8 +9,13 @@ import {
     StyledTabTitle,
     TabTitleContainer,
     StyledTabLink,
+    SpinnerContainer,
 } from './styles';
 import EditProfile from './editProfile';
+import MyOrders from './myOrders';
+import { baseUrl } from '../../constants';
+import useFetch from '../../hooks/useFetch';
+import Spinner from '../../components/Spinner';
 
 const tabTitles = [
     <TabTitleContainer>
@@ -34,19 +39,31 @@ const tabTitles = [
 ];
 
 const UserProfile = () => {
-    const [tabIndex, setTabIndex] = useState(2);
+    const [tabIndex, setTabIndex] = useState(0);
     const { plantillaReducer, authReducer } = useSelector(
         (state: RootStore) => state
     );
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
+    const { uid } = authReducer;
+
+    const { loading: loadingOrders, value: valueOrders } = useFetch(
+        `${baseUrl}/user/orders/${uid}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': localStorage.getItem('token'),
+            },
+        }
+    );
+    const orders = valueOrders?.orders;
 
     const handleTabSelect = (index: number) => {
         setTabIndex(index);
     };
 
     const tabPanels = [
-        <h2>Any content 1</h2>,
+        <MyOrders orders={orders} />,
         <h2>Any content 2</h2>,
         <EditProfile
             {...authReducer}
@@ -55,6 +72,28 @@ const UserProfile = () => {
         />,
         <h2>Any content 4</h2>,
     ];
+
+    if (loadingOrders) {
+        return (
+            <SpinnerContainer>
+                <Spinner
+                    plantillaStyles={plantillaStyles}
+                    size={15}
+                    margin={2}
+                    defaultColor="#47bac1"
+                    text={
+                        <h1
+                            style={{
+                                color: plantillaStyles?.colorFondo || '#47bac1',
+                            }}
+                        >
+                            Loading...
+                        </h1>
+                    }
+                />
+            </SpinnerContainer>
+        );
+    }
 
     return (
         <Container>

@@ -110,6 +110,7 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
                                                 src={foto}
                                                 width="25"
                                                 alt="user"
+                                                referrerPolicy="no-referrer"
                                             />
                                         </RenderIf>
                                         <RenderIf isTrue={!foto}>

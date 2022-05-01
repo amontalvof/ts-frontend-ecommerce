@@ -5,6 +5,9 @@ import AppRouter from './router/AppRouter';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
+// TODO: Export every component from index
+// TODO: remove every nanoid from key in map
+
 function App() {
     return (
         <Provider store={store}>
