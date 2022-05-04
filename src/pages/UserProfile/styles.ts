@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -32,7 +33,25 @@ export const SpinnerContainer = styled.div`
 `;
 
 export const StyledTitle = styled.h1`
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+`;
+
+export const StyledDate = styled.h4`
+    margin-top: 5px;
+    margin-bottom: 5px;
+`;
+
+export const StyledFaStar = styled(FaStar)`
+    color: #fdcc0d;
+`;
+
+export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
+    color: #fdcc0d;
+`;
+
+export const StyledFaRegStar = styled(FaRegStar)`
+    color: #fdcc0d;
 `;
 
 export const ErrorContainer = styled.div`

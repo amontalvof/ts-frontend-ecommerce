@@ -63,7 +63,11 @@ const UserProfile = () => {
     };
 
     const tabPanels = [
-        <MyOrders orders={orders} />,
+        <MyOrders
+            orders={orders}
+            colorfondo={plantillaStyles?.colorFondo}
+            colortexto={plantillaStyles?.colorTexto}
+        />,
         <h2>Any content 2</h2>,
         <EditProfile
             {...authReducer}
