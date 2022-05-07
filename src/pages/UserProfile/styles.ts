@@ -42,6 +42,20 @@ export const StyledDate = styled.h4`
     margin-bottom: 5px;
 `;
 
+export const StyledH3 = styled.h3`
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    /*=============================================
+    MOVIL (XS revisamos en 320px)
+    =============================================*/
+
+    @media (max-width: 767px) {
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+`;
+
 export const StyledFaStar = styled(FaStar)`
     color: #fdcc0d;
 `;

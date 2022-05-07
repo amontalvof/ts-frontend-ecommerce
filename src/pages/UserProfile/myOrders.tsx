@@ -1,7 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import CommentModal from '../../components/CommentModal';
 import DeliverOrder from '../../components/DeliverOrder';
 import RenderIf from '../../components/RenderIf';
 import { IOrderInfo } from '../../interfaces/user';
+import { openCommentModal } from '../../redux/actions/commentModalActions';
 import {
     ErrorContainer,
     StyledDate,
@@ -9,6 +12,7 @@ import {
     StyledFaStar,
     StyledFaStarHalfAlt,
     StyledTitle,
+    StyledH3,
 } from './styles';
 
 interface IMyOrdersProps {
@@ -18,131 +22,146 @@ interface IMyOrdersProps {
 }
 
 const MyOrders = (props: IMyOrdersProps) => {
+    const dispatch = useDispatch();
     const { orders = [], colorfondo, colortexto } = props;
     const isEmptyOrders = orders.length === 0;
-    return (
-        <div className="panel-group">
-            <RenderIf isTrue={isEmptyOrders}>
-                <ErrorContainer className="col-xs-12 text-center">
-                    <h1>
-                        <small>Oops!</small>
-                    </h1>
-                    <h2>You still have no orders made in this store</h2>
-                </ErrorContainer>
-            </RenderIf>
-            <RenderIf isTrue={!isEmptyOrders}>
-                <>
-                    {orders.map((order: IOrderInfo) => {
-                        const buyDate = `Bought on ${new Date(
-                            order.comprasFecha
-                        ).toLocaleString()}`;
-                        const isVirtual = order.tipo === 'virtual';
-                        const deliveryText =
-                            order.entrega === 1
-                                ? `Delivery process: ${order.entrega} business day`
-                                : `Delivery process: ${order.entrega} business days`;
 
-                        return (
-                            <div
-                                className="panel panel-default"
-                                key={`order-${order.id}`}
-                            >
-                                <div className="panel-body">
-                                    <div className="col-md-2 col-sm-6 col-xs-12">
-                                        <figure>
-                                            <img
-                                                className="img-thumbnail"
-                                                src={order.portada}
-                                                alt="product"
-                                            />
-                                        </figure>
-                                    </div>
-                                    <div className="col-sm-6 col-xs-12">
-                                        <StyledTitle>
-                                            <small>{order.titulo}</small>
-                                        </StyledTitle>
-                                        <StyledDate>
-                                            <small>{buyDate}</small>
-                                        </StyledDate>
-                                        <p>{order.titular}</p>
-                                        <RenderIf isTrue={isVirtual}>
-                                            <Link to="#">
-                                                <button
-                                                    className="btn btn-default pull-left"
-                                                    style={{ outline: 'none' }}
-                                                >
-                                                    Go to course
-                                                </button>
-                                            </Link>
-                                        </RenderIf>
-                                        <RenderIf isTrue={!isVirtual}>
-                                            <DeliverOrder
-                                                deliveryText={deliveryText}
-                                                envio={order.envio}
-                                            />
-                                        </RenderIf>
-                                    </div>
-                                    <div className="col-md-4 col-xs-12">
-                                        <div className="pull-right">
-                                            <a
-                                                className="calificarProducto"
-                                                href="#modalComentarios"
-                                                data-toggle="modal"
-                                            >
-                                                <button
-                                                    className="btn btn-default backColor"
-                                                    style={{
-                                                        outline: 'none',
-                                                        color: colortexto,
-                                                        backgroundColor:
-                                                            colorfondo,
-                                                    }}
-                                                >
-                                                    Rate Product
-                                                </button>
-                                            </a>
+    const handleRate = (id: number) => {
+        dispatch(openCommentModal(id));
+    };
+
+    return (
+        <>
+            <div className="panel-group">
+                <RenderIf isTrue={isEmptyOrders}>
+                    <ErrorContainer className="col-xs-12 text-center">
+                        <h1>
+                            <small>Oops!</small>
+                        </h1>
+                        <h2>You still have no orders made in this store</h2>
+                    </ErrorContainer>
+                </RenderIf>
+                <RenderIf isTrue={!isEmptyOrders}>
+                    <>
+                        {orders.map((order: IOrderInfo) => {
+                            const buyDate = `Bought on ${new Date(
+                                order.comprasFecha
+                            ).toLocaleString()}`;
+                            const isVirtual = order.tipo === 'virtual';
+                            const deliveryText =
+                                order.entrega === 1
+                                    ? `Delivery process: ${order.entrega} business day`
+                                    : `Delivery process: ${order.entrega} business days`;
+
+                            return (
+                                <div
+                                    className="panel panel-default"
+                                    key={`order-${order.id}`}
+                                >
+                                    <div className="panel-body">
+                                        <div className="col-md-2 col-sm-6 col-xs-12">
+                                            <figure>
+                                                <img
+                                                    className="img-thumbnail"
+                                                    src={order.portada}
+                                                    alt="product"
+                                                />
+                                            </figure>
                                         </div>
-                                        <br />
-                                        <br />
-                                        <div className="pull-right">
-                                            <h3 className="text-right">
-                                                <StyledFaStar />
-                                                <StyledFaStar />
-                                                <StyledFaStar />
-                                                <StyledFaStarHalfAlt />
-                                                <StyledFaRegStar />
-                                            </h3>
-                                            <p
-                                                className="panel panel-default text-right"
-                                                style={{ padding: '5px' }}
-                                            >
-                                                <small>
-                                                    Lorem ipsum dolor sit amet
-                                                    consectetur, adipisicing
-                                                    elit. Consequuntur adipisci
-                                                    incidunt eligendi deserunt
-                                                    ut accusamus quam minima
-                                                    aliquam quod veritatis.
-                                                    Ducimus ipsam, obcaecati
-                                                    sint reiciendis mollitia
-                                                    voluptas. Expedita
-                                                    distinctio est ea
-                                                    accusantium inventore iste
-                                                    explicabo qui odio ipsum
-                                                    magnam? Enim eius voluptatem
-                                                    similique eos consequatur a
-                                                    nobis itaque et cumque?
-                                                </small>
-                                            </p>
+                                        <div className="col-sm-6 col-xs-12">
+                                            <StyledTitle>
+                                                <small>{order.titulo}</small>
+                                            </StyledTitle>
+                                            <StyledDate>
+                                                <small>{buyDate}</small>
+                                            </StyledDate>
+                                            <p>{order.titular}</p>
+                                            <RenderIf isTrue={isVirtual}>
+                                                <Link to="#">
+                                                    <button
+                                                        className="btn btn-default pull-left"
+                                                        style={{
+                                                            outline: 'none',
+                                                        }}
+                                                    >
+                                                        Go to course
+                                                    </button>
+                                                </Link>
+                                            </RenderIf>
+                                            <RenderIf isTrue={!isVirtual}>
+                                                <DeliverOrder
+                                                    deliveryText={deliveryText}
+                                                    envio={order.envio}
+                                                />
+                                            </RenderIf>
+                                            <div className="pull-right">
+                                                <a
+                                                    className="calificarProducto"
+                                                    href="#modalComentarios"
+                                                    data-toggle="modal"
+                                                >
+                                                    <button
+                                                        className="btn btn-default backColor"
+                                                        onClick={() =>
+                                                            handleRate(order.id)
+                                                        }
+                                                        style={{
+                                                            outline: 'none',
+                                                            color: colortexto,
+                                                            backgroundColor:
+                                                                colorfondo,
+                                                        }}
+                                                    >
+                                                        Rate Product
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-4 col-xs-12">
+                                            <div className="pull-right">
+                                                <StyledH3 className="text-center">
+                                                    <StyledFaStar />
+                                                    <StyledFaStar />
+                                                    <StyledFaStar />
+                                                    <StyledFaStarHalfAlt />
+                                                    <StyledFaRegStar />
+                                                </StyledH3>
+                                                <p
+                                                    className="panel panel-default text-right"
+                                                    style={{ padding: '5px' }}
+                                                >
+                                                    <small>
+                                                        Lorem ipsum dolor sit
+                                                        amet consectetur,
+                                                        adipisicing elit.
+                                                        Consequuntur adipisci
+                                                        incidunt eligendi
+                                                        deserunt ut accusamus
+                                                        quam minima aliquam quod
+                                                        veritatis. Ducimus
+                                                        ipsam, obcaecati sint
+                                                        reiciendis mollitia
+                                                        voluptas. Expedita
+                                                        distinctio est ea
+                                                        accusantium inventore
+                                                        iste explicabo qui odio
+                                                        ipsum magnam? Enim eius
+                                                        voluptatem similique eos
+                                                        consequatur a nobis
+                                                        itaque et cumque?
+                                                    </small>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </>
-            </RenderIf>
-        </div>
+                            );
+                        })}
+                    </>
+                </RenderIf>
+            </div>
+            <CommentModal />
+        </>
     );
 };
 

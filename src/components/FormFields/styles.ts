@@ -15,3 +15,7 @@ export const StyledCheckbox = styled.input<ICheckboxProps>`
     bottom: 3px;
     accent-color: ${(props) => props.colorfondo};
 `;
+
+export const StyledTextArea = styled.textarea`
+    resize: none;
+`;

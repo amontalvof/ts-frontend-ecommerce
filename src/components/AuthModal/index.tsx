@@ -7,7 +7,7 @@ import RenderIf from '../RenderIf';
 import Footer from './footer';
 import ForgotPassword from './forgotPassword';
 import GoogleSignInButton from './googleSignInButton';
-import Header from './header';
+import ModalHeader from '../ModalHeader';
 import Login from './login';
 import Register from './register';
 import { customStyles, ModalContent, ModalTitulo } from './styles';
@@ -47,7 +47,7 @@ const AuthModal = () => {
         >
             <ModalContent>
                 <ModalTitulo className="modal-body">
-                    <Header
+                    <ModalHeader
                         text={headerText}
                         plantillaStyles={plantillaStyles}
                         closeModal={closeModal}
