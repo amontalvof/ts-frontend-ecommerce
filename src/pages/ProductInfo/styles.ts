@@ -7,6 +7,7 @@ import {
     FaRegStar,
 } from 'react-icons/fa';
 import { TStyle } from '../../interfaces/plantilla';
+import { yellowStar } from '../../constants';
 
 interface IStyledAnchorProps {
     plantillaStyles?: TStyle;
@@ -55,13 +56,13 @@ export const StyledErrorContainer = styled.div`
 `;
 
 export const StyledFaStar = styled(FaStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 export const StyledFaRegStar = styled(FaRegStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const StarIconsContainer = styled.div`

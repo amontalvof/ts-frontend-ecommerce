@@ -1,11 +1,12 @@
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { modalCustomStyles } from '../../constants';
 import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
 import { RootStore } from '../../redux/store';
 import ModalHeader from '../ModalHeader';
 import CommentForm from './commentForm';
-import { customStyles, ModalContent, ModalTitulo } from './styles';
+import { ModalContent, ModalTitulo } from './styles';
 
 const CommentModal = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const CommentModal = () => {
         <Modal
             isOpen={uiCommentModalReducer.modalOpen}
             onRequestClose={closeModal}
-            style={customStyles}
+            style={modalCustomStyles}
             contentLabel="Example modal"
             closeTimeoutMS={200}
             className="modal"

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import styled from 'styled-components';
+import { yellowStar } from '../../constants';
 
 export const Container = styled.div`
     margin: 20px 0 0;
@@ -57,15 +58,15 @@ export const StyledH3 = styled.h3`
 `;
 
 export const StyledFaStar = styled(FaStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const StyledFaRegStar = styled(FaRegStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const ErrorContainer = styled.div`

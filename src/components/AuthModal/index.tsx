@@ -10,7 +10,8 @@ import GoogleSignInButton from './googleSignInButton';
 import ModalHeader from '../ModalHeader';
 import Login from './login';
 import Register from './register';
-import { customStyles, ModalContent, ModalTitulo } from './styles';
+import { ModalContent, ModalTitulo } from './styles';
+import { modalCustomStyles } from '../../constants';
 
 Modal.setAppElement('#root');
 
@@ -39,7 +40,7 @@ const AuthModal = () => {
         <Modal
             isOpen={uiAuthModalReducer.modalOpen}
             onRequestClose={closeModal}
-            style={customStyles}
+            style={modalCustomStyles}
             contentLabel="Example modal"
             closeTimeoutMS={200}
             className="modal"

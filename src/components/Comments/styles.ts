@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import { yellowStar } from '../../constants';
 
 export const StyledFaStar = styled(FaStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const StyledFaRegStar = styled(FaRegStar)`
-    color: #fdcc0d;
+    color: ${yellowStar};
 `;
 
 export const HeaderInfoContainer = styled.div`

@@ -5,6 +5,10 @@ import { SubmitButton } from '../AuthModal/styles';
 import { TStyle } from '../../interfaces/plantilla';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
 import { useDispatch } from 'react-redux';
+import StarRating from '../StarRating';
+import { yellowStar, grayStar } from '../../constants';
+import { useState } from 'react';
+import { RatingContainer } from './styles';
 
 interface IHandleSubmitParams {
     comment: string;
@@ -17,6 +21,7 @@ const CommentForm = ({
     plantillaStyles: TStyle;
     productId?: number;
 }) => {
+    const [rating, setRating] = useState<number | null>(null);
     const dispatch = useDispatch();
 
     const handleSubmit = (params: IHandleSubmitParams) => {
@@ -35,6 +40,13 @@ const CommentForm = ({
         >
             {() => (
                 <Form noValidate>
+                    <RatingContainer>
+                        <StarRating
+                            color={{ filled: yellowStar, unfilled: grayStar }}
+                            rating={rating}
+                            onRating={setRating}
+                        />
+                    </RatingContainer>
                     <TextArea
                         label={
                             <>

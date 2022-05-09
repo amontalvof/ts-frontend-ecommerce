@@ -7,6 +7,8 @@ import './App.css';
 
 // TODO: Export every component from index
 // TODO: remove every nanoid from key in map
+// TODO: Add colors to constants file
+// TODO: Add all env variables to constants file
 
 function App() {
     return (

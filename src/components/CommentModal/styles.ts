@@ -5,17 +5,6 @@ interface ISubmitButtonProps {
     colortexto?: string;
 }
 
-export const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
-
 export const ModalContent = styled.div`
     padding: 10px 10px 0;
     /*=============================================
@@ -41,4 +30,10 @@ export const SubmitButton = styled.input<ISubmitButtonProps>`
     :focus {
         color: ${(props) => props.colortexto};
     }
+`;
+
+export const RatingContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 10px;
 `;
