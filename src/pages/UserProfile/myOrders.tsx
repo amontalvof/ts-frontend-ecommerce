@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import CommentModal from '../../components/CommentModal';
 import DeliverOrder from '../../components/DeliverOrder';
 import RenderIf from '../../components/RenderIf';
+import StarRatingDisplay from '../../components/StarRatingDisplay';
+import { grayStar, yellowStar } from '../../constants';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { IOrderInfo } from '../../interfaces/user';
 import { openCommentModal } from '../../redux/actions/commentModalActions';
-import {
-    ErrorContainer,
-    StyledDate,
-    StyledFaRegStar,
-    StyledFaStar,
-    StyledFaStarHalfAlt,
-    StyledTitle,
-    StyledH3,
-} from './styles';
+import { ErrorContainer, StyledDate, StyledTitle, StyledH3 } from './styles';
 
 interface IMyOrdersProps {
     orders?: IOrderInfo[];
@@ -22,6 +17,7 @@ interface IMyOrdersProps {
 }
 
 const MyOrders = (props: IMyOrdersProps) => {
+    const isLarge = useMediaQuery('(min-width: 500px)');
     const dispatch = useDispatch();
     const { orders = [], colorfondo, colortexto } = props;
     const isEmptyOrders = orders.length === 0;
@@ -29,7 +25,6 @@ const MyOrders = (props: IMyOrdersProps) => {
     const handleRate = (id: number) => {
         dispatch(openCommentModal(id));
     };
-
     return (
         <>
             <div className="panel-group">
@@ -52,7 +47,6 @@ const MyOrders = (props: IMyOrdersProps) => {
                                 order.entrega === 1
                                     ? `Delivery process: ${order.entrega} business day`
                                     : `Delivery process: ${order.entrega} business days`;
-
                             return (
                                 <div
                                     className="panel panel-default"
@@ -94,7 +88,15 @@ const MyOrders = (props: IMyOrdersProps) => {
                                                     envio={order.envio}
                                                 />
                                             </RenderIf>
-                                            <div className="pull-right">
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent:
+                                                        !isVirtual && !isLarge
+                                                            ? 'center'
+                                                            : 'flex-end',
+                                                }}
+                                            >
                                                 <a
                                                     className="calificarProducto"
                                                     href="#modalComentarios"
@@ -118,39 +120,41 @@ const MyOrders = (props: IMyOrdersProps) => {
                                             </div>
                                         </div>
                                         <div className="col-md-4 col-xs-12">
-                                            <div className="pull-right">
-                                                <StyledH3 className="text-center">
-                                                    <StyledFaStar />
-                                                    <StyledFaStar />
-                                                    <StyledFaStar />
-                                                    <StyledFaStarHalfAlt />
-                                                    <StyledFaRegStar />
-                                                </StyledH3>
-                                                <p
-                                                    className="panel panel-default text-right"
-                                                    style={{ padding: '5px' }}
+                                            <div
+                                                className="pull-right"
+                                                style={{ width: '100%' }}
+                                            >
+                                                <StyledH3
+                                                    className={
+                                                        isLarge
+                                                            ? 'text-right'
+                                                            : 'text-center'
+                                                    }
                                                 >
-                                                    <small>
-                                                        Lorem ipsum dolor sit
-                                                        amet consectetur,
-                                                        adipisicing elit.
-                                                        Consequuntur adipisci
-                                                        incidunt eligendi
-                                                        deserunt ut accusamus
-                                                        quam minima aliquam quod
-                                                        veritatis. Ducimus
-                                                        ipsam, obcaecati sint
-                                                        reiciendis mollitia
-                                                        voluptas. Expedita
-                                                        distinctio est ea
-                                                        accusantium inventore
-                                                        iste explicabo qui odio
-                                                        ipsum magnam? Enim eius
-                                                        voluptatem similique eos
-                                                        consequatur a nobis
-                                                        itaque et cumque?
-                                                    </small>
-                                                </p>
+                                                    <StarRatingDisplay
+                                                        calificacion={
+                                                            order.calificacion
+                                                        }
+                                                        color={{
+                                                            filled: yellowStar,
+                                                            unfilled: grayStar,
+                                                        }}
+                                                    />
+                                                </StyledH3>
+                                                <RenderIf
+                                                    isTrue={!!order.comentario}
+                                                >
+                                                    <p
+                                                        className="panel panel-default text-right"
+                                                        style={{
+                                                            padding: '5px',
+                                                        }}
+                                                    >
+                                                        <small>
+                                                            {order.comentario}
+                                                        </small>
+                                                    </p>
+                                                </RenderIf>
                                             </div>
                                         </div>
                                     </div>

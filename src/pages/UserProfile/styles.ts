@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import styled from 'styled-components';
-import { yellowStar } from '../../constants';
 
 export const Container = styled.div`
     margin: 20px 0 0;
@@ -44,8 +42,8 @@ export const StyledDate = styled.h4`
 `;
 
 export const StyledH3 = styled.h3`
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     /*=============================================
     MOVIL (XS revisamos en 320px)
@@ -55,18 +53,6 @@ export const StyledH3 = styled.h3`
         margin-top: 15px;
         margin-bottom: 5px;
     }
-`;
-
-export const StyledFaStar = styled(FaStar)`
-    color: ${yellowStar};
-`;
-
-export const StyledFaStarHalfAlt = styled(FaStarHalfAlt)`
-    color: ${yellowStar};
-`;
-
-export const StyledFaRegStar = styled(FaRegStar)`
-    color: ${yellowStar};
 `;
 
 export const ErrorContainer = styled.div`
