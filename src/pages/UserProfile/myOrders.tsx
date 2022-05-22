@@ -22,8 +22,16 @@ const MyOrders = (props: IMyOrdersProps) => {
     const { orders = [], colorfondo, colortexto } = props;
     const isEmptyOrders = orders.length === 0;
 
-    const handleRate = (id: number) => {
-        dispatch(openCommentModal(id));
+    const handleRate = (params: IOrderInfo) => {
+        const { commentsId, productosId, calificacion, comentario } = params;
+        dispatch(
+            openCommentModal({
+                commentsId,
+                productosId,
+                calificacion,
+                comentario,
+            })
+        );
     };
     return (
         <>
@@ -105,7 +113,7 @@ const MyOrders = (props: IMyOrdersProps) => {
                                                     <button
                                                         className="btn btn-default backColor"
                                                         onClick={() =>
-                                                            handleRate(order.id)
+                                                            handleRate(order)
                                                         }
                                                         style={{
                                                             outline: 'none',

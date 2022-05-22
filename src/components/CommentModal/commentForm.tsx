@@ -1,39 +1,68 @@
+import { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import TextArea from '../FormFields/textArea';
 import { commentValidationSchema } from './validation/commentValidation';
 import { SubmitButton } from '../AuthModal/styles';
 import { TStyle } from '../../interfaces/plantilla';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StarRating from '../StarRating';
 import { yellowStar, grayStar } from '../../constants';
-import { useState } from 'react';
-import { RatingContainer } from './styles';
+import { RatingContainer, StyledError } from './styles';
+import { ICommentPayload } from '../../interfaces/commentModal';
+import { RootStore } from '../../redux/store';
+import RenderIf from '../RenderIf';
 
 interface IHandleSubmitParams {
     comment: string;
 }
 
-const CommentForm = ({
-    plantillaStyles,
-    productId,
-}: {
+interface ICommentFormProps {
     plantillaStyles: TStyle;
-    productId?: number;
-}) => {
-    const [rating, setRating] = useState<number | null>(null);
+    commentInfo: ICommentPayload | null;
+}
+
+const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
+    const {
+        commentsId,
+        productosId,
+        calificacion = null,
+        comentario = '',
+    } = commentInfo || {};
+
+    const [rating, setRating] = useState<number | null>(calificacion);
+    const [showError, setShowError] = useState<boolean>(false);
     const dispatch = useDispatch();
+    const state = useSelector((state: RootStore) => state);
+    const { authReducer } = state;
+    const { uid } = authReducer;
+
+    useEffect(() => {
+        if (rating !== null) {
+            setShowError(false);
+        }
+    }, [rating]);
 
     const handleSubmit = (params: IHandleSubmitParams) => {
-        console.log(params);
-        dispatch(closeCommentModal());
+        if (!rating) {
+            setShowError(true);
+        } else {
+            const { comment } = params;
+            console.log({
+                uid,
+                commentsId,
+                productosId,
+                comentario: comment,
+                calificacion: rating,
+            });
+            dispatch(closeCommentModal());
+        }
     };
-    console.log({ productId });
+
     return (
         <Formik
             initialValues={{
-                comment:
-                    'Lorem, ipsum dolor sit amet consectetur adipisicing elit. In officiis eius unde exercitationem laboriosam ratione deleniti, doloremque porro assumenda. Numquam!',
+                comment: comentario,
             }}
             onSubmit={handleSubmit}
             validationSchema={commentValidationSchema}
@@ -52,7 +81,9 @@ const CommentForm = ({
                             <>
                                 Your opinion about this product:{' '}
                                 <span>
-                                    <small>(maximum 300 characterss)</small>
+                                    <small>
+                                        (optional - maximum 300 characters)
+                                    </small>
                                 </span>
                             </>
                         }
@@ -61,6 +92,11 @@ const CommentForm = ({
                         id="comment"
                         name="comment"
                     />
+                    <RenderIf isTrue={showError}>
+                        <StyledError>
+                            Error: You need to rate the product.
+                        </StyledError>
+                    </RenderIf>
                     <SubmitButton
                         colorfondo={plantillaStyles.colorFondo}
                         colortexto={plantillaStyles.colorTexto}

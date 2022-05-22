@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalCustomStyles } from '../../constants';
 import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
+import { IReturnUiCommentModalReducer } from '../../interfaces/commentModal';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
 import { RootStore } from '../../redux/store';
 import ModalHeader from '../ModalHeader';
@@ -12,17 +13,22 @@ const CommentModal = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
     const { uiCommentModalReducer, plantillaReducer } = state;
-    useDisableBodyScroll(uiCommentModalReducer.modalOpen);
+
+    useDisableBodyScroll(
+        (uiCommentModalReducer as IReturnUiCommentModalReducer).modalOpen
+    );
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
 
     const closeModal = () => {
         dispatch(closeCommentModal());
     };
-
     return (
         <Modal
-            isOpen={uiCommentModalReducer.modalOpen}
+            isOpen={
+                (uiCommentModalReducer as IReturnUiCommentModalReducer)
+                    .modalOpen
+            }
             onRequestClose={closeModal}
             style={modalCustomStyles}
             contentLabel="Example modal"
@@ -39,7 +45,11 @@ const CommentModal = () => {
                     />
                     <CommentForm
                         plantillaStyles={plantillaStyles}
-                        productId={uiCommentModalReducer.payload}
+                        commentInfo={
+                            (
+                                uiCommentModalReducer as IReturnUiCommentModalReducer
+                            ).payload
+                        }
                     />
                 </ModalTitulo>
             </ModalContent>

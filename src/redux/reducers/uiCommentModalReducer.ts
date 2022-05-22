@@ -1,26 +1,29 @@
-import { UiCommentModalDispatchTypes } from '../../interfaces/commentModal';
+import {
+    IReturnUiCommentModalReducer,
+    UiCommentModalDispatchTypes,
+} from '../../interfaces/commentModal';
 
 const initialState = {
     modalOpen: false,
-    payload: 0,
+    payload: null,
 };
 
 export const uiCommentModalReducer = (
     state = initialState,
     action: UiCommentModalDispatchTypes
-) => {
+): IReturnUiCommentModalReducer => {
     switch (action.type) {
         case 'OPEN_COMMENT_MODAL':
             return {
                 ...state,
                 modalOpen: true,
-                payload: action?.payload,
+                payload: action.payload,
             };
         case 'CLOSE_COMMENT_MODAL':
             return {
                 ...state,
                 modalOpen: false,
-                payload: 0,
+                payload: action.payload,
             };
         default:
             return state;

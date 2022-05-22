@@ -12,6 +12,7 @@ export interface IUserInfo {
 export interface IOrderInfo extends IProduct {
     calificacion: number;
     comentario: string;
+    commentsId: number | null;
     comprasFecha: string;
     comprasId: number;
     descripcion: string;

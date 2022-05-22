@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { redError } from '../../constants';
 
 interface ISubmitButtonProps {
     colorfondo?: string;
@@ -36,4 +37,8 @@ export const RatingContainer = styled.div`
     display: flex;
     justify-content: center;
     margin: 20px 0 10px;
+`;
+
+export const StyledError = styled.p`
+    color: ${redError};
 `;

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { redError } from '../../constants';
 
 interface ICheckboxProps {
     colorfondo?: string;
 }
 
 export const ErrorText = styled.p`
-    color: #cc0000;
+    color: ${redError};
 `;
 
 export const StyledCheckbox = styled.input<ICheckboxProps>`
