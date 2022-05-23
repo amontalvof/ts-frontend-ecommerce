@@ -10,6 +10,7 @@ import './App.css';
 // TODO: Add colors to constants file
 // TODO: Add all env variables to constants file
 // TODO: Refactor to use react-query
+// TODO: Refactor to logout when token expires
 
 function App() {
     return (

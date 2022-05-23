@@ -12,6 +12,8 @@ import { RatingContainer, StyledError } from './styles';
 import { ICommentPayload } from '../../interfaces/commentModal';
 import { RootStore } from '../../redux/store';
 import RenderIf from '../RenderIf';
+import updateProductComment from '../../services/updateProductComment';
+import createProductComment from '../../services/createProductComment';
 
 interface IHandleSubmitParams {
     comment: string;
@@ -25,7 +27,7 @@ interface ICommentFormProps {
 const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
     const {
         commentsId,
-        productosId,
+        productosId = null,
         calificacion = null,
         comentario = '',
     } = commentInfo || {};
@@ -43,18 +45,26 @@ const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
         }
     }, [rating]);
 
-    const handleSubmit = (params: IHandleSubmitParams) => {
+    const handleSubmit = async (params: IHandleSubmitParams) => {
+        // TODO: refactor to refetch comments after updating with react-query
         if (!rating) {
             setShowError(true);
         } else {
             const { comment } = params;
-            console.log({
-                uid,
-                commentsId,
-                productosId,
-                comentario: comment,
-                calificacion: rating,
-            });
+            if (commentsId) {
+                await updateProductComment({
+                    comment,
+                    commentsId,
+                    rating,
+                });
+            } else {
+                await createProductComment({
+                    comment,
+                    uid,
+                    productosId,
+                    rating,
+                });
+            }
             dispatch(closeCommentModal());
         }
     };
