@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -13,13 +12,6 @@ export const TabTitleContainer = styled.div`
 
 export const StyledTabTitle = styled.span`
     margin-left: 5px;
-`;
-
-export const StyledTabLink = styled(Link)`
-    color: #333333;
-    :hover {
-        color: #333333;
-    }
 `;
 
 export const SpinnerContainer = styled.div`

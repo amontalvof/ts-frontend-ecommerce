@@ -11,7 +11,7 @@ import { TRoute } from '../../interfaces/productRoutes';
 import { ImagesViewer, ProductFeatures, ProductsPanel } from '../../components';
 import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';
-import { baseUrl } from '../../constants';
+import { baseUrl, grayStar, yellowStar } from '../../constants';
 import RenderIf from '../../components/RenderIf';
 import VideoViewer from '../../components/VideoViewer';
 import TabSet from '../../components/TabSet';
@@ -19,6 +19,7 @@ import Comments from '../../components/Comments';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import ThereAreNoProducts from '../../components/ThereAreNoProducts';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import StarRatingDisplay from '../../components/StarRatingDisplay/index';
 import {
     InfoContainer,
     IconContainer,
@@ -28,9 +29,6 @@ import {
     // StyledWhatsappIcon,
     Divider,
     StarIconsContainer,
-    StyledFaStar,
-    StyledFaStarHalfAlt,
-    StyledFaRegStar,
     SpinnerContainer,
     StyledErrorContainer,
 } from './styles';
@@ -41,10 +39,11 @@ interface IUseParams {
     productId?: string;
 }
 
-const tabTitles = ['Comments', 'See More'];
-const tabPanels = [<h2>Any content 1</h2>, <h2>Any content 2</h2>];
+const tabTitles = ['Comments'];
 
 const ProductInfo = () => {
+    const [averageRating, setAverageRating] = useState(0);
+    const [totalRatings, setTotalRatings] = useState(0);
     const isLarge = useMediaQuery('(min-width: 767px)');
     const [viewRelatedProducts, setViewRelatedProducts] =
         useState<string>('grid');
@@ -101,6 +100,15 @@ const ProductInfo = () => {
         : 'col-sm-6 col-xs-12';
 
     const plantillaStyles = styles[0];
+
+    const tabPanels = [
+        <Comments
+            color={plantillaStyles?.colorFondo}
+            productId={product[0]?.id}
+            handleTotalRatings={setTotalRatings}
+            handleAverageRating={setAverageRating}
+        />,
+    ];
 
     const isASubCategoryAllowedRoute = checkIsAllowedRoute<TSubCategory>(
         subCategories,
@@ -237,18 +245,22 @@ const ProductInfo = () => {
                     action={
                         isLarge ? (
                             <StarIconsContainer>
-                                <span>AVERAGE RATING: 3.5</span>
+                                <span>
+                                    {totalRatings}{' '}
+                                    {totalRatings === 1 ? 'review' : 'reviews'}
+                                </span>
                                 <Divider>|</Divider>
-                                <StyledFaStar />
-                                <StyledFaStar />
-                                <StyledFaStar />
-                                <StyledFaStarHalfAlt />
-                                <StyledFaRegStar />
+                                <StarRatingDisplay
+                                    calificacion={Math.floor(averageRating)}
+                                    color={{
+                                        filled: yellowStar,
+                                        unfilled: grayStar,
+                                    }}
+                                />
                             </StarIconsContainer>
                         ) : undefined
                     }
                 />
-                <Comments color={plantillaStyles?.colorFondo} />
             </div>
             <RenderIf isTrue={products}>
                 <ProductsPanel

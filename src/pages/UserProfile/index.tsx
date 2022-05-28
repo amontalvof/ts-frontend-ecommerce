@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { FaList, FaGift, FaUserEdit, FaStar } from 'react-icons/fa';
+import { FaList, FaGift, FaUserEdit } from 'react-icons/fa';
 import { Breadcrumb } from '../../components';
 import TabSet from '../../components/TabSet';
 import { RootStore } from '../../redux/store';
@@ -8,7 +8,6 @@ import {
     Container,
     StyledTabTitle,
     TabTitleContainer,
-    StyledTabLink,
     SpinnerContainer,
 } from './styles';
 import EditProfile from './editProfile';
@@ -29,12 +28,6 @@ const tabTitles = [
     <TabTitleContainer>
         <FaUserEdit />
         <StyledTabTitle>Edit profile</StyledTabTitle>
-    </TabTitleContainer>,
-    <TabTitleContainer>
-        <FaStar />
-        <StyledTabLink to="/offers">
-            <StyledTabTitle>See offers</StyledTabTitle>
-        </StyledTabLink>
     </TabTitleContainer>,
 ];
 
@@ -74,7 +67,6 @@ const UserProfile = () => {
             colorfondo={plantillaStyles?.colorFondo}
             colortexto={plantillaStyles?.colorTexto}
         />,
-        <h2>Any content 4</h2>,
     ];
 
     if (loadingOrders) {
