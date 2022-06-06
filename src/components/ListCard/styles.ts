@@ -5,7 +5,6 @@ interface IStyledBadgeProps {
     colortexto?: string;
     colorfondo?: string;
 }
-interface IStyledButtonProps extends IStyledBadgeProps {}
 
 export const StyledFigure = styled.figure`
     overflow: hidden;
@@ -49,25 +48,6 @@ export const StyledOferta = styled.strong`
     text-decoration: line-through;
     color: #ccc;
     font-size: 12px;
-`;
-
-export const StyledButton = styled.button<IStyledButtonProps>`
-    margin: 2px;
-    svg {
-        color: #999;
-    }
-    :hover {
-        background-color: ${(props) => props.colorfondo};
-        svg {
-            color: ${(props) => props.colortexto};
-        }
-    }
-`;
-
-export const IconContainer = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 3px 0;
 `;
 
 export const ButtonsContainer = styled.div`

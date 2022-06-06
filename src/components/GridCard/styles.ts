@@ -5,7 +5,6 @@ interface IStyledBadgeProps {
     colortexto?: string;
     colorfondo?: string;
 }
-interface IStyledButtonProps extends IStyledBadgeProps {}
 
 interface IStyledLinkProps extends IStyledBadgeProps {}
 
@@ -56,25 +55,6 @@ export const StyledOferta = styled.strong`
 export const EnlacesContainer = styled.div`
     padding: 0;
     padding-bottom: 20px;
-`;
-
-export const StyledButton = styled.button<IStyledButtonProps>`
-    margin: 2px;
-    svg {
-        color: #999;
-    }
-    :hover {
-        background-color: ${(props) => props.colorfondo};
-        svg {
-            color: ${(props) => props.colortexto};
-        }
-    }
-`;
-
-export const IconContainer = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 3px 0;
 `;
 
 export const ButtonsContainer = styled.div`

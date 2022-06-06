@@ -1,14 +1,11 @@
-import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
 import { TStyle } from '../../interfaces/plantilla';
+import { openAuthModal } from '../../redux/actions';
+import { RootStore } from '../../redux/store';
+import ButtonCard from '../ButtonCard';
 import RenderIf from '../RenderIf';
-import {
-    EnlacesContainer,
-    StyledButton,
-    IconContainer,
-    ButtonsContainer,
-} from './styles';
+import { EnlacesContainer, ButtonsContainer } from './styles';
 interface IGridButtonsProps {
     ruta: string;
     tipo: string;
@@ -24,66 +21,50 @@ const GridButtons = ({
 }: IGridButtonsProps) => {
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
+    const dispatch = useDispatch();
+    const state = useSelector((state: RootStore) => state);
+    const { authReducer } = state;
+    const { uid } = authReducer;
+
+    const handleHeartClick = async () => {
+        if (uid) {
+            console.log(
+                '%c****************grid********************',
+                'color: black; background: cyan'
+            );
+        } else {
+            dispatch(openAuthModal('login'));
+        }
+    };
 
     return (
-        <>
-            <EnlacesContainer className="col-xs-5">
-                <ButtonsContainer>
-                    <StyledButton
-                        type="button"
-                        className="btn btn-default btn-xs"
-                        data-tip
-                        data-for="tooltipHeart"
-                        style={{ outline: 'none' }}
+        <EnlacesContainer className="col-xs-5">
+            <ButtonsContainer>
+                <ButtonCard
+                    icon="Heart"
+                    colortexto={plantillaStyles?.colorTexto}
+                    colorfondo={plantillaStyles?.colorFondo}
+                    tooltipText="Add to my wish list"
+                    onClick={handleHeartClick}
+                />
+                <RenderIf isTrue={isVirtual && !isFree}>
+                    <ButtonCard
+                        icon="Cart"
                         colortexto={plantillaStyles?.colorTexto}
                         colorfondo={plantillaStyles?.colorFondo}
-                    >
-                        <IconContainer>
-                            <FaHeart />
-                        </IconContainer>
-                    </StyledButton>
-                    <RenderIf isTrue={isVirtual && !isFree}>
-                        <StyledButton
-                            type="button"
-                            className="btn btn-default btn-xs"
-                            data-tip
-                            data-for="tooltipCart"
-                            style={{ outline: 'none' }}
-                            colortexto={plantillaStyles?.colorTexto}
-                            colorfondo={plantillaStyles?.colorFondo}
-                        >
-                            <IconContainer>
-                                <FaShoppingCart />
-                            </IconContainer>
-                        </StyledButton>
-                    </RenderIf>
-                    <Link to={ruta}>
-                        <StyledButton
-                            type="button"
-                            className="btn btn-default btn-xs"
-                            data-tip
-                            data-for="tooltipEye"
-                            style={{ outline: 'none' }}
-                            colortexto={plantillaStyles?.colorTexto}
-                            colorfondo={plantillaStyles?.colorFondo}
-                        >
-                            <IconContainer>
-                                <FaEye />
-                            </IconContainer>
-                        </StyledButton>
-                    </Link>
-                </ButtonsContainer>
-            </EnlacesContainer>
-            <ReactTooltip id="tooltipHeart" effect="solid">
-                Add to my wish list
-            </ReactTooltip>
-            <ReactTooltip id="tooltipCart" effect="solid">
-                Add to shopping cart
-            </ReactTooltip>
-            <ReactTooltip id="tooltipEye" effect="solid">
-                See product
-            </ReactTooltip>
-        </>
+                        tooltipText="Add to shopping cart"
+                    />
+                </RenderIf>
+                <Link to={ruta}>
+                    <ButtonCard
+                        icon="Eye"
+                        colortexto={plantillaStyles?.colorTexto}
+                        colorfondo={plantillaStyles?.colorFondo}
+                        tooltipText="See product"
+                    />
+                </Link>
+            </ButtonsContainer>
+        </EnlacesContainer>
     );
 };
 
