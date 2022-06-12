@@ -7,7 +7,12 @@ import ListPrice from './listPrice';
 import ListTitle from './listTitle';
 import { StyledFigure, StyledImg } from './styles';
 
+interface IListCardProps extends IProduct {
+    showRemove?: boolean;
+}
+
 export const ListCard = ({
+    id,
     ruta,
     portada,
     titulo,
@@ -20,7 +25,8 @@ export const ListCard = ({
     descripcion,
     categoriaRuta,
     subcategoriaRuta,
-}: IProduct) => {
+    showRemove,
+}: IListCardProps) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
     const { styles = [] } = plantillaReducer;
@@ -53,6 +59,8 @@ export const ListCard = ({
                     precioOferta={precioOferta}
                 />
                 <ListButtons
+                    showRemove={showRemove}
+                    productId={id}
                     tipo={tipo}
                     precio={precio}
                     plantillaStyles={plantillaStyles}

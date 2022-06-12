@@ -33,6 +33,10 @@ export const StyledDate = styled.h4`
     margin-bottom: 5px;
 `;
 
+export const ListContainer = styled.div`
+    margin-top: 30px;
+`;
+
 export const StyledH3 = styled.h3`
     margin-top: 10px;
     margin-bottom: 10px;

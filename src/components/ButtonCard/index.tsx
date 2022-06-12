@@ -1,5 +1,5 @@
 import ReactTooltip from 'react-tooltip';
-import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
+import { FaHeart, FaEye, FaShoppingCart, FaTrash } from 'react-icons/fa';
 import { StyledButton, IconContainer } from './styles';
 
 interface IButtonCardProps {
@@ -14,6 +14,7 @@ const iconsMap: { [key: string]: any } = {
     Heart: FaHeart,
     Eye: FaEye,
     Cart: FaShoppingCart,
+    Trash: FaTrash,
 };
 
 const ButtonCard = ({

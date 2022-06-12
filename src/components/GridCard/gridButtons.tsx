@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
@@ -11,9 +13,11 @@ interface IGridButtonsProps {
     tipo: string;
     plantillaStyles?: TStyle;
     precio?: number;
+    productId: number;
 }
 
 const GridButtons = ({
+    productId,
     tipo,
     plantillaStyles,
     ruta,
@@ -28,10 +32,21 @@ const GridButtons = ({
 
     const handleHeartClick = async () => {
         if (uid) {
-            console.log(
-                '%c****************grid********************',
-                'color: black; background: cyan'
+            const resp = await fetchWithToken(
+                `user/wish/new`,
+                { idProducto: productId, idUsuario: uid },
+                'POST'
             );
+            const body = await resp.json();
+            if (body.ok) {
+                toast.success(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            } else {
+                toast.error(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
         } else {
             dispatch(openAuthModal('login'));
         }

@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { redError, white } from '../../constants';
+import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
@@ -12,13 +15,17 @@ interface IListButtonsProps {
     tipo: string;
     precio?: number;
     plantillaStyles?: TStyle;
+    productId: number;
+    showRemove?: boolean;
 }
 
 const ListButtons = ({
+    productId,
     tipo,
     plantillaStyles,
     ruta,
     precio,
+    showRemove,
 }: IListButtonsProps) => {
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
@@ -29,23 +36,41 @@ const ListButtons = ({
 
     const handleHeartClick = async () => {
         if (uid) {
-            console.log(
-                '%c***************list*********************',
-                'color: black; background: cyan'
+            const resp = await fetchWithToken(
+                `user/wish/new`,
+                { idProducto: productId, idUsuario: uid },
+                'POST'
             );
+            const body = await resp.json();
+            if (body.ok) {
+                toast.success(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            } else {
+                toast.error(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
         } else {
             dispatch(openAuthModal('login'));
         }
     };
+
+    const handleTrashClick = () => {
+        console.log('Trash clicked');
+    };
+
     return (
         <ButtonsContainer>
-            <ButtonCard
-                icon="Heart"
-                colortexto={plantillaStyles?.colorTexto}
-                colorfondo={plantillaStyles?.colorFondo}
-                tooltipText="Add to my wish list"
-                onClick={handleHeartClick}
-            />
+            <RenderIf isTrue={!showRemove}>
+                <ButtonCard
+                    icon="Heart"
+                    colortexto={plantillaStyles?.colorTexto}
+                    colorfondo={plantillaStyles?.colorFondo}
+                    tooltipText="Add to my wish list"
+                    onClick={handleHeartClick}
+                />
+            </RenderIf>
             <RenderIf isTrue={isVirtual && !isFree}>
                 <ButtonCard
                     icon="Cart"
@@ -62,6 +87,15 @@ const ListButtons = ({
                     tooltipText="See product"
                 />
             </Link>
+            <RenderIf isTrue={!!showRemove}>
+                <ButtonCard
+                    icon="Trash"
+                    colortexto={white}
+                    colorfondo={redError}
+                    tooltipText="Remove from my wish list"
+                    onClick={handleTrashClick}
+                />
+            </RenderIf>
         </ButtonsContainer>
     );
 };

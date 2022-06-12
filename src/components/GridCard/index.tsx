@@ -8,6 +8,7 @@ import GridTitle from './gridTitle';
 import { StyledFigure, StyledImg } from './styles';
 
 export const GridCard = ({
+    id,
     ruta,
     portada,
     titulo,
@@ -48,6 +49,7 @@ export const GridCard = ({
                 precioOferta={precioOferta}
             />
             <GridButtons
+                productId={id}
                 tipo={tipo}
                 precio={precio}
                 plantillaStyles={plantillaStyles}

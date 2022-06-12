@@ -15,6 +15,7 @@ import MyOrders from './myOrders';
 import { baseUrl } from '../../constants';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/Spinner';
+import WishList from './wishList';
 
 const tabTitles = [
     <TabTitleContainer>
@@ -51,6 +52,12 @@ const UserProfile = () => {
     );
     const orders = valueOrders?.orders;
 
+    const { loading: loadingWhishes, value: valueWhishes } = useFetch(
+        `${baseUrl}/user/wish/${uid}`
+    );
+
+    const wishes = valueWhishes?.deseos;
+
     const handleTabSelect = (index: number) => {
         setTabIndex(index);
     };
@@ -61,7 +68,7 @@ const UserProfile = () => {
             colorfondo={plantillaStyles?.colorFondo}
             colortexto={plantillaStyles?.colorTexto}
         />,
-        <h2>Any content 2</h2>,
+        <WishList wishes={wishes} />,
         <EditProfile
             {...authReducer}
             colorfondo={plantillaStyles?.colorFondo}
@@ -69,7 +76,7 @@ const UserProfile = () => {
         />,
     ];
 
-    if (loadingOrders) {
+    if (loadingOrders || loadingWhishes) {
         return (
             <SpinnerContainer>
                 <Spinner
