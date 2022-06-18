@@ -15,7 +15,6 @@ interface IWishListProps {
 }
 
 const WishList = ({ wishes }: IWishListProps) => {
-    console.log(wishes);
     return (
         <div>
             <RenderIf isTrue={!wishes?.length}>

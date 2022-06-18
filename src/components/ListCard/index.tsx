@@ -9,6 +9,8 @@ import { StyledFigure, StyledImg } from './styles';
 
 interface IListCardProps extends IProduct {
     showRemove?: boolean;
+    onRemove?: (deseosId?: number) => void;
+    deseosId?: number;
 }
 
 export const ListCard = ({
@@ -26,6 +28,8 @@ export const ListCard = ({
     categoriaRuta,
     subcategoriaRuta,
     showRemove,
+    onRemove,
+    deseosId,
 }: IListCardProps) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
@@ -59,7 +63,9 @@ export const ListCard = ({
                     precioOferta={precioOferta}
                 />
                 <ListButtons
+                    deseosId={deseosId}
                     showRemove={showRemove}
+                    onRemove={onRemove}
                     productId={id}
                     tipo={tipo}
                     precio={precio}

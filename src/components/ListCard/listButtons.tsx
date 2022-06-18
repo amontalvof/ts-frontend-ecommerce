@@ -16,16 +16,20 @@ interface IListButtonsProps {
     precio?: number;
     plantillaStyles?: TStyle;
     productId: number;
+    deseosId?: number;
     showRemove?: boolean;
+    onRemove?: (deseosId?: number) => void;
 }
 
 const ListButtons = ({
+    deseosId,
     productId,
     tipo,
     plantillaStyles,
     ruta,
     precio,
     showRemove,
+    onRemove,
 }: IListButtonsProps) => {
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
@@ -57,7 +61,7 @@ const ListButtons = ({
     };
 
     const handleTrashClick = () => {
-        console.log('Trash clicked');
+        onRemove && onRemove(deseosId);
     };
 
     return (
