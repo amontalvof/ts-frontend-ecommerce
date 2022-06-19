@@ -29,6 +29,7 @@ const EditProfile = ({
                 modo={modo}
                 name={name}
                 email={email}
+                foto={foto}
                 colorfondo={colorfondo}
                 colortexto={colortexto}
             />

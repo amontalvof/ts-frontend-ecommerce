@@ -6,12 +6,16 @@ import { StyledButton } from './styles';
 import { updatePasswordValidationSchema } from './validation/updatePasswordValidationSchema';
 import { fetchWithToken } from '../../helpers/fetch';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { startLogout } from '../../redux/actions/authModalActions';
+import { useDispatch } from 'react-redux';
 
 interface IUpdatePasswordProps {
     uid?: number;
     modo?: string;
     name?: string;
     email?: string;
+    foto?: string;
     colorfondo?: string;
     colortexto?: string;
 }
@@ -21,9 +25,12 @@ const UpdatePassword = ({
     modo,
     name,
     email,
+    foto,
     colorfondo,
     colortexto,
 }: IUpdatePasswordProps) => {
+    const dispatch = useDispatch();
+
     const handleUpdatePassword = async (values: {
         updPassword1: string;
         updPassword2: string;
@@ -42,6 +49,37 @@ const UpdatePassword = ({
             toast.error(body.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
+        }
+    };
+
+    const handleDelete = async () => {
+        const result = await Swal.fire({
+            title: 'Are you sure you want to delete your account?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: colorfondo,
+            cancelButtonColor: '#C9302C',
+            confirmButtonText: 'Yes, delete it!',
+        });
+
+        if (result.isConfirmed) {
+            const resp = await fetchWithToken(
+                `user/${uid}`,
+                { modo, foto },
+                'DELETE'
+            );
+            const body = await resp.json();
+            if (body.ok) {
+                dispatch(startLogout());
+                toast.success(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            } else {
+                toast.error(body.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
         }
     };
 
@@ -106,6 +144,7 @@ const UpdatePassword = ({
                                     style={{ outline: 'none' }}
                                     type="button"
                                     className="btn btn-danger btn-md pull-right"
+                                    onClick={handleDelete}
                                 >
                                     Delete account
                                 </button>
@@ -203,6 +242,7 @@ const UpdatePassword = ({
                                     style={{ outline: 'none' }}
                                     type="button"
                                     className="btn btn-danger btn-md pull-right"
+                                    onClick={handleDelete}
                                 >
                                     Delete account
                                 </button>
