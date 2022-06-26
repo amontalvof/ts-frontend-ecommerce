@@ -70,7 +70,7 @@ const UserProfile = () => {
         />,
         <WishList wishes={wishes} />,
         <EditProfile
-            {...authReducer}
+            {...(authReducer as object)}
             colorfondo={plantillaStyles?.colorFondo}
             colortexto={plantillaStyles?.colorTexto}
         />,

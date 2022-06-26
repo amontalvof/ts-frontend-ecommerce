@@ -1,9 +1,11 @@
 import { FaShoppingCart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { Carrito } from './styles';
 
 const ShoppingCart = () => {
+    const { push } = useHistory();
     const { styles } = useSelector(
         (state: RootStore) => state.plantillaReducer
     );
@@ -17,6 +19,7 @@ const ShoppingCart = () => {
             <button
                 className="btn btn-default pull-left"
                 style={{ ...cartStyles, outline: 'none' }}
+                onClick={() => push('/cart')}
             >
                 <FaShoppingCart />
             </button>
