@@ -20,6 +20,7 @@ export const GridCard = ({
     tipo,
     categoriaRuta,
     subcategoriaRuta,
+    peso,
 }: IProduct) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
@@ -54,6 +55,9 @@ export const GridCard = ({
                 precio={precio}
                 plantillaStyles={plantillaStyles}
                 ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                portada={portada}
+                titulo={titulo}
+                peso={peso}
             />
         </>
     );

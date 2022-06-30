@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { uniqBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fetchWithToken } from '../../helpers/fetch';
@@ -8,11 +9,18 @@ import { RootStore } from '../../redux/store';
 import ButtonCard from '../ButtonCard';
 import RenderIf from '../RenderIf';
 import { EnlacesContainer, ButtonsContainer } from './styles';
+import {
+    getFromLocalStorageItem,
+    setLocalStorageItem,
+} from '../../helpers/manageStorage';
 interface IGridButtonsProps {
     ruta: string;
     tipo: string;
+    portada: string;
+    titulo: string;
     plantillaStyles?: TStyle;
     precio?: number;
+    peso?: number;
     productId: number;
 }
 
@@ -22,6 +30,9 @@ const GridButtons = ({
     plantillaStyles,
     ruta,
     precio,
+    portada,
+    titulo,
+    peso,
 }: IGridButtonsProps) => {
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
@@ -52,6 +63,29 @@ const GridButtons = ({
         }
     };
 
+    const handleCartClick = () => {
+        const newProduct = {
+            productId,
+            portada,
+            titulo,
+            precio,
+            tipo,
+            peso,
+            cantidad: 1,
+        };
+        const cartProductList = getFromLocalStorageItem('productList');
+        if (!!cartProductList) {
+            const parsedCartProductList = JSON.parse(cartProductList);
+            const newCartProductList = uniqBy(
+                [...parsedCartProductList, newProduct],
+                'productId'
+            );
+            setLocalStorageItem('productList', newCartProductList);
+        } else {
+            setLocalStorageItem('productList', [newProduct]);
+        }
+    };
+
     return (
         <EnlacesContainer className="col-xs-5">
             <ButtonsContainer>
@@ -68,6 +102,7 @@ const GridButtons = ({
                         colortexto={plantillaStyles?.colorTexto}
                         colorfondo={plantillaStyles?.colorFondo}
                         tooltipText="Add to shopping cart"
+                        onClick={handleCartClick}
                     />
                 </RenderIf>
                 <Link to={ruta}>

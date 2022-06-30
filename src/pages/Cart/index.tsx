@@ -199,7 +199,7 @@ const Cart = () => {
                                     color: plantillaStyles?.colorTexto,
                                 }}
                             >
-                                REALIZAR PAGO
+                                MAKE PAYMENT
                             </button>
                         </CabeceraCheckout>
                     </div>
