@@ -16,12 +16,25 @@ interface IFeaturesProps {
     tipo: string;
     detalles: string;
     colorfondo: string;
+    formValues: {
+        Color: string;
+        Brand: string;
+        Size: string;
+    };
+    onChange: (event: any) => void;
 }
 
-const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
+const Features = ({
+    tipo,
+    detalles,
+    colorfondo,
+    formValues,
+    onChange,
+}: IFeaturesProps) => {
     const hasDetails = detalles !== null;
     const isNotVirtual = tipo === 'fisico';
     const details = hasDetails && JSON.parse(detalles);
+    const { Color, Brand, Size } = formValues;
     return (
         <RenderIf isTrue={hasDetails}>
             <>
@@ -29,7 +42,12 @@ const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
                 <RenderIf isTrue={isNotVirtual}>
                     <NoVirtualContainer>
                         <RenderIf isTrue={!!details.Size}>
-                            <StyledSelect colorfondo={colorfondo}>
+                            <StyledSelect
+                                colorfondo={colorfondo}
+                                name="Size"
+                                onChange={onChange}
+                                value={Size}
+                            >
                                 <option value="">Size</option>
                                 {!!details.Size &&
                                     details.Size.map((size: number) => (
@@ -40,7 +58,12 @@ const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
                             </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Color}>
-                            <StyledSelect colorfondo={colorfondo}>
+                            <StyledSelect
+                                colorfondo={colorfondo}
+                                name="Color"
+                                onChange={onChange}
+                                value={Color}
+                            >
                                 <option value="">Color</option>
                                 {!!details.Color &&
                                     details.Color.map((color: string) => (
@@ -51,7 +74,12 @@ const Features = ({ tipo, detalles, colorfondo }: IFeaturesProps) => {
                             </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Brand}>
-                            <StyledSelect colorfondo={colorfondo}>
+                            <StyledSelect
+                                colorfondo={colorfondo}
+                                name="Brand"
+                                onChange={onChange}
+                                value={Brand}
+                            >
                                 <option value="">Brand</option>
                                 {!!details.Brand &&
                                     details.Brand.map((brand: string) => (

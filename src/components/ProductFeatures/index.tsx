@@ -1,3 +1,7 @@
+import { toast } from 'react-toastify';
+import addToCart from '../../helpers/addToCart';
+import checkIfFeaturesWhereSelected from '../../helpers/checkIfFeaturesWhereSelected';
+import { useForm } from '../../hooks/useForm';
 import { TStyle } from '../../interfaces/plantilla';
 import { IProduct } from '../../interfaces/product';
 import BuyButtons from './buyButtons';
@@ -16,6 +20,7 @@ export const ProductFeatures = ({
     plantillaStyles,
 }: IProductFeaturesProps) => {
     const {
+        id,
         ruta,
         titulo,
         nuevo,
@@ -31,8 +36,54 @@ export const ProductFeatures = ({
         vistasGratis,
         ventas,
         vistas,
+        portada,
+        peso,
     } = infoProduct;
     const { colorFondo, colorTexto } = plantillaStyles;
+    const [formValues, handleInputChange] = useForm({
+        Color: '',
+        Size: '',
+        Brand: '',
+    });
+
+    const handleAddCart = () => {
+        if (tipo === 'virtual') {
+            const newProduct = {
+                productId: id,
+                portada,
+                titulo,
+                precio,
+                tipo,
+                peso,
+                cantidad: 1,
+            };
+            return addToCart(newProduct);
+        }
+        const { isFeaturesSelected, finalFormValues } =
+            checkIfFeaturesWhereSelected(detalles, formValues);
+        if (isFeaturesSelected) {
+            const newProduct = {
+                productId: id,
+                portada,
+                titulo,
+                precio,
+                tipo,
+                peso,
+                cantidad: 1,
+                ...formValues,
+            };
+            return addToCart(newProduct);
+        }
+        toast.error(
+            `Please select the following characteristics ${Object.keys(
+                finalFormValues
+            )}`,
+            {
+                position: toast.POSITION.TOP_RIGHT,
+            }
+        );
+    };
+
     return (
         <>
             <Title
@@ -49,7 +100,13 @@ export const ProductFeatures = ({
                 oferta={oferta}
             />
             <Description descripcion={descripcion} />
-            <Features detalles={detalles} tipo={tipo} colorfondo={colorFondo} />
+            <Features
+                detalles={detalles}
+                tipo={tipo}
+                colorfondo={colorFondo}
+                formValues={formValues}
+                onChange={handleInputChange}
+            />
             <Delivery
                 ruta={ruta}
                 entrega={entrega}
@@ -64,6 +121,7 @@ export const ProductFeatures = ({
                 tipo={tipo}
                 colorfondo={colorFondo}
                 colortexto={colorTexto}
+                onAddToCart={handleAddCart}
             />
         </>
     );

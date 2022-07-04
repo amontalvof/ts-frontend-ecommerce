@@ -11,10 +11,12 @@ interface IListCardProps extends IProduct {
     showRemove?: boolean;
     onRemove?: (deseosId?: number) => void;
     deseosId?: number;
+    id_producto?: number;
 }
 
 export const ListCard = ({
     id,
+    id_producto,
     ruta,
     portada,
     titulo,
@@ -30,6 +32,7 @@ export const ListCard = ({
     showRemove,
     onRemove,
     deseosId,
+    peso
 }: IListCardProps) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
@@ -66,11 +69,14 @@ export const ListCard = ({
                     deseosId={deseosId}
                     showRemove={showRemove}
                     onRemove={onRemove}
-                    productId={id}
+                    productId={id_producto || id}
                     tipo={tipo}
                     precio={precio}
                     plantillaStyles={plantillaStyles}
                     ruta={`/${categoriaRuta}/${subcategoriaRuta}/${ruta}`}
+                    portada={portada}
+                    titulo={titulo}
+                    peso={peso}
                 />
             </div>
             <div className="col-xs-12">

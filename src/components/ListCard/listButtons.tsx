@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { redError, white } from '../../constants';
+import addToCart from '../../helpers/addToCart';
 import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
@@ -17,17 +18,23 @@ interface IListButtonsProps {
     plantillaStyles?: TStyle;
     productId: number;
     deseosId?: number;
+    portada: string;
+    titulo: string;
+    peso?: number;
     showRemove?: boolean;
     onRemove?: (deseosId?: number) => void;
 }
 
 const ListButtons = ({
-    deseosId,
     productId,
     tipo,
     plantillaStyles,
     ruta,
     precio,
+    portada,
+    titulo,
+    peso,
+    deseosId,
     showRemove,
     onRemove,
 }: IListButtonsProps) => {
@@ -64,6 +71,19 @@ const ListButtons = ({
         onRemove && onRemove(deseosId);
     };
 
+    const handleCartClick = () => {
+        const newProduct = {
+            productId,
+            portada,
+            titulo,
+            precio,
+            tipo,
+            peso,
+            cantidad: 1,
+        };
+        addToCart(newProduct);
+    };
+
     return (
         <ButtonsContainer>
             <RenderIf isTrue={!showRemove}>
@@ -81,6 +101,7 @@ const ListButtons = ({
                     colortexto={plantillaStyles?.colorTexto}
                     colorfondo={plantillaStyles?.colorFondo}
                     tooltipText="Add to shopping cart"
+                    onClick={handleCartClick}
                 />
             </RenderIf>
             <Link to={ruta}>

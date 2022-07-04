@@ -10,6 +10,7 @@ interface IBuyButtonsProps {
     tipo: string;
     colorfondo: string;
     colortexto: string;
+    onAddToCart: () => void;
 }
 
 const BuyButtons = ({
@@ -17,6 +18,7 @@ const BuyButtons = ({
     tipo,
     colorfondo,
     colortexto,
+    onAddToCart,
 }: IBuyButtonsProps) => {
     const isFree = precio === 0;
     const isVirtual = tipo === 'virtual';
@@ -24,6 +26,7 @@ const BuyButtons = ({
     const buttonStyles = {
         backgroundColor: colorfondo,
         color: colortexto,
+        outline: 'none',
     };
 
     return (
@@ -63,6 +66,7 @@ const BuyButtons = ({
                                 <StyledBuyButton
                                     className="btn btn-default btn-block btn-lg"
                                     style={buttonStyles}
+                                    onClick={onAddToCart}
                                 >
                                     <AddToCartIconContainer>
                                         <small>ADD TO CART</small>
@@ -78,6 +82,7 @@ const BuyButtons = ({
                                 <StyledBuyButton
                                     className="btn btn-default btn-block btn-lg"
                                     style={buttonStyles}
+                                    onClick={onAddToCart}
                                 >
                                     <AddToCartIconContainer>
                                         ADD TO CART

@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { uniqBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fetchWithToken } from '../../helpers/fetch';
@@ -9,10 +8,7 @@ import { RootStore } from '../../redux/store';
 import ButtonCard from '../ButtonCard';
 import RenderIf from '../RenderIf';
 import { EnlacesContainer, ButtonsContainer } from './styles';
-import {
-    getFromLocalStorageItem,
-    setLocalStorageItem,
-} from '../../helpers/manageStorage';
+import addToCart from '../../helpers/addToCart';
 interface IGridButtonsProps {
     ruta: string;
     tipo: string;
@@ -73,17 +69,7 @@ const GridButtons = ({
             peso,
             cantidad: 1,
         };
-        const cartProductList = getFromLocalStorageItem('productList');
-        if (!!cartProductList) {
-            const parsedCartProductList = JSON.parse(cartProductList);
-            const newCartProductList = uniqBy(
-                [...parsedCartProductList, newProduct],
-                'productId'
-            );
-            setLocalStorageItem('productList', newCartProductList);
-        } else {
-            setLocalStorageItem('productList', [newProduct]);
-        }
+        addToCart(newProduct);
     };
 
     return (
