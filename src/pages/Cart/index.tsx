@@ -1,15 +1,28 @@
 import { FaTimes } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Breadcrumb } from '../../components';
+import { getFromLocalStorageItem } from '../../helpers/manageStorage';
 import { RootStore } from '../../redux/store';
 import { CabeceraCarrito, CabeceraCheckout, Center, Container } from './styles';
 
 // TODO: Make cart responsive
 
+interface ICartProduct {
+    productId: number;
+    portada: string;
+    titulo: string;
+    precio: number;
+    cantidad: number;
+    tipo: string;
+}
+
 const Cart = () => {
     const { plantillaReducer } = useSelector((state: RootStore) => state);
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
+    const cartProductList = JSON.parse(
+        getFromLocalStorageItem('productList') || '[]'
+    );
     return (
         <Container>
             <div className="container-fluid">
@@ -39,141 +52,94 @@ const Cart = () => {
                             </div>
                         </CabeceraCarrito>
                         <div className="panel-body cuerpoCarrito">
-                            <div className="row itemCarrito">
-                                <div className="col-sm-1 col-xs-12">
-                                    <br />
-                                    <Center>
-                                        <button
-                                            className="btn btn-default backColor"
-                                            style={{
-                                                outline: 'none',
-                                                backgroundColor:
-                                                    plantillaStyles?.colorFondo,
-                                            }}
-                                        >
-                                            <Center>
-                                                <FaTimes
-                                                    style={{
-                                                        color: plantillaStyles?.colorTexto,
-                                                    }}
-                                                />
-                                            </Center>
-                                        </button>
-                                    </Center>
-                                </div>
-                                <div className="col-sm-1 col-xs-12">
-                                    <figure>
-                                        <img
-                                            src="https://res.cloudinary.com/a03m02f92/image/upload/v1643745307/ecommerce/productos/cursos/curso02_nkiwrk.jpg"
-                                            className="img-thumbnail"
-                                            alt="product"
-                                        />
-                                    </figure>
-                                </div>
-                                <div className="col-sm-4 col-xs-12">
-                                    <br />
-                                    <p className="tituloCarritoCompra text-left">
-                                        Learn Javascript from Scratch
-                                    </p>
-                                </div>
-                                <div className="col-md-2 col-sm-1 col-xs-12">
-                                    <br />
-                                    <p className="precioCarritoCompra text-center">
-                                        USD $<span>10</span>
-                                    </p>
-                                </div>
-                                <div className="col-md-2 col-sm-3 col-xs-8">
-                                    <br />
-                                    <div className="col-xs-8">
-                                        <Center>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                min={1}
-                                                defaultValue={1}
-                                                readOnly
-                                            />
-                                        </Center>
+                            {cartProductList.map((item: ICartProduct) => {
+                                console.log(item);
+                                const {
+                                    productId,
+                                    portada,
+                                    titulo,
+                                    precio,
+                                    cantidad,
+                                    tipo,
+                                } = item;
+                                return (
+                                    <div key={productId}>
+                                        <div className="row itemCarrito">
+                                            <div className="col-sm-1 col-xs-12">
+                                                <br />
+                                                <Center>
+                                                    <button
+                                                        className="btn btn-default backColor"
+                                                        style={{
+                                                            outline: 'none',
+                                                            backgroundColor:
+                                                                plantillaStyles?.colorFondo,
+                                                        }}
+                                                    >
+                                                        <Center>
+                                                            <FaTimes
+                                                                style={{
+                                                                    color: plantillaStyles?.colorTexto,
+                                                                }}
+                                                            />
+                                                        </Center>
+                                                    </button>
+                                                </Center>
+                                            </div>
+                                            <div className="col-sm-1 col-xs-12">
+                                                <figure>
+                                                    <img
+                                                        src={portada}
+                                                        className="img-thumbnail"
+                                                        alt="product"
+                                                    />
+                                                </figure>
+                                            </div>
+                                            <div className="col-sm-4 col-xs-12">
+                                                <br />
+                                                <p className="tituloCarritoCompra text-left">
+                                                    {titulo}
+                                                </p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-1 col-xs-12">
+                                                <br />
+                                                <p className="precioCarritoCompra text-center">
+                                                    USD $<span>{precio}</span>
+                                                </p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-3 col-xs-8">
+                                                <br />
+                                                <div className="col-xs-8">
+                                                    <Center>
+                                                        <input
+                                                            type="number"
+                                                            className="form-control"
+                                                            min={1}
+                                                            defaultValue={
+                                                                cantidad
+                                                            }
+                                                            readOnly={
+                                                                tipo ===
+                                                                'virtual'
+                                                            }
+                                                        />
+                                                    </Center>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-2 col-sm-1 col-xs-4 text-center">
+                                                <br />
+                                                <p>
+                                                    <strong>
+                                                        USD $<span>10</span>
+                                                    </strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="clearfix"></div>
+                                        <hr />
                                     </div>
-                                </div>
-                                <div className="col-md-2 col-sm-1 col-xs-4 text-center">
-                                    <br />
-                                    <p>
-                                        <strong>
-                                            USD $<span>10</span>
-                                        </strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="clearfix"></div>
-                            <hr />
-                            <div className="row itemCarrito">
-                                <div className="col-sm-1 col-xs-12">
-                                    <br />
-                                    <Center>
-                                        <button
-                                            className="btn btn-default backColor"
-                                            style={{
-                                                outline: 'none',
-                                                backgroundColor:
-                                                    plantillaStyles?.colorFondo,
-                                            }}
-                                        >
-                                            <Center>
-                                                <FaTimes
-                                                    style={{
-                                                        color: plantillaStyles?.colorTexto,
-                                                    }}
-                                                />
-                                            </Center>
-                                        </button>
-                                    </Center>
-                                </div>
-                                <div className="col-sm-1 col-xs-12">
-                                    <figure>
-                                        <img
-                                            src="https://res.cloudinary.com/a03m02f92/image/upload/v1643745373/ecommerce/productos/tecnologia/tecnologia02_sxtswp.jpg"
-                                            className="img-thumbnail"
-                                            alt="product"
-                                        />
-                                    </figure>
-                                </div>
-                                <div className="col-sm-4 col-xs-12">
-                                    <br />
-                                    <p className="tituloCarritoCompra text-left">
-                                        Samsung Galaxy S10
-                                    </p>
-                                </div>
-                                <div className="col-md-2 col-sm-1 col-xs-12">
-                                    <br />
-                                    <p className="precioCarritoCompra text-center">
-                                        USD $<span>290</span>
-                                    </p>
-                                </div>
-                                <div className="col-md-2 col-sm-3 col-xs-8">
-                                    <br />
-                                    <div className="col-xs-8">
-                                        <Center>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                min={1}
-                                                defaultValue={1}
-                                            />
-                                        </Center>
-                                    </div>
-                                </div>
-                                <div className="col-md-2 col-sm-1 col-xs-4 text-center">
-                                    <br />
-                                    <p>
-                                        <strong>
-                                            USD $<span>10</span>
-                                        </strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="clearfix"></div>
-                            <hr />
+                                );
+                            })}
                         </div>
                         <div className="panel-body sumaCarrito">
                             <div className="col-md-4 col-sm-6 col-xs-12 pull-right well">

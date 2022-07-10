@@ -1,4 +1,6 @@
 import { uniqBy } from 'lodash';
+import Swal from 'sweetalert2';
+import { redError } from '../constants';
 import { getFromLocalStorageItem, setLocalStorageItem } from './manageStorage';
 
 interface AddToCartParams {
@@ -11,7 +13,7 @@ interface AddToCartParams {
     cantidad: number;
 }
 
-const addToCart = (newProduct: AddToCartParams) => {
+const addToCart = async (newProduct: AddToCartParams, colorfondo?: string) => {
     const cartProductList = getFromLocalStorageItem('productList');
     if (!!cartProductList) {
         const parsedCartProductList = JSON.parse(cartProductList);
@@ -23,6 +25,16 @@ const addToCart = (newProduct: AddToCartParams) => {
     } else {
         setLocalStorageItem('productList', [newProduct]);
     }
+    const result = await Swal.fire({
+        text: 'A new product has been added to the shopping cart.',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: colorfondo,
+        cancelButtonColor: redError,
+        cancelButtonText: 'Continue on this page',
+        confirmButtonText: 'Go to cart',
+    });
+    return result;
 };
 
 export default addToCart;

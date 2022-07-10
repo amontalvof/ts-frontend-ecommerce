@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
@@ -30,6 +30,7 @@ const GridButtons = ({
     titulo,
     peso,
 }: IGridButtonsProps) => {
+    const { push } = useHistory();
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const GridButtons = ({
         }
     };
 
-    const handleCartClick = () => {
+    const handleCartClick = async () => {
         const newProduct = {
             productId,
             portada,
@@ -69,7 +70,10 @@ const GridButtons = ({
             peso,
             cantidad: 1,
         };
-        addToCart(newProduct);
+        const result = await addToCart(newProduct, plantillaStyles?.colorFondo);
+        if (result.isConfirmed) {
+            push('/cart');
+        }
     };
 
     return (

@@ -19,7 +19,6 @@ import { IUserInfo } from '../interfaces/user';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import UserProfile from '../pages/UserProfile';
-import Cart from '../pages/Cart';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -97,11 +96,6 @@ const AppRouter = () => {
                 <Top plantillaStyles={plantillaStyles} userInfo={userInfo} />
                 <Header />
                 <Switch>
-                    <PrivateRoute
-                        path="/cart"
-                        isAuthenticated={!!uid}
-                        component={Cart}
-                    />
                     <PrivateRoute
                         path="/profile"
                         isAuthenticated={!!uid}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { redError, white } from '../../constants';
 import addToCart from '../../helpers/addToCart';
@@ -38,6 +38,7 @@ const ListButtons = ({
     showRemove,
     onRemove,
 }: IListButtonsProps) => {
+    const { push } = useHistory();
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;
     const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const ListButtons = ({
         onRemove && onRemove(deseosId);
     };
 
-    const handleCartClick = () => {
+    const handleCartClick = async () => {
         const newProduct = {
             productId,
             portada,
@@ -81,7 +82,10 @@ const ListButtons = ({
             peso,
             cantidad: 1,
         };
-        addToCart(newProduct);
+        const result = await addToCart(newProduct, plantillaStyles?.colorFondo);
+        if (result.isConfirmed) {
+            push('/cart');
+        }
     };
 
     return (

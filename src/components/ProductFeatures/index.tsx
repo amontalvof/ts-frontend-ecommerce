@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addToCart from '../../helpers/addToCart';
 import checkIfFeaturesWhereSelected from '../../helpers/checkIfFeaturesWhereSelected';
@@ -39,6 +40,7 @@ export const ProductFeatures = ({
         portada,
         peso,
     } = infoProduct;
+    const { push } = useHistory();
     const { colorFondo, colorTexto } = plantillaStyles;
     const [formValues, handleInputChange] = useForm({
         Color: '',
@@ -46,7 +48,7 @@ export const ProductFeatures = ({
         Brand: '',
     });
 
-    const handleAddCart = () => {
+    const handleAddCart = async () => {
         if (tipo === 'virtual') {
             const newProduct = {
                 productId: id,
@@ -57,7 +59,11 @@ export const ProductFeatures = ({
                 peso,
                 cantidad: 1,
             };
-            return addToCart(newProduct);
+            const result = await addToCart(newProduct, colorFondo);
+            if (result.isConfirmed) {
+                return push('/cart');
+            }
+            return null;
         }
         const { isFeaturesSelected, finalFormValues } =
             checkIfFeaturesWhereSelected(detalles, formValues);
@@ -72,7 +78,11 @@ export const ProductFeatures = ({
                 cantidad: 1,
                 ...formValues,
             };
-            return addToCart(newProduct);
+            const result = await addToCart(newProduct, colorFondo);
+            if (result.isConfirmed) {
+                return push('/cart');
+            }
+            return null;
         }
         toast.error(
             `Please select the following characteristics ${Object.keys(

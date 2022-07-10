@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+import Cart from '../pages/Cart';
 import Error404 from '../pages/Error404';
 import Main from '../pages/Main';
 import ProductInfo from '../pages/ProductInfo';
@@ -18,6 +19,7 @@ export const PublicRoute = ({
     return (
         <Route {...rest}>
             <Switch>
+                <Route path="/cart" component={Cart} />
                 <Route exact path="/error" component={Error404} />
                 <Route exact path="/verify/:hash" component={Verify} />
                 <Route
