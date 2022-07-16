@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import addToCart from '../../helpers/addToCart';
+import { CartContext } from '../../context/storageCart';
 import checkIfFeaturesWhereSelected from '../../helpers/checkIfFeaturesWhereSelected';
 import { useForm } from '../../hooks/useForm';
 import { TStyle } from '../../interfaces/plantilla';
@@ -40,6 +41,7 @@ export const ProductFeatures = ({
         portada,
         peso,
     } = infoProduct;
+    const { addToCart } = useContext(CartContext);
     const { push } = useHistory();
     const { colorFondo, colorTexto } = plantillaStyles;
     const [formValues, handleInputChange] = useForm({

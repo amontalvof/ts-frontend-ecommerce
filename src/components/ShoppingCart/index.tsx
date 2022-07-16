@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { CartContext } from '../../context/storageCart';
+import formatPrice from '../../helpers/formatPrice';
 import { RootStore } from '../../redux/store';
 import { Carrito } from './styles';
 
 const ShoppingCart = () => {
+    const { total, cartItems } = useContext(CartContext);
     const { push } = useHistory();
     const { styles } = useSelector(
         (state: RootStore) => state.plantillaReducer
@@ -14,6 +18,8 @@ const ShoppingCart = () => {
         backgroundColor: plantillaStyles?.colorFondo,
         color: plantillaStyles?.colorTexto,
     };
+    const newTotal = formatPrice(total);
+
     return (
         <Carrito className="col-lg-3 col-md-3 col-sm-2 col-xs-12">
             <button
@@ -24,8 +30,8 @@ const ShoppingCart = () => {
                 <FaShoppingCart />
             </button>
             <p>
-                YOUR CART <span className="cantidadCesta">3</span> <br /> USD ${' '}
-                <span className="sumaCesta">20</span>
+                YOUR CART <span className="cantidadCesta">{cartItems}</span>{' '}
+                <br /> <span className="sumaCesta">{newTotal}</span>
             </p>
         </Carrito>
     );

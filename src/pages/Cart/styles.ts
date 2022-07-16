@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lightBlack } from '../../constants';
 
 export const Container = styled.div`
     margin: 20px 0 0;
@@ -20,4 +21,8 @@ export const Center = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+export const ErrorContainer = styled.div`
+    color: ${lightBlack};
 `;

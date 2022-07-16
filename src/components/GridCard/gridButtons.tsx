@@ -8,7 +8,8 @@ import { RootStore } from '../../redux/store';
 import ButtonCard from '../ButtonCard';
 import RenderIf from '../RenderIf';
 import { EnlacesContainer, ButtonsContainer } from './styles';
-import addToCart from '../../helpers/addToCart';
+import { useContext } from 'react';
+import { CartContext } from '../../context/storageCart';
 interface IGridButtonsProps {
     ruta: string;
     tipo: string;
@@ -30,6 +31,7 @@ const GridButtons = ({
     titulo,
     peso,
 }: IGridButtonsProps) => {
+    const { addToCart } = useContext(CartContext);
     const { push } = useHistory();
     const isVirtual = tipo === 'virtual';
     const isFree = !precio;

@@ -12,6 +12,7 @@ export const yellowStar = '#fdcc0d';
 export const grayStar = '#e4e5e9';
 export const redError = '#cc0000';
 export const white = '#ffffff';
+export const lightBlack = '#333333';
 
 export const modalCustomStyles = {
     content: {
