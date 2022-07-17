@@ -1,17 +1,23 @@
 import { useContext } from 'react';
-import { FaTimes } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Breadcrumb } from '../../components';
 import RenderIf from '../../components/RenderIf';
 import { CartContext } from '../../context/storageCart';
 import formatPrice from '../../helpers/formatPrice';
 import { RootStore } from '../../redux/store';
+import Amount from './amount';
+import Price from './price';
+import ProductImage from './productImage';
+import RemoveButton from './removeButton';
+import SubTotal from './subTotal';
+import Title from './title';
+import Total from './total';
+import CheckoutButton from './checkoutButton';
 import {
     CabeceraCarrito,
-    CabeceraCheckout,
-    Center,
     Container,
     ErrorContainer,
+    ItemCarrito,
 } from './styles';
 
 // TODO: Make cart responsive
@@ -26,11 +32,18 @@ interface ICartProduct {
 }
 
 const Cart = () => {
-    const { cart: cartProductList } = useContext(CartContext);
+    const {
+        cart: cartProductList,
+        removeFromCart,
+        increaseAmount,
+        decreaseAmount,
+        total,
+    } = useContext(CartContext);
     const { plantillaReducer } = useSelector((state: RootStore) => state);
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
     const isCartEmpty = cartProductList.length === 0;
+    const newTotal = formatPrice(total);
     return (
         <Container>
             <div className="container-fluid">
@@ -82,85 +95,54 @@ const Cart = () => {
                                             } = item;
                                             const newPrice =
                                                 formatPrice(precio);
+                                            const newSubtotal = formatPrice(
+                                                precio * cantidad
+                                            );
                                             return (
                                                 <div key={productId}>
-                                                    <div className="row itemCarrito">
-                                                        <div className="col-sm-1 col-xs-12">
-                                                            <br />
-                                                            <Center>
-                                                                <button
-                                                                    className="btn btn-default backColor"
-                                                                    style={{
-                                                                        outline:
-                                                                            'none',
-                                                                        backgroundColor:
-                                                                            plantillaStyles?.colorFondo,
-                                                                    }}
-                                                                >
-                                                                    <Center>
-                                                                        <FaTimes
-                                                                            style={{
-                                                                                color: plantillaStyles?.colorTexto,
-                                                                            }}
-                                                                        />
-                                                                    </Center>
-                                                                </button>
-                                                            </Center>
-                                                        </div>
-                                                        <div className="col-sm-1 col-xs-12">
-                                                            <figure>
-                                                                <img
-                                                                    src={
-                                                                        portada
-                                                                    }
-                                                                    className="img-thumbnail"
-                                                                    alt="product"
-                                                                />
-                                                            </figure>
-                                                        </div>
-                                                        <div className="col-sm-4 col-xs-12">
-                                                            <br />
-                                                            <p className="tituloCarritoCompra text-left">
-                                                                {titulo}
-                                                            </p>
-                                                        </div>
-                                                        <div className="col-md-2 col-sm-1 col-xs-12">
-                                                            <br />
-                                                            <p className="precioCarritoCompra text-center">
-                                                                {newPrice}
-                                                            </p>
-                                                        </div>
-                                                        <div className="col-md-2 col-sm-3 col-xs-8">
-                                                            <br />
-                                                            <div className="col-xs-8">
-                                                                <Center>
-                                                                    <input
-                                                                        type="number"
-                                                                        className="form-control"
-                                                                        min={1}
-                                                                        defaultValue={
-                                                                            cantidad
-                                                                        }
-                                                                        readOnly={
-                                                                            tipo ===
-                                                                            'virtual'
-                                                                        }
-                                                                    />
-                                                                </Center>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-2 col-sm-1 col-xs-4 text-center">
-                                                            <br />
-                                                            <p>
-                                                                <strong>
-                                                                    USD $
-                                                                    <span>
-                                                                        10
-                                                                    </span>
-                                                                </strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                    <ItemCarrito className="row ">
+                                                        <RemoveButton
+                                                            productId={
+                                                                productId
+                                                            }
+                                                            removeFromCart={
+                                                                removeFromCart
+                                                            }
+                                                            colorFondo={
+                                                                plantillaStyles?.colorFondo
+                                                            }
+                                                            colorTexto={
+                                                                plantillaStyles?.colorTexto
+                                                            }
+                                                        />
+                                                        <ProductImage
+                                                            portada={portada}
+                                                        />
+                                                        <Title
+                                                            titulo={titulo}
+                                                        />
+                                                        <Price
+                                                            price={newPrice}
+                                                        />
+                                                        <Amount
+                                                            tipo={tipo}
+                                                            productId={
+                                                                productId
+                                                            }
+                                                            cantidad={cantidad}
+                                                            decreaseAmount={
+                                                                decreaseAmount
+                                                            }
+                                                            increaseAmount={
+                                                                increaseAmount
+                                                            }
+                                                        />
+                                                        <SubTotal
+                                                            subTotal={
+                                                                newSubtotal
+                                                            }
+                                                        />
+                                                    </ItemCarrito>
                                                     <div className="clearfix"></div>
                                                     <hr />
                                                 </div>
@@ -172,33 +154,11 @@ const Cart = () => {
                         </div>
                         <RenderIf isTrue={!isCartEmpty}>
                             <>
-                                <div className="panel-body sumaCarrito">
-                                    <div className="col-md-4 col-sm-6 col-xs-12 pull-right well">
-                                        <div className="col-xs-6">
-                                            <h4>TOTAL:</h4>
-                                        </div>
-                                        <div className="col-xs-6">
-                                            <h4 className="sumaSubTotal">
-                                                <strong>
-                                                    USD $<span>20</span>
-                                                </strong>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <CabeceraCheckout className="panel-heading">
-                                    <button
-                                        className="btn btn-default btn-lg pull-right"
-                                        style={{
-                                            outline: 'none',
-                                            backgroundColor:
-                                                plantillaStyles?.colorFondo,
-                                            color: plantillaStyles?.colorTexto,
-                                        }}
-                                    >
-                                        MAKE PAYMENT
-                                    </button>
-                                </CabeceraCheckout>
+                                <Total total={newTotal} />
+                                <CheckoutButton
+                                    colorFondo={plantillaStyles?.colorFondo}
+                                    colorTexto={plantillaStyles?.colorTexto}
+                                />
                             </>
                         </RenderIf>
                     </div>

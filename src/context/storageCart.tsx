@@ -12,7 +12,27 @@ interface ICartObject {
     cantidad: number;
 }
 
-const CartContext = React.createContext<any>(undefined);
+interface ICartContext {
+    cart: ICartObject[];
+    total: number;
+    cartItems: number;
+    increaseAmount: (id: number) => void;
+    decreaseAmount: (id: number, amount: number) => void;
+    removeFromCart: (id: number) => void;
+    addToCart: (product: ICartObject, colorfondo?: string) => any;
+    clearCart: () => void;
+}
+
+const CartContext = React.createContext<ICartContext>({
+    cart: [],
+    total: 0,
+    cartItems: 0,
+    increaseAmount: (id: number) => {},
+    decreaseAmount: (id: number, amount: number) => {},
+    removeFromCart: (id: number) => {},
+    addToCart: (product: ICartObject, colorfondo?: string) => {},
+    clearCart: () => {},
+});
 
 const getCartFromLocalStorage = () => {
     const productList = localStorage.getItem('productList') || '[]';
@@ -45,7 +65,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }, [cart]);
 
     //remove item
-    const removeItem = (id: number) => {
+    const removeFromCart = (id: number) => {
         setCart([...cart].filter((item: ICartObject) => item.productId !== id));
     };
 
@@ -53,7 +73,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const increaseAmount = (id: number) => {
         const newCart = [...cart].map((item: ICartObject) => {
             return item.productId === id
-                ? { ...item, amount: item.cantidad + 1 }
+                ? { ...item, cantidad: item.cantidad + 1 }
                 : { ...item };
         });
         setCart(newCart);
@@ -62,11 +82,11 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     //decrease amount
     const decreaseAmount = (id: number, amount: number) => {
         if (amount === 1) {
-            removeItem(id);
+            removeFromCart(id);
         } else {
             const newCart = [...cart].map((item: ICartObject) => {
                 return item.productId === id
-                    ? { ...item, amount: item.cantidad - 1 }
+                    ? { ...item, cantidad: item.cantidad - 1 }
                     : { ...item };
             });
             setCart(newCart);
@@ -74,7 +94,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     //add to cart
-    const addToCart = async (product: ICartObject, colorfondo: string) => {
+    const addToCart = async (product: ICartObject, colorfondo?: string) => {
         const { productId, portada, titulo, precio, tipo, peso } = product;
         const item = [...cart].find(
             (item: ICartObject) => item.productId === productId
@@ -117,9 +137,9 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
                 cart,
                 total,
                 cartItems,
-                removeItem,
                 increaseAmount,
                 decreaseAmount,
+                removeFromCart,
                 addToCart,
                 clearCart,
             }}

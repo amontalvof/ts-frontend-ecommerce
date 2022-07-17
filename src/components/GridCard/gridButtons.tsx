@@ -16,7 +16,7 @@ interface IGridButtonsProps {
     portada: string;
     titulo: string;
     plantillaStyles?: TStyle;
-    precio?: number;
+    precio: number;
     peso?: number;
     productId: number;
 }

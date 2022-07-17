@@ -1,5 +1,6 @@
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import styled from 'styled-components';
-import { lightBlack } from '../../constants';
+import { gray, lightBlack } from '../../constants';
 
 export const Container = styled.div`
     margin: 20px 0 0;
@@ -23,6 +24,27 @@ export const Center = styled.div`
     align-items: center;
 `;
 
+export const ItemCarrito = styled.div`
+    font-size: 16px;
+`;
+
 export const ErrorContainer = styled.div`
     color: ${lightBlack};
+`;
+
+export const StyledPAmount = styled.div<{ tipo: string }>`
+    color: ${(props) => (props.tipo === 'virtual' ? gray : lightBlack)};
+`;
+
+export const StyledFaAngleDown = styled(FaAngleDown)<{ tipo: string }>`
+    :hover {
+        cursor: ${(props) =>
+            props.tipo === 'virtual' ? 'not-allowed' : 'pointer'};
+    }
+`;
+export const StyledFaAngleUp = styled(FaAngleUp)<{ tipo: string }>`
+    :hover {
+        cursor: ${(props) =>
+            props.tipo === 'virtual' ? 'not-allowed' : 'pointer'};
+    }
 `;

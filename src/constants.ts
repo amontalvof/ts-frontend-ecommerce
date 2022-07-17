@@ -10,6 +10,7 @@ export const privateRoutes = ['profile', 'cart'];
 // ! Colors
 export const yellowStar = '#fdcc0d';
 export const grayStar = '#e4e5e9';
+export const gray = '#808080';
 export const redError = '#cc0000';
 export const white = '#ffffff';
 export const lightBlack = '#333333';

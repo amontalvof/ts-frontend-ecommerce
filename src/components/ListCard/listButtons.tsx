@@ -15,7 +15,7 @@ import { ButtonsContainer } from './styles';
 interface IListButtonsProps {
     ruta: string;
     tipo: string;
-    precio?: number;
+    precio: number;
     plantillaStyles?: TStyle;
     productId: number;
     deseosId?: number;
