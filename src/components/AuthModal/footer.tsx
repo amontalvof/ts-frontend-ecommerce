@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { openAuthModal } from '../../redux/actions';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { StyledButton } from './styles';
 
 const Footer = ({ colorFondo, type }: { colorFondo: string; type: string }) => {

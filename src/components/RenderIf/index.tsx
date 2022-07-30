@@ -5,11 +5,9 @@ interface IRenderIfProps {
     children: ReactChild | ReactChildren;
 }
 
-const RenderIf = ({ isTrue, children }: IRenderIfProps) => {
+export const RenderIf = ({ isTrue, children }: IRenderIfProps) => {
     if (isTrue) {
         return <>{children}</>;
     }
     return null;
 };
-
-export default RenderIf;

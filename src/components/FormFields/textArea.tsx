@@ -9,7 +9,7 @@ interface ITextAreaProps {
     [x: string]: any;
 }
 
-const TextArea = (props: ITextAreaProps) => {
+export const TextArea = (props: ITextAreaProps) => {
     const { id, label } = props;
     const [field] = useField(props);
     return (
@@ -28,5 +28,3 @@ const TextArea = (props: ITextAreaProps) => {
         </div>
     );
 };
-
-export default TextArea;

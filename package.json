@@ -21,7 +21,6 @@
         "@types/styled-components": "^5.1.21",
         "formik": "^2.2.9",
         "lodash": "^4.17.21",
-        "nanoid": "^3.2.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-google-login": "^5.2.2",

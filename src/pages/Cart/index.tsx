@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { Breadcrumb } from '../../components';
-import RenderIf from '../../components/RenderIf';
+import { Breadcrumb, RenderIf } from '../../components';
 import { CartContext } from '../../context/storageCart';
 import formatPrice from '../../helpers/formatPrice';
 import { RootStore } from '../../redux/store';

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ProductsPanel } from '../../components';
-import Slider from '../../components/Slider';
-import Spinner from '../../components/Spinner';
+import { ProductsPanel, Slider, Spinner } from '../../components';
 import useFetch from '../../hooks/useFetch';
 import { RootStore } from '../../redux/store';
-import { baseUrl } from '../../constants';
+import { baseUrl, defaultBrand } from '../../constants';
 import { SpinnerContainer, SliderContainer } from './styles';
 
 const Main = () => {
@@ -32,11 +30,12 @@ const Main = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...
@@ -53,7 +52,7 @@ const Main = () => {
                 <Slider
                     elements={valueSlider?.slider}
                     controles
-                    // autoplay
+                    autoplay
                     velocidad="800"
                 />
             </SliderContainer>

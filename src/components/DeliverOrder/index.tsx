@@ -1,13 +1,13 @@
 import { FaCheck, FaClock } from 'react-icons/fa';
 import { StyledBar, StyledIconContainer } from './styles';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 
 interface IDeliverOrderProps {
     deliveryText: string;
     envio: number;
 }
 
-const DeliverOrder = ({ deliveryText, envio }: IDeliverOrderProps) => {
+export const DeliverOrder = ({ deliveryText, envio }: IDeliverOrderProps) => {
     const isSent = envio === 1 || envio === 2;
     const isDelivered = envio === 2;
     return (
@@ -75,5 +75,3 @@ const DeliverOrder = ({ deliveryText, envio }: IDeliverOrderProps) => {
         </>
     );
 };
-
-export default DeliverOrder;

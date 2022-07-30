@@ -1,6 +1,7 @@
 // * Env Variables
 export const baseUrl = process.env.REACT_APP_API_URL;
 export const reCaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
+export const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 //? Routes
 export const relevantRoutes = ['free', 'sales', 'views'];
@@ -14,6 +15,7 @@ export const gray = '#808080';
 export const redError = '#cc0000';
 export const white = '#ffffff';
 export const lightBlack = '#333333';
+export const defaultBrand = '#47bac1';
 
 export const modalCustomStyles = {
     content: {

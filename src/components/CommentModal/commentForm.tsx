@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
-import TextArea from '../FormFields/textArea';
+import { TextArea } from '../FormFields/textArea';
 import { commentValidationSchema } from './validation/commentValidation';
 import { SubmitButton } from '../AuthModal/styles';
 import { TStyle } from '../../interfaces/plantilla';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
 import { useDispatch, useSelector } from 'react-redux';
-import StarRating from '../StarRating';
+import { StarRating } from '../StarRating';
 import { yellowStar, grayStar } from '../../constants';
 import { RatingContainer, StyledError } from './styles';
 import { ICommentPayload } from '../../interfaces/commentModal';
 import { RootStore } from '../../redux/store';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import updateProductComment from '../../services/updateProductComment';
 import createProductComment from '../../services/createProductComment';
 

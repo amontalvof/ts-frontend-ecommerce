@@ -1,5 +1,6 @@
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
+import { googleClientId } from '../../constants';
 import { startGoogleSignIn } from '../../redux/actions/authModalActions';
 import { GoogleLoginContainer } from './styles';
 
@@ -10,12 +11,10 @@ const GoogleSignInButton = ({ text }: { text: string }) => {
         dispatch(startGoogleSignIn({ ...response, type: text.toLowerCase() }));
     };
 
-    const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
-
     return (
         <GoogleLoginContainer>
             <GoogleLogin
-                clientId={googleClientId}
+                clientId={googleClientId || ''}
                 buttonText={`${text} with Google`}
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}

@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import {
     FaPlayCircle,
     FaClock,
@@ -8,7 +7,7 @@ import {
     FaTrophy,
 } from 'react-icons/fa';
 import capitalizeFirstLetter from '../../helpers/capitalizeFirstLetter';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { StyledVirtualFeaturesContainer } from './styles';
 import { IconContainer, NoVirtualContainer, StyledSelect } from './styles';
 
@@ -50,11 +49,16 @@ const Features = ({
                             >
                                 <option value="">Size</option>
                                 {!!details.Size &&
-                                    details.Size.map((size: number) => (
-                                        <option key={nanoid(10)} value={size}>
-                                            {size}
-                                        </option>
-                                    ))}
+                                    details.Size.map(
+                                        (size: number, index: number) => (
+                                            <option
+                                                key={`details-size-${index}`}
+                                                value={size}
+                                            >
+                                                {size}
+                                            </option>
+                                        )
+                                    )}
                             </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Color}>
@@ -66,11 +70,16 @@ const Features = ({
                             >
                                 <option value="">Color</option>
                                 {!!details.Color &&
-                                    details.Color.map((color: string) => (
-                                        <option key={nanoid(10)} value={color}>
-                                            {capitalizeFirstLetter(color)}
-                                        </option>
-                                    ))}
+                                    details.Color.map(
+                                        (color: string, index: number) => (
+                                            <option
+                                                key={`details-color-${index}`}
+                                                value={color}
+                                            >
+                                                {capitalizeFirstLetter(color)}
+                                            </option>
+                                        )
+                                    )}
                             </StyledSelect>
                         </RenderIf>
                         <RenderIf isTrue={!!details.Brand}>
@@ -82,11 +91,16 @@ const Features = ({
                             >
                                 <option value="">Brand</option>
                                 {!!details.Brand &&
-                                    details.Brand.map((brand: string) => (
-                                        <option key={nanoid(10)} value={brand}>
-                                            {capitalizeFirstLetter(brand)}
-                                        </option>
-                                    ))}
+                                    details.Brand.map(
+                                        (brand: string, index: number) => (
+                                            <option
+                                                key={`details-brand-${index}`}
+                                                value={brand}
+                                            >
+                                                {capitalizeFirstLetter(brand)}
+                                            </option>
+                                        )
+                                    )}
                             </StyledSelect>
                         </RenderIf>
                     </NoVirtualContainer>

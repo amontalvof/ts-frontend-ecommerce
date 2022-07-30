@@ -1,13 +1,17 @@
 import { TStyle } from '../../interfaces/plantilla';
 import { Title, XCloseButton } from './styles';
 
-interface IHeaderProps {
+interface IModalHeaderProps {
     text: string;
     plantillaStyles: TStyle;
     closeModal: () => void;
 }
 
-const Header = ({ text, closeModal, plantillaStyles }: IHeaderProps) => {
+export const ModalHeader = ({
+    text,
+    closeModal,
+    plantillaStyles,
+}: IModalHeaderProps) => {
     return (
         <>
             <Title
@@ -26,5 +30,3 @@ const Header = ({ text, closeModal, plantillaStyles }: IHeaderProps) => {
         </>
     );
 };
-
-export default Header;

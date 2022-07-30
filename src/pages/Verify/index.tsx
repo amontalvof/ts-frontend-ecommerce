@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import RenderIf from '../../components/RenderIf';
-import Spinner from '../../components/Spinner';
-import { baseUrl } from '../../constants';
+import { RenderIf, Spinner } from '../../components';
+import { baseUrl, defaultBrand } from '../../constants';
 import { fetchWithoutToken } from '../../helpers/fetch';
 import useFetch from '../../hooks/useFetch';
 import { openAuthModal } from '../../redux/actions';
@@ -68,11 +67,12 @@ const Verify = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import List from './list';
 
 interface INumbersProps {

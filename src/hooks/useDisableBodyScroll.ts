@@ -1,4 +1,3 @@
-// TODO: Add to Effortless React
 import { useEffect } from 'react';
 
 const useDisableBodyScroll = (open: boolean) => {

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { omit } from 'lodash';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import Spinner from '../components/Spinner';
+import { Spinner, ScrollButton } from '../components';
 import Header from '../layout/Header';
 import Top from '../layout/Top';
 import { SpinnerContainer, RouterContainer } from './styles';
@@ -13,12 +13,12 @@ import {
     getSubCategories,
     getProductRoutes,
 } from '../redux/actions';
-import ScrollButton from '../components/ScrollButton';
 import { startChecking } from '../redux/actions/authModalActions';
 import { IUserInfo } from '../interfaces/user';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import UserProfile from '../pages/UserProfile';
+import { defaultBrand } from '../constants';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -75,11 +75,12 @@ const AppRouter = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...

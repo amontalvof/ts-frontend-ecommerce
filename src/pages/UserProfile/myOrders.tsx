@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CommentModal from '../../components/CommentModal';
-import DeliverOrder from '../../components/DeliverOrder';
-import RenderIf from '../../components/RenderIf';
-import StarRatingDisplay from '../../components/StarRatingDisplay';
 import { grayStar, yellowStar } from '../../constants';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { IOrderInfo } from '../../interfaces/user';
 import { openCommentModal } from '../../redux/actions/commentModalActions';
 import { ErrorContainer, StyledDate, StyledTitle, StyledH3 } from './styles';
+import {
+    CommentModal,
+    DeliverOrder,
+    RenderIf,
+    StarRatingDisplay,
+} from '../../components';
 
 interface IMyOrdersProps {
     orders?: IOrderInfo[];

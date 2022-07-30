@@ -7,7 +7,8 @@ interface IRelevantTitleProps {
     seeMoreRoute?: string;
     plantillaStyles: TStyle;
 }
-const RelevantTitle = ({
+
+export const RelevantTitle = ({
     title = '',
     seeMoreRoute = '',
     plantillaStyles,
@@ -48,5 +49,3 @@ const RelevantTitle = ({
         </>
     );
 };
-
-export default RelevantTitle;

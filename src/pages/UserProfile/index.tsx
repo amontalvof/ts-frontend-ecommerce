@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaList, FaGift, FaUserEdit } from 'react-icons/fa';
-import { Breadcrumb } from '../../components';
-import TabSet from '../../components/TabSet';
+import { Breadcrumb, Spinner, TabSet } from '../../components';
 import { RootStore } from '../../redux/store';
 import {
     Container,
@@ -12,9 +11,8 @@ import {
 } from './styles';
 import EditProfile from './editProfile';
 import MyOrders from './myOrders';
-import { baseUrl } from '../../constants';
+import { baseUrl, defaultBrand } from '../../constants';
 import useFetch from '../../hooks/useFetch';
-import Spinner from '../../components/Spinner';
 import WishList from './wishList';
 
 const tabTitles = [
@@ -83,11 +81,12 @@ const UserProfile = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...

@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { fetchWithToken } from '../../helpers/fetch';
@@ -44,8 +43,8 @@ export const ListProducts = ({ products = [], showRemove }: IListProducts) => {
 
     return (
         <StyledUl>
-            {finalProducts.map((product) => (
-                <li key={nanoid(10)} className="col-xs-12">
+            {finalProducts.map((product, index) => (
+                <li key={`final-products-${index}`} className="col-xs-12">
                     <ListCard
                         {...product}
                         showRemove={showRemove}

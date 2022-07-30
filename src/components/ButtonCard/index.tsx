@@ -17,7 +17,7 @@ const iconsMap: { [key: string]: any } = {
     Trash: FaTrash,
 };
 
-const ButtonCard = ({
+export const ButtonCard = ({
     icon,
     colortexto,
     colorfondo,
@@ -48,5 +48,3 @@ const ButtonCard = ({
         </>
     );
 };
-
-export default ButtonCard;

@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import { range } from 'lodash';
 import useQueryParams from '../../hooks/useQueryParams';
@@ -28,9 +27,9 @@ const List = ({
     const defaultStyles = { color: colorfondo };
     return (
         <>
-            {range(start, end).map((number) => {
+            {range(start, end).map((number, index) => {
                 return (
-                    <li key={nanoid(10)}>
+                    <li key={`list-${index}`}>
                         <Link
                             to={`${route}?page=${number}`}
                             style={

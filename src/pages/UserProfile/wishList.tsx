@@ -1,5 +1,4 @@
-import { ListProducts } from '../../components';
-import RenderIf from '../../components/RenderIf';
+import { ListProducts, RenderIf } from '../../components';
 import { ErrorContainer, ListContainer } from './styles';
 import { IProduct } from '../../interfaces/product';
 

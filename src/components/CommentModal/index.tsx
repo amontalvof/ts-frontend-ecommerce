@@ -5,11 +5,11 @@ import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
 import { IReturnUiCommentModalReducer } from '../../interfaces/commentModal';
 import { closeCommentModal } from '../../redux/actions/commentModalActions';
 import { RootStore } from '../../redux/store';
-import ModalHeader from '../ModalHeader';
+import { ModalHeader } from '../ModalHeader';
 import CommentForm from './commentForm';
 import { ModalContent, ModalTitulo } from './styles';
 
-const CommentModal = () => {
+export const CommentModal = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
     const { uiCommentModalReducer, plantillaReducer } = state;
@@ -56,5 +56,3 @@ const CommentModal = () => {
         </Modal>
     );
 };
-
-export default CommentModal;

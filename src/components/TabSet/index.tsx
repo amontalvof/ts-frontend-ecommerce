@@ -14,7 +14,7 @@ interface ITabSetProps {
     action?: ReactChild | ReactChildren;
 }
 
-const TabSet = ({
+export const TabSet = ({
     titles,
     panels,
     color,
@@ -49,5 +49,3 @@ const TabSet = ({
         </Tabs>
     );
 };
-
-export default TabSet;

@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
 import { FaTh, FaList } from 'react-icons/fa';
+import { lightBlack } from '../../constants';
 import { TStyle } from '../../interfaces/plantilla';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import {
     IconTextContainer,
     StyledButtonText,
@@ -42,10 +43,10 @@ export const DisplayGridListBar = ({
     };
 
     const recentAnchorStyles = {
-        color: hoveredRecent ? '#333333' : plantillaStyles?.colorTexto,
+        color: hoveredRecent ? lightBlack : plantillaStyles?.colorTexto,
     };
     const oldAnchorStyles = {
-        color: hoveredOld ? '#333333' : plantillaStyles?.colorTexto,
+        color: hoveredOld ? lightBlack : plantillaStyles?.colorTexto,
     };
 
     const toggleHoverRecent = () => {

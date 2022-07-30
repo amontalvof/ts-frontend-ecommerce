@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FaSpinner, FaFileUpload } from 'react-icons/fa';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
 import { startUploadUserImage } from '../../redux/actions/userActions';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import {
     ButtonTextContainer,
     HiddenInput,
@@ -18,7 +18,7 @@ interface IUploadUserImgProps {
     modo?: string;
 }
 
-const UploadUserImg = ({
+export const UploadUserImg = ({
     uid,
     foto,
     colorfondo,
@@ -97,5 +97,3 @@ const UploadUserImg = ({
         </form>
     );
 };
-
-export default UploadUserImg;

@@ -8,13 +8,16 @@ import { TCategory } from '../../interfaces/categories';
 import checkProductsRoute from '../../helpers/checkProductsRoute';
 import getProductsRequestBody from '../../helpers/getProductsRequestBody';
 import useFetch from '../../hooks/useFetch';
-import Spinner from '../../components/Spinner';
 import { SpinnerContainer } from './styles';
-import { Banner, ProductsPanel, Pagination } from '../../components';
+import { Banner, ProductsPanel, Pagination, Spinner } from '../../components';
 import useQueryParams from '../../hooks/useQueryParams';
 import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
-import { otherCategoriesRoutes, relevantRoutes } from '../../constants';
-import { baseUrl } from '../../constants';
+import {
+    baseUrl,
+    defaultBrand,
+    otherCategoriesRoutes,
+    relevantRoutes,
+} from '../../constants';
 
 interface IUseParams {
     categoryId?: string;
@@ -105,11 +108,12 @@ const Products = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...

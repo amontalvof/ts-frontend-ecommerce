@@ -2,7 +2,7 @@ import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { TStyle } from '../../interfaces/plantilla';
 import { startForgotPassword } from '../../redux/actions/authModalActions';
-import TextInput from '../FormFields/textInput';
+import { TextInput } from '../FormFields/textInput';
 import { SubmitButton } from './styles';
 import { forgotPasswordValidationSchema } from './validation/forgotPasswordValidation';
 

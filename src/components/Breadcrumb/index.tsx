@@ -4,7 +4,7 @@ import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import { TCategory } from '../../interfaces/categories';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { RootStore } from '../../redux/store';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { StyledLink } from './styles';
 import {
     otherCategoriesRoutes,

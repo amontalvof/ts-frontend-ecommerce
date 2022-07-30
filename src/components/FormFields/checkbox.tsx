@@ -8,7 +8,7 @@ interface ICheckboxProps {
     [x: string]: any;
 }
 
-const Checkbox = ({ label, ...props }: ICheckboxProps) => {
+export const Checkbox = ({ label, ...props }: ICheckboxProps) => {
     const [field] = useField({ ...props, type: 'checkbox' });
     return (
         <>
@@ -26,5 +26,3 @@ const Checkbox = ({ label, ...props }: ICheckboxProps) => {
         </>
     );
 };
-
-export default Checkbox;

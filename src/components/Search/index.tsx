@@ -11,7 +11,7 @@ interface ISearchProps {
 }
 const regex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_ ]*$/;
 
-const Search = ({ handleHideCategories }: ISearchProps) => {
+export const Search = ({ handleHideCategories }: ISearchProps) => {
     const history = useHistory();
     const [internalSearchValue, setInternalSearchValue] = useState('');
     const dispatch = useDispatch();
@@ -100,5 +100,3 @@ const Search = ({ handleHideCategories }: ISearchProps) => {
         </div>
     );
 };
-
-export default Search;

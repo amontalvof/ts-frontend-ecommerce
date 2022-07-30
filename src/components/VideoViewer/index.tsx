@@ -4,7 +4,8 @@ import { StyledIframe, VideoViewerContainer } from './styles';
 interface IVideoViewerProps {
     infoProduct: IProduct;
 }
-const VideoViewer = ({ infoProduct }: IVideoViewerProps) => {
+
+export const VideoViewer = ({ infoProduct }: IVideoViewerProps) => {
     const { multimedia: videoId } = infoProduct;
     const src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=0`;
     return (
@@ -19,5 +20,3 @@ const VideoViewer = ({ infoProduct }: IVideoViewerProps) => {
         </VideoViewerContainer>
     );
 };
-
-export default VideoViewer;

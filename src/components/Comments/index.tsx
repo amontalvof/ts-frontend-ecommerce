@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
-import StarRatingDisplay from '../StarRatingDisplay';
+import { StarRatingDisplay } from '../StarRatingDisplay';
 import { baseUrl, grayStar, yellowStar } from '../../constants';
 import useFetch from '../../hooks/useFetch';
-import RenderIf from '../RenderIf/index';
+import { RenderIf } from '../RenderIf/index';
 import resolveAverageRating from '../../helpers/resolveAverageRating';
 import {
     CommentContainer,
@@ -20,7 +20,7 @@ interface ICommentsProps {
     productId?: number;
 }
 
-const Comments = ({
+export const Comments = ({
     color,
     productId,
     handleTotalRatings,
@@ -98,5 +98,3 @@ const Comments = ({
         </CommentContainer>
     );
 };
-
-export default Comments;

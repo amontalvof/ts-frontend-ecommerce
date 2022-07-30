@@ -8,8 +8,8 @@ import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
-import ButtonCard from '../ButtonCard';
-import RenderIf from '../RenderIf';
+import { ButtonCard } from '../ButtonCard';
+import { RenderIf } from '../RenderIf';
 import { ButtonsContainer } from './styles';
 
 interface IListButtonsProps {

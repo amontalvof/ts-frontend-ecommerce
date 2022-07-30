@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { IRegisterActionParams } from '../../interfaces/authModal';
 import { TStyle } from '../../interfaces/plantilla';
 import { startRegister } from '../../redux/actions';
-import Checkbox from '../FormFields/checkbox';
-import TextInput from '../FormFields/textInput';
+import { Checkbox } from '../FormFields/checkbox';
+import { TextInput } from '../FormFields/textInput';
 import { StyledAnchor, SubmitButton } from './styles';
 import { registerValidationSchema } from './validation/registerValidation';
 

@@ -1,9 +1,6 @@
 import { useRef, useState, MutableRefObject } from 'react';
-import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
-import { CategoriesList, Logo } from '../../components';
-import Search from '../../components/Search';
-import ShoppingCart from '../../components/ShoppingCart';
+import { CategoriesList, Logo, Search, ShoppingCart } from '../../components';
 import useClickOutside from '../../hooks/useClickOutside';
 import { RootStore } from '../../redux/store';
 import { CategoriasContainer } from './styles';
@@ -40,9 +37,9 @@ const Header = () => {
                     style={categoriesStyles}
                     ref={categoriesRef}
                 >
-                    {categories.map((item) => (
+                    {categories.map((item, index) => (
                         <CategoriesList
-                            key={nanoid(10)}
+                            key={`category-${index}`}
                             id={item.id}
                             category={item.categoria}
                             to={item.ruta}

@@ -5,7 +5,7 @@ import { StyledButton } from './styles';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../redux/store';
 
-const ScrollButton = () => {
+export const ScrollButton = () => {
     const [pageScroll, setPageScroll] = useState<number>(0);
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
@@ -38,5 +38,3 @@ const ScrollButton = () => {
         </StyledButton>
     );
 };
-
-export default ScrollButton;

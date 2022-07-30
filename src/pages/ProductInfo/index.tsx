@@ -8,18 +8,22 @@ import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import { TRoute } from '../../interfaces/productRoutes';
-import { ImagesViewer, ProductFeatures, ProductsPanel } from '../../components';
-import Spinner from '../../components/Spinner';
 import useFetch from '../../hooks/useFetch';
-import { baseUrl, grayStar, yellowStar } from '../../constants';
-import RenderIf from '../../components/RenderIf';
-import VideoViewer from '../../components/VideoViewer';
-import TabSet from '../../components/TabSet';
-import Comments from '../../components/Comments';
+import { baseUrl, defaultBrand, grayStar, yellowStar } from '../../constants';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
-import ThereAreNoProducts from '../../components/ThereAreNoProducts';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import StarRatingDisplay from '../../components/StarRatingDisplay/index';
+import {
+    ImagesViewer,
+    ProductFeatures,
+    ProductsPanel,
+    Spinner,
+    RenderIf,
+    VideoViewer,
+    ThereAreNoProducts,
+    StarRatingDisplay,
+    TabSet,
+    Comments,
+} from '../../components';
 import {
     InfoContainer,
     IconContainer,
@@ -149,11 +153,12 @@ const ProductInfo = () => {
                     plantillaStyles={plantillaStyles}
                     size={15}
                     margin={2}
-                    defaultColor="#47bac1"
+                    defaultColor={defaultBrand}
                     text={
                         <h1
                             style={{
-                                color: plantillaStyles?.colorFondo || '#47bac1',
+                                color:
+                                    plantillaStyles?.colorFondo || defaultBrand,
                             }}
                         >
                             Loading...

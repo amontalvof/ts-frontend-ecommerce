@@ -3,11 +3,11 @@ import { RootStore } from '../../redux/store';
 import { DisplayGridListBar } from '../DisplayGridListBar';
 import { GridProducts } from '../GridProducts';
 import { ListProducts } from '../ListProducts';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { IProduct } from '../../interfaces/product';
-import RelevantTitle from '../RelevantTitle';
+import { RelevantTitle } from '../RelevantTitle';
 import { Breadcrumb } from '../Breadcrumb';
-import ThereAreNoProducts from '../ThereAreNoProducts';
+import { ThereAreNoProducts } from '../ThereAreNoProducts';
 
 interface IProductsPanelProps {
     title?: string;

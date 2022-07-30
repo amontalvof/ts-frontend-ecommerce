@@ -7,7 +7,7 @@ import formatPrice from '../../helpers/formatPrice';
 import { RootStore } from '../../redux/store';
 import { Carrito } from './styles';
 
-const ShoppingCart = () => {
+export const ShoppingCart = () => {
     const { total, cartItems } = useContext(CartContext);
     const { push } = useHistory();
     const { styles } = useSelector(
@@ -36,5 +36,3 @@ const ShoppingCart = () => {
         </Carrito>
     );
 };
-
-export default ShoppingCart;

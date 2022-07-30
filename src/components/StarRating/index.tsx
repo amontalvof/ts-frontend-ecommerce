@@ -13,7 +13,7 @@ interface IStarRatingProps {
     onRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const StarRating = ({
+export const StarRating = ({
     color,
     count = 5,
     rating,
@@ -47,5 +47,3 @@ const StarRating = ({
         </div>
     );
 };
-
-export default StarRating;

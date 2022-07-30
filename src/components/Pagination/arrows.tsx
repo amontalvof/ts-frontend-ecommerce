@@ -1,7 +1,7 @@
 import { ReactChild, ReactChildren } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { IconContainer } from './styles';
 
 interface IArrowsProps {

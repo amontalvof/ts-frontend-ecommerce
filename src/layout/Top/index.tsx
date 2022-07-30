@@ -1,10 +1,8 @@
-// import { nanoid } from 'nanoid';
 // import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
-import AuthModal from '../../components/AuthModal';
-import RenderIf from '../../components/RenderIf';
+import { AuthModal, RenderIf } from '../../components';
 import { TStyle } from '../../interfaces/plantilla';
 import { IUserInfo } from '../../interfaces/user';
 import { openAuthModal } from '../../redux/actions';
@@ -80,10 +78,10 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
                     {/* SOCIAL */}
                     <div className="col-lg-9 col-md-9 col-sm-8 col-xs-12">
                         {/* <StyledIconsUl>
-                            {redesSocialesParsed.map((item: ISocialNetwork) => {
+                            {redesSocialesParsed.map((item: ISocialNetwork, index: number) => {
                                 const Icon = iconsMap[item.red];
                                 return (
-                                    <StyledIconsLi key={nanoid(10)}>
+                                    <StyledIconsLi key={`icon-${index}`)}>
                                         <a
                                             href={item.url}
                                             target="_blank"

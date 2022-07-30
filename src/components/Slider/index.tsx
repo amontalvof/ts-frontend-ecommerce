@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback, MutableRefObject } from 'react';
-import { nanoid } from 'nanoid';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { white } from '../../constants';
 import {
     Boton,
     ContenedorPrincipal,
@@ -29,12 +29,12 @@ interface ISlide {
 const arrowStyles = {
     width: '25px',
     height: '25px',
-    color: '#fff',
+    color: white,
     backgroundColor: 'rgba(0,0,0,.5)',
     borderRadius: '5px',
 };
 
-const Slider = ({
+export const Slider = ({
     elements,
     controles = false,
     autoplay = false,
@@ -46,7 +46,7 @@ const Slider = ({
 
     const siguiente = useCallback(() => {
         // Comprobamos que el slideshow tenga elementos
-        if (slideshow.current.children.length > 0) {
+        if (slideshow?.current?.children?.length > 0) {
             // console.log('Siguiente');
 
             // Obtenemos el primer elemento del slideshow.
@@ -124,9 +124,9 @@ const Slider = ({
     return (
         <ContenedorPrincipal>
             <ContenedorSlideshow ref={slideshow}>
-                {elements.map((item) => {
+                {elements.map((item, index) => {
                     return (
-                        <Slide key={nanoid(10)}>
+                        <Slide key={`slide-${index}`}>
                             <Link to={item?.route || ''}>
                                 <img src={item.src} alt={`item-${item.id}`} />
                             </Link>
@@ -150,5 +150,3 @@ const Slider = ({
         </ContenedorPrincipal>
     );
 };
-
-export default Slider;

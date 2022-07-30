@@ -1,5 +1,4 @@
-import UpdatePassword from '../../components/UpdatePassword';
-import UploadUserImg from '../../components/UploadUserImg';
+import { UpdatePassword, UploadUserImg } from '../../components';
 import { IUserInfo } from '../../interfaces/user';
 
 interface IEditProfileProps extends IUserInfo {

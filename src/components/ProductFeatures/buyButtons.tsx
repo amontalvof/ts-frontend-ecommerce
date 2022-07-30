@@ -1,4 +1,4 @@
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import {
     AddToCartIconContainer,
     StyledFaShoppingCart,

@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import { FaGoogle } from 'react-icons/fa';
-import TextInput from '../FormFields/textInput';
-import RenderIf from '../RenderIf/index';
+import { TextInput } from '../FormFields/textInput';
+import { RenderIf } from '../RenderIf/index';
 import { StyledButton } from './styles';
 import { updatePasswordValidationSchema } from './validation/updatePasswordValidationSchema';
 import { fetchWithToken } from '../../helpers/fetch';
@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { startLogout } from '../../redux/actions/authModalActions';
 import { useDispatch } from 'react-redux';
+import { redError } from '../../constants';
 
 interface IUpdatePasswordProps {
     uid?: number;
@@ -20,7 +21,7 @@ interface IUpdatePasswordProps {
     colortexto?: string;
 }
 
-const UpdatePassword = ({
+export const UpdatePassword = ({
     uid,
     modo,
     name,
@@ -59,7 +60,7 @@ const UpdatePassword = ({
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: colorfondo,
-            cancelButtonColor: '#C9302C',
+            cancelButtonColor: redError,
             confirmButtonText: 'Yes, delete it!',
         });
 
@@ -254,5 +255,3 @@ const UpdatePassword = ({
         </Formik>
     );
 };
-
-export default UpdatePassword;

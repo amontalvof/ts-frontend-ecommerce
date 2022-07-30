@@ -11,7 +11,7 @@ interface IStarRatingDisplayProps {
     color: IColor;
 }
 
-const StarRatingDisplay = (props: IStarRatingDisplayProps) => {
+export const StarRatingDisplay = (props: IStarRatingDisplayProps) => {
     const { calificacion = 0, count = 5, color } = props;
     const { filled, unfilled } = color;
     const newCalificacion = Math.floor(calificacion);
@@ -32,5 +32,3 @@ const StarRatingDisplay = (props: IStarRatingDisplayProps) => {
         </>
     );
 };
-
-export default StarRatingDisplay;

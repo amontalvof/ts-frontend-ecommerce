@@ -10,7 +10,7 @@ interface ISpinnerProps {
     text?: ReactElement;
 }
 
-const Spinner = ({
+export const Spinner = ({
     plantillaStyles,
     size,
     margin,
@@ -25,5 +25,3 @@ const Spinner = ({
         </>
     );
 };
-
-export default Spinner;

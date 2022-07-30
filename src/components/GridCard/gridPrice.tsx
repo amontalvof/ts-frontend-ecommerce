@@ -1,5 +1,5 @@
 import formatPrice from '../../helpers/formatPrice';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { PrecioContainer, StyledOferta } from './styles';
 
 interface IGridPriceProps {

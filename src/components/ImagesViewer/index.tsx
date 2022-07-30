@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { nanoid } from 'nanoid';
 import {
     FeaturedImage,
     Slider,
@@ -73,11 +72,11 @@ export const ImagesViewer = ({ infoProduct }: IVideoViewerProps) => {
             <SlideWrapper>
                 <LeftArrow onClick={() => handleClick('left')} />
                 <Slider ref={sliderRef}>
-                    {images.map((image: { foto: string }) => {
+                    {images.map((image: { foto: string }, index: number) => {
                         const active = image.foto === activeImage.foto;
                         return (
                             <ThumbnailImage
-                                key={nanoid(10)}
+                                key={`image-viewer-${index}`}
                                 src={image.foto}
                                 alt="product"
                                 active={active}

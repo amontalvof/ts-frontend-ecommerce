@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
 import { closeAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import Footer from './footer';
 import ForgotPassword from './forgotPassword';
 import GoogleSignInButton from './googleSignInButton';
-import ModalHeader from '../ModalHeader';
+import { ModalHeader } from '../ModalHeader';
 import Login from './login';
 import Register from './register';
 import { ModalContent, ModalTitulo } from './styles';
@@ -21,7 +21,7 @@ const headerTextMap: { [key: string]: string } = {
     forgotPassword: 'Forgot Password',
 };
 
-const AuthModal = () => {
+export const AuthModal = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootStore) => state);
     const { uiAuthModalReducer, plantillaReducer } = state;
@@ -71,5 +71,3 @@ const AuthModal = () => {
         </Modal>
     );
 };
-
-export default AuthModal;

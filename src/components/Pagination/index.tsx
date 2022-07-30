@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useParams } from 'react-router-dom';
 import useQueryParams from '../../hooks/useQueryParams';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import Arrows from './arrows';
 import Numbers from './numbers';
 import { PaginationContainer } from './styles';

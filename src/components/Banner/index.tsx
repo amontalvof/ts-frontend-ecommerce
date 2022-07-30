@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
-import RenderIf from '../RenderIf';
+import { RenderIf } from '../RenderIf';
 import { BannerContainer, TextoBanner, StyledImage } from './styles';
 
 interface IBannerProps {

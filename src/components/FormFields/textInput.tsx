@@ -14,7 +14,7 @@ const iconMap = {
     password: 'glyphicon-lock',
 };
 
-const TextInput = (props: IMyTextInputProps) => {
+export const TextInput = (props: IMyTextInputProps) => {
     const { type } = props;
     const [field] = useField(props);
     return (
@@ -35,5 +35,3 @@ const TextInput = (props: IMyTextInputProps) => {
         </div>
     );
 };
-
-export default TextInput;
