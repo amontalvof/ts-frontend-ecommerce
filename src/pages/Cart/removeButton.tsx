@@ -1,5 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
-import { Center } from './styles';
+import { Center, RemoveButtonContainer } from './styles';
 
 interface IRemoveButtonProps {
     productId: number;
@@ -15,7 +15,7 @@ const RemoveButton = ({
     removeFromCart,
 }: IRemoveButtonProps) => {
     return (
-        <div className="col-sm-1 col-xs-12">
+        <RemoveButtonContainer className="col-sm-1 col-xs-12">
             <br />
             <Center>
                 <button
@@ -35,7 +35,7 @@ const RemoveButton = ({
                     </Center>
                 </button>
             </Center>
-        </div>
+        </RemoveButtonContainer>
     );
 };
 

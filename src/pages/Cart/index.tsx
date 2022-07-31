@@ -19,8 +19,6 @@ import {
     ItemCarrito,
 } from './styles';
 
-// TODO: Make cart responsive
-
 interface ICartProduct {
     productId: number;
     portada: string;
@@ -50,12 +48,12 @@ const Cart = () => {
                     <Breadcrumb />
                     <div className="panel panel-default">
                         <CabeceraCarrito className="panel-heading">
-                            <div className="col-md-6 col-sm-7 col-xs-12 text-center">
+                            <div className="col-md-6 col-sm-6 col-xs-12 text-center">
                                 <h3>
                                     <small>PRODUCT</small>
                                 </h3>
                             </div>
-                            <div className="col-md-2 col-sm-1 col-xs-0 text-center">
+                            <div className="col-md-2 col-sm-2 col-xs-0 text-center">
                                 <h3>
                                     <small>PRICE</small>
                                 </h3>

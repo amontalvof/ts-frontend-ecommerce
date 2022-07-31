@@ -3,6 +3,7 @@ import {
     StyledPAmount,
     StyledFaAngleDown,
     StyledFaAngleUp,
+    AmountContainer,
 } from './styles';
 
 interface IAmountProps {
@@ -21,9 +22,9 @@ const Amount = ({
     increaseAmount,
 }: IAmountProps) => {
     return (
-        <div className="col-md-2 col-sm-3 col-xs-8">
+        <AmountContainer className="col-md-2 col-sm-3 col-xs-12">
             <br />
-            <div className="col-xs-8">
+            <div className="col-xs-8" style={{ width: '100%' }}>
                 <Center>
                     <StyledPAmount tipo={tipo}>
                         <span>
@@ -56,7 +57,7 @@ const Amount = ({
                     </StyledPAmount>
                 </Center>
             </div>
-        </div>
+        </AmountContainer>
     );
 };
 

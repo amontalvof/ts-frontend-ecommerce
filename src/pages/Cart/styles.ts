@@ -34,6 +34,7 @@ export const ErrorContainer = styled.div`
 
 export const StyledPAmount = styled.div<{ tipo: string }>`
     color: ${(props) => (props.tipo === 'virtual' ? gray : lightBlack)};
+    display: flex;
 `;
 
 export const StyledFaAngleDown = styled(FaAngleDown)<{ tipo: string }>`
@@ -47,4 +48,28 @@ export const StyledFaAngleUp = styled(FaAngleUp)<{ tipo: string }>`
         cursor: ${(props) =>
             props.tipo === 'virtual' ? 'not-allowed' : 'pointer'};
     }
+`;
+
+export const RemoveButtonContainer = styled.div`
+    margin-bottom: 20px;
+`;
+
+export const ProductImageContainer = styled.div`
+    padding: 0 0 10px 0;
+
+    /*=============================================
+    SMALL DESKTOP OR VERTICAL TABLET (SM we review at 768px)
+    =============================================*/
+
+    @media (max-width: 991px) and (min-width: 768px) {
+        padding-bottom: 10px 0 0 0;
+    }
+`;
+
+export const TitleContainer = styled.div`
+    padding-bottom: 10px;
+`;
+
+export const AmountContainer = styled.div`
+    padding-bottom: 10px;
 `;
