@@ -8,8 +8,7 @@ import { checkIsAllowedRoute } from '../../helpers/checkIsAllowedRoute';
 import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import { TRoute } from '../../interfaces/productRoutes';
-import useFetch from '../../hooks/useFetch';
-import { baseUrl, defaultBrand, grayStar, yellowStar } from '../../constants';
+import { defaultBrand, grayStar, yellowStar } from '../../constants';
 import filterCategoriesByRoute from '../../helpers/filterCategoriesByRoute';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import {
@@ -36,6 +35,8 @@ import {
     SpinnerContainer,
     StyledErrorContainer,
 } from './styles';
+import useReadRelatedProducts from '../../hooks/useReadRelatedProducts';
+import useReadProduct from '../../hooks/useReadProduct';
 
 interface IUseParams {
     categoryId?: string;
@@ -74,27 +75,20 @@ const ProductInfo = () => {
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
 
     const subCategory = filterCategoriesByRoute(subCategories, subCategoryId);
-
-    const {
-        loading: loadingRelatedProducts,
-        value: valueRelatedProducts = {},
-    } = useFetch(`${baseUrl}/products`, {
-        body: JSON.stringify({
+    const { isLoading: loadingRelatedProducts, data: valueRelatedProducts } =
+        useReadRelatedProducts('products', {
             ordenar: '',
             modo: 'Rand()',
             item: 'id_subcategoria',
             valor: subCategory?.id,
             base: 0,
             tope: 4,
-        }),
-        method: 'POST',
-    });
+        });
 
-    const { products } = valueRelatedProducts;
+    const { products } = valueRelatedProducts || {};
 
-    const { loading: loadingProduct, value: valueProduct = {} } = useFetch(
-        `${baseUrl}/product/${productId}`
-    );
+    const { isLoading: loadingProduct, data: valueProduct = {} } =
+        useReadProduct(`product/${productId}`);
 
     const { product = [] } = valueProduct;
     const isFisico = product[0]?.tipo === 'fisico';

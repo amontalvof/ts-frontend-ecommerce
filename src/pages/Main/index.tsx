@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ProductsPanel, Slider, Spinner } from '../../components';
-import useFetch from '../../hooks/useFetch';
 import { RootStore } from '../../redux/store';
-import { baseUrl, defaultBrand } from '../../constants';
+import { defaultBrand } from '../../constants';
 import { SpinnerContainer, SliderContainer } from './styles';
+import useReadSlider from '../../hooks/useReadSlider';
+import useReadRelevantProducts from '../../hooks/useReadRelevantProducts';
 
 const Main = () => {
     const [viewTypeFree, setViewTypeFree] = useState<string>('grid');
@@ -15,13 +16,11 @@ const Main = () => {
     const { loading: loadingStyles, styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
 
-    const { loading: loadingSlider, value: valueSlider } = useFetch(
-        `${baseUrl}/slider`
-    );
+    const { isLoading: loadingSlider, data: valueSlider } =
+        useReadSlider('slider');
 
-    const { loading: loadingRelevantProducts, value: valueRelevant } = useFetch(
-        `${baseUrl}/products/relevant`
-    );
+    const { isLoading: loadingRelevantProducts, data: valueRelevant } =
+        useReadRelevantProducts('products/relevant');
 
     if (loadingStyles || loadingSlider || loadingRelevantProducts) {
         return (

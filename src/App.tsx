@@ -1,3 +1,5 @@
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import store from './redux/store';
@@ -7,15 +9,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 // TODO: Refactor to use react-query
+const queryClient = new QueryClient();
 
 function App() {
     return (
-        <Provider store={store}>
-            <CartProvider>
-                <ToastContainer />
-                <AppRouter />
-            </CartProvider>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                <CartProvider>
+                    <ToastContainer />
+                    <AppRouter />
+                </CartProvider>
+            </Provider>
+            <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+        </QueryClientProvider>
     );
 }
 

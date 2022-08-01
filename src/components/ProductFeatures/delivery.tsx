@@ -1,6 +1,5 @@
 import { FaShoppingCart, FaRegClock, FaRegEye } from 'react-icons/fa';
-import { baseUrl } from '../../constants';
-import useFetch from '../../hooks/useFetch';
+import useUpdateProductViews from '../../hooks/useUpdateProductViews';
 import { IconContainer, StyledDeliveryText, StyledLabel } from './styles';
 
 interface IDeliveryProps {
@@ -86,13 +85,10 @@ const Delivery = ({
     const newViews = views + 1;
     const item = isFree ? 'vistasGratis' : 'vistas';
 
-    useFetch(`${baseUrl}/product/${ruta}`, {
-        body: JSON.stringify({
-            valor: newViews,
-            item,
-            ruta,
-        }),
-        method: 'PUT',
+    useUpdateProductViews(`product/${ruta}`, {
+        valor: newViews,
+        item,
+        ruta,
     });
 
     const deliveryText = isImmediateDelivery

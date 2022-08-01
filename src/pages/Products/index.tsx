@@ -18,6 +18,7 @@ import {
     otherCategoriesRoutes,
     relevantRoutes,
 } from '../../constants';
+import useReadBanner from '../../hooks/useReadBanner';
 
 interface IUseParams {
     categoryId?: string;
@@ -56,9 +57,9 @@ const Products = () => {
         [categoryId, subCategoryId, actualPage, sortDirection]
     );
 
-    const { loading: loadingBanner, value: valueBanner = {} } = useFetch(
-        `${baseUrl}/banner`
-    );
+    const { isLoading: loadingBanner, data: valueBanner = {} } =
+        useReadBanner('banner');
+
     const { banners = [] } = valueBanner;
     const { products, total } = valueProducts;
 

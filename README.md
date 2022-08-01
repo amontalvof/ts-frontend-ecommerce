@@ -5,6 +5,7 @@
 -   TypeScript
 -   React
 -   Redux
+-   React Query
 -   JWT
 -   Formik
 -   React Router Dom v5

@@ -3,17 +3,18 @@ import { useSelector } from 'react-redux';
 import { FaList, FaGift, FaUserEdit } from 'react-icons/fa';
 import { Breadcrumb, Spinner, TabSet } from '../../components';
 import { RootStore } from '../../redux/store';
+import EditProfile from './editProfile';
+import MyOrders from './myOrders';
+import { defaultBrand } from '../../constants';
+import WishList from './wishList';
+import useReadUserOrders from '../../hooks/useReadUserOrders';
+import useReadUserWishes from '../../hooks/useReadUserWishes';
 import {
     Container,
     StyledTabTitle,
     TabTitleContainer,
     SpinnerContainer,
 } from './styles';
-import EditProfile from './editProfile';
-import MyOrders from './myOrders';
-import { baseUrl, defaultBrand } from '../../constants';
-import useFetch from '../../hooks/useFetch';
-import WishList from './wishList';
 
 const tabTitles = [
     <TabTitleContainer>
@@ -39,21 +40,14 @@ const UserProfile = () => {
     const plantillaStyles = styles[0];
     const { uid } = authReducer;
 
-    const { loading: loadingOrders, value: valueOrders } = useFetch(
-        `${baseUrl}/user/orders/${uid}`,
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-token': localStorage.getItem('token'),
-            },
-        }
+    const { isLoading: loadingOrders, data: valueOrders } = useReadUserOrders(
+        `user/orders/${uid}`
     );
     const orders = valueOrders?.orders;
 
-    const { loading: loadingWhishes, value: valueWhishes } = useFetch(
-        `${baseUrl}/user/wish/${uid}`
+    const { isLoading: loadingWhishes, data: valueWhishes } = useReadUserWishes(
+        `user/wish/${uid}`
     );
-
     const wishes = valueWhishes?.deseos;
 
     const handleTabSelect = (index: number) => {

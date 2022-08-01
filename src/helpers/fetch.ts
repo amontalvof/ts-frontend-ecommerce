@@ -43,3 +43,21 @@ export const fetchWithToken = <T>(
         });
     }
 };
+
+export const finalFetchWithoutToken = async <T>(
+    endpoint: string,
+    data?: T,
+    method = 'GET'
+) => {
+    const resp = await fetchWithoutToken(endpoint, data, method);
+    return await resp.json();
+};
+
+export const finalFetchWithToken = async <T>(
+    endpoint: string,
+    data?: T,
+    method = 'GET'
+) => {
+    const resp = await fetchWithToken(endpoint, data, method);
+    return await resp.json();
+};

@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
 import { StarRatingDisplay } from '../StarRatingDisplay';
-import { baseUrl, grayStar, yellowStar } from '../../constants';
-import useFetch from '../../hooks/useFetch';
+import { grayStar, yellowStar } from '../../constants';
 import { RenderIf } from '../RenderIf/index';
 import resolveAverageRating from '../../helpers/resolveAverageRating';
 import {
@@ -12,6 +11,7 @@ import {
     ErrorContainer,
 } from './styles';
 import { IComment } from '../../interfaces/comment';
+import useReadProductComments from '../../hooks/useReadProductComments';
 
 interface ICommentsProps {
     handleTotalRatings: Dispatch<SetStateAction<number>>;
@@ -26,10 +26,8 @@ export const Comments = ({
     handleTotalRatings,
     handleAverageRating,
 }: ICommentsProps) => {
-    const { loading: loadingComments, value: valueComments } = useFetch(
-        `${baseUrl}/product/comments/${productId}`
-    );
-
+    const { isLoading: loadingComments, data: valueComments } =
+        useReadProductComments(`product/comments/${productId}`);
     const { comments } = valueComments || {};
 
     useEffect(() => {
