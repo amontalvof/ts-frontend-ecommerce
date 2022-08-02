@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { redError, white } from '../../constants';
 import { CartContext } from '../../context/storageCart';
-import { fetchWithToken } from '../../helpers/fetch';
+import useAddToWishList from '../../hooks/useAddToWishList';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
@@ -47,24 +46,11 @@ const ListButtons = ({
     const state = useSelector((state: RootStore) => state);
     const { authReducer } = state;
     const { uid } = authReducer;
+    const { mutate } = useAddToWishList();
 
     const handleHeartClick = async () => {
         if (uid) {
-            const resp = await fetchWithToken(
-                `user/wish/new`,
-                { idProducto: productId, idUsuario: uid },
-                'POST'
-            );
-            const body = await resp.json();
-            if (body.ok) {
-                toast.success(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            } else {
-                toast.error(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+            mutate({ productId, uid });
         } else {
             dispatch(openAuthModal('login'));
         }

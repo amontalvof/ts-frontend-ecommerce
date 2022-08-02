@@ -7,18 +7,17 @@ import { TSubCategory } from '../../interfaces/subCategories';
 import { TCategory } from '../../interfaces/categories';
 import checkProductsRoute from '../../helpers/checkProductsRoute';
 import getProductsRequestBody from '../../helpers/getProductsRequestBody';
-import useFetch from '../../hooks/useFetch';
 import { SpinnerContainer } from './styles';
 import { Banner, ProductsPanel, Pagination, Spinner } from '../../components';
 import useQueryParams from '../../hooks/useQueryParams';
 import { resolveRandomBanner } from '../../helpers/resolveRandomBanner';
+import useReadBanner from '../../hooks/useReadBanner';
+import useReadProducts from '../../hooks/useReadProducts';
 import {
-    baseUrl,
     defaultBrand,
     otherCategoriesRoutes,
     relevantRoutes,
 } from '../../constants';
-import useReadBanner from '../../hooks/useReadBanner';
 
 interface IUseParams {
     categoryId?: string;
@@ -48,14 +47,13 @@ const Products = () => {
         sortDirection,
     });
 
-    const { loading: loadingProducts, value: valueProducts = {} } = useFetch(
-        `${baseUrl}/products`,
-        {
-            body: JSON.stringify(requestBody),
-            method: 'POST',
-        },
-        [categoryId, subCategoryId, actualPage, sortDirection]
-    );
+    const { isLoading: loadingProducts, data: valueProducts = {} } =
+        useReadProducts('products', requestBody, [
+            categoryId,
+            subCategoryId,
+            actualPage,
+            sortDirection,
+        ]);
 
     const { isLoading: loadingBanner, data: valueBanner = {} } =
         useReadBanner('banner');

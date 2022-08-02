@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { fetchWithToken } from '../../helpers/fetch';
 import { TStyle } from '../../interfaces/plantilla';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
@@ -10,6 +8,7 @@ import { RenderIf } from '../RenderIf';
 import { EnlacesContainer, ButtonsContainer } from './styles';
 import { useContext } from 'react';
 import { CartContext } from '../../context/storageCart';
+import useAddToWishList from '../../hooks/useAddToWishList';
 interface IGridButtonsProps {
     ruta: string;
     tipo: string;
@@ -39,24 +38,11 @@ const GridButtons = ({
     const state = useSelector((state: RootStore) => state);
     const { authReducer } = state;
     const { uid } = authReducer;
+    const { mutate } = useAddToWishList();
 
     const handleHeartClick = async () => {
         if (uid) {
-            const resp = await fetchWithToken(
-                `user/wish/new`,
-                { idProducto: productId, idUsuario: uid },
-                'POST'
-            );
-            const body = await resp.json();
-            if (body.ok) {
-                toast.success(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            } else {
-                toast.error(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+            mutate({ productId, uid });
         } else {
             dispatch(openAuthModal('login'));
         }

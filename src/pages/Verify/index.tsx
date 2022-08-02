@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RenderIf, Spinner } from '../../components';
-import { baseUrl, defaultBrand } from '../../constants';
+import { defaultBrand } from '../../constants';
 import { fetchWithoutToken } from '../../helpers/fetch';
-import useFetch from '../../hooks/useFetch';
+import useVerifyEmail from '../../hooks/useVerifyEmail';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
 import { SpinnerContainer, VerifyContainer } from './styles';
@@ -24,16 +24,11 @@ const Verify = () => {
 
     const { hash } = useParams<IUseParams>();
 
-    const { loading: loadingRedUser, value: valueRedUser = {} } = useFetch(
-        `${baseUrl}/user`,
-        {
-            body: JSON.stringify({
-                valor: hash,
-                item: 'emailEncriptado',
-            }),
-            method: 'POST',
-        }
-    );
+    const { isLoading: loadingRedUser, data: valueRedUser = {} } =
+        useVerifyEmail('user', {
+            valor: hash,
+            item: 'emailEncriptado',
+        });
 
     useEffect(() => {
         if (valueRedUser?.ok) {
