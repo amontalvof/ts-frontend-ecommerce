@@ -46,7 +46,7 @@ const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
     }, [rating]);
 
     const handleSubmit = async (params: IHandleSubmitParams) => {
-        // TODO: refactor to refetch comments after updating with react-query
+        // TODO: refactor to reFetch comments after updating with react-query
         if (!rating) {
             setShowError(true);
         } else {

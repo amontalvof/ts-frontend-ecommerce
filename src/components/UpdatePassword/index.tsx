@@ -4,12 +4,11 @@ import { TextInput } from '../FormFields/textInput';
 import { RenderIf } from '../RenderIf/index';
 import { StyledButton } from './styles';
 import { updatePasswordValidationSchema } from './validation/updatePasswordValidationSchema';
-import { fetchWithToken } from '../../helpers/fetch';
 import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
 import { startLogout } from '../../redux/actions/authModalActions';
 import { useDispatch } from 'react-redux';
-import { redError } from '../../constants';
+import useUpdateUserPassword from '../../hooks/useUpdateUserPassword';
+import useDeleteUserAccount from '../../hooks/useDeleteUserAccount';
 
 interface IUpdatePasswordProps {
     uid?: number;
@@ -31,57 +30,41 @@ export const UpdatePassword = ({
     colortexto,
 }: IUpdatePasswordProps) => {
     const dispatch = useDispatch();
+    const { mutate: mutateUpdatePassword } = useUpdateUserPassword();
 
-    const handleUpdatePassword = async (values: {
-        updPassword1: string;
-        updPassword2: string;
-    }) => {
-        const resp = await fetchWithToken(
-            `user/update/pass/${uid}`,
-            { ...values },
-            'PUT'
-        );
-        const body = await resp.json();
-        if (body.ok) {
-            toast.success(body.message, {
+    const handleOnSuccessDelete = (data: any) => {
+        if (data?.ok) {
+            dispatch(startLogout());
+            toast.success(data?.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
         } else {
-            toast.error(body.message, {
+            toast.error(data?.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
         }
     };
 
-    const handleDelete = async () => {
-        const result = await Swal.fire({
-            title: 'Are you sure you want to delete your account?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: colorfondo,
-            cancelButtonColor: redError,
-            confirmButtonText: 'Yes, delete it!',
+    const handleOnErrorDelete = (error: any) => {
+        toast.error(error?.message, {
+            position: toast.POSITION.TOP_RIGHT,
         });
+    };
 
-        if (result.isConfirmed) {
-            const resp = await fetchWithToken(
-                `user/${uid}`,
-                { modo, foto },
-                'DELETE'
-            );
-            const body = await resp.json();
-            if (body.ok) {
-                dispatch(startLogout());
-                toast.success(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            } else {
-                toast.error(body.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
-        }
+    const { mutate: mutateDeleteUserAccount } = useDeleteUserAccount(
+        handleOnSuccessDelete,
+        handleOnErrorDelete
+    );
+
+    const handleUpdatePassword = async (values: {
+        updPassword1: string;
+        updPassword2: string;
+    }) => {
+        mutateUpdatePassword({ uid, passwords: values });
+    };
+
+    const handleDelete = async () => {
+        mutateDeleteUserAccount({ uid, colorfondo, modo, foto });
     };
 
     return (

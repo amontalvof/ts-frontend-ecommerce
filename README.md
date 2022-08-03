@@ -5,9 +5,9 @@
 -   TypeScript
 -   React
 -   Redux
--   React Query
 -   JWT
 -   Formik
+-   React Query
 -   React Router Dom v5
 -   Styled Components
 -   Bootstrap
