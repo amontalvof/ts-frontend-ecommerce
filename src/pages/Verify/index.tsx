@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RenderIf, Spinner } from '../../components';
 import { defaultBrand } from '../../constants';
-import { fetchWithoutToken } from '../../helpers/fetch';
-import useVerifyEmail from '../../hooks/useVerifyEmail';
+import useReadUnverifiedUser from '../../hooks/useReadUnverifiedUser';
+import useUpdateUnverifiedUser from '../../hooks/useUpdateUnverifiedUser';
 import { openAuthModal } from '../../redux/actions';
 import { RootStore } from '../../redux/store';
 import { SpinnerContainer, VerifyContainer } from './styles';
@@ -25,30 +25,32 @@ const Verify = () => {
     const { hash } = useParams<IUseParams>();
 
     const { isLoading: loadingRedUser, data: valueRedUser = {} } =
-        useVerifyEmail('user', {
+        useReadUnverifiedUser('user', {
             valor: hash,
             item: 'emailEncriptado',
         });
 
+    const handleVerifySuccess = (data: any) => {
+        if (data?.ok) setIsVerifiedUser(true);
+        setLoadingUpdateUser(false);
+    };
+    const handleVerifyError = (error: any) => {
+        setLoadingUpdateUser(false);
+    };
+
+    const { mutate } = useUpdateUnverifiedUser(
+        handleVerifySuccess,
+        handleVerifyError
+    );
+
     useEffect(() => {
         if (valueRedUser?.ok) {
             (async () => {
-                try {
-                    setLoadingUpdateUser(true);
-                    const response = await fetchWithoutToken(
-                        `user/verify/${valueRedUser?.user?.id}`,
-                        { verificacion: 0 },
-                        'PUT'
-                    );
-                    const json = await response.json();
-                    if (json?.ok) setIsVerifiedUser(true);
-                    setLoadingUpdateUser(false);
-                } catch (error) {
-                    console.error(error);
-                    setLoadingUpdateUser(false);
-                }
+                setLoadingUpdateUser(true);
+                mutate({ valueRedUser });
             })();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [valueRedUser]);
 
     const handleButtonClick = (value: string) => {

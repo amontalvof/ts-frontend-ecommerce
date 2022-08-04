@@ -8,7 +8,6 @@ import { CartProvider } from './context/storageCart';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-// TODO: Refactor to use react-query
 const queryClient = new QueryClient();
 
 function App() {

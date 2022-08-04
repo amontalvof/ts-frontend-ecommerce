@@ -12,8 +12,8 @@ import { RatingContainer, StyledError } from './styles';
 import { ICommentPayload } from '../../interfaces/commentModal';
 import { RootStore } from '../../redux/store';
 import { RenderIf } from '../RenderIf';
-import updateProductComment from '../../services/updateProductComment';
-import createProductComment from '../../services/createProductComment';
+import useCreateProductComment from '../../hooks/useCreateProductComment';
+import useUpdateProductComment from '../../hooks/useUpdateProductComment';
 
 interface IHandleSubmitParams {
     comment: string;
@@ -38,6 +38,8 @@ const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
     const state = useSelector((state: RootStore) => state);
     const { authReducer } = state;
     const { uid } = authReducer;
+    const { mutate: mutateCreateProductComment } = useCreateProductComment();
+    const { mutate: mutateUpdateProductComment } = useUpdateProductComment();
 
     useEffect(() => {
         if (rating !== null) {
@@ -46,19 +48,18 @@ const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
     }, [rating]);
 
     const handleSubmit = async (params: IHandleSubmitParams) => {
-        // TODO: refactor to reFetch comments after updating with react-query
         if (!rating) {
             setShowError(true);
         } else {
             const { comment } = params;
             if (commentsId) {
-                await updateProductComment({
+                mutateUpdateProductComment({
                     comment,
                     commentsId,
                     rating,
                 });
             } else {
-                await createProductComment({
+                mutateCreateProductComment({
                     comment,
                     uid,
                     productosId,
@@ -72,7 +73,7 @@ const CommentForm = ({ plantillaStyles, commentInfo }: ICommentFormProps) => {
     return (
         <Formik
             initialValues={{
-                comment: comentario,
+                comment: comentario || '',
             }}
             onSubmit={handleSubmit}
             validationSchema={commentValidationSchema}

@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { finalFetchWithoutToken } from '../helpers/fetch';
 
-const useVerifyEmail = <T>(endpoint: string, data: T) => {
-    return useQuery('verify-email', () =>
+const useReadUnverifiedUser = <T>(endpoint: string, data: T) => {
+    return useQuery(['read-unverified-user', endpoint], () =>
         finalFetchWithoutToken(endpoint, data, 'POST')
     );
 };
 
-export default useVerifyEmail;
+export default useReadUnverifiedUser;

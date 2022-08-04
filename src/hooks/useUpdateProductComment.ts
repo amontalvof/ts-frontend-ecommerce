@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { fetchWithToken } from '../helpers/fetch';
 
@@ -35,4 +36,11 @@ const updateProductComment = async ({
     }
 };
 
-export default updateProductComment;
+const useUpdateProductComment = () => {
+    const queryClient = useQueryClient();
+    return useMutation(updateProductComment, {
+        onSuccess: () => queryClient.invalidateQueries('read-user-orders'),
+    });
+};
+
+export default useUpdateProductComment;
