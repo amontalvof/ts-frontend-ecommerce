@@ -16,14 +16,13 @@ const Register = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     };
 
     return (
-        // TODO: remove initialValues
         <Formik
             initialValues={{
-                regName: 'Andy',
-                regEmail: 'amontalvof92@gmail.com', // andy@mail.com
-                regPassword1: 'P@ssw0rd', // Aa@123456
-                regPassword2: 'P@ssw0rd',
-                regTerms: true,
+                regName: '',
+                regEmail: '', //   andy@mail.com
+                regPassword1: '', // Aa@123456
+                regPassword2: '',
+                regTerms: false,
             }}
             onSubmit={handleRegister}
             validationSchema={registerValidationSchema}
@@ -68,13 +67,11 @@ const Register = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
                                     <small style={{ marginLeft: '5px' }}>
                                         By registering, you agree to our terms
                                         of use and privacy policies.{' '}
-                                        {/* TODO: change the link of terms of use
-                                            and privacy policies*/}
                                         <StyledAnchor
-                                            href="//www.iubenda.com/privacy-policy/8146355"
+                                            href="#"
                                             title="Terms of use and privacy policies"
-                                            target="_blank"
-                                            rel="noreferrer"
+                                            // target="_blank"
+                                            // rel="noreferrer"
                                             color={plantillaStyles.colorFondo}
                                         >
                                             Read more

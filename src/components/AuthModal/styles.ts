@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { redError } from '../../constants';
 
 interface ISubmitButtonProps {
     colorfondo?: string;
@@ -79,4 +80,10 @@ export const GoogleLoginContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin: 15px 0 10px;
+`;
+
+export const StyledError = styled.p`
+    display: flex;
+    justify-content: center;
+    color: ${redError};
 `;

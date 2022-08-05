@@ -10,6 +10,8 @@ interface ICartObject {
     tipo: string;
     peso?: number;
     cantidad: number;
+    oferta: number;
+    precioOferta: number;
 }
 
 interface ICartContext {
@@ -58,6 +60,9 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
         //cart total
         let newTotal = cart.reduce((total: number, cartItem: ICartObject) => {
+            if (cartItem?.oferta) {
+                return (total += cartItem.precioOferta * cartItem.cantidad);
+            }
             return (total += cartItem.cantidad * cartItem.precio);
         }, 0);
         newTotal = parseFloat(newTotal.toFixed(2));
@@ -95,7 +100,16 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     //add to cart
     const addToCart = async (product: ICartObject, colorfondo?: string) => {
-        const { productId, portada, titulo, precio, tipo, peso } = product;
+        const {
+            productId,
+            portada,
+            titulo,
+            precio,
+            tipo,
+            peso,
+            oferta,
+            precioOferta,
+        } = product;
         const item = [...cart].find(
             (item: ICartObject) => item.productId === productId
         );
@@ -109,6 +123,8 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
                 precio,
                 tipo,
                 peso,
+                oferta,
+                precioOferta,
                 cantidad: 1,
             };
             const newCart = [...cart, newItem];

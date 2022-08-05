@@ -58,6 +58,8 @@ export const GridCard = ({
                 portada={portada}
                 titulo={titulo}
                 peso={peso}
+                precioOferta={precioOferta}
+                oferta={oferta}
             />
         </>
     );

@@ -21,6 +21,8 @@ interface IListButtonsProps {
     portada: string;
     titulo: string;
     peso?: number;
+    precioOferta: number;
+    oferta: number;
     showRemove?: boolean;
     onRemove?: (deseosId?: number) => void;
 }
@@ -34,6 +36,8 @@ const ListButtons = ({
     portada,
     titulo,
     peso,
+    precioOferta,
+    oferta,
     deseosId,
     showRemove,
     onRemove,
@@ -68,6 +72,8 @@ const ListButtons = ({
             precio,
             tipo,
             peso,
+            precioOferta,
+            oferta,
             cantidad: 1,
         };
         const result = await addToCart(newProduct, plantillaStyles?.colorFondo);

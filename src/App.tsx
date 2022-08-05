@@ -10,6 +10,8 @@ import './App.css';
 
 const queryClient = new QueryClient();
 
+// TODO: Configure Google reCaptcha and login in the cloud
+
 function App() {
     return (
         <QueryClientProvider client={queryClient}>

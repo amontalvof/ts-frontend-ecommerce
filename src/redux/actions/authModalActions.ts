@@ -159,7 +159,8 @@ const checkingFinish = () => ({
 
 export const startLogout = () => {
     return (dispatch: AppDispatch) => {
-        localStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('token-init-time');
         dispatch(logout());
     };
 };

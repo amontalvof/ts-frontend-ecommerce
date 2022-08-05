@@ -26,6 +26,8 @@ interface ICartProduct {
     precio: number;
     cantidad: number;
     tipo: string;
+    oferta: number;
+    precioOferta: number;
 }
 
 const Cart = () => {
@@ -89,12 +91,19 @@ const Cart = () => {
                                                 precio,
                                                 cantidad,
                                                 tipo,
+                                                oferta,
+                                                precioOferta,
                                             } = item;
-                                            const newPrice =
-                                                formatPrice(precio);
-                                            const newSubtotal = formatPrice(
-                                                precio * cantidad
-                                            );
+                                            const newPrice = oferta
+                                                ? formatPrice(precioOferta)
+                                                : formatPrice(precio);
+                                            const newSubtotal = oferta
+                                                ? formatPrice(
+                                                      precioOferta * cantidad
+                                                  )
+                                                : formatPrice(
+                                                      precio * cantidad
+                                                  );
                                             return (
                                                 <div key={productId}>
                                                     <ItemCarrito className="row ">

@@ -59,6 +59,8 @@ export const ProductFeatures = ({
                 precio,
                 tipo,
                 peso,
+                precioOferta,
+                oferta,
                 cantidad: 1,
             };
             const result = await addToCart(newProduct, colorFondo);

@@ -18,6 +18,8 @@ interface IGridButtonsProps {
     precio: number;
     peso?: number;
     productId: number;
+    precioOferta: number;
+    oferta: number;
 }
 
 const GridButtons = ({
@@ -29,6 +31,8 @@ const GridButtons = ({
     portada,
     titulo,
     peso,
+    precioOferta,
+    oferta,
 }: IGridButtonsProps) => {
     const { addToCart } = useContext(CartContext);
     const { push } = useHistory();
@@ -56,6 +60,8 @@ const GridButtons = ({
             precio,
             tipo,
             peso,
+            precioOferta,
+            oferta,
             cantidad: 1,
         };
         const result = await addToCart(newProduct, plantillaStyles?.colorFondo);

@@ -32,7 +32,7 @@ export const ListCard = ({
     showRemove,
     onRemove,
     deseosId,
-    peso
+    peso,
 }: IListCardProps) => {
     const state = useSelector((state: RootStore) => state);
     const { plantillaReducer } = state;
@@ -77,6 +77,8 @@ export const ListCard = ({
                     portada={portada}
                     titulo={titulo}
                     peso={peso}
+                    precioOferta={precioOferta}
+                    oferta={oferta}
                 />
             </div>
             <div className="col-xs-12">
