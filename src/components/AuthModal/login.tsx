@@ -53,8 +53,8 @@ const Login = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     return (
         <Formik
             initialValues={{
-                logEmail: '', //amontalvof92@gmail.com | test1@mail.com | andy@mail.com
-                logPassword: '', // P@ssw0rd                P@ssw0rd2      Aa@123456
+                logEmail: '',
+                logPassword: '',
             }}
             onSubmit={handleLogin}
             validationSchema={loginValidationSchema}

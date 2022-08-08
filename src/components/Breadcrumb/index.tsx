@@ -78,6 +78,7 @@ export const Breadcrumb = () => {
         ) || {};
 
     const { searchValue } = searchReducer;
+    const isSearch = categoryId === 'search' && !!searchValue;
 
     return (
         <ul className="breadcrumb fondoBreadcrumb text-uppercase">
@@ -95,15 +96,23 @@ export const Breadcrumb = () => {
                     />
                 </li>
             </RenderIf>
-            <RenderIf isTrue={!!subcategoria || !!searchValue}>
+            <RenderIf isTrue={!!subcategoria}>
                 <li className="active pagActiva">
                     <StyledLink
-                        to={`/${categoryId}/${
-                            subCategoryId || searchValue
-                        }?page=1`}
+                        to={`/${categoryId}/${subCategoryId}?page=1`}
                         colorfondo={plantillaStyles?.colorFondo}
                     >
-                        {subcategoria || searchValue}
+                        {subcategoria}
+                    </StyledLink>
+                </li>
+            </RenderIf>
+            <RenderIf isTrue={isSearch}>
+                <li className="active pagActiva">
+                    <StyledLink
+                        to={`/${categoryId}/${searchValue}?page=1`}
+                        colorfondo={plantillaStyles?.colorFondo}
+                    >
+                        {searchValue}
                     </StyledLink>
                 </li>
             </RenderIf>

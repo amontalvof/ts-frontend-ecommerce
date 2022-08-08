@@ -19,8 +19,8 @@ const Register = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
         <Formik
             initialValues={{
                 regName: '',
-                regEmail: '', //   andy@mail.com
-                regPassword1: '', // Aa@123456
+                regEmail: '',
+                regPassword1: '',
                 regPassword2: '',
                 regTerms: false,
             }}

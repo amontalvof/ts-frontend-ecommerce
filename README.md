@@ -1,4 +1,4 @@
-# TypeScript Frontend E-Commerce
+# TULOGO Frontend E-Commerce
 
 ## Technologies
 
