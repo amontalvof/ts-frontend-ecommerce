@@ -3,6 +3,7 @@ export { Banner } from './Banner';
 export { Breadcrumb } from './Breadcrumb';
 export { ButtonCard } from './ButtonCard';
 export { CategoriesList } from './CategoriesList';
+export { CardModal } from './CardModal';
 export { CommentModal } from './CommentModal';
 export { Comments } from './Comments';
 export { DeliverOrder } from './DeliverOrder';

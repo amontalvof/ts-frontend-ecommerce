@@ -92,7 +92,6 @@ const ProductInfo = () => {
 
     const { product = [] } = valueProduct;
     const isFisico = product[0]?.tipo === 'fisico';
-    const hasMultimedia = !!product[0]?.multimedia;
     const infoContainerClass = isFisico
         ? 'col-md-7 col-sm-6 col-xs-12'
         : 'col-sm-6 col-xs-12';
@@ -167,12 +166,12 @@ const ProductInfo = () => {
         <div>
             <div className="container">
                 <div className="row">
-                    <RenderIf isTrue={isFisico && hasMultimedia}>
+                    <RenderIf isTrue={isFisico}>
                         <div className="col-md-5 col-sm-6 col-xs-12">
                             <ImagesViewer infoProduct={product[0]} />
                         </div>
                     </RenderIf>
-                    <RenderIf isTrue={!isFisico && hasMultimedia}>
+                    <RenderIf isTrue={!isFisico}>
                         <div className="col-sm-6 col-xs-12">
                             <VideoViewer infoProduct={product[0]} />
                         </div>

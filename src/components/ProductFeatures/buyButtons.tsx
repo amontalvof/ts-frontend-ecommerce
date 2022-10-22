@@ -57,11 +57,11 @@ const BuyButtons = ({
                 <>
                     <RenderIf isTrue={isVirtual}>
                         <>
-                            <div className="col-md-6 col-xs-12">
+                            {/* <div className="col-md-6 col-xs-12">
                                 <StyledBuyButton className="btn btn-default btn-block btn-lg">
                                     <small>BUY NOW</small>
                                 </StyledBuyButton>
-                            </div>
+                            </div> */}
                             <div className="col-md-6 col-xs-12">
                                 <StyledBuyButton
                                     className="btn btn-default btn-block btn-lg"

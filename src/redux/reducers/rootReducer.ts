@@ -7,6 +7,7 @@ import { searchReducer } from './searchReducer';
 import { uiAuthModalReducer } from './uiAuthModalReducer';
 import { uiCommentModalReducer } from './uiCommentModalReducer';
 import { authReducer } from './authReducer';
+import { uiCardModalReducer } from './uiCardModalReducer';
 
 export const rootReducer = combineReducers({
     plantillaReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     searchReducer,
     uiCommentModalReducer,
     uiAuthModalReducer,
+    uiCardModalReducer,
     authReducer,
 });

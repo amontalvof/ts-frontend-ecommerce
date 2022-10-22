@@ -13,6 +13,7 @@ import {
 import getCursor from '../../helpers/ getCursor';
 import moveLens from '../../helpers/moveLens';
 import { IProduct } from '../../interfaces/product';
+import { RenderIf } from '../RenderIf';
 interface IVideoViewerProps {
     infoProduct: IProduct;
 }
@@ -20,8 +21,14 @@ interface IVideoViewerProps {
 type TImageZoomEvent = React.MouseEvent<HTMLImageElement, MouseEvent>;
 
 export const ImagesViewer = ({ infoProduct }: IVideoViewerProps) => {
-    const { multimedia } = infoProduct;
-    const images = multimedia ? JSON.parse(multimedia) : [];
+    const { multimedia, portada } = infoProduct;
+    const images = multimedia
+        ? JSON.parse(multimedia)
+        : [
+              {
+                  foto: portada,
+              },
+          ];
     const [activeImage, setActiveImage] = useState(images[0]);
     const sliderRef = useRef(null) as React.MutableRefObject<any>;
     const imageRef = useRef(null) as React.MutableRefObject<any>;
@@ -69,25 +76,29 @@ export const ImagesViewer = ({ infoProduct }: IVideoViewerProps) => {
                     onMouseMove={imageZoom}
                 />
             </ImageContainer>
-            <SlideWrapper>
-                <LeftArrow onClick={() => handleClick('left')} />
-                <Slider ref={sliderRef}>
-                    {images.map((image: { foto: string }, index: number) => {
-                        const active = image.foto === activeImage.foto;
-                        return (
-                            <ThumbnailImage
-                                key={`image-viewer-${index}`}
-                                src={image.foto}
-                                alt="product"
-                                active={active}
-                                onMouseEnter={() => handleHover(image)}
-                                className="img-thumbnail"
-                            />
-                        );
-                    })}
-                </Slider>
-                <RightArrow onClick={() => handleClick('right')} />
-            </SlideWrapper>
+            <RenderIf isTrue={!!multimedia}>
+                <SlideWrapper>
+                    <LeftArrow onClick={() => handleClick('left')} />
+                    <Slider ref={sliderRef}>
+                        {images.map(
+                            (image: { foto: string }, index: number) => {
+                                const active = image.foto === activeImage.foto;
+                                return (
+                                    <ThumbnailImage
+                                        key={`image-viewer-${index}`}
+                                        src={image.foto}
+                                        alt="product"
+                                        active={active}
+                                        onMouseEnter={() => handleHover(image)}
+                                        className="img-thumbnail"
+                                    />
+                                );
+                            }
+                        )}
+                    </Slider>
+                    <RightArrow onClick={() => handleClick('right')} />
+                </SlideWrapper>
+            </RenderIf>
         </ImagesViewerContainer>
     );
 };

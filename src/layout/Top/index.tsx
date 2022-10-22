@@ -2,7 +2,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import MaleUserAvatar from '../../assets/maleUserAvatar';
-import { AuthModal, RenderIf } from '../../components';
+import { AuthModal, CardModal, RenderIf } from '../../components';
 import { TStyle } from '../../interfaces/plantilla';
 import { IUserInfo } from '../../interfaces/user';
 import { openAuthModal } from '../../redux/actions';
@@ -173,6 +173,7 @@ const Top = ({ plantillaStyles, userInfo = {} }: ITopProps) => {
                 </div>
             </div>
             <AuthModal />
+            <CardModal />
         </BarraSuperior>
     );
 };
