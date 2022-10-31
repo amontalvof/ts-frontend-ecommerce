@@ -23,7 +23,6 @@ const MyOrders = (props: IMyOrdersProps) => {
     const dispatch = useDispatch();
     const { orders = [], colorfondo, colortexto } = props;
     const isEmptyOrders = orders.length === 0;
-
     const handleRate = (params: IOrderInfo) => {
         const { commentsId, productosId, calificacion, comentario } = params;
         dispatch(
@@ -60,7 +59,7 @@ const MyOrders = (props: IMyOrdersProps) => {
                             return (
                                 <div
                                     className="panel panel-default"
-                                    key={`order-${order.id}`}
+                                    key={`order-${order.comprasId}`}
                                 >
                                     <div className="panel-body">
                                         <div className="col-md-2 col-sm-6 col-xs-12">

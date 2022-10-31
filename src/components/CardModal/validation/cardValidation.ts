@@ -2,6 +2,9 @@ import * as Yup from 'yup';
 import valid from 'card-validator';
 
 export const cardValidationSchema = Yup.object({
+    address: Yup.string()
+        .required('An address is required.')
+        .max(200, 'The address must be 200 characters or less.'),
     number: Yup.string()
         .required('A card number is required.')
         .test(

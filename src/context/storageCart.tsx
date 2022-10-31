@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { redError } from '../constants';
 
-interface ICartObject {
+export interface ICartObject {
     productId: number;
     portada: string;
     titulo: string;

@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
+import { omit } from 'lodash';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import Cards from 'react-credit-cards';
@@ -19,24 +21,55 @@ import {
 } from './styles';
 import { ModalHeader } from '../ModalHeader';
 import { cardValidationSchema } from './validation/cardValidation';
+import { CartContext } from '../../context/storageCart';
+import { IUserInfo } from '../../interfaces/user';
+import formatOrders from '../../helpers/formatOrders';
+import useInsertOrders from '../../hooks/useInsertOrders';
 
 type Focused = 'name' | 'number' | 'expiry' | 'cvc';
 
+interface ICardValues {
+    address: string;
+    cvc: string;
+    expiry: string;
+    name: string;
+    number: string;
+}
+
 export const CardModal = () => {
+    const { push } = useHistory();
     const dispatch = useDispatch();
+    const { mutate } = useInsertOrders();
+    const { cart: cartProductList, clearCart } = useContext(CartContext);
     const state = useSelector((state: RootStore) => state);
-    const { uiCardModalReducer, plantillaReducer } = state;
+    const { uiCardModalReducer, plantillaReducer, authReducer } = state;
+    const userInfo = omit<IUserInfo>(authReducer, 'checking');
     const { styles = [] } = plantillaReducer;
     const plantillaStyles = styles[0];
     useDisableBodyScroll(uiCardModalReducer.modalOpen);
     const [focus, setFocus] = useState<Focused>();
 
-    const handleSubmit = (values: any) => {
-        console.log(JSON.stringify(values, null, 2));
+    const handleSubmit = (values: ICardValues) => {
+        const newCartProductList = formatOrders(
+            userInfo,
+            cartProductList,
+            values.address
+        );
+        mutate(
+            { data: newCartProductList },
+            {
+                onSuccess: () => {
+                    clearCart();
+                    push('/profile');
+                },
+            }
+        );
+        closeModal();
     };
 
     const formik = useFormik({
         initialValues: {
+            address: '',
             cvc: '',
             expiry: '',
             name: '',
@@ -75,7 +108,6 @@ export const CardModal = () => {
                             plantillaStyles={plantillaStyles}
                             closeModal={closeModal}
                         />
-                        <br />
                         <Cards
                             cvc={formik.values.cvc}
                             expiry={formik.values.expiry}
@@ -83,8 +115,24 @@ export const CardModal = () => {
                             name={formik.values.name}
                             number={formik.values.number}
                         />
-                        <br />
                         <InputsContainers>
+                            <StyledInput
+                                type="text"
+                                name="address"
+                                placeholder="Delivery address"
+                                onChange={formik.handleChange}
+                                value={formik.values.address}
+                                onFocus={(e) =>
+                                    setFocus(e.target.name as Focused)
+                                }
+                                style={{ outline: 'none' }}
+                            />
+                            {formik.touched.address && formik.errors.address && (
+                                <ErrorText>
+                                    <strong>ERROR:</strong>{' '}
+                                    {formik.errors.address}
+                                </ErrorText>
+                            )}
                             <StyledInput
                                 type="tel"
                                 name="number"
@@ -122,7 +170,7 @@ export const CardModal = () => {
                                 <StyledInput
                                     type="text"
                                     name="expiry"
-                                    placeholder="MM/YY Expiry"
+                                    placeholder="MM / YY"
                                     onChange={formik.handleChange}
                                     value={formik.values.expiry}
                                     onFocus={(e) =>
