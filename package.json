@@ -20,6 +20,7 @@
         "@types/redux": "^3.6.0",
         "@types/redux-thunk": "^2.1.0",
         "@types/styled-components": "^5.1.21",
+        "card-validator": "^8.1.1",
         "formik": "^2.2.9",
         "lodash": "^4.17.21",
         "react": "^17.0.2",

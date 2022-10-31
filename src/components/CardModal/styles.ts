@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { defaultBrand, gray, white } from '../../constants';
+import { defaultBrand, gray, redError, white } from '../../constants';
 
 export const ModalContent = styled.div`
     padding: 10px 10px 0;
@@ -47,4 +47,8 @@ export const StyledButton = styled.button`
     margin: 20px 0;
     width: 100%;
     font-size: 16px;
+`;
+
+export const ErrorText = styled.span`
+    color: ${redError};
 `;

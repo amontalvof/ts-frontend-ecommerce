@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
+import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -7,7 +8,6 @@ import { modalCustomStyles } from '../../constants';
 import { RootStore } from '../../redux/store';
 import { closeCardModal } from '../../redux/actions';
 import useDisableBodyScroll from '../../hooks/useDisableBodyScroll';
-import { useForm } from '../../hooks/useForm';
 import {
     InputsContainers,
     ModalContent,
@@ -15,8 +15,10 @@ import {
     ModalTitulo,
     SecondSection,
     StyledButton,
+    ErrorText,
 } from './styles';
 import { ModalHeader } from '../ModalHeader';
+import { cardValidationSchema } from './validation/cardValidation';
 
 type Focused = 'name' | 'number' | 'expiry' | 'cvc';
 
@@ -28,15 +30,24 @@ export const CardModal = () => {
     const plantillaStyles = styles[0];
     useDisableBodyScroll(uiCardModalReducer.modalOpen);
     const [focus, setFocus] = useState<Focused>();
-    const [formValues, handleInputChange] = useForm({
-        cvc: '',
-        expiry: '',
-        name: '',
-        number: '',
+
+    const handleSubmit = (values: any) => {
+        console.log(JSON.stringify(values, null, 2));
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            cvc: '',
+            expiry: '',
+            name: '',
+            number: '',
+        },
+        onSubmit: handleSubmit,
+        validationSchema: cardValidationSchema,
     });
-    const { cvc, expiry, name, number } = formValues;
 
     const closeModal = () => {
+        formik.resetForm();
         dispatch(closeCardModal());
     };
 
@@ -57,80 +68,109 @@ export const CardModal = () => {
             overlayClassName="modal-fondo"
         >
             <ModalContent>
-                <ModalTitulo className="modal-body">
-                    <ModalHeader
-                        text="Payment"
-                        plantillaStyles={plantillaStyles}
-                        closeModal={closeModal}
-                    />
-                    <br />
-                    <Cards
-                        cvc={cvc}
-                        expiry={expiry}
-                        focused={focus}
-                        name={name}
-                        number={number}
-                    />
-                    <br />
-                    <InputsContainers>
-                        <StyledInput
-                            type="tel"
-                            name="number"
-                            placeholder="Card Number"
-                            value={number}
-                            onChange={handleInputChange}
-                            onFocus={(e) => setFocus(e.target.name as Focused)}
-                            style={{ outline: 'none' }}
+                <form onSubmit={formik.handleSubmit}>
+                    <ModalTitulo className="modal-body">
+                        <ModalHeader
+                            text="Payment"
+                            plantillaStyles={plantillaStyles}
+                            closeModal={closeModal}
                         />
-                        <StyledInput
-                            type="text"
-                            name="name"
-                            placeholder="Your Name"
-                            value={name}
-                            onChange={handleInputChange}
-                            onFocus={(e) => setFocus(e.target.name as Focused)}
-                            style={{ outline: 'none' }}
+                        <br />
+                        <Cards
+                            cvc={formik.values.cvc}
+                            expiry={formik.values.expiry}
+                            focused={focus}
+                            name={formik.values.name}
+                            number={formik.values.number}
                         />
-                        <SecondSection>
-                            <StyledInput
-                                type="text"
-                                name="expiry"
-                                placeholder="MM/YY Expiry"
-                                value={expiry}
-                                onChange={handleInputChange}
-                                onFocus={(e) =>
-                                    setFocus(e.target.name as Focused)
-                                }
-                                style={{
-                                    outline: 'none',
-                                    width: '50%',
-                                    marginRight: '5px',
-                                }}
-                            />
+                        <br />
+                        <InputsContainers>
                             <StyledInput
                                 type="tel"
-                                name="cvc"
-                                placeholder="CVC"
-                                value={cvc}
-                                onChange={handleInputChange}
+                                name="number"
+                                placeholder="Card Number"
+                                onChange={formik.handleChange}
+                                value={formik.values.number}
                                 onFocus={(e) =>
                                     setFocus(e.target.name as Focused)
                                 }
-                                style={{
-                                    outline: 'none',
-                                    width: '50%',
-                                    marginLeft: '5px',
-                                }}
+                                style={{ outline: 'none' }}
                             />
-                        </SecondSection>
-                    </InputsContainers>
-                </ModalTitulo>
-                <StyledButton
-                    className="btn btn-default btn-block btn-lg"
-                    style={buttonStyles}
-                >
-                    Pay
-                </StyledButton>
+                            {formik.touched.number && formik.errors.number && (
+                                <ErrorText>
+                                    <strong>ERROR:</strong>{' '}
+                                    {formik.errors.number}
+                                </ErrorText>
+                            )}
+                            <StyledInput
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                onChange={formik.handleChange}
+                                value={formik.values.name}
+                                onFocus={(e) =>
+                                    setFocus(e.target.name as Focused)
+                                }
+                                style={{ outline: 'none' }}
+                            />
+                            {formik.touched.name && formik.errors.name && (
+                                <ErrorText>
+                                    <strong>ERROR:</strong> {formik.errors.name}
+                                </ErrorText>
+                            )}
+                            <SecondSection>
+                                <StyledInput
+                                    type="text"
+                                    name="expiry"
+                                    placeholder="MM/YY Expiry"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.expiry}
+                                    onFocus={(e) =>
+                                        setFocus(e.target.name as Focused)
+                                    }
+                                    style={{
+                                        outline: 'none',
+                                        width: '50%',
+                                        marginRight: '5px',
+                                    }}
+                                />
+                                <StyledInput
+                                    type="tel"
+                                    name="cvc"
+                                    placeholder="CVC"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.cvc}
+                                    onFocus={(e) =>
+                                        setFocus(e.target.name as Focused)
+                                    }
+                                    style={{
+                                        outline: 'none',
+                                        width: '50%',
+                                        marginLeft: '5px',
+                                    }}
+                                />
+                            </SecondSection>
+                            {formik.touched.expiry && formik.errors.expiry && (
+                                <ErrorText>
+                                    <strong>ERROR:</strong>{' '}
+                                    {formik.errors.expiry}
+                                </ErrorText>
+                            )}
+                            {formik.touched.cvc && formik.errors.cvc && (
+                                <ErrorText>
+                                    <strong>ERROR:</strong> {formik.errors.cvc}
+                                </ErrorText>
+                            )}
+                        </InputsContainers>
+                    </ModalTitulo>
+                    <StyledButton
+                        className="btn btn-default btn-block btn-lg"
+                        style={buttonStyles}
+                        type="submit"
+                    >
+                        Pay
+                    </StyledButton>
+                </form>
             </ModalContent>
         </Modal>
     );
