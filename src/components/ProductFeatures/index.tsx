@@ -40,6 +40,7 @@ export const ProductFeatures = ({
         vistas,
         portada,
         peso,
+        categoria,
     } = infoProduct;
     const { addToCart } = useContext(CartContext);
     const { push } = useHistory();
@@ -49,6 +50,8 @@ export const ProductFeatures = ({
         Size: '',
         Brand: '',
     });
+
+    const areShoes = categoria === 'SHOES';
 
     const handleAddCart = async () => {
         if (tipo === 'virtual') {
@@ -70,7 +73,7 @@ export const ProductFeatures = ({
             return null;
         }
         const { isFeaturesSelected, finalFormValues } =
-            checkIfFeaturesWhereSelected(detalles, formValues);
+            checkIfFeaturesWhereSelected(detalles, formValues, areShoes);
         if (isFeaturesSelected) {
             const newProduct = {
                 productId: id,
@@ -115,6 +118,7 @@ export const ProductFeatures = ({
             />
             <Description descripcion={descripcion} />
             <Features
+                areShoes={areShoes}
                 detalles={detalles}
                 tipo={tipo}
                 colorfondo={colorFondo}

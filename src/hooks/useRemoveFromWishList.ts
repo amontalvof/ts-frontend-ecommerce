@@ -1,4 +1,5 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import { fetchWithToken } from '../helpers/fetch';
 
 const removeFromWishList = async ({ deseosId }: { deseosId: number }) => {
@@ -7,18 +8,26 @@ const removeFromWishList = async ({ deseosId }: { deseosId: number }) => {
     return body;
 };
 
-const useRemoveFromWishList = (
-    onSuccess: (
-        data: any,
-        variables: {
-            deseosId: number;
-        }
-    ) => void,
-    onError: (error: any) => void
-) => {
+const useRemoveFromWishList = () => {
+    const queryClient = useQueryClient();
     return useMutation(removeFromWishList, {
-        onSuccess,
-        onError,
+        onSuccess: (data: any) => {
+            if (data.ok) {
+                queryClient.invalidateQueries('read-user-wishes');
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            } else {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        },
+        onError: (error: any) => {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        },
     });
 };
 
