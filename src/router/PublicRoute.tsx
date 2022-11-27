@@ -1,10 +1,12 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Cart from '../pages/Cart';
-import Error404 from '../pages/Error404';
-import Main from '../pages/Main';
-import ProductInfo from '../pages/ProductInfo';
-import Products from '../pages/Products';
-import Verify from '../pages/Verify';
+import {
+    LazyCart,
+    LazyError404,
+    LazyMain,
+    LazyProductInfo,
+    LazyProducts,
+    LazyVerify,
+} from '../pages';
 
 interface IPublicRouteProps {
     isAuthenticated: boolean;
@@ -19,20 +21,20 @@ export const PublicRoute = ({
     return (
         <Route {...rest}>
             <Switch>
-                <Route path="/cart" component={Cart} />
-                <Route exact path="/error" component={Error404} />
-                <Route exact path="/verify/:hash" component={Verify} />
+                <Route path="/cart" component={LazyCart} />
+                <Route exact path="/error" component={LazyError404} />
+                <Route exact path="/verify/:hash" component={LazyVerify} />
                 <Route
                     exact
                     path="/:categoryId/:subCategoryId/:productId"
-                    component={ProductInfo}
+                    component={LazyProductInfo}
                 />
                 <Route
                     exact
                     path={['/:categoryId/:subCategoryId', '/:categoryId']}
-                    component={Products}
+                    component={LazyProducts}
                 />
-                <Route exact path="/" component={Main} />
+                <Route exact path="/" component={LazyMain} />
                 <Redirect to="/error" />
             </Switch>
         </Route>

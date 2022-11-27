@@ -5,6 +5,7 @@
 -   TypeScript
 -   React
 -   Redux
+-   Lazy Loading
 -   JWT
 -   Formik
 -   React Query

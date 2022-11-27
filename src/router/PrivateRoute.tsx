@@ -1,8 +1,11 @@
+import { LazyExoticComponent } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
+type JSXcomponent = () => JSX.Element;
 
 interface IPrivateRouteProps {
     isAuthenticated: boolean;
-    component: () => JSX.Element;
+    component: LazyExoticComponent<JSXcomponent> | JSXcomponent;
     exact?: boolean;
     path: string;
 }

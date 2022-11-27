@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { omit } from 'lodash';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -17,8 +17,8 @@ import { startChecking } from '../redux/actions/authModalActions';
 import { IUserInfo } from '../interfaces/user';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
-import UserProfile from '../pages/UserProfile';
 import { defaultBrand } from '../constants';
+import { LazyUserProfile } from '../pages';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
@@ -92,21 +92,26 @@ const AppRouter = () => {
     }
 
     return (
-        <Router>
-            <RouterContainer>
-                <Top plantillaStyles={plantillaStyles} userInfo={userInfo} />
-                <Header />
-                <Switch>
-                    <PrivateRoute
-                        path="/profile"
-                        isAuthenticated={!!uid}
-                        component={UserProfile}
+        <Suspense fallback={null}>
+            <Router>
+                <RouterContainer>
+                    <Top
+                        plantillaStyles={plantillaStyles}
+                        userInfo={userInfo}
                     />
-                    <PublicRoute path="/" isAuthenticated={!!uid} />
-                </Switch>
-                <ScrollButton />
-            </RouterContainer>
-        </Router>
+                    <Header />
+                    <Switch>
+                        <PrivateRoute
+                            path="/profile"
+                            isAuthenticated={!!uid}
+                            component={LazyUserProfile}
+                        />
+                        <PublicRoute path="/" isAuthenticated={!!uid} />
+                    </Switch>
+                    <ScrollButton />
+                </RouterContainer>
+            </Router>
+        </Suspense>
     );
 };
 
