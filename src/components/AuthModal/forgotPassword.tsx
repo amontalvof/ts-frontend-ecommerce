@@ -16,7 +16,7 @@ const ForgotPassword = ({ plantillaStyles }: { plantillaStyles: TStyle }) => {
     return (
         <Formik
             initialValues={{
-                fgpEmail: 'amontalvof92@gmail.com',
+                fgpEmail: '',
             }}
             onSubmit={handleForgotPasswordSubmit}
             validationSchema={forgotPasswordValidationSchema}
